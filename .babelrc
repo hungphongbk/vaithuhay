@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "vue-app",
+    "stage-2",
+    "flow",
+    "react"
+  ],
+  "plugins": ["jsx-event-modifiers", "transform-vue-jsx", "jsx-vue-functional"]
+}

@@ -1,0 +1,105 @@
+<div class="title_block">
+	{% if settings.featured_products_title == ''%}
+	{{collections[settings.featured_collection].title}}
+	{% else %}
+	{{ settings.featured_products_title }}
+	{% endif %}
+</div>
+<div class="ltabs-wrap product_tabs_slider_4">
+	<div class="ltabs-tabs-container_4">
+		<div class="ltabs-tabs-wrap">
+			<!--Begin Tabs-->
+			<div class="navi_4 navi_collection_4 tab_collection_1_4">
+				<a class="prev prevsellers_3"></a>
+				<a class="next nextsellers_3"></a>
+			</div>
+			<!--End Tabs-->
+		</div>
+		<div class="tab_container ltabs-items-container row show-slider">
+			<!-- Tabs 1 -->
+			<div class="ltabs-items tab_content content-product-list" id="tab_collection_1_4">
+				<div class="ltabs-items-inner" id="tab_collection_1_in_4">
+					{%assign collection = collections[settings.featured_collection]%}
+					{% for product in collections[settings.featured_collection].products limit: 6 %}					
+					{% if product.compare_at_price > 0 %}
+					{% assign sale_percent = product.price | times: 100 | divided_by: product.compare_at_price | floor %}
+					{% assign sale_percent = 100 | minus: sale_percent %}		
+					{% else %}
+					{% assign sale_percent = 0 %}
+					{% endif %}
+					{% assign on_sale = false %}
+					{% if product.available and product.compare_at_price > product.price %}
+					{% assign on_sale = true %}
+					{% endif %}
+					<div class="item-inner product-resize">
+						<div class="left-block">
+							<a href="{{ product.url }}" title="{{ product.title }}" class="product_image image-resize">
+								<span class="hover-image">
+									{% if product.images.size > 1 %}  
+									<img class="replace-2x img-responsive" src="{{ product.images[1] | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" title="{{ product.title}}" />
+									{% endif %}
+								</span>
+								<img src="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'large' }}{%else%}//hstatic.net/0/0/global/design/theme-default/no-image.png{%endif%}" alt="{{ product.featured_image.alt | escape }}" />
+							</a>
+						</div>
+						<div class="right-block">
+							<h5 class="s_title_block">
+								<a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+							</h5>
+							<div class="pr-rt">
+								<div class="content_price">
+									<span class="price product-price"> {{ product.price | money }} </span>
+									{% if on_sale %}
+									<span class="old-price product-price"> {{ product.compare_at_price | money}} </span>
+									{% endif %}
+									{% if product.compare_at_price > product.price and sale_percent > 0 %}									
+									<span class="reduction"><span>{{ sale_percent }}%</span></span>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<script type="text/javascript" >
+					jQuery(document).ready(function($){
+					var posTabProduct = $("#tab_collection_1_in_4");
+					posTabProduct.owlCarousel({
+					items : 1,
+					itemsDesktop : [1199,1],
+					itemsDesktopSmall : [991,1], 
+					itemsTablet: [767,2], 
+					itemsMobile : [480,1],
+					autoPlay :  true,
+					stopOnHover: false,
+					addClassActive: true,
+
+					});
+					$(".navi_collection_4 .next").click(function(){
+					posTabProduct.trigger('owl.next');})
+					$(".navi_collection_4 .prev").click(function(){
+					posTabProduct.trigger('owl.prev');})
+					});
+				</script>
+				<!-- End Tabs 1 -->
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+	$(".product_tabs_slider_4 .tab_content").hide();
+	$(".product_tabs_slider_4 .navi_4").hide();
+	$(".product_tabs_slider_4 .tab_content:first").show(); 
+	$(".product_tabs_slider_4 .navi_4:first").show(); 
+	$(".product_tabs_slider_4 ul.tabs li").click(function() {
+	$(".product_tabs_slider_4 ul.tabs li").removeClass("active");
+	$(this).addClass("active");
+	$(".product_tabs_slider_4 .tab_content").hide();
+	$(".product_tabs_slider_4 .navi_4").hide();
+	var activeTab = $(this).attr("rel"); 
+	$(".product_tabs_slider_4 #"+activeTab).fadeIn(); 
+	$(".product_tabs_slider_4 ."+activeTab).fadeIn(); 
+	});
+	});
+</script>

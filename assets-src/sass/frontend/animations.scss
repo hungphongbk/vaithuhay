@@ -1,0 +1,109 @@
+@import "../inc/inc";
+
+%transition {
+  transition: all $animation-time ease
+}
+
+%transition-2x {
+  transition: all $animation-time*2 ease
+}
+
+@mixin default {
+  &enter-active, &leave-active {
+    @extend %transition;
+  }
+  &2x- {
+    &enter-active, &leave-active {
+      @extend %transition-2x;
+    }
+  }
+}
+
+.vth-fade- {
+  @include default;
+  &enter, &leave-to {
+    opacity: 0
+  }
+}
+
+.vth-fade-slide-up- {
+  @include default;
+  &enter, &leave-to {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+.vth-fade-slide-down- {
+  @include default;
+  &enter, &leave-to {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}
+
+.vth-fade-slide-up-2x- {
+  &enter-active, &leave-active {
+    transition: all $animation-time*2 ease
+  }
+  &enter, &leave-to {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+.vth-fade-slide-right- {
+  &enter-active, &leave-active {
+    transition: all $animation-time*2 ease
+  }
+  &enter, &leave-to {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+}
+.vth-fade-slide-right-2x- {
+  &enter-active, &leave-active {
+    transition: all $animation-time*4 ease
+  }
+  &enter, &leave-to {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+}
+
+.vth-fade-slide-left- {
+  &enter-active, &leave-active {
+    transition: all $animation-time*2 ease
+  }
+  &enter, &leave-to {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+}
+
+.vth-fade-slide-down-bz- {
+  @include default;
+  &enter-active {
+    transition: all $animation-time ease
+  }
+  &leave-active {
+    transition: all 500ms cubic-bezier(0.755, -0.360, 0.995, -0.180);
+  }
+  &enter {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  &leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.vth-fade-ripple-top-left- {
+}
+
+.slide-list-{
+  &enter-active, &leave-active{
+    transition: all $animation-time*2 ease;
+  }
+
+}

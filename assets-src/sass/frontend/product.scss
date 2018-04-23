@@ -1,0 +1,49 @@
+@import "../inc/inc";
+
+.vth-product-summary {
+  @extend %page-summary;
+  hr{
+    border-top-color: darken($theme-color, 15%)
+  }
+}
+
+.post-type-archive-product {
+  ul.products {
+    display: none;
+  }
+  .vth-wc-archive {
+    background-color: $theme-color;
+    padding-bottom: $line-height-computed*2.7;
+  }
+}
+
+%override-tab {
+  @extend %reset-link;
+  border: none;
+}
+
+.single-product-tabs {
+  margin: 40px 20px;
+  border: 1px solid #ddd;
+  .nav-tabs {
+    > li > a {
+      @extend %override-tab;
+      font-size: $font-size-h3*0.9;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      margin-right: 0;
+    }
+    > li.active > a {
+      @extend %override-tab;
+      background-color: $theme-color;
+      color: $text-color;
+    }
+  }
+  .tab-pane {
+    padding: 20px;
+  }
+  #tab-description {
+
+  }
+}

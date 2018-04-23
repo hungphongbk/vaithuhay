@@ -1,0 +1,72 @@
+.vth-single-product
+  .vth-product-summary
+    .container
+      .row.gutter-sm-50
+        .col-sm-6
+          product-images.images(ref="images", :images_="images", :fullScreen_="true")
+        .col-sm-6
+          h2.entry-title {{title$i18n}}
+          .clearfix
+            h2.price(style="display: inline-block", v-show="price!=='-1'") {{price}}
+            product-rating.pull-right(v-model="rating", color="#997a00", background-color="#f5e4a3", :clickable="true")
+          hr
+          p.short-desc(v-html="description$i18n")
+          product-variants(v-show="variants.length>1", :list="variants", :options_="variantOptions", v-model="variantSelected", @input="({image}) => $refs.images.goTo(image)")
+          .row.gutter-10.gutter-sm-20
+            .col-xs-6.col-sm-4
+              product-quantity(v-model="quantity")
+            .col-xs-6.col-sm-8
+              add-to-cart-wrapper.btn.btn-theme-red.add-to-cart(v-ripple='', @cart-failed="error")
+                i.fa.fa-shopping-cart
+                | {{$t('buyNow')}}
+          hr
+          social-sharer(:url="url")
+  .product-body
+    .container
+      .row(:class="{'flex-row': !$mq.tablet}").gutter-30
+        .col-md-8
+          product-tabs
+            product-tab(:title="$t('info')")
+              component.product-content(:is="body", :class="{contentCollapse}")
+              .text-center.readmore(@click="contentCollapse = !contentCollapse")
+                span.btn.btn-theme(v-if="contentCollapse") {{$t('seeMore')}}
+                span.btn.btn-theme(v-else) {{$t('collapse')}}
+            product-tab(title="FAQ", :badge="faq.length")
+              product-faq(:list="faq")
+            product-tab(:title="$t('comment')", :badge="commentCount")
+              .fb-comments(:data-href="`http://vaithuhay.com${url}`", data-width="100%")
+        .col-md-4.product-sidebar
+          .inner
+            div(v-if="wholesale.length>0")
+              h3.title
+                i.fa.fa-lg.fa-gift
+                | {{$t('combo.label')}}
+              product-whole-sale(:list="wholesale", :variant-id="variantId", :product-id="productId")
+            template(v-if="relateds.length>0")
+              h3.title
+                i.fa.fa-lg.fa-link
+                | {{$t('related')}}
+              ul.products-sidebar
+                li(v-for="rel in relateds")
+                  a.item(:href="rel.url")
+                    thumbnail(:url_="rel.thumbnail", thumbnailSize_="small", ratio_="1-1", :overlay_="false")
+                    h5.title {{rel._title[$i18n.locale]}}
+            div
+              h3.title
+                i.fa.fa-lg.fa-certificate
+                | {{$t('top')}}
+              ul.products-sidebar
+                li(v-for="rel in top6")
+                  a.item(:href="rel.url")
+                    thumbnail(:url_="rel.thumbnail", thumbnailSize_="small", ratio_="1-1", :overlay_="false")
+                    h5.title {{rel._title[$i18n.locale]}}
+    .top-products
+      .container
+        .row
+          .col-sm-12
+            .text-center
+              h3.title {{$t('sale')}}
+            item-loop.pt(:slider-opts="slickOptions_", :list="topPromos")
+              template(slot="item", slot-scope="p")
+                .swiper-slide
+                  product-item(:item="p.item", thumbnailSize_="medium")

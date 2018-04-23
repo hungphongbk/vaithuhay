@@ -1,0 +1,89 @@
+{% if settings.blog_index %}
+<div class="container">
+	<div class="row">
+		<div id="blockptsblogstabs">
+			<h3 class="title_block">{{ settings.blog_title }}</h3>
+			<div class="block_content">
+				<div id="blockptsblogs" class="carousel slide simpleblog-posts">
+					<div class="carousel-control-blog">
+						<a class="carousel-control_left" data-slide="prev">prev</a>
+						<a class="carousel-control_right" data-slide="next">next</a>
+					</div>
+					<div class="blogSlider">
+						{% for article in blogs.news.articles %}
+						{%assign img = ''%}
+								{%assign content = ''%}
+								{%if article.excerpt contains 'img' %}
+									{%assign content = article.excerpt%}
+								{%else%}
+									{%if article.content contains 'img' %}
+										{%assign content = article.content%}
+									{%else%}
+										{%assign content = nil%}
+									{%endif%}
+								{%endif%}
+
+								{%if content == nil %}
+									{%assign img = 'http://hstatic.net/0/0/global/noDefaultImage6_large.gif' %}
+								{%else%}
+									{%assign img = content | split : 'src="' | last %}
+									{%assign img = img | split : '"' | first %}
+								{%endif%}
+						
+						<div class="post-item">
+							<div class="blog_container clearfix">
+								<div class="blog-image">
+									{%if imgurl !='' %}
+									<a class="post-thumbnail" href="{{ article.url }}" title="">
+										<img src="{{img}}" class="img-responsive">
+									</a>
+									{% endif %}
+									<div class="content_blog">
+										<div class="blog-info1"></div>
+										<div class="blog-info">
+											<span class="post-date"> {{ article.published_at | date: '%d' }} </span>
+											<span class="post-month"> {{ article.published_at | date: '%m' }} </span>
+										</div>
+									</div>
+								</div>
+								<div class="post-content">
+									<h2>
+										<a href="{{ article.url }}" title="">{{ article.title | strip_html | truncatewords: 9 }}</a>
+									</h2>
+								</div>
+								<div class="blog-created">
+									<p>{{ article.content | strip_html | truncatewords: 25 }}</p>
+								</div>
+								<div class="read-more">
+									<a class="see-more" href="{{ article.url }}" title="Read more">Xem tiếp</a>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+<script>
+$(document).ready(function() {
+	var blogSlider = $(".blogSlider");
+	blogSlider.owlCarousel({
+		items : 3,
+		itemsDesktop : [1199,3],
+		itemsDesktopSmall : [991,3], 
+		itemsTablet: [767,2], 
+		itemsMobile : [480,1],
+		autoPlay :  true,
+		stopOnHover: false,
+	});
+
+	// Custom Navigation Events
+	$(".carousel-control_left").click(function(){
+		blogSlider.trigger('owl.prev');})
+	$(".carousel-control_right").click(function(){
+		blogSlider.trigger('owl.next');})   
+});
+</script>

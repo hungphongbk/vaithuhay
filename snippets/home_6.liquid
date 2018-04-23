@@ -1,0 +1,106 @@
+{% if settings.our_all %}
+<div class="container">
+	<div class="row">
+		<div class="pts-brand-container">
+			<div class="container-inner">
+				<div class="pts-brand">
+					<div class="pts-brand-title title_block">
+						<h4>{{ settings.our_title }}</h4>
+					</div>
+					<div class="bx-controls bx-has-controls-direction">
+						<div class="bx-controls-direction">
+							<a class="bx-prev">Prev</a>
+							<a class="bx-next">Next</a>
+						</div>
+					</div>
+					<div class="ourbrands">
+						{% if settings.our_1 %}
+						<li >
+							<a href="{{ settings.link_our_1 }}">
+								<img src="{{'img_our_1.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_2 %}
+						<li >
+							<a href="{{ settings.link_our_2 }}">
+								<img src="{{'img_our_2.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_3 %}
+						<li >
+							<a href="{{ settings.link_our_3 }}">
+								<img src="{{'img_our_3.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_4 %}
+						<li >
+							<a href="{{ settings.link_our_4 }}">
+								<img src="{{'img_our_4.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_5 %}
+						<li >
+							<a href="{{ settings.link_our_5 }}">
+								<img src="{{'img_our_5.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_6 %}
+						<li >
+							<a href="{{ settings.link_our_6 }}">
+								<img src="{{'img_our_6.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_7 %}
+						<li >
+							<a href="{{ settings.link_our_7 }}">
+								<img src="{{'img_our_7.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_8 %}
+						<li >
+							<a href="{{ settings.link_our_8 }}">
+								<img src="{{'img_our_8.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+						{% if settings.our_9 %}
+						<li >
+							<a href="{{ settings.link_our_9 }}">
+								<img src="{{'img_our_9.png' | asset_url }}" alt="Brand">
+							</a>
+						</li>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+<script>
+$(document).ready(function() {
+	var blogSlider = $(".ourbrands");
+	blogSlider.owlCarousel({
+		items : 6,
+		itemsDesktop : [1199,5],
+		itemsDesktopSmall : [991,3], 
+		itemsTablet: [767,3], 
+		itemsMobile : [480,2],
+		autoPlay :  true,
+		stopOnHover: false,
+	});
+
+	// Custom Navigation Events
+	$(".bx-controls .bx-controls-direction .bx-prev").click(function(){
+		blogSlider.trigger('owl.prev');})
+	$(".bx-controls .bx-controls-direction .bx-next").click(function(){
+		blogSlider.trigger('owl.next');})   
+});
+</script>

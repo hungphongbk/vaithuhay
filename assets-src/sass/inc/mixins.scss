@@ -1,0 +1,50 @@
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "pseudo";
+@import "responsive";
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    @extend %abs-full;
+    overflow: hidden;
+  }
+}
+
+@mixin font-size-with-line-height($font-size) {
+  font-size: $font-size;
+  line-height: $font-size*$line-height-base;
+}
+
+@mixin outline-effect($color, $size: 4px) {
+  transition: all .125s ease;
+  box-shadow: 0 0 0 0 $color;
+  &:hover, &:focus {
+    box-shadow: 0 0 0 $size $color;
+  }
+}
+
+@mixin outline-text-effect($color, $size: 4px) {
+  transition: all .125s ease;
+  text-shadow: 0 0 0 $color;
+  &:hover, &:focus {
+    text-shadow: 0 0 $size $color;
+  }
+}
+
+@function sqrt($r) {
+  $x0: 1;
+  $x1: $x0;
+
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+    $x0: $x1;
+  }
+
+  @return $x1;
+}

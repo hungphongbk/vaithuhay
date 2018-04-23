@@ -1,0 +1,30 @@
+{% layout none %}
+{%if search.results.size == 0%}
+<p class="empty">
+	Không có sản phẩm nào phù hợp
+</p>
+{%else%}
+
+{%paginate search.results by settings.pagination_limit%}
+{%for product in search.results%}
+	{% include 'product-loop' with collection.handle %}
+{%endfor%}
+
+<div class="col-md-12 pagination_bottom pw-default">
+	{%include 'pagination-ajax'%}
+</div>
+
+{%endpaginate%}
+{%endif%}
+{% include 'quick-view' %}
+<script>
+$(document).ready(function(){
+	$("[data-toggle=tooltip]").tooltip({ placement: 'top'});
+});
+</script>
+{{ 'scripts.js'  | asset_url | script_tag }}
+
+<script>
+
+bindGrid()
+</script>

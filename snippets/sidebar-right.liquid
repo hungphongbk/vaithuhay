@@ -1,0 +1,79 @@
+<!--Star sản phẩm bán chạy-->
+{% if settings.banchay_products %}
+<div class="pts-bestsellers-product block">
+	<div class="title_block">
+		{% if settings.banchay_products_title == ''%}
+		{{collections[settings.banhchay_collection].title}}
+		{% else %}
+		{{ settings.banchay_products_title }}
+		{% endif %}
+	</div>
+	<ul class="bestsellers-product">
+		{% for product in collections[settings.banhchay_collection].products  limit: 3 %}	
+		<li class="clearfix">
+			<div class="product_image">
+				<a href="{{product.url}}" title="">
+					<img src="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{product.title}}">
+				</a>
+			</div>
+			<div class="product-content">
+				<h3><a class="product-name" href="{{product.url}}" title="{{product.title}}">{{product.title}}</a></h3>
+				<div class="content_price">
+					<span class="price product-price">{{ product.price | money }}</span>
+					{% if on_sale %}<span class="old-price product-price">{{ product.compare_at_price | money }}</span>{% endif %}
+				</div>
+				<a data-variant="{{ product.variants.first.id }}" href="javascript:void(0);" class="button add_cart ajax_add_to_cart ajax_add_to_cart_button btn btn-default {%unless product.available%}disabled{%endunless%}" >
+					<span>+ Giỏ hàng</span>
+				</a>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}
+<!--Slider banner-->
+{% if settings.slide_right_1 != false or settings.slide_right_2 != false or settings.slide_right_3 != false %}
+<div class="pts-slideshow-container">	
+	<!-- Begin slider -->
+	<div class="flexslider-container">
+		<div class="flexslider">
+			<ul class="slides">
+				{% for i in (1..4) %}
+				{% capture show_slide %}slide_right_{{ i }}{% endcapture %}
+				{% capture image %}slideshow_right_{{ i }}.jpg{% endcapture %}
+				{% capture alt %}slide_{{ i }}_alt{% endcapture %}
+				{% if settings[show_slide] %}
+				<li>
+					<a href="">
+						<img src="{{ image | asset_url }}" alt="{{ settings[alt] | escape }}" />
+					</a>
+				</li>
+				{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<!-- End slider -->
+</div>
+{% endif %}
+<!--Star sản phẩm nổi bật-->
+{% if settings.use_featured_products %}
+<div class="pts-special-product block content-product-list">
+	{% include 'special-product' %}
+</div>
+{% endif %}
+<!--Star Nhận xét khách hàng-->
+{%if settings.use_nhanxet%}
+<div id="testimonials_block_right" class="block">
+	{% include 'testimonials'%}
+</div>
+{%endif%}
+<!--Hình banner cuối-->
+{% if settings.banners_right %}
+<div class="static_block_left">
+	<a href="{{ settings.link_banners_right }}">
+		<img src="{{'img_banners_right.jpg' | asset_url }}" alt="" width="270" height="363">
+		<span class="img_overlay">. </span>
+	</a>
+</div>
+{% endif %}

@@ -1,0 +1,33 @@
+{% if settings.hotro_1 %}
+<div class="stb-col stb-col1 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	<div class="stb-conten">
+		<a class="image" href="#">
+			<img src="{{'img_hotro_1.png' | asset_url }}" alt="" >
+		</a>
+		<h3>{{ settings.hotro_title_1 }}</h3>
+		<p>{{ settings.hotro_comment_1 }}</p>
+	</div>
+</div>
+{% endif %}
+{% if settings.hotro_2%}
+<div class="stb-col stb-col2 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	<div class="stb-conten">
+		<a class="image" href="#">
+			<img src="{{'img_hotro_2.png' | asset_url }}" alt="" >
+		</a>
+		<h3>{{ settings.hotro_title_2 }}</h3>
+		<p>{{ settings.hotro_comment_2 }}</p>
+	</div>
+</div>
+{% endif %}
+{% if settings.hotro_3%}
+<div class="stb-col stb-col3 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	<div class="stb-conten">
+		<a class="image" href="#">
+			<img src="{{'img_hotro_3.png' | asset_url }}" alt="">
+		</a>
+		<h3>{{ settings.hotro_title_3 }}</h3>
+		<p>{{ settings.hotro_comment_3 }}</p>
+	</div>
+</div>
+{% endif %}

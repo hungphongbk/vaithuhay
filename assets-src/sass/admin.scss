@@ -1,0 +1,36 @@
+@import "admin/bootstrap";
+
+#vth-admin {
+  background-color: #e5e5e5;
+  height: 800px;
+
+  * {
+    box-sizing: border-box;;
+  }
+
+  a {
+    &, &:hover, &:focus, &:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .actions {
+    li {
+      display: inline-block;
+    }
+  }
+
+  .btn {
+    margin-right: 8px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.11);
+    }
+  }
+}

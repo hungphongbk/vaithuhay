@@ -1,0 +1,57 @@
+@import "vars";
+
+$responsive-list: (
+        'xs-min':$screen-xs-min,
+        'xs-max':$screen-xs-max,
+        'sm-min':$screen-sm-min,
+        'sm-max':$screen-sm-max,
+        'md-min':$screen-md-min,
+        'md-max':$screen-md-max
+);
+
+$default-brkpoint: 'root';
+$current-brkpoint: $default-brkpoint;
+@mixin responsive($size) {
+  $type: str-slice($size, 4);
+  $current-brkpoint: $size !global;
+  @media screen and (unquote("#{$type}-width"): map_get($responsive-list, $size)) {
+    @content
+  }
+  $current-brkpoint: $default-brkpoint !global;
+}
+
+$placeholders: ();
+@mixin responsive-pseudo($name) {
+  @if not index($placeholders, $name) {
+    // Store its name
+    $placeholders: append($placeholders, $name) !global;
+    @at-root {
+      // Looping through `$breakpoints`
+      @each $breakpoint in map_keys($responsive-list) {
+        // Opening a media query block
+        //@media (min-width: $value) {
+        //  // Generating a placeholder
+        //  // Called $name-$breakpoint
+        //  %#{$name}-#{$breakpoint} {
+        //    @content;
+        //  }
+        //}
+        @include responsive($breakpoint) {
+          %#{$name}-#{$breakpoint} {
+            @content;
+          }
+        }
+      }
+
+      // And dumping a placeholder out of any media query as well
+      // so basically at root level
+      %#{$name}-#{$default-brkpoint} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin _($name) {
+  @extend %#{$name}-#{$current-brkpoint} !optional;
+}

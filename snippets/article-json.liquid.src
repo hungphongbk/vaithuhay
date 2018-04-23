@@ -1,0 +1,9 @@
+{% include 'get-img-blog' %}{
+  "_type": "article",
+  "id": {{ article.id }},
+  "title": {{ article.title | json }},
+  "url": {{ article.url | json }},
+  "author": {{ article.author | json }},
+  "created": {{ article.published_at | date: '%d/%m/%Y %H:%M:%S' | json }},
+  "image": {{ imageUrl | json }}
+}

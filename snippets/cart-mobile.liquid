@@ -1,0 +1,155 @@
+<div class="minicart-header">
+	<div id="sm_cartpro" class="sm-cartpro">
+		<div class="cartpro-title  cartpro-empty ">
+			<div class="tongle"></div>									
+		</div>
+		<div class="cartpro-content">
+
+			<div class="cartpro-wrapper" id="view-cart">
+
+				<div id="clone-item">
+					<div class="item_2 clearfix hidden item-ajax item-cart clearfix">
+						<div class="nav-bar-item">
+							<figure class="image-cart">
+								<a href="">  
+									<img src="">
+								</a>
+							</figure>
+							<div class="text_cart">
+								<h4>
+									<a href=""></a>
+								</h4>
+								<span class="variant"></span>					
+								<div class="price-line">
+									<div class="down-case"> <span class="new-price">  </span></div>
+								</div>
+							</div>
+							<span class="remove_link">
+								<a class="remove-cart" data-id="{{ item.variant.id }}" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+							</span>
+						</div>
+					</div>   
+				</div>
+				{% if cart.item_count > 0 %}          
+				{% for item in cart.items %}
+				<div class="item-cart clearfix">
+					<div class="nav-bar-item">
+						<figure class="image-cart ">
+							<a href="{{ item.product.url | within: collections.all }}">  
+								<img src="{{ item | img_url: 'small' }}" />
+							</a>
+						</figure>
+						<div class="text_cart">
+							<h4>
+								<a href="{{ item.product.url }}">{{ item.title }}</a>
+							</h4>
+							<span class="variant">
+								{% unless item.variant.title contains 'Default' and item.product.variants.size == 1 %}
+								{{ item.variant.title }}
+								{% endunless %}
+							</span>					
+							<div class="price-line">
+								<div class="down-case">{{ item.quantity }} x <span class="new-price"> {{ item.price | money }}  </span></div>
+							</div>
+						</div>
+						<span class="remove_link">
+							<a class="remove-cart" data-id="{{ item.variant.id }}" href="javascript:void(0);"><i class="fa fa-times"></i></a>
+						</span>
+					</div>
+				</div>    
+				{% endfor %}
+
+				<div id="cartpro-widgets">
+				</div>
+				<div class="cartpro-subtotal">
+					<span class="label">Tổng tiền:</span> 
+					<span class="price cart_block_total">{{ cart.total_price | money }}</span>		
+				</div>
+				<div class="cartpro-actions">
+					<a class="button cart-link" href="/cart">
+						Giỏ hàng     
+					</a>
+					<a class="button checkout-button" href="/checkout">
+						Thanh toán            
+					</a>
+				</div>
+				{% else %}
+				<div class="none-item-cart" style="padding:0 20px;"> 
+					<p style="margin:0"class="text-center">Giỏ hàng của bạn đang trống</p>
+					<p class="text-center"><a href="{{shop.url}}">Tiếp tục mua hàng</a></p>				
+				</div>
+				{% endif %}  
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function getCartView() {
+	jQuery.getJSON('/cart.js', function(cart, textStatus) {
+		jQuery('.ajax_cart_quantity').html(cart.item_count);
+		jQuery('#view-cart .cartpro-subtotal').remove();
+		jQuery('#view-cart .cartpro-actions').remove();
+		jQuery('#view-cart').append(
+			"<div class='cartpro-subtotal'><span class='label'>Tổng tiền:</span><span class='price cart_block_total'>" + Haravan.formatMoney(cart.total_price,'{{ shop.money_format }}') + "</span></div><div class='cartpro-actions'><a class='button cart-link' href='/cart'>Giỏ hàng</a><a class='button checkout-button' href='/checkout'>Thanh toán</a></div>"
+		);
+		jQuery.each(cart.items,function(i,item){
+			clone_item(item);
+		});
+	});
+};
+
+function clone_item(product){
+	var item_product = jQuery('#clone-item .item_2');
+	item_product.find('img').attr('src',product.image);
+	item_product.find('a:not(.remove-cart)').attr('href', product.url);
+	item_product.find('.text_cart > h4 > a').html(product.title);
+	var variant = '';
+	jQuery.each(product.variant_options,function(i,v){
+		variant = variant + ' ' + v;
+	});
+	item_product.find('.remove-cart').attr('data-id',product.variant_id);
+	item_product.find('.variant').html(variant);
+	item_product.find('.price-line .new-price').html(Haravan.formatMoney(product.price,"{{ shop.money_format }}") + "<span class='down-case'> x " + product.quantity + "</span>");
+	item_product.clone().removeClass('hidden').prependTo('#view-cart');
+}
+
+jQuery(document).on("click",".remove-cart",function(){
+	var index_view_cart = jQuery(this).parents('.item-cart').index() - 1;
+	jQuery(this).parents('.item-cart').remove();
+	var variant_id = jQuery(this).attr('data-id');
+	var params = {
+		type: 'POST',
+		url: '/cart/change.js',
+		data:  'quantity=0&id='+variant_id,
+		dataType: 'json',
+		success: function(cart) { 	
+			if ( cart.item_count > 0 ) {
+				jQuery('.ajax_cart_quantity').html(cart.item_count);
+				if ( window.location.pathname == '/cart' ){
+					jQuery('#total-carts').html(Haravan.formatMoney(cart.total_price, "{{ shop.money_format }}"));
+					jQuery('#cartformpage tr.list-carts').eq(index_view_cart).remove();
+				};
+				jQuery('.price.cart_block_total').html(Haravan.formatMoney(cart.total_price, "{{ shop.money_format }}"));
+			} else {
+				if ( window.location.pathname == '/cart' ){
+					jQuery('#cartformpage').remove();
+					jQuery('#layout-page').append("<p class='text-center'>Không có sản phẩm nào trong giỏ hàng!</p><p class='text-center'><a href='/collections/all'><i class='fa fa-reply'></i> Tiếp tục mua hàng</a></p>");
+				}
+				jQuery('.ajax_cart_quantity').html(cart.item_count);
+				jQuery('#view-cart > div:not(#clone-item)').remove();
+				jQuery('#view-cart').append("<div class='none-item-cart' style='padding:0 20px;'> <p style='margin:0' class='text-center'>Giỏ hàng của bạn đang trống</p><p class='text-center'><a href='{{shop.url}}'>Tiếp tục mua hàng</a></p></div>");
+			}
+		},
+		error: function(XMLHttpRequest, textStatus) {
+			Haravan.onError(XMLHttpRequest, textStatus);
+		}
+	};
+	jQuery.ajax(params);
+
+});
+
+
+</script>
+
+
+

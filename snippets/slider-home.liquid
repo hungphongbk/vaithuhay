@@ -1,0 +1,150 @@
+{% if settings.slide_normal %}
+{% if settings.slide_1 != false or settings.slide_2 != false or settings.slide_3 != false or settings.slide_4 != false %}
+<section id="wrap-slider">
+	<div class="wrap-img">
+		{% assign numbs = 0 %}
+		{% for i in (1..4) %}
+		{% capture show_slide %}slide_{{ i }}{% endcapture %}
+		{% capture	bgimage %}bgimage_{{i}}0.png{% endcapture %}
+		{% capture slide_link %}slide_{{ i }}_link{% endcapture %}
+		{% if settings[show_slide] %}
+		{% assign numbs = numbs | plus: 1 %}
+		<div class="box-img">
+			<a href="{{ settings[slide_link] }}">
+				<img src="{{ bgimage | asset_url }}" alt="" class="img-responsive"/>
+			</a>
+		</div>
+		{% endif %}
+		{% endfor %}
+
+	</div>
+</section>
+{% endif %}
+<script>
+$(document).ready(function() {
+
+	$(".wrap-img").owlCarousel({
+		navigation : true, // Show next and prev buttons
+		navigationText:[
+					'<div class="slide_prev"><span class="fa fa-chevron-left"></span></div>',
+					'<div class="slide_next"><span class="fa fa-chevron-right"></span></div>'
+				],
+		slideSpeed : 300,
+		paginationSpeed : 400,
+		singleItem:true,
+		autoPlay:true,
+		touchDrag: false,
+		mouseDrag: false
+		// "singleItem:true" is a shortcut for:
+		// items : 1, 
+		// itemsDesktop : false,
+		// itemsDesktopSmall : false,
+		// itemsTablet: false,
+		// itemsMobile : false
+
+	});
+
+});
+
+</script>
+
+{% comment %}
+<div class="pos_slideshow">
+	<div id="sequence-theme">
+		<div id="sequence">
+			<ul class="sequence-canvas">
+				{% assign numbs = 0 %}
+				{% for i in (1..4) %}
+				{% capture show_slide %}slide_{{ i }}{% endcapture %}
+				{% capture	bgimage %}bgimage_{{i}}0.png{% endcapture %}
+				{% capture slide_img %}slide_{{i}}_img{% endcapture %}
+				{% capture image %}image_{{i}}0.png{% endcapture %}
+				{% capture slide_link_title  %}slide_{{i}}_link_title{% endcapture %}
+				{% capture slide_link %}slide_{{ i }}_link{% endcapture %}
+				{% if settings[show_slide] %}
+				{% assign numbs = numbs | plus: 1 %}
+				<li class="animate-in" id ="kind_effect{{i}}">
+					{% if settings[slide_title_1] %}	<h2 class ="title">{{ settings[slide_title_1] }}</h2>{% endif %}
+					{% if settings[slide_title_2] %}<h3 class ="subtitle">{{ settings[slide_title_2] }}</h3>{% endif %}
+					<div class="intro">
+						{% if settings[slide_title_3] %}	<div class="upto-off">{{ settings[slide_title_3] }}</div><br />{% endif %}
+						{% if settings[slide_title_4] %}	<div class="slidershow-price">{{ settings[slide_title_4] }}</div>{% endif %}
+					</div>
+					<img class="slider-bg" src="{{ bgimage | asset_url }}" alt="" />
+					{% if settings[slide_link_title] %}
+					<div class ="link">
+						<a href ="{{ settings[slide_link] }}">{{ settings[slide_link_title] }}</a>
+					</div>
+					{% endif %}
+				</li>
+				{% endif %}
+				{% endfor %}
+
+			</ul>
+
+			{% if numbs > 1 %}
+			<ul class="sequence-pagination">
+				{% for t in (1..4) %}
+				<li><a href="javascript:void(0)">{{t}} </a></li>
+				{% endfor %}
+
+			</ul>
+			{% endif %}
+
+		</div>
+	</div>
+
+	<script>
+
+	//<![CDATA[
+	$(document).ready(function(){
+
+		var options = {
+			autoPlay:  true, // auto change slides
+			autoPlayDelay: 6000,
+			pauseOnHover: 	false, 
+			hidePreloaderDelay: 500,
+			nextButton: true,
+			prevButton: true,
+			pauseButton: true,
+			preloader: true,
+			pagination:true,
+			hidePreloaderUsingCSS: false,                   
+			animateStartingFrameIn: true,    
+			navigationSkipThreshold: 750,
+			preventDelayWhenReversingAnimations: true,
+			customKeyEvents: {
+				80: "pause"
+			}
+		};
+
+		var sequence = $("#sequence").sequence(options).data("sequence");
+
+
+	});
+	//]]>
+
+	</script>
+</div>
+{% endcomment %}
+{% endif %}
+
+{% if settings.slide_bg%}
+<section id="slider-sd">
+	<div class="content-slider-sd">
+		<div class="container">
+			<div class="col-md-offset-1 col-md-10 col-xs-12 content-slogan-sd">
+				{{ settings.slide_text }}
+				<div class="wow animate fadeInUp viewer-content-sd" data-wow-delay="10s">
+					<p class="_viewer-content-page">
+						<a href="{{ settings.slide_link }}">
+							Tìm hiểu thêm <br/><i class="fa fa-angle-double-down"></i>
+						</a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+{% endif %}

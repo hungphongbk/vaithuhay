@@ -1,0 +1,317 @@
+<style lang="scss" scoped>
+  @import "../../sass/inc/inc";
+
+  %center {
+    text-align: center;
+  }
+
+  .vth-wc-archive {
+    @at-root .archive-carousel {
+      @include responsive('md-min') {
+        background-color: #f3f3f3;
+        padding: 90px 0 30px 0;
+        position: relative;
+        .container > div {
+          overflow-x: hidden;
+          padding: 100px 0;
+        }
+        /deep/ {
+          .main, .slick-list {
+            overflow: unset;
+          }
+          .main-outer {
+            position: initial;
+          }
+          .slick-slide {
+            transition: all $animation-time*3 ease;
+            transform: scale(1);
+            will-change: transform;
+          }
+          .slick-center {
+            transform: scale(1.65);
+            z-index: 2;
+            @include _(box-shadow-2);
+          }
+        }
+      }
+
+      @include responsive('sm-max') {
+        .product-loop {
+          margin-bottom: 0 {
+            left: -10px;
+            right: -10px;
+          }
+        }
+      }
+    }
+
+    .archive-list {
+      background-color: $theme-color;
+      padding-bottom: $line-height-computed*2.7;
+    }
+  }
+
+  .title {
+    @extend %center;
+    .page-title {
+      display: inline-block;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: white;
+      @include font-size-with-line-height($font-size-h1*1.15);
+      @include responsive('xs-max') {
+        @include font-size-with-line-height($font-size-h1*0.9);
+      }
+    }
+    .overlay-selector.cat-selector {
+      text-align: center;
+      /deep/ .indicator .fa {
+        font-size: $font-size-h1*1.15;
+        color: white;
+        opacity: 0;
+        transform: translateX(50%);
+        transition: all $animation-time ease;
+      }
+      &:hover /deep/ .indicator .fa {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      a {
+        @extend %reset-link;
+        display: block;
+        text-align: left;
+      }
+    }
+  }
+
+  .archive-list {
+    position: relative;
+    .title {
+      padding: {
+        top: $line-height-computed;
+        bottom: $line-height-computed;
+      }
+    }
+    .list {
+      padding: 0 50px {
+        top: 50px;
+      }
+      @include responsive('xs-max') {
+        padding: 0 5px;
+      }
+      .product-item {
+        margin-bottom: 20px;
+        @include responsive('xs-max') {
+          /*padding: {*/
+          /*left: 5px;*/
+          /*right: 5px;*/
+          /*}*/
+          margin-bottom: 10px;
+        }
+        /deep/ .caption {
+          height: $line-height-computed*10;
+          @include responsive('xs-max') {
+            height: $line-height-computed*7;
+          }
+        }
+      }
+    }
+    .thumbnail {
+      transition: all $animation-time ease;
+      @extend %box-shadow-1;
+    }
+  }
+
+  .sort-form {
+    @include responsive('sm-min') {
+      text-align: center;
+    }
+    > div {
+      display: inline-block;
+      font-size: $font-size-base*1.4;
+      @include responsive('xs-max') {
+        font-size: $font-size-base;
+        margin-bottom: $font-size-base*0.7;
+      }
+    }
+    margin-bottom: 40px;
+    @include responsive('xs-max') {
+      margin-bottom: $grid-gutter-width/2;
+    }
+    .overlay-selector.sort-selector {
+      display: inline-block;
+      margin-left: $grid-gutter-width;
+      @include responsive('sm-min') {
+        min-width: 240px;
+      }
+
+      .sort-title {
+        text-align: left;
+      }
+
+      /deep/ .indicator {
+        padding-bottom: 4px;
+        @include responsive('xs-max') {
+          padding-bottom: 2px;
+        }
+        border-bottom: 1px solid;
+      }
+    }
+    .cat {
+      @extend %reset-link;
+      display: inline-block;
+      h2 {
+        color: darken(#fff, 20%);
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+    @at-root .sort-title {
+      @include responsive('xs-max') {
+        @include font-size-with-line-height($font-size-h5)
+      }
+    }
+  }
+
+  @include responsive('xs-max') {
+    .select-cat-list {
+      margin: {
+        left: -$grid-gutter-width/2;
+        right: -$grid-gutter-width/2;
+      }
+      background-color: darken($theme-color, 4%);
+      .select-cat {
+        padding: $line-height-computed*0.7 $grid-gutter-width/2;
+      }
+    }
+  }
+
+  #main-list{
+    position: absolute;
+    top: -$navbar-height;
+  }
+</style>
+<template lang="pug">
+  .vth-wc-archive
+    .archive-carousel(v-if="slides.length>0")
+      .container
+        product-loop(:slider-opts="carousel_", :list="slides")
+          template(slot="item", slot-scope="p")
+            a(:href="p.item.url")
+              thumbnail(:url_="p.item.image.vi.thumbnails['600w']", ratio_="3-2", :overlay_="false", :lazy_="false", :slick-lazy_="false")
+    .archive-list
+      #main-list
+      .container
+        .title
+          h1.page-title {{currentCategory_.title}}
+        .sort-form
+          div(style="margin-right: 30px")
+            span Sản phẩm
+            overlay-selector.sort-selector(:list="categories_")
+              template(slot="current")
+                span {{currentCategory_.title}}
+              template(slot="item", slot-scope="p")
+                a(:href="p.item.url").cat
+                  h2.sort-title {{p.item.title}}
+          div
+            span Sắp xếp bởi
+            overlay-selector.sort-selector(:list="sort_", v-model="currentSort_")
+              template(slot="current", slot-scope="p")
+                span {{p.item.title}}
+              template(slot="item", slot-scope="p")
+                h2.sort-title {{p.item.title}}
+        .list
+          product-loop.row.gutter-10.gutter-sm-30(v-if="products.length<20", :list="products")
+            template(slot="item", slot-scope="p")
+              .col-xs-6.col-md-4
+                product-item.product-item(:key="p.item.id", :item="p.item")
+          paginate(v-else, :for_="products", :perPage="12", @navigated="navigated")
+            template(slot-scope="p")
+              //transition-group.row.gutter-10.gutter-sm-30(name="slide-list", tag="div")
+              .row.gutter-10.gutter-sm-30
+                .col-xs-6.col-md-4(v-for="item in p.list", :key="item.id")
+                  product-item.product-item(:item="item")
+</template>
+<script>
+  import {ItemLoop, Paginate, OverlaySelector, PageSlider} from '../components/index'
+  import {ProductItem1 as ProductItem} from '../components/products'
+  import Slick from 'vue-slick'
+  import {mapGetters} from 'vuex';
+  import {PRODUCTS_LIST_, PRODUCTS_FETCH_, PRODUCTS_SORT_, CATEGORIES_LIST_} from '../store/types'
+  import ProductsModule from '../store/products'
+
+  const $=jQuery;
+
+  export default {
+    components: {
+      ProductLoop: ItemLoop,
+      Paginate,
+      ProductItem,
+      Slick,
+      OverlaySelector,
+      PageSlider
+    },
+    data() {
+      const f = (id, title) => ({id, title}),
+        sort_ = [
+          f('new', 'Mới'),
+          f('sale', 'Khuyến mãi'),
+          f('name', 'A-Z'),
+          f('pricelow', 'Giá: từ cao đến thấp'),
+          f('pricehigh', 'Giá: từ thấp đến cao'),
+        ];
+      return {
+        title_: window.products.title,
+        sort_,
+        currentSort_: sort_[0]
+      }
+    },
+    computed: {
+      slides() {
+        return this.$store.state.products.slides;
+      },
+      ...mapGetters({
+        products: PRODUCTS_LIST_,
+        categories_: CATEGORIES_LIST_
+      }),
+      currentCategory_() {
+        return this.categories_.find(cat => cat.id === window.products.categoryId)
+      },
+      carousel_() {
+        return this.$mq.tablet ? {
+          slidesToShow: 1,
+          autoplay: true,
+          autoplaySpeed: 2000
+        } : {
+          centerMode: true,
+          centerPadding: '1px',
+          slidesToShow: 3,
+          autoplay: true,
+          autoplaySpeed: 2000
+        }
+      }
+    },
+    watch: {
+      currentSort_({id}) {
+        this.$store.commit(PRODUCTS_SORT_, id);
+      }
+    },
+    methods:{
+      navigated(){
+        $.scrollTo('#main-list');
+      }
+    },
+    beforeMount() {
+      const {list, slides} = window.products;
+      this.$store.registerModule('products', ProductsModule);
+      this.$store.commit(PRODUCTS_FETCH_, {
+        list,
+        slides
+      });
+    },
+    destroyed() {
+      this.$store.unregisterModule('products')
+    }
+  }
+</script>

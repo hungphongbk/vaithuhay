@@ -1,0 +1,102 @@
+@import "vars";
+@import "responsive";
+
+%white-bg {
+  background: #fff;
+}
+
+%abs-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@include responsive-pseudo('abs-center') {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// For clearing floats like a boss h5bp.com/q
+%clearfix {
+  *zoom: 1;
+  &::before,
+  &::after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &::after {
+    clear: both;
+  }
+}
+
+%reset-link {
+  &, &:active, &:hover, &:focus, &:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+//@include responsive-pseudo('reset-link'){
+//  &, &:active, &:hover, &:focus, &:visited {
+//    color: inherit;
+//    text-decoration: none;
+//  }
+//}
+
+%page-summary {
+  @extend %clearfix;
+  background: #fc0;
+  padding: 60px 30px 30px 30px;
+  @include responsive('xs-max'){
+    padding: 0 0 20px 0;
+  }
+
+  .entry-summary {
+    .entry-title {
+      margin-top: -0.3em;
+      line-height: 1.3em;
+      margin-bottom: 0.7em;
+    }
+  }
+}
+
+%box-shadow-1 {
+  box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.65);
+  &:hover {
+    box-shadow: 0 6px 20px -5px rgba(0, 0, 0, .65);
+  }
+}
+%box-shadow-2{
+  box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.85);
+}
+@include responsive-pseudo('box-shadow-2'){
+  box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.85);
+}
+@include responsive-pseudo('text-shadow-2'){
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+}
+
+%theme-link {
+  color: darken($theme-color, 4%);
+}
+
+%no-focus {
+  &:focus {
+    outline: none;
+  }
+}
+
+%vignette-1{
+  box-shadow: 0 0 100px rgba(0,0,0,0.65) inset;
+}
+%vignette-2{
+  box-shadow: 0 0 80px rgba(0,0,0,0.45) inset;
+}
+%vignette-3{
+  box-shadow: 0 0 60px rgba(0,0,0,0.25) inset;
+}

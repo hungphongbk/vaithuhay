@@ -1,0 +1,58 @@
+<div class="ltabs-wrap product_tabs_slider_1">
+	<div class="ltabs-tabs-container_1">
+		<div class="ltabs-tabs-wrap">
+			{% comment %}
+			<!--Begin Tabs-->
+			<div class="navi_1 navi_collection_1 tab_collection_1_1">
+				<a class="prevtab_1"></a>
+				<a class="nexttab_1"></a>
+			</div>
+			<!--End Tabs-->
+			{% endcomment %}
+		</div>
+		<div class="tab_container ltabs-items-container row show-slider">
+			<!-- Tabs 1 -->
+			<div class="ltabs-items tab_content content-product-list" id="tab_collection_1_1">
+				{%if collections[settings.new_collection].products.size > 0%}						
+				<div class="ltabs-items-inner row" id="tab_collection_1_in_1">
+					{%assign collection = collections[settings.new_collection]%}
+					{% for product in collections[settings.new_collection].products limit: 8 %}					
+					{% include 'product-new' %}
+					{% endfor %}
+
+				</div>
+				{%else%}
+				<a class="link-setting" href="/admin/theme#/list">Chưa có sản phẩm nào để hiển thị. Vui lòng vào trang quản trị, và cấu hình cho mục này</a>
+				{%endif%}
+			</div>
+
+			{% if collections[settings.new_collection].products.size > 8 %}
+			<div class="clearfix text-center">
+				<a href="{{ collections[settings.new_collection].url }}" class="btn-more">Xem thêm</a>
+			</div>
+			{% endif %}
+
+			{% comment %}<script type="text/javascript" >
+				jQuery(document).ready(function($){
+				var posTabProduct = $("#tab_collection_1_in_1");
+				posTabProduct.owlCarousel({
+				items : 3,
+				itemsDesktop : [1199,3],
+				itemsDesktopSmall : [991,2], 
+				itemsTablet: [767,2], 
+				itemsMobile : [480,1],
+				autoPlay :  false,
+				stopOnHover: false,
+				addClassActive: true,
+
+				});
+				$(".navi_collection_1 .nexttab_1").click(function(){
+				posTabProduct.trigger('owl.next');})
+				$(".navi_collection_1 .prevtab_1").click(function(){
+				posTabProduct.trigger('owl.prev');})
+				});
+			</script>{% endcomment %}
+			<!-- End Tabs 1 -->
+		</div>
+	</div>
+</div>

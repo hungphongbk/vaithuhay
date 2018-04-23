@@ -1,0 +1,106 @@
+<div class="title_block">Nhận xét</div>
+<div class="ltabs-wrap product_tabs_slider_5">
+	<div class="ltabs-tabs-container_5">
+		<div class="ltabs-tabs-wrap">
+			<!--Begin Tabs-->
+			<div class="navi_5 navi_collection_5 tab_collection_1_5">
+				<a class="prev prevsellers_5"></a>
+				<a class="next nextsellers_5"></a>
+			</div>
+			<!--End Tabs-->
+		</div>
+		<div class="tab_container ltabs-items-container row show-slider">
+			<!-- Tabs 1 -->
+			<div class="ltabs-items tab_content content-product-list" id="tab_collection_1_5">
+				<div class="ltabs-items-inner" id="tab_collection_1_in_5">
+					{% if settings.nhanxet_1 %}
+					<div class="main-block">
+						<div class="content_test">
+							<p class="des_testimonial">{{ settings.noidung_nhanxet_1 }}</p>
+						</div>
+						<div class="media-content"> 
+							<a class="fancybox-media" href="#" rel="media-gallery">
+								<img src="{{'img_nhanxet_1.jpg' | asset_url }}" alt="">
+							</a>
+						</div>
+						<div class="content_test">
+							<p class="des_namepost">{{ settings.name_1 }}</p>
+							<p class="des_company">{{ settings.vitri_1 }}</p>
+						</div>
+					</div>
+					{% endif %}
+					{% if settings.nhanxet_2 %}
+					<div class="main-block">
+						<div class="content_test">
+							<p class="des_testimonial">{{ settings.noidung_nhanxet_2}}</p>
+						</div>
+						<div class="media-content"> 
+							<a class="fancybox-media" href="#" rel="media-gallery">
+								<img src="{{'img_nhanxet_2.jpg' | asset_url }}" alt="">
+							</a>
+						</div>
+						<div class="content_test">
+							<p class="des_namepost">{{ settings.name_2 }}</p>
+							<p class="des_company">{{ settings.vitri_2 }}</p>
+						</div>
+					</div>
+					{% endif %}
+					{% if settings.nhanxet_3 %}
+					<div class="main-block">
+						<div class="content_test">
+							<p class="des_testimonial">{{ settings.noidung_nhanxet_3 }}</p>
+						</div>
+						<div class="media-content"> 
+							<a class="fancybox-media" href="#" rel="media-gallery">
+								<img src="{{'img_nhanxet_3.jpg' | asset_url }}" alt="">
+							</a>
+						</div>
+						<div class="content_test">
+							<p class="des_namepost">{{ settings.name_3 }}</p>
+							<p class="des_company">{{ settings.vitri_3 }}</p>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<script type="text/javascript" >
+				jQuery(document).ready(function($){
+				var posTabProduct = $("#tab_collection_1_in_5");
+				posTabProduct.owlCarousel({
+				items : 1,
+				itemsDesktop : [1199,1],
+				itemsDesktopSmall : [991,1], 
+				itemsTablet: [767,2], 
+				itemsMobile : [480,1],
+				autoPlay :  true,
+				stopOnHover: false,
+				addClassActive: true,
+
+				});
+				$(".navi_collection_5 .next").click(function(){
+				posTabProduct.trigger('owl.next');})
+				$(".navi_collection_5 .prev").click(function(){
+				posTabProduct.trigger('owl.prev');})
+				});
+			</script>
+			<!-- End Tabs 1 -->
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+	$(".product_tabs_slider_5 .tab_content").hide();
+	$(".product_tabs_slider_5 .navi_5").hide();
+	$(".product_tabs_slider_5 .tab_content:first").show(); 
+	$(".product_tabs_slider_5 .navi_5:first").show(); 
+	$(".product_tabs_slider_5 ul.tabs li").click(function() {
+	$(".product_tabs_slider_5 ul.tabs li").removeClass("active");
+	$(this).addClass("active");
+	$(".product_tabs_slider_5 .tab_content").hide();
+	$(".product_tabs_slider_5 .navi_5").hide();
+	var activeTab = $(this).attr("rel"); 
+	$(".product_tabs_slider_5 #"+activeTab).fadeIn(); 
+	$(".product_tabs_slider_5 ."+activeTab).fadeIn(); 
+	});
+	});
+</script>

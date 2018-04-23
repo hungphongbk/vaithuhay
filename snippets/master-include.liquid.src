@@ -1,0 +1,10 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//hstatic.net/0/0/global/design/js/bootstrap.min.js"></script>
+{{ 'api.jquery.js' | haravan_asset_url | script_tag }}
+<script src="//hstatic.net/0/0/global/design/theme-default/html5shiv.js"></script>
+<script src="//code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+{% if template contains 'customers' %}
+{{ 'haravan_common.js' | haravan_asset_url | script_tag }}
+{{ 'customer_area.js'  | haravan_asset_url | script_tag }}
+{% endif %}

@@ -1,0 +1,66 @@
+{% if product.compare_at_price > 0 %}
+{% assign sale_percent = product.price | times: 100 | divided_by: product.compare_at_price | floor %}
+{% assign sale_percent = 100 | minus: sale_percent %}		
+{% else %}
+{% assign sale_percent = 0 %}
+{% endif %}
+{% assign on_sale = false %}
+{% if product.available and product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+{% assign sold_out = true %}
+{% if product.available  %}
+{% assign sold_out = false %}
+{% endif %}
+<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 item-inner product-resize">
+	<div class="left-block">
+		<a href="{{ product.url }}" title="{{ product.title }}" class="product_image image-resize">
+			<span class="hover-image">
+				{% if product.images.size > 1 %}  
+				<img class="replace-2x img-responsive" src="{{ product.images[1] | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"  />
+				{% endif %}
+			</span>
+			<img class="replace-2x" src="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'large' }}{%else%}//hstatic.net/0/0/global/design/theme-default/no-image.png{%endif%}" alt="{{ product.featured_image.alt | escape }}" />
+		</a>
+		{% if product.compare_at_price > product.price and sale_percent > 0 %}
+		<span class="sale">Sale!</span>
+		{% endif %}
+		{%if product.tags.size > 0%}   
+		{% for tag in product.tags %}
+		{% if tag contains 'type' %}
+		{% capture cut_type %}
+		{{ tag | split : 'type:' }}
+		{% endcapture %}
+		<span class="new">{{cut_type}}</span>
+		{% endif %}
+		{% endfor %}
+		{% endif %}
+		<div class="button-container fly_3 clearfix">
+			<a class="quick-view" data-handle="{{product.url}}" href="javascript:void(0);" rel="">
+				<span class="wrap_bg">
+					<i class="icon-eye-open icon-0x icon-mar-lr2"></i>
+					<span class="wrap_text">Xem nhanh</span>
+				</span>
+			</a>
+			<a class="button add_cart ajax_add_to_cart ajax_add_to_cart_button btn btn-default {%unless product.available%}disabled{%endunless%}" data-variant="{{ product.variants.first.id }}" href="javascript:void(0);">
+				<span class="wrap_bg">
+					<i class="icon-shopping-cart icon-0x icon-mar-lr2"></i>
+					<span class="wrap_text">{% if sold_out %} Hết hàng {% else %} Giỏ hàng {% endif %}</span>
+				</span>
+			</a>
+		</div>
+	</div>
+	<div class="right-block">
+		<h5 class="s_title_block">
+			<a href="{{ product.url }}" title="{{ product.title }}">{{ product.title }}</a>
+		</h5>
+		<div class="pr-rt">
+			<div class="content_price">
+				<span class="price product-price"> {{ product.price | money }} </span>
+				{% if on_sale %}
+				<span class="old-price product-price"> {{ product.compare_at_price | money}} </span>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

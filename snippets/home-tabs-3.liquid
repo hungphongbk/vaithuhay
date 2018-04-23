@@ -1,0 +1,180 @@
+<div class="ltabs-wrap product_tabs_slider_3">
+	<div class="ltabs-tabs-container_3">
+		<div class="ltabs-tabs-wrap_3">
+			<!--Begin Tabs-->
+			<ul class="tabs ltabs-tabs_3 ">
+				{% if settings.use_5_products %}
+				<li class="ltabs-tab_3 active"  rel="tab_collection_1">
+					<span class="ltabs-tab-label">
+						{% if settings.5_products_title == ''%}
+						{{collections[settings.5_collection].title}}
+						{% else %}
+						{{ settings.5_products_title }}
+						{% endif %}
+					</span>
+				</li> 
+				{% endif %}
+				{% if settings.use_6_products %}
+				<li class="ltabs-tab_3" rel="tab_collection_2">
+					<span class="ltabs-tab-label">
+						{% if settings.6_products_title == ''%}
+						{{collections[settings.6_collection].title}}
+						{% else %}
+						{{ settings.6_products_title}}
+						{% endif %}
+					</span>
+				</li>
+				{% endif %}
+				{% if settings.use_7_products %}
+				<li class="ltabs-tab_3" rel="tab_collection_3">
+					<span class="ltabs-tab-label">
+						{% if settings.7_products_title == ''%}
+						{{collections[settings.7_collection].title}}
+						{% else %}
+						{{ settings.7_products_title }}
+						{% endif %}
+					</span>
+				</li>
+				{% endif %}
+			</ul>
+			<div class="navi_3 navi_collection_1_1_3 tab_collection_1">
+				<a class="prevtab"></a>
+				<a class="nexttab"></a>
+			</div>
+			<div class="navi_3 navi_collection_1_2_3 tab_collection_2">
+				<a class="prevtab"></a>
+				<a class="nexttab"></a>
+			</div>	
+			<div class="navi_3 navi_collection_1_3_3 tab_collection_3">
+				<a class="prevtab"></a>
+				<a class="nexttab"></a>
+			</div>
+			<!--End Tabs-->
+		</div>
+		<div class="tab_container ltabs-items-container row show-slider">
+			<!-- Tabs 1 -->
+			{% if settings.use_5_products %}
+			<div class="ltabs-items tab_content content-product-list" id="tab_collection_1">
+				{%if collections[settings.5_collection].products.size > 0%}
+				<div class="ltabs-items-inner" id="tab_collection_1_in_3">
+					{%assign collection = collections[settings.5_collection]%}
+					{% for product in collections[settings.5_collection].products %}
+					{% include 'product_tab_new' %}
+					{% endfor %}
+				</div>
+				{%else%}
+				<a class="link-setting" href="/admin/theme#/list">Chưa có sản phẩm nào để hiển thị. Vui lòng vào trang quản trị, và cấu hình cho mục này</a>
+				{%endif%}
+			</div>
+			{% endif %}
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+				var posTabProduct = $("#tab_collection_1_in_3");
+				posTabProduct.owlCarousel({
+				items : 3,
+				itemsDesktop : [1199,3],
+				itemsDesktopSmall : [991,2], 
+				itemsTablet: [767,2], 
+				itemsMobile : [480,1],
+				autoPlay :  false,
+				stopOnHover: false,
+				addClassActive: true,
+
+				});
+				$(".navi_collection_1_1_3 .nexttab").click(function(){
+				posTabProduct.trigger('owl.next');})
+				$(".navi_collection_1_1_3 .prevtab").click(function(){
+				posTabProduct.trigger('owl.prev');})
+				});
+			</script>
+			<!-- End Tabs 1 -->
+			<!-- Tabs 2 -->
+			{% if settings.use_6_products %}
+			<div class="ltabs-items tab_content content-product-list" id="tab_collection_2">
+				{%if collections[settings.6_collection].products.size > 0%}				
+				<div class="ltabs-items-inner" id="tab_collection_2_in_3">
+					{%assign collection = collections[settings.6_collection]%}
+					{% for product in collections[settings.6_collection].products %}
+					{% include 'product_tab_new' %}
+					{% endfor %}
+				</div>
+				{%else%}
+				<a class="link-setting" href="/admin/theme#/list">Chưa có sản phẩm nào để hiển thị. Vui lòng vào trang quản trị, và cấu hình cho mục này</a>
+				{%endif%}
+			</div>
+			{% endif %}
+			<script>
+			jQuery(document).ready(function($){
+				var posTabProduct = $("#tab_collection_2_in_3");
+				posTabProduct.owlCarousel({
+					items : 3,
+					itemsDesktop : [1199,3],
+					itemsDesktopSmall : [991,2], 
+					itemsTablet: [767,2], 
+					itemsMobile : [480,1],
+					autoPlay :  false,
+					stopOnHover: false,
+					addClassActive: true,
+				});
+				$(".navi_collection_1_2_3 .nexttab").click(function(){
+					posTabProduct.trigger('owl.next');})
+				$(".navi_collection_1_2_3 .prevtab").click(function(){
+					posTabProduct.trigger('owl.prev');})
+			});
+			</script>
+			<!-- End Tabs 2 -->
+			<!-- Tabs 3 -->
+			{% if settings.use_7_products %}
+			<div class="ltabs-items tab_content content-product-list" id="tab_collection_3">
+				{%if collections[settings.new_collection].products.size > 0%}
+				<div class="ltabs-items-inner" id="tab_collection_3_in_3">
+					{%assign collection = collections[settings.7_collection]%}
+					{% for product in collections[settings.7_collection].products %}
+					{% include 'product_tab_new' %}
+					{% endfor %}
+				</div>
+				{%else%}
+				<a class="link-setting" href="/admin/theme#/list">Chưa có sản phẩm nào để hiển thị. Vui lòng vào trang quản trị, và cấu hình cho mục này</a>
+				{%endif%}
+			</div>
+			{% endif %}
+			<script>
+			jQuery(document).ready(function($){
+				var posTabProduct = $("#tab_collection_3_in_3");
+				posTabProduct.owlCarousel({
+					items : 3,
+					itemsDesktop : [1199,3],
+					itemsDesktopSmall : [991,2], 
+					itemsTablet: [767,2], 
+					itemsMobile : [480,1],
+					autoPlay :  false,
+					stopOnHover: false,
+					addClassActive: true,
+				});
+				$(".navi_collection_1_3_3 .nexttab").click(function(){
+					posTabProduct.trigger('owl.next');})
+				$(".navi_collection_1_3_3 .prevtab").click(function(){
+					posTabProduct.trigger('owl.prev');})
+			});
+			</script>
+			<!-- End Tabs 3 -->
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+	$(".product_tabs_slider_3 .tab_content").hide();
+	$(".product_tabs_slider_3 .navi_3").hide();
+	$(".product_tabs_slider_3 .tab_content:first").show(); 
+	$(".product_tabs_slider_3 .navi_3:first").show(); 
+	$(".product_tabs_slider_3 ul.tabs li").click(function() {
+	$(".product_tabs_slider_3 ul.tabs li").removeClass("active");
+	$(this).addClass("active");
+	$(".product_tabs_slider_3 .tab_content").hide();
+	$(".product_tabs_slider_3 .navi_3").hide();
+	var activeTab = $(this).attr("rel"); 
+	$(".product_tabs_slider_3 #"+activeTab).fadeIn(); 
+	$(".product_tabs_slider_3 ."+activeTab).fadeIn(); 
+	});
+	});
+</script>

@@ -1,0 +1,164 @@
+<!--Home 6-->
+{% include 'home_6'%}
+<!--End Home 6-->
+<div class="footer-center">
+	<div class="container">
+		<div class="row">
+			<div class="left_footer col-lg-3 col-md-3 col-sm-4 col-xs-12">
+				<div class="footer-static row-fluid">
+					{% if settings.about_1 %}
+					<section id="block_contact_infos">
+						<h4>{{ settings.about_title }}</h4>
+						<div class="ft_map">
+							<p>{{ settings.noidung_about }}</p>
+							<ul class="toggle-footer">
+								<li>
+									<span class="ci_icon">
+										<i class="icon-map-marker"></i>
+									</span>
+									<span class="ci_content">{{ settings.address_about }}</span>
+								</li>
+								<li>
+									<span class="ci_icon">
+										<i class="icon-phone"></i>
+									</span>
+									<span class="ci_content">{{ settings.hotline_about }}</span>
+								</li>
+								<li>
+									<span class="ci_icon">
+										<i class="icon-envelope-alt"></i>
+									</span>
+									<span class="ci_content"><a href="#">{{ settings.email_about }}</a>
+									</span>
+								</li>
+							</ul>
+						</div>
+					</section>
+					{% endif %}
+					{% comment %}					
+					{% if settings.footer_social_enable %}
+					<section id="social_block">
+						<h4>{{ settings.footer_social_title }}</h4>
+						<p>{{ settings.footer_social_noidung }}</p>
+						<ul>
+							<li class="facebook">
+								<a target="_blank" href="{{ settings.social_facebook_link }}">
+									<span>
+										<em class="icon-facebook"></em>
+									</span>
+								</a>
+							</li>
+							<li class="instagram">
+								<a target="_blank" href="{{ settings.social_instagram_link }}">
+									<span>
+										<em class="icon-instagram"></em>
+									</span>
+								</a>
+							</li>
+							<li class="twitter">
+								<a target="_blank" href="{{ settings.social_twitter_link }}">
+									<span>
+										<em class="icon-twitter"></em>
+									</span>
+								</a>
+							</li>
+							<li class="pinterest">
+								<a target="_blank" href="{{ settings.social_pinterest_link }}">
+									<span>
+										<em class="icon-pinterest"></em>
+									</span>
+								</a>
+							</li>
+							<li class="google-plus">
+								<a target="_blank" href="{{ settings.social_google_plus_link }}">
+									<span>
+										<em class="icon-google-plus"></em>
+									</span>
+								</a>
+							</li>
+						</ul>
+					</section>
+					{% endif %}
+					{% endcomment %}					
+				</div>
+			</div>
+			<div class="right_footer">
+				<div class="footer-static row-fluid">
+					<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+						<div class="img_static_footer">
+							{% if settings.banners_footer %}						
+							<a href="{{ settings.link_banners_banner }}">
+								<img src="{{'img_banners_footer.jpg' | asset_url }}">
+							</a>
+							{% endif %}
+						</div>
+					</div>
+
+				</div>
+				<div class="footer-static row-fluid">
+					<div class="col-md-6 col-xs-12">
+
+						<p class="text-center">
+							{{ settings.google_code }}
+						</p>
+
+					</div>
+					{% if settings.newsletter %}
+					<div class="tittle_static_block_footer col-lg-3 col-md-3 col-sm-4 col-xs-12">
+						<h4>{{ settings.newsletter_title }}</h4>
+						<p>{{ settings.noidung_newsletter }}</p>
+						<div id="newsletter_block_left" class="block ">
+							<div class="block_content">
+								{% form 'customer' %}	
+								{% if form.posted_successfully? %}
+								<script>
+								alert('Cám ơn bạn đã đăng kí nhận tin')
+								</script>
+								{% endif %}
+								{% if form.errors %}
+								<div class="error-box">
+									{% for field in form.errors %}
+									{{ field }} {{ form.errors.messages[field] }}
+									{% endfor %} 
+								</div>
+								{% endif %}   
+								{% if form.errors %} 
+								<script>//window.location.hash = '#mailing-list';</script> 
+								{% endif %}			
+								<form>
+									<div class="form-group">
+										<input class="inputNew form-control grey newsletter-input" id="newsletter-input" placeholder="Email của bạn" name="contact[email]" type="email" size="18" value="">
+										<button type="submit" name="submitNewsletter" class="btn btn-default button">
+											<span>Gửi</span>
+										</button>
+										<input type="hidden" name="action" value="0">
+									</div>
+								</form>
+								{% endform %}
+							</div>
+						</div>
+					</div>
+
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="footer-bottom">
+	<div class="container">
+		<div class="row">
+			<div class="footer-static row-fluid">
+				<div class="footer-address col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+					<p>Copyright © 2015 Vài Thứ Hay. 
+						<a target="_blank" href="http://vaithuhay.com">Powered by Vaithuhay</a>.</p>
+				</div>
+				{% if settings.thanhtoan_footer %}
+				<div class="payment col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<img src="{{'img_thanhtoan_footer.png' | asset_url }}" alt="" width="220" height="24">
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

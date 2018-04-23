@@ -1,0 +1,1 @@
+export {default as ProductItem1} from './post__PostItem1.vue'

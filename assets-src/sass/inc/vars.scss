@@ -1,0 +1,27 @@
+$animation-time: .135s;
+
+$body-bg: #fff;
+
+$font-family-sans-serif: "UTM Avo", Helvetica, Arial, sans-serif !default;
+
+$font-size-base: 14px;
+
+$grid-gutter-width: 20px;
+
+$container-large-desktop: 1160px + $grid-gutter-width;
+
+$navbar-height: 60px;
+
+$border-radius-base: 0;
+
+$text-color: #222;
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
+
+$navbar-padding-vertical: (($navbar-height - $line-height-computed) / 2);
+
+$theme-color: #fc0;
+$theme-red-color: #e02417;
+$theme-color-dark: #d6ab00;
+
+$font-size-h: $font-size-h1*0.87, $font-size-h2*0.95, $font-size-h3, $font-size-h4, $font-size-h5, $font-size-h6;

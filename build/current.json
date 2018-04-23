@@ -1,0 +1,16 @@
+{
+  "desktop.bundle.js": "cc4d05514a29a45f82a5",
+  "mobile.bundle.js": "38565b89640dee71ad0c",
+  "collection.bundle.js": "9b8e50573c9270853718",
+  "product.bundle.js": "919313233b63314fd2e3",
+  "index.bundle.js": "07be306b20e7e399f268",
+  "about-us.bundle.js": "3718424d27c5ef44dd5c",
+  "article.bundle.js": "bf4f96b027c72928fb67",
+  "blog.bundle.js": "f08e281150fc4f7570b0",
+  "frontend.js": "fe12c53266e345716e98",
+  "frontend.css": "a5b2f9933dc8b00177c35fb4c715ef9e",
+  "vendor.js": "44a1725a8137e1c31e21",
+  "product-variant.bundle.js": "2504f8fe37bdfce06c67",
+  "locale.bundle.js": "378f3c8fc32a1f91422b",
+  "inline.js": "cd950537a65d6cb551a3"
+}

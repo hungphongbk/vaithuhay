@@ -1,0 +1,19 @@
+{% assign origin = product %}
+[{% capture related_items %}
+    {% for value in origin.metafields.vthRelatedProducts %}
+      {% assign product = collections.all.products[value.last] %}
+      {% if product.id %}
+        {% include 'product-json.src' %}
+        {% unless forloop.last %},{% endunless %}
+      {% endif %}
+    {% endfor %}
+{% endcapture %}
+{% assign product = origin %}
+{% assign result = related_items | strip %}
+{% assign check = result | size | minus: 1 %}
+{% assign last = result | slice: -1 %}
+{% if last == ',' %}
+  {{ result | slice: 0, check }}
+{% else %}
+  {{ result }}
+{% endif %}]

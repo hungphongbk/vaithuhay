@@ -1,0 +1,228 @@
+@import "../inc/inc";
+
+@font-face {
+  font-family: 'UTM Avo';
+  src: url(../fonts/utm-avobold.woff2) format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'UTM Avo';
+  src: url(../fonts/utm-avo.woff2) format('woff2');
+  font-weight: normal;
+}
+
+%btn-vth {
+  border: none;
+  border-radius: 0;
+  font-size: $font-size-base*1.2;
+  transition: all $animation-time ease;
+  &:not(.no-text) .fa {
+    margin-right: .7em;
+    font-weight: 700;
+  }
+}
+
+.btn-ripple {
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-theme {
+  color: #333;
+  background-color: $theme-color;
+  &:hover {
+    background-color: darken($theme-color, 11%);
+  }
+  border-color: $theme-color-dark;
+  @extend %btn-vth;
+}
+
+.text-theme-red {
+  color: $theme-red-color
+}
+
+.btn-fb {
+  background-color: #455796;
+  color: #fff !important;
+  &:hover {
+    background-color: darken(#455796, 10%);
+  }
+  @extend %btn-vth;
+}
+
+.btn-google {
+  background-color: #dd4b39;
+  color: #fff !important;
+  &:hover {
+    background-color: darken(#dd4b39, 10%);
+  }
+  @extend %btn-vth;
+}
+
+.btn-theme-red {
+  background-color: $theme-red-color;
+  &:hover {
+    background-color: darken($theme-red-color, 11%);
+  }
+  &, &:hover, &:focus {
+    color: #fff;
+  }
+  @extend %btn-vth;
+}
+
+.btn-white {
+  color: #333;
+  background-color: #fff;
+  @extend %btn-vth;
+}
+
+.btn-grey {
+  color: #333;
+  background-color: darken(#fff, 10%);
+  @extend %btn-vth;
+}
+
+.btn-dark {
+  color: #333;
+  background-color: darken(#fff, 20%);
+  @extend %btn-vth;
+}
+
+.vth-section {
+  &-title {
+    text-align: center;
+    margin-bottom: 2*$line-height-computed;
+    margin-top: 3/2*$line-height-computed;
+  }
+  @include responsive('xs-max') {
+    &-title {
+      @include font-size-with-line-height($font-size-h3);
+      margin-bottom: $line-height-computed;
+      margin-top: $line-height-computed;
+    }
+  }
+}
+
+ul, ol {
+  list-style: none;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-padding-start: 0;
+}
+
+a {
+  color: darken($theme-color-dark, 12%);
+  &:hover, &:focus {
+    color: darken($theme-color-dark, 20%);
+  }
+}
+
+.disabled {
+  opacity: .45;
+}
+
+.text-theme-red {
+  color: $theme-red-color;
+}
+
+label {
+  font-weight: 500;
+}
+
+.slick-slider .slick-track {
+  display: flex;
+}
+
+.theme-link {
+  @extend %reset-link;
+  &:hover {
+    @extend %theme-link;
+  }
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ratio-4-3 {
+  @include aspect-ratio(4, 3);
+}
+
+.ratio-5-4 {
+  @include aspect-ratio(5, 4);
+}
+
+.ratio-6-5 {
+  @include aspect-ratio(6, 5);
+}
+
+.ratio-1-1 {
+  @include aspect-ratio(1, 1);
+}
+
+.ratio-3-4 {
+  @include aspect-ratio(3, 4);
+}
+
+.ratio-2-3 {
+  @include aspect-ratio(2, 3);
+}
+
+.ratio-3-2 {
+  @include aspect-ratio(3, 2);
+}
+
+.ratio-16-9 {
+  @include aspect-ratio(16, 9);
+}
+
+.ratio-5-2 {
+  @include aspect-ratio(5, 2);
+}
+
+$gutters: 10 20 30 40 50;
+@mixin pf($pf, $g) {
+  $g2: $g/2;
+  .#{$pf}-#{$g}.row {
+    margin-right: -$g2*1px;
+    margin-left: -$g2*1px;
+  }
+  .#{$pf}-#{$g} > [class^="col-"] {
+    padding-right: $g2*1px;
+    padding-left: $g2*1px;
+  }
+}
+@each $g in $gutters {
+  @include pf('gutter', $g);
+  @include responsive('sm-min') {
+    @include pf('gutter-sm', $g);
+  }
+}
+
+img.lazy[lazy="loading"] {
+  background: {
+    image: url(../img/icon-loading.svg);
+    repeat: no-repeat;
+    position: center;
+  }
+}
+
+.row.row-masonry {
+
+}
+
+$directions: l left, r right, t top, b bottom;
+@each $d in $directions {
+  @for $i from 1 through 4 {
+    .m#{nth($d,1)}-#{$i} {
+      margin-#{nth($d,2)}: ($i/4)*$line-height-computed
+    }
+  }
+}

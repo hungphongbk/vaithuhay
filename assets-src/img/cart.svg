@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>ico-basket</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="ico-basket" stroke="#a0a0a0" stroke-width="1.053">
+            <polyline id="Stroke-1" points="9.5826 17.2084 21.7536 17.2084 23.9226 6.5034 7.1816 6.5034"></polyline>
+            <polyline id="Stroke-3" points="10.0108 19.5663 5.9778 3.0033 2.5198 3.0033"></polyline>
+            <path d="M12.6046,21.4999 C12.6046,22.5939 11.7176,23.4809 10.6236,23.4809 C9.5296,23.4809 8.6436,22.5939 8.6436,21.4999 C8.6436,20.4059 9.5296,19.5189 10.6236,19.5189 C11.7176,19.5189 12.6046,20.4059 12.6046,21.4999 L12.6046,21.4999 Z" id="Stroke-5"></path>
+            <path d="M21.1405,21.4999 C21.1405,22.5939 20.2535,23.4809 19.1595,23.4809 C18.0655,23.4809 17.1795,22.5939 17.1795,21.4999 C17.1795,20.4059 18.0655,19.5189 19.1595,19.5189 C20.2535,19.5189 21.1405,20.4059 21.1405,21.4999 L21.1405,21.4999 Z" id="Stroke-7"></path>
+            <path d="M12.6046,21.4999 L17.1786,21.4999" id="Stroke-9"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,1 @@
+{% assign origin = product %}[{% capture related_items %} {% for value in collections['onsale'].products %} {% assign product = value %} {% include 'product-json.src' %} {% unless forloop.last %},{% endunless %} {% endfor %}{% endcapture %}{% assign product = origin %}{{ related_items }}]

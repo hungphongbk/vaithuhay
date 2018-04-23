@@ -1,0 +1,444 @@
+<div class="wrap-in">
+	{% if settings.filter-show %}
+	<nav class="" id="top-nav-collec" role="navigation">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">	
+				<div class="block sns-snsproductspecials sns-productlist margin-repon" id="layered_block_left" >
+					<div class="slider-inner">
+						<div type="button" class="collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<div class=" ">
+								<p class="title_block">Bộ lọc</p>
+							</div>
+						</div>     					
+					</div>
+					<div class="navbar-collapse collapse block_content" style="height: 0px;" id="bs-example-navbar-collapse-2" aria-expanded="false">			   				      		
+						<div class="row">
+
+							<div class="block-title hidden-xs">
+								<strong>{{settings.title-filter}}</strong>
+							</div>
+
+							<div class="block-content clearfix">
+								<!--Thương hiệu-->
+								<div class="col-lg-12 " id="repontop-bor">
+									<div class="filter-collection layered_filter">
+										<p id="filter-heading" class="layered_subtitle" >
+											Thương hiệu
+										</p>
+										<div class="row">
+											<ul id="filter-category">
+												{% for vendor in shop.vendors %}
+												<li class="col-lg-6">
+													<label>
+														<input class="le-checkbox" type="checkbox" id="input-check" value="(vendor:product**{{ vendor }})">
+														<i class="fake-box"></i>
+														<span>{{ vendor }}</span>
+													</label>
+												</li>
+												{% endfor %}		
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!--Size-->
+								<div class="col-lg-12">
+									<div class="filter-collection layered_filter clearfix">
+										{% unless settings.filter-size == '' %}
+										<p id="filter-heading" class="layered_subtitle">
+											Size
+										</p>
+										<div class="row">
+											{% assign arr_variants_size = settings.filter-size %}
+											{% assign arr_size = arr_variants_size | split : ',' %}
+											<ul id="filter-size">
+												{% for variant_size in arr_size %}
+												<li class="col-lg-6">
+													<label>
+														<input class="le-checkbox" type="checkbox"  id="input-check" value="(variant:product={{ variant_size }})">
+														<i class="fake-box"></i>
+														<span>	{{ variant_size }}</span>	
+													</label>
+												</li>
+												{% endfor %}
+											</ul>
+										</div>
+										{% endunless %}
+									</div>
+								</div>
+								<!--Màu sắc-->
+								<div class="col-lg-12 ">
+									<div class="filter-collection layered_filter">
+										<p id="filter-heading" class="layered_subtitle">
+											Màu sắc
+										</p>
+										<div class="row">
+											<ul id="filter-color">
+												{% unless settings.color_title_1 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_1 }})">
+													<label>
+														<div class="colour" style="background:{{ settings.color_1 }}"></div>
+														<span>	{{ settings.color_title_1 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_2 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_2 }})">
+													<label>	
+														<div class="colour" style="background:{{ settings.color_2 }}"></div>
+														<span>	{{ settings.color_title_2 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_3 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_3 }})">
+													<label>	
+														<div class="colour" style="background:{{ settings.color_3 }}"></div>
+														<span>	{{ settings.color_title_3 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_4 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_4 }})">
+													<label>		
+														<div class="colour" style="background:{{ settings.color_4 }}"></div>
+														<span>	{{ settings.color_title_4 }}</span>
+													</label>
+												</li>
+
+												{% endunless %}
+												{% unless settings.color_title_5 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_5 }})">
+													<label>	
+														<div class="colour" style="background:{{ settings.color_5 }}"></div>
+														<span>	{{ settings.color_title_5 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_6 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_6 }})">
+													<label>	
+														<div class="colour" style="background:{{ settings.color_6 }}"></div>
+														<span>	{{ settings.color_title_6 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_7 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_7 }})">
+													<label>		
+														<div class="colour" style="background:{{ settings.color_7 }}"></div>
+														<span>			{{ settings.color_title_7 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_8 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_8 }})">
+													<label>	
+														<div class="colour" style="background:{{ settings.color_8 }}"></div>
+														<span>	{{ settings.color_title_8 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_9 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_9 }})">
+													<label>
+														<div class="colour" style="background:{{ settings.color_9 }}"></div>
+														<span>	{{ settings.color_title_9 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+												{% unless settings.color_title_10 == '' %}
+												<li class="col-lg-6" data-color="(variant:product**{{ settings.color_title_10 }})">
+													<label>
+														<div class="colour" style="background:{{ settings.color_10 }}"></div>
+														<span>	{{ settings.color_title_10 }}</span>
+													</label>
+												</li>
+												{% endunless %}
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!--Giá-->
+								<div class="col-lg-12">
+									<div class="filter-collection layered_filter price clearfix">
+										<p  class="layered_subtitle" >Giá </p>										
+										<aside class="widget widget_product_price_slide">
+											<input disabled type="text" id="amount"/>  
+											<input type="hidden" id="amount-min" />
+											<input type="hidden" id="amount-max" />											
+											<div id="slider-container"></div>
+										</aside>
+
+									</div>
+								</div>	
+
+							</div>
+
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>    		
+	</nav>
+	{% endif %}
+
+</div>
+<script>
+var query = "/search?q=filter=("; 
+var total_page = 0, cur_page = 0;
+var genQuery = function(){
+	_query = query ;
+	/*
+	$('#filter-price input').each(function(){
+		if($(this).is(':checked')){
+			_query = _query + $(this).val() + '&&';
+		}
+	});
+*/
+	if ( $('#amount-min').val() != '' && $('#amount-max').val() != '' ) {
+		_query = _query + '(' + $('#amount-min').val() + '&&' + $('#amount-max').val() + ')||';
+	}
+	var q1 = '';
+	$('#filter-category input').each(function(){
+		if( $(this).is(':checked')){
+			q1 = q1 + $(this).val() + '||' ; 
+		}
+	});
+
+	$('#filter-size input').each(function(){
+		if( $(this).is(':checked')){
+			q1 = q1 + $(this).val() + '||' ;
+		}
+	});
+
+	$('#filter-color li').each(function(){
+		if($(this).hasClass('active')){
+			q1 = q1 + $(this).attr('data-color') + '||';
+		}
+	});
+
+
+	_query = _query + '(' + q1 + '####)';
+
+	var link = _query.split('||####');
+	var query_final = link[0] + link[1] + ')';
+	if ( $('#filter-category input:checked').length == 0 && $('#filter-size input:checked').length == 0 && $('#filter-color li.active').length == 0 ) {
+
+		var query1 = '';
+		var coll_handle = '{{ collection.handle }}';
+		if ( $('#amount-min').val() != '' && $('#amount-max').val() != '' ) {
+			query1 = query1 + '(' + $('#amount-min').val() + '&&' + $('#amount-max').val() + ')';
+			if ( coll_handle == 'all' ) {
+				query_final = "/search?q=filter=((collectionid:product>0)&&(" + query1 + "))";
+			}
+			else {
+				query_final = "/search?q=filter=((collectionid:product=={{ collection.id }})&&(" + query1 + "))";
+			}
+
+		} else {
+			if ( coll_handle == 'all' ) {
+				query_final = "/search?q=filter=(collectionid:product>0)";
+			}
+			else {
+				query_final = "/search?q=filter=(collectionid:product=={{ collection.id }})";
+			}
+		}
+	}
+	return query_final;
+}
+//
+var getProduct = function(page){
+	$.ajax({
+		url: genQuery() + '&view=data&page='+page,
+		success:function(data){
+			$('.pw-default').remove();
+			$('.products-grid').html('');
+			$('.empty').remove();
+			$('.products-grid').append(data);
+			$('.products-grid img').imagesLoaded( function() {
+				$(window).resize();
+			});
+		}
+	});
+}
+//
+$(document).ready(function(){
+
+	$('#filter-category input').change(function(){
+		//get total
+		$.ajax({
+			url: genQuery() + '&view=pagesize',
+			success:function(data){
+				total_page = parseInt(data);
+			}
+		});
+		//lay trang dau tien
+		$.ajax({
+			url: genQuery() + '&view=data',
+			success:function(data){
+				$('.pw-default').remove();
+				$('.products-grid').html('');
+				$('.empty').remove();
+				$('.products-grid').append(data);
+				$('.products-grid img').imagesLoaded( function() {
+					$(window).resize();
+				});
+			}
+		});
+	});
+});
+
+$(document).ready(function(){
+	$('#filter-size input').click(function(){	
+		$(this).toggleClass('active');	
+
+		$.ajax({
+			url: genQuery() + '&view=pagesize',
+			success:function(data){
+				total_page = parseInt(data);
+			}
+		});
+		//lay trang dau tien
+		$.ajax({
+			url: genQuery() + '&view=data',
+			success:function(data){
+				$('.pw-default').remove();
+				$('.products-grid').html('');
+				$('.empty').remove();
+				$('.products-grid').append(data);
+				$('.products-grid img').imagesLoaded( function() {
+					$(window).resize();
+				});
+			}
+		});
+
+	});
+});
+
+$(document).ready(function(){
+	$('#filter-color > li').click(function(){	
+		$(this).toggleClass('active');	
+
+		$.ajax({
+			url: genQuery() + '&view=pagesize',
+			success:function(data){
+				total_page = parseInt(data);
+			}
+		});
+		//lay trang dau tien
+		$.ajax({
+			url: genQuery() + '&view=data',
+			success:function(data){
+				$('.pw-default').remove();
+				$('.products-grid').html('');
+				$('.empty').remove();
+				$('.products-grid').append(data);
+				$('.products-grid img').imagesLoaded( function() {
+					$(window).resize();
+				});
+			}
+		});
+
+	});
+});
+</script>
+
+
+
+
+<!-- Quick view -->
+<script>
+jQuery(function () {
+	jQuery('#slider-container').slider({
+		range: true,
+		min: 0,
+		max: 10000000,
+		values: [1, 10000000],
+		create: function() {
+			jQuery("#amount").val("0 đ - 10,000,000 đ");
+		},
+		slide: function (event, ui) {
+			$("#amount").val(numberWithCommas(ui.values[0]) + " đ- " + numberWithCommas(ui.values[1])+" đ");
+			var price_min = '';
+			var arr_price_min = numberWithCommas(ui.values[0]);
+			$.each(arr_price_min.split(','),function(i,v){
+				price_min = price_min + v;
+			});
+			$('#amount-min').val('(price:product>='+parseInt(price_min)+')');
+			var price_max = '';
+			var arr_price_max = numberWithCommas(ui.values[1]);
+			$.each(arr_price_max.split(','),function(i,v){
+				price_max = price_max + v;
+			});
+			$('#amount-max').val('(price:product<='+parseInt(price_max)+')');
+			var mi = ui.values[0];
+			var mx = ui.values[1];
+			filterSystem(mi, mx);					
+		},
+		stop: function(event, ui) {
+			$.ajax({
+				url: genQuery() + '&view=pagesize',
+				success:function(data){
+					total_page = parseInt(data);
+				}
+			});
+			//lay trang dau tien
+			$.ajax({
+				url: genQuery() + '&view=data',
+				success:function(data){
+					$('.pw-default').remove();
+					$('.products-grid').html('');
+					$('.empty').remove();
+					$('.products-grid').append(data);
+					$('.products-grid img').imagesLoaded( function() {
+						$(window).resize();
+					});
+				}
+			});
+		}
+	})
+});
+function filterSystem(minPrice, maxPrice) {
+	jQuery("#product-sorting li.system").hide().filter(function () {
+		console.log($(this).data("price")+"aâ");
+		var price = parseInt($(this).data("price"), 10);
+		return price >= minPrice && price <= maxPrice;
+	}).show();
+}
+function numberWithCommas(number) {
+	if (isNaN(number)) {
+		return '';
+	}
+
+	var asString = '' + Math.abs(number),
+			numberOfUpToThreeCharSubstrings = Math.ceil(asString.length / 3),
+			startingLength = asString.length % 3,
+			substrings = [],
+			isNegative = (number < 0),
+			formattedNumber,
+			i;
+
+	if (startingLength > 0) {
+		substrings.push(asString.substring(0, startingLength));
+	}
+
+	for (i=startingLength; i < asString.length; i += 3) {
+		substrings.push(asString.substr(i, 3));
+	}
+
+	formattedNumber = substrings.join(',');
+	if (isNegative) {
+		formattedNumber = '-' + formattedNumber;
+	}
+
+	return formattedNumber;
+};
+$(document).ready(function(){
+	$('.image-resize img').imagesLoaded( function() {
+		setTimeout(function(){
+			$(window).resize();
+		},1000);
+	});
+});
+</script>

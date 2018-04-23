@@ -1,0 +1,15 @@
+{%- layout none -%}
+{%- paginate search.results by 5 -%}
+{%- for article in search.results -%}
+<div class="clearfix blog-read-item">
+								<a href="{{ article.url }}" target="_blank">
+									<div class="item-img pull-left">
+										<img class="lazy" src="{{ article.image.src }}"></div>
+								</a>
+								<div class="caption pull-right">						
+									<h3 class="title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+									<span class="date">{{ article.published_at | date: '%d/%m/%Y' }}</span>
+								</div>
+							</div>
+{%- endfor -%}
+{%- endpaginate -%}

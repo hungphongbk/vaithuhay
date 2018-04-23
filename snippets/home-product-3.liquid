@@ -1,0 +1,73 @@
+<div class="pos-best-sellers products_block bestsellers ">
+	<div class="field-toprate-product-slider-title">
+		<h2>{%if settings.h2_products_title_3 == ''%}
+			{{collections[settings.h2_collection_3].title}}
+			{%else%}
+			{{ settings.h2_products_title_3 }}
+			{%endif%}</h2>		
+	</div>
+	{% assign limit_item = settings.no_of_products_h2_3 %}		
+	{% assign collection_handle = settings.h2_collection_3 %}	
+	{% comment %} Tổng số item {% endcomment %}
+	{% if collections[collection_handle].all_products_count > limit_item %}
+	{% assign total_items = limit_item %}
+	{% else %}
+	{% assign total_items = collections[collection_handle].all_products_count %}
+	{% endif %}
+	{% comment %} Số item trong mỗi slide {% endcomment %}
+	{% assign item_per_slide = 3%}
+	{% comment %} Tính tổng số slides {% endcomment %}
+	{% assign total_slides = total_items | divided_by: item_per_slide %}
+	{% assign even_slides = total_items | modulo: item_per_slide %}
+	{% if even_slides != 0 %}
+	{% assign total_slides = total_slides | plus: 1 %}
+	{% endif %}
+	<div class="block_content_bestsellers">
+		{%if collections[settings.h2_collection_3].products.size > 0%}
+		<div class="Topsellers_3 block_content products-block owl-carousel owl-theme" style="display: block; opacity: 1;">
+
+			{% assign count_item = 0 %}
+			{% for slide in (1..total_slides) %}
+			{% if count_item <= limit_item %}
+																	 {% assign slide_offset = slide | times: item_per_slide | minus: item_per_slide %}
+																	 <div class="item_out">
+			{% for product in collections[settings.h2_collection_3].products  offset: slide_offset limit: item_per_slide %}
+			{% assign count_item = count_item | plus: 1 %}
+			{% if count_item <= limit_item %} 
+																	 {% include 'product-slide' %}			
+																	 {% endif %}							
+																	 {% endfor %}
+																	 </div>
+			{% endif %}      
+			{% endfor %}
+		</div>
+		{%else%}
+		<a class="link-setting" href="/admin/theme#/list">Chưa có sản phẩm nào để hiển thị. Vui lòng vào trang quản trị, và cấu hình cho mục này</a>
+		{%endif%}
+		<div class="boxprevnext">
+			<a class="prev prevsellers_3"></a>
+			<a class="next nextsellers_3"></a>
+		</div> 
+	</div>
+</div>
+<script>
+// home-product-2
+$(document).ready(function() {
+	var owl = $(".Topsellers_3");
+	owl.owlCarousel({
+		items :1,
+		slideSpeed: 1000,
+		pagination :false,
+		itemsDesktop : [1200,1],
+		itemsDesktopSmall : [1024,1],
+		itemsTablet: [768,1],
+		itemsMobile : [480,1]
+	});
+	$(".prevsellers_3").click(function(){
+		owl.trigger('owl.prev');
+	})
+	$(".nextsellers_3").click(function(){
+		owl.trigger('owl.next');
+	})  
+});
+</script>

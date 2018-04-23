@@ -1,0 +1,154 @@
+
+<!-- MENU MAIN -->
+<div class="container nav-wrapper">
+	<div class="row">
+		<div class="navbar-header hidden-lg hidden-sm hidden-md">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav clearfix hidden-xs">
+
+				{% for link in linklists.main-menu.links %}
+				{% if linklists[link.handle] == empty %}
+				{% if link.title == 'Trang chủ'%}
+				<li class="pts_menu act hidden-xs">
+					<a href="{{ link.url}}" class="{% if link.active %} current{% endif %}" title="Trang chủ">
+						<span><i class="icon-home"></i></span>
+					</a>
+				</li>
+				{% else %}
+				<li class="pts_menu">
+					<a href="{{ link.url }}" class="{% if link.active %} current{% endif %}" title="{{link.title}}">
+						<span>{{ link.title }}</span>
+					</a>
+				</li>
+				{% endif %}
+				{% else %}
+				<li class="dropdown pts_menu act" id="pts_menu_cms">
+					<a href="{{ link.url }}" title="{{link.title}}" class="{% if link.active  %} current{% endif %}">
+						<span>{{ link.title }}</span>
+					</a>
+					<ul class="dropdown-menu nav-ayt-02 subnav_2col popup" role="menu">
+						{% for l in linklists[link.handle].links %}
+						<li class="itemSubMenu level3">
+							<a href="{{ l.url }}"{% if l.active %} class="current"{% endif %} title="{{l.title}}">{{ l.title }}</a>
+							{%if linklists[l.handle].links.size > 0%}
+							<ul class="dropdown-menu">
+								{% for ll in linklists[l.handle].links %}
+								<li>
+									<a href="{{ ll.url }}"{% if ll.active %} class="current"{% endif %} title="{{ll.title}}">{{ ll.title }}</a>
+								</li>
+								{%endfor%}
+							</ul>
+							{%endif%}
+						</li>
+						{% endfor %}
+					</ul>
+				</li>
+				{% endif %}
+				{% endfor %}
+				<li class="pts_menu">
+					<div class="social-menu">
+						<ul>
+							<li class="facebook clearfix">
+								<a target="_blank" href="{{ settings.social_facebook_link }}">
+									<span>
+										<em class="icon-facebook"></em>
+									</span>
+								</a>
+							</li>
+							<li class="instagram clearfix">
+								<a target="_blank" href="{{ settings.social_instagram_link }}">
+									<span>
+										<em class="icon-instagram"></em>
+									</span>
+								</a>
+							</li>
+							{% comment %}
+							<li class="twitter">
+								<a target="_blank" href="{{ settings.social_twitter_link }}">
+									<span>
+										<em class="icon-twitter"></em>
+									</span>
+								</a>
+							</li>
+							<li class="pinterest">
+								<a target="_blank" href="{{ settings.social_pinterest_link }}">
+									<span>
+										<em class="icon-pinterest"></em>
+									</span>
+								</a>
+							</li>
+							{% endcomment %}
+							<li class="google-plus clearfix">
+								<a target="_blank" href="{{ settings.social_google_plus_link }}">
+									<span>
+										<em class="icon-google-plus"></em>
+									</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="pts_menu">
+					<ul id="header_links" class="clearfix">
+						{% comment %}
+						<li class="hidden-xs">
+							<i class="icon-shopping-cart"></i><a class="link-mycart" href="/cart" title="Giỏ hàng">Giỏ hàng</a>
+						</li>
+						{% endcomment %}
+						{% if shop.customer_accounts_enabled%}
+						{% if customer  %}
+						{% if customer.default_address.first_name == empty and customer.default_address.last_name == empty %}
+						<li>
+							<i class="icon-user"></i><a class="link-myaccount" href="/account" >Xin chào: {{customer.first_name}} {{customer.last_name}}</a>
+						</li>
+						{% else%}
+						<li>
+							<i class="icon-user"></i><a class="link-myaccount" href="/account" >Xin chào: {{customer.default_address.first_name}} {{customer.default_address.last_name}}</a>
+						</li>
+						{% endif %}
+						<li class="last">
+							<i class="icon-lock"></i><a class="link-login" href="/account/logout" rel="nofollow">Đăng xuất</a>
+						</li>
+						{% else %}
+						<li>
+							<i class="icon-user"></i><a class="link-myaccount" href="/account/register" title="Đăng kí">Đăng ký</a>
+						</li>
+						{% if shop.customer_accounts_optional %}
+						<li class="last">
+							<i class="icon-lock"></i><a class="link-login" href="/account/login" title="Đăng nhập" rel="nofollow">Đăng nhập</a>
+						</li>
+						{% endif %}
+						{% endif %}
+						{% endif %}
+					</ul>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+</div><!-- End container  -->
+
+<script>
+$(document).ready(function(){
+	$('li.dropdown li.active').parents('.dropdown').addClass('active')
+	if($('.right-menu').width() + $('#navbar').width() > $('.nav-wrapper').width() - 40)
+	{
+		$('.nav-wrapper').addClass('responsive-menu');
+	}
+	else{
+		$('.nav-wrapper').removeClass('responsive-menu');
+	}
+})
+
+
+$(document).on("click", "ul.mobile-menu-icon .dropdown-menu ,.drop-control .dropdown-menu, .drop-control .input-dropdown", function (e) {
+	e.stopPropagation();
+});
+</script>

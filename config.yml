@@ -1,0 +1,13 @@
+---
+:api_key: 85cd803d294c02deb803d426494d06e8
+:password: e8592930418e096c41d2ccbb7df32c6d
+:store: vai-thu-hay-i-something-nice.myharavan.com
+:theme_id: '1000281169'
+:whitelist_files:
+- layout/
+- assets/
+- snippets/
+- templates/
+- locales/
+:ignore_files:
+- /\.liquid\.src/
