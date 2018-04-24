@@ -1,13 +1,13 @@
-import './responsive'
-import './animateCss'
-import Vue from 'vue'
-import AsyncComputed from 'vue-async-computed'
-import VueCookie from 'vue-cookie'
-import VueLocalStorage from 'vue-localstorage'
-import VueLazyload from 'vue-lazyload'
-import {delay} from '../components/helpers'
-import './observe-visibility'
-import {detect} from 'detect-browser'
+import './responsive';
+import './animateCss';
+import Vue from 'vue';
+import AsyncComputed from 'vue-async-computed';
+import VueCookie from 'vue-cookie';
+import VueLocalStorage from 'vue-localstorage';
+import VueLazyload from 'vue-lazyload';
+import {delay} from '../components/helpers';
+import './observe-visibility';
+import {detect} from 'detect-browser';
 //
 // import 'vue-carousel'
 
@@ -37,7 +37,7 @@ Object.defineProperty(Vue.prototype, '$browser', {
     if (browser) return browser.name;
     return '';
   }
-})
+});
 
 export const tooltip = (el, {value, modifiers = {top: true}}) => $(el).tooltip({
   placement: (() => {
@@ -51,4 +51,9 @@ export const tooltip = (el, {value, modifiers = {top: true}}) => $(el).tooltip({
 });
 
 
-vth.links.url = (url, json = true) => vth.links.home + (url[0] === '/' ? url : ('/' + url))
+vth.links.url = (url, json = true) => vth.links.home + (url[0] === '/' ? url : ('/' + url));
+
+window.FB.init({
+  appId: '246837025841849',
+  version: 'v2.10' // or v2.1, v2.2, v2.3, ...
+});

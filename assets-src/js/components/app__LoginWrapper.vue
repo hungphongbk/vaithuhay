@@ -1,7 +1,7 @@
 <style lang="scss">
 </style>
 <template lang="pug">
-  form(@submit.prevent="onSubmit", ref="form")
+  form(@submit.prevent="onSubmit", ref="form", method="post", action="/account/login")
     slot(:customer="customer")
 </template>
 <script>

@@ -1,6 +1,6 @@
 import StaticOverlay from '@/components/static-overlay.vue'
 import AppLoginWrapper from '@/components/app__LoginWrapper'
-import {USER_IS_LOGGING_IN_, USER_LOGGED_IN_} from "@/store/types";
+import {USER_IS_LOGGING_IN_, USER_LOGGED_IN_, USER_LOGIN_} from "@/store/types";
 import debounce from 'lodash/debounce'
 import qs from 'query-string'
 
@@ -83,6 +83,7 @@ export const loginMixins = {
     facebookLogin() {
       this.$store.commit(USER_IS_LOGGING_IN_);
       FB.login(async ({authResponse}) => {
+        console.log(authResponse);
         if (authResponse) {
           const [email, password] = atob(await $.post('https://api.v1.hungphongbk.com/vaithuhay/b/social/auth/facebook', {access_token: authResponse.accessToken})).split(':');
           this.$refs.form.login(email, password);
@@ -95,6 +96,9 @@ export const loginMixins = {
   },
   beforeCreate() {
     $.cachedScript('https://apis.google.com/js/client.js');
+  },
+  async created(){
+    await this.$store.dispatch(USER_LOGIN_);
   }
 };
 

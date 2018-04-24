@@ -12,6 +12,7 @@
   .popover {
     display: block;
     width: 30vw;
+    max-width: 30vw;
     top: $navbar-height - 3px;
     right: 0;
     left: unset;
@@ -63,6 +64,12 @@
       opacity: .45;
     }
   }
+  .popoverItem > a{
+    padding:{
+      left: 1rem;
+      right: 1rem;
+    }
+  }
 </style>
 <template lang="pug">
   user-button(@click="show_ = !show_")
@@ -99,11 +106,14 @@
               h4 {{$t('hello')}}&nbsp;
                 strong {{user.name}}
             ul
-              li(v-if="isExperiment")
+              li(v-if="isExperiment", :class="$style.popoverItem")
                 a(href="javascript:void(0)", @click="show_ = false; orderTrackingForm = true")
                   i.fa.fa-search.fa-lg.mr-2
                   | Kiểm tra đơn hàng
-              li
+              li(:class="$style.popoverItem")
+                a(href="#", style="display: block")
+                  loyalty
+              li(:class="$style.popoverItem")
                 a(href="/account/logout") {{$t('signout')}}
     modal(v-if="orderTrackingForm", title="Kiểm tra đơn hàng", @dismiss="orderTrackingForm = false", size="lg")
       .modal-body
@@ -112,12 +122,13 @@
 <script>
   import {loginMixins, overlayMixin} from '../mixins';
   import {OrderTracking, UserButton} from "../index";
-  import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_} from "../../store/types";
+  import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
   import {mapGetters} from 'vuex';
+  import Loyalty from './nav-menu_Loyalty';
 
   export default {
     mixins: [overlayMixin, loginMixins],
-    components: {UserButton, OrderTracking},
+    components: {UserButton, OrderTracking, Loyalty},
     data() {
       return {
         orderTrackingForm: false,
@@ -127,7 +138,8 @@
     computed: {
       ...mapGetters({
         loggedIn: USER_LOGGED_IN_,
-        loginForm: USER_LOGIN_FORM_SHOW_
+        loginForm: USER_LOGIN_FORM_SHOW_,
+        loyalty: USER_LOYALTY_
       }),
       user() {
         return this.$store.state.customer;
