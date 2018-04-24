@@ -1,8 +1,8 @@
-import StaticOverlay from '@/components/static-overlay.vue'
-import AppLoginWrapper from '@/components/app__LoginWrapper'
+import StaticOverlay from '@/components/static-overlay.vue';
+import AppLoginWrapper from '@/components/app__LoginWrapper';
 import {USER_IS_LOGGING_IN_, USER_LOGGED_IN_, USER_LOGIN_} from "@/store/types";
-import debounce from 'lodash/debounce'
-import qs from 'query-string'
+import debounce from 'lodash/debounce';
+import qs from 'query-string';
 
 const $ = jQuery;
 
@@ -17,7 +17,7 @@ export const overlayMixin = {
     return {
       show_: false,
       showArr_: []
-    }
+    };
   },
   computed: {
     show$: {
@@ -28,7 +28,7 @@ export const overlayMixin = {
           if (typeof this.showArr_[this.overlayKey] === 'undefined') {
             this.showArr_[this.overlayKey] = false;
           }
-          return this.showArr_[this.overlayKey]
+          return this.showArr_[this.overlayKey];
         }
       },
       set(value) {
@@ -42,7 +42,7 @@ export const overlayMixin = {
     const self = this,
       overlay = {
         get show_() {
-          return self.show_
+          return self.show_;
         }
       };
     return {overlay};
@@ -54,7 +54,7 @@ export const addToCartMixin = {
     const self = this,
       cartItem_ = {
         get id() {
-          return self.variantId
+          return self.variantId;
         },
         get quantity() {
           return self.quantity;
@@ -63,7 +63,7 @@ export const addToCartMixin = {
           self.quantity = value;
         }
       };
-    return {cartItem_}
+    return {cartItem_};
   }
 };
 
@@ -77,7 +77,7 @@ export const loginMixins = {
         email: '',
         password: ''
       }
-    }
+    };
   },
   methods: {
     facebookLogin() {
@@ -97,7 +97,7 @@ export const loginMixins = {
   beforeCreate() {
     $.cachedScript('https://apis.google.com/js/client.js');
   },
-  async created(){
+  async created() {
     await this.$store.dispatch(USER_LOGIN_);
   }
 };
@@ -111,7 +111,7 @@ export const orderTrackingMixin = {
         kw_: ''
       },
       cached_: []
-    }
+    };
   },
   computed: {
     loggedIn() {
@@ -146,6 +146,6 @@ export const orderTrackingMixin = {
       this.kw = value;
     }, 200)
   }
-}
+};
 
-export {default as searchMixin} from './search'
+export {default as searchMixin} from './search';

@@ -214,8 +214,8 @@ if (process.env.NODE_ENV === 'production') {
       include: /.*\.(css|js)/,
       // s3Options are required
       s3Options: {
-        accessKeyId: 'AKIAJQQARQCLZS3O3O4Q',
-        secretAccessKey: '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',
+        accessKeyId: 'AKIAI7DC4R5MIMF66Z5Q',
+        secretAccessKey: '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',
         region: 'ap-southeast-1'
         // signatureVersion: 'v2'
       },
