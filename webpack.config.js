@@ -209,21 +209,23 @@ if (process.env.NODE_ENV === 'production') {
         file: 'js.LICENSE'
       }
     }),
-    // new S3Plugin({
-    //   // Exclude uploading of html
-    //   include: /.*\.(css|js)/,
-    //   // s3Options are required
-    //   s3Options: {
-    //     region: 'ap-southeast-1'
-    //     // signatureVersion: 'v2'
-    //   },
-    //   s3UploadOptions: {
-    //     Bucket: 'static.vaithuhay.com',
-    //     Key(filename) {
-    //       return filename.split('?')[0]
-    //     }
-    //   }
-    // }),
+    new S3Plugin({
+      // Exclude uploading of html
+      include: /.*\.(css|js)/,
+      // s3Options are required
+      s3Options: {
+        accessKeyId: 'AKIAJQQARQCLZS3O3O4Q',
+        secretAccessKey: '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',
+        region: 'ap-southeast-1'
+        // signatureVersion: 'v2'
+      },
+      s3UploadOptions: {
+        Bucket: 'static.vaithuhay.com',
+        Key(filename) {
+          return filename.split('?')[0]
+        }
+      }
+    }),
     // MyUtils.WebpackCloudFlareSync({
     //   zoneId: '72dad98b1fc6b0a725033f7cf5fee2b1',
     //   watchAssets: ['frontend.css', 'inline.js', 'vendor.js', 'frontend.js', 'sw.js'],

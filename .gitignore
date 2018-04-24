@@ -115,3 +115,4 @@ fabric.properties
 .idea/httpRequests
 /.cache-loader/
 /assets/
+/webpack.config.js
