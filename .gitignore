@@ -116,3 +116,4 @@ fabric.properties
 /.cache-loader/
 /assets/
 /webpack.config.js
+assets-src/html/
