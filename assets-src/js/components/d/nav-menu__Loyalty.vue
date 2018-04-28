@@ -5,23 +5,17 @@
     text-align: left;
     > p {
       display: flex;
+      margin-bottom: .3em;
       > span:first-child {
         flex-grow: 1;
       }
     }
   }
-
-  .balance {
-    font-weight: 700;
-    color: $theme-red-color;
-    font-size: 1.5em;
-  }
 </style>
 <template lang="pug">
   div(:class="$style.loyalty")
-    p
-      span {{$t('balance')}}
-      span.text-right(:class="$style.balance") {{loyalty.balance}}
+    p {{$t('balance')}}
+    p.small.text-muted ({{$t('status',{p:loyalty.balance})}})
 </template>
 <script>
   import {USER_LOYALTY_} from "@/store/types";
@@ -38,10 +32,12 @@
 <i18n>
   {
     "en": {
-      "balance":"Your current balance"
+      "balance":"Your current balance",
+      "status":"You have %{p} points"
     },
     "vi":{
-      "balance":"Số điểm thưởng hiện tại"
+      "balance":"Số điểm thưởng hiện tại",
+      "status":"Bạn đang có %{p} điểm thưởng"
     }
   }
 </i18n>

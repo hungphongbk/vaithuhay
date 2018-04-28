@@ -1,6 +1,8 @@
 <style lang="scss" scoped>
   @import "../../../sass/inc/inc";
 
+  $user-panel-width: 25vw;
+
   form {
     @extend %box-shadow-2;
     background: #fbfcfd;
@@ -11,8 +13,8 @@
 
   .popover {
     display: block;
-    width: 30vw;
-    max-width: 30vw;
+    width: $user-panel-width;
+    max-width: $user-panel-width;
     top: $navbar-height - 3px;
     right: 0;
     left: unset;
@@ -40,34 +42,41 @@
         margin-top: 1.7rem;
         border-top: 1px solid #ccc;
       }
-      ul li a {
-        @extend %reset-link;
-        display: inline-block;
-        width: 100%;
-        @include font-size-with-line-height($font-size-base*1.25);
-        padding: {
-          top: 1rem;
-          bottom: 1rem;
-        }
-        color: #888;
-        &:hover {
-          background: #f0f0f0;
-          color: #333;
-        }
-      }
     }
   }
 </style>
 <style lang="scss" module>
+  @import "../../../sass/inc/inc";
+
   .loginForm {
     @at-root .isLoggingIn > * {
       opacity: .45;
     }
   }
-  .popoverItem > a{
-    padding:{
-      left: 1rem;
-      right: 1rem;
+
+  .popoverItem {
+    @include font-size-with-line-height($font-size-base*1.1);
+    > a {
+      @extend %reset-link;
+      display: inline-block;
+      width: 100%;
+      //@include font-size-with-line-height($font-size-base*1.25);
+      padding: {
+        top: 1rem;
+        bottom: 1rem;
+      }
+      color: #444;
+      &:hover {
+        background: #f0f0f0;
+        color: #333;
+      }
+      padding: {
+        left: 1rem;
+        right: 1rem;
+      }
+    }
+    &:not(:last-child)>a{
+      border-bottom: 1px solid #ccc;
     }
   }
 </style>
@@ -124,7 +133,7 @@
   import {OrderTracking, UserButton} from "../index";
   import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
   import {mapGetters} from 'vuex';
-  import Loyalty from './nav-menu_Loyalty';
+  import Loyalty from './nav-menu__Loyalty';
 
   export default {
     mixins: [overlayMixin, loginMixins],
@@ -154,17 +163,17 @@
 </script>
 <i18n>
   {
-  "en": {
-  "login": "SIGN IN",
-  "loggingIn": "PLEASE WAIT...",
-  "signout": "SIGN OUT",
-  "hello": "Hello"
-  },
-  "vi": {
-  "login": "ĐĂNG NHẬP",
-  "loggingIn": "ĐANG ĐĂNG NHẬP, CHỜ MỘT LÁT...",
-  "signout": "ĐĂNG XUẤT",
-  "hello": "Xin chào"
-  }
+    "en": {
+      "login": "SIGN IN",
+      "loggingIn": "PLEASE WAIT...",
+      "signout": "SIGN OUT",
+      "hello": "Hello"
+    },
+    "vi": {
+      "login": "ĐĂNG NHẬP",
+      "loggingIn": "ĐANG ĐĂNG NHẬP, CHỜ MỘT LÁT...",
+      "signout": "ĐĂNG XUẤT",
+      "hello": "Xin chào"
+    }
   }
 </i18n>

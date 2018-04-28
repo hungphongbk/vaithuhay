@@ -96,9 +96,6 @@ export const loginMixins = {
   },
   beforeCreate() {
     $.cachedScript('https://apis.google.com/js/client.js');
-  },
-  async created() {
-    await this.$store.dispatch(USER_LOGIN_);
   }
 };
 

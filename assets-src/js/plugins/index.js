@@ -19,6 +19,7 @@ Vue.use(VueLazyload, {});
 Vue.filter('vnd', function (value) {
   return Math.round(value / 100).toLocaleString("vi-VN") + '₫';
 });
+Vue.filter('percentage', value => Math.round(value * 100) + '%');
 Vue.use(VueCookie);
 
 Vue.directive('anim', async (el) => {

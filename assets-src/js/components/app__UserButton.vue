@@ -41,11 +41,16 @@
     slot
 </template>
 <script>
+  import {USER_LOGIN_} from "@/store/types";
+
   export default {
     computed: {
       loggedIn() {
         return this.$store.state.customer.id
       }
+    },
+    async created() {
+      await this.$store.dispatch(USER_LOGIN_);
     }
   }
 </script>

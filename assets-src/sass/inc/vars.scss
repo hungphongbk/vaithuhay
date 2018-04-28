@@ -23,5 +23,7 @@ $navbar-padding-vertical: (($navbar-height - $line-height-computed) / 2);
 $theme-color: #fc0;
 $theme-red-color: #e02417;
 $theme-color-dark: #d6ab00;
+$theme-color-dark-2: darken($theme-color-dark, 10);
+$theme-color-dark-3: darken($theme-color-dark, 20);
 
 $font-size-h: $font-size-h1*0.87, $font-size-h2*0.95, $font-size-h3, $font-size-h4, $font-size-h5, $font-size-h6;

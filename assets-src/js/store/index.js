@@ -16,6 +16,7 @@ const store = new Vuex.Store({
   state: {
     customer: {
       id: null,
+      name: '',
       form: false,
       isLoggingIn: false,
       loyalty: {
@@ -87,7 +88,10 @@ const store = new Vuex.Store({
 if (vth) {
   store.replaceState(extend({}, vth, {
     customer: {
-      isLoggingIn: false
+      id: null,
+      name: '',
+      isLoggingIn: false,
+      form: false
     }
   }));
 }
