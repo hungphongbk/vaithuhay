@@ -183,6 +183,10 @@
     font-weight: 700;
     color: $theme-red-color;
   }
+  span.oldPrice{
+    text-decoration: line-through;
+    color: $theme-color-dark-3;
+  }
   .sale{
     @include font-size-with-line-height($font-size-base*1.05);
     margin-bottom: 0;

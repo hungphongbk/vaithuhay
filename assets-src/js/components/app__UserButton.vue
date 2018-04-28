@@ -46,6 +46,7 @@
   export default {
     computed: {
       loggedIn() {
+        console.log(this.$store.state);
         return this.$store.state.customer.id
       }
     },

@@ -8,7 +8,8 @@
           h2.entry-title {{title$i18n}}
           .clearfix
             template(v-if="price.current!=='-1'")
-              h2(:class="$style.price", style="display: inline-block") {{price.current}}
+              h2(:class="$style.price", style="display: inline-block") {{price.current}}&nbsp;
+                span.small(v-if="priceSalePercentage", :class="$style.oldPrice") ({{price.old}})
               p(v-if="priceSalePercentage", :class="$style.sale") Tiết kiệm:&nbsp;
                 span(:class="$style.percentageNumber") {{priceSalePercentage | percentage}}
                 | &nbsp; ({{priceSaleDiff | vnd}})
