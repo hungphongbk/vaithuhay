@@ -32,7 +32,7 @@
         thumbnail.no-effect.ratio-1-1(:url_="item.image", :overlay_="false", v-tooltip.top="item.title",:lazy_="false")
 </template>
 <script>
-  import {tooltip} from '../plugins/index'
+  import {tooltip} from '../plugins/index';
 
   const $ = jQuery;
   export default {
@@ -47,7 +47,9 @@
       value: null
     },
     mounted() {
-      this.$emit('input', this.list[0])
+      console.log('first variant will be selected');
+      console.log(this.list[0]);
+      this.$emit('input', this.list[0]);
     }
-  }
+  };
 </script>

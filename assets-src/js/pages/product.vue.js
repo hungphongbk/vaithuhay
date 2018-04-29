@@ -15,8 +15,6 @@ import {ProductItem_, WholeSale} from '../components/classes';
 import {delay} from '../components/helpers';
 import transform from '../plugins/content-transform';
 import ripple from 'js-effect-ripple';
-// import ProductVariants from
-const ProductVariants = () => import(/* webpackChunkName: "product-variant" */ '../fragments/product__Variants');
 //    import {i18nFields} from '../plugins/i18n'
 
 const $ = jQuery,
@@ -66,7 +64,7 @@ export default {
     ProductQuantity,
     ProductTabs,
     ProductTab,
-    ProductVariants,
+    'product-variants': () => import(/* webpackChunkName: "product-variant" */ '../fragments/product__Variants'),
     ProductRating,
     AddToCartWrapper,
     ItemLoop,

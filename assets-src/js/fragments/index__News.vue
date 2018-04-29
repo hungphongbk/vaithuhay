@@ -76,7 +76,7 @@
               a(:href="p.item.url")
                 h4.title {{p.item.title}}
               p(v-if="!$mq.tablet") {{p.item.excerpt}}
-              a.see-more {{$t('seemore')}}
+              a.see-more(:href="p.item.url") {{$t('seemore')}}
                 i.fa.fa-chevron-right
     .text-center
       a(href="https://vaithuhay.com/blogs/news")

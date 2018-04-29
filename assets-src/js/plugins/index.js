@@ -54,7 +54,9 @@ export const tooltip = (el, {value, modifiers = {top: true}}) => $(el).tooltip({
 
 vth.links.url = (url, json = true) => vth.links.home + (url[0] === '/' ? url : ('/' + url));
 
-window.FB.init({
-  appId: '246837025841849',
-  version: 'v2.10' // or v2.1, v2.2, v2.3, ...
-});
+window.fbAsyncInit = function () {
+  window.FB.init({
+    appId: '246837025841849',
+    version: 'v2.10' // or v2.1, v2.2, v2.3, ...
+  });
+};

@@ -101,7 +101,7 @@
     props: {
       like_: {
         type: Boolean,
-        default: true
+        default: false
       },
       popupInMobile_: {
         type: Boolean,

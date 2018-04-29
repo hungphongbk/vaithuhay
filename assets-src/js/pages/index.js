@@ -13,6 +13,7 @@ const Pages = {Index, Collection, Blog, Article, PageVaithuhay, Product};
 // })
 
 const component = () => {
+  console.log(window.vth.template+' ahuhu');
   switch (window.vth.template) {
     case 'index':
       return Pages.Index;

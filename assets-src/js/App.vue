@@ -1,10 +1,12 @@
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../sass/inc/inc";
-
   #primary {
     position: relative;
     padding-top: $navbar-height;
   }
+</style>
+<style lang="scss" scoped>
+  @import "../sass/inc/inc";
 
   .overlay {
     position: absolute;
@@ -18,10 +20,6 @@
       position: fixed;
       top: 0;
     }
-  }
-
-  iframe {
-    display: none;
   }
 </style>
 <style lang="scss" module>

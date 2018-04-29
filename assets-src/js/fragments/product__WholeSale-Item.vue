@@ -30,7 +30,7 @@
       font-size: 1.2em;
     }
 
-    @include responsive('xs-max'){
+    @include responsive('xs-max') {
       width: calc(100% - 15px);
       @include font-size-with-line-height($font-size-base*0.9);
     }
@@ -86,9 +86,9 @@
 </template>
 <script>
   //TODO: migrate function rule->new WholeSale from page/product.vue to here
-  import {CART_ADD_, CART_HAS_PRODUCT_} from '../store/types'
-  import {mapActions, mapMutations} from 'vuex'
-  import {WholeSale} from "../components/classes"
+  import {CART_ADD_, CART_HAS_PRODUCT_} from '../store/types';
+  import {mapActions, mapMutations} from 'vuex';
+  import {WholeSale} from "../components/classes";
 
   const ProductVariants = () => import(/* webpackChunkName: "product-variant" */ '../fragments/product__Variants');
   export default {
@@ -108,7 +108,7 @@
       return {
         rule$,
         modal: false
-      }
+      };
     },
     computed: {
       variantId() {
@@ -138,11 +138,11 @@
           const unwatch = self.$watch('modal', value => {
             unwatch();
             if (value === false) {
-              resolve(product.variantSelected)
-            } else reject()
-          })
+              resolve(product.variantSelected);
+            } else reject();
+          });
 
-        })
+        });
       },
       async add() {
         const item = this.rule$;
@@ -156,7 +156,7 @@
               tasks.push(this.add_({
                 id: this.variantId,
                 quantity: (item.number * 1) || 1
-              }))
+              }));
             }
             //Get additional variant, then push it to cart
             tasks.push(this.add_({
@@ -171,11 +171,11 @@
           await this.add_({
             id: this.variantId,
             quantity: (item.number * 1) || 1
-          })
+          });
         }
       },
       isReady({__wholesale: value}) {
-        console.log(value)
+        console.log(value);
       }
     },
     mounted() {
@@ -184,7 +184,7 @@
       //   deep: true
       // })
     }
-  }
+  };
 </script>
 <i18n>
   {
