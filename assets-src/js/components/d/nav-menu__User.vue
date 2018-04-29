@@ -123,6 +123,8 @@
                 a(href="#", style="display: block")
                   loyalty
               li(:class="$style.popoverItem")
+                a(href="#") Cài đặt
+              li(:class="$style.popoverItem")
                 a(href="/account/logout") {{$t('signout')}}
     modal(v-if="orderTrackingForm", title="Kiểm tra đơn hàng", @dismiss="orderTrackingForm = false", size="lg")
       .modal-body

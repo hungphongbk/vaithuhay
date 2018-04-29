@@ -73,24 +73,26 @@
     app-offline-mode
 </template>
 <script>
-  import {Event} from './components/index'
-  import AppServiceWorker from './fragments/app__ServiceWorker'
-  import AppOfflineMode from './fragments/app__OfflineMode'
-  import {tooltip} from '@/plugins'
-  import {delay} from "@/components/helpers";
+  import {Event} from './components/index';
+  import AppOfflineMode from './fragments/app__OfflineMode';
+  import {tooltip} from '@/plugins';
+  import {USER_LOGIN_} from "@/store/types";
 
   const $ = jQuery;
 
   export default {
     directives: {tooltip},
-    components: {AppServiceWorker, AppOfflineMode},
+    components: {
+      'app-service-worker': () => import(/* webpackChunkName: "vaithuhay-sw" */ './fragments/app__ServiceWorker'),
+      AppOfflineMode
+    },
     data() {
       return {
         overlay_: false,
         scrollTop: 0,
         screenHeight: $(window).height(),
         iframeUrl: 'server.vaithuhay.com'
-      }
+      };
     },
     computed: {
       isScrollToTop() {
@@ -105,6 +107,9 @@
         }, 400);
       }
     },
+    async created() {
+      await this.$store.dispatch(USER_LOGIN_);
+    },
     mounted() {
       const self = this;
       Event.$on('overlay', value => self.overlay_ = value);
@@ -112,5 +117,5 @@
         self.scrollTop = $(window).scrollTop();
       });
     }
-  }
+  };
 </script>

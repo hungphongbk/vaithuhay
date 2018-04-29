@@ -1,6 +1,8 @@
 <style lang="scss" scoped>
   @import "../../sass/inc/inc";
 
+  $font: $font-size-h4;
+
   .homepage-news {
     margin: 0 -5px;
     @include responsive('sm-min') {
@@ -19,12 +21,12 @@
       padding: 0 15px;
     }
     .title {
-      $font: $font-size-h4;
       @include font-size-with-line-height($font*0.95);
       text-transform: uppercase;
       font-weight: 700;
       @include responsive('xs-max') {
-        @include font-size-with-line-height($font*0.85)
+        @include font-size-with-line-height($font*0.75)
+        margin-bottom: .3rem;
       }
     }
   }
@@ -41,7 +43,7 @@
     @extend %reset-link;
     text-transform: uppercase;
     font-weight: 700;
-    @include font-size-with-line-height($font-size-base*1.12);
+    @include font-size-with-line-height($font*0.9);
 
     transition: all $animation-time ease;
     color: #666;
@@ -52,6 +54,14 @@
       //font-size: $font-size-base*0.9;
       @include font-size-with-line-height($font-size-base*0.75);
       margin-left: .7rem;
+    }
+
+    @include responsive('xs-max') {
+      @include font-size-with-line-height($font*0.7);
+      .fa {
+        @include font-size-with-line-height($font*0.68);
+        margin-left: .4rem;
+      }
     }
   }
 </style>
@@ -73,63 +83,28 @@
         .btn.btn-white KHÁM PHÁ THÊM
 </template>
 <script>
-  import {IndexSection, ItemLoop} from '../components/index'
+  import {IndexSection, ItemLoop} from '../components/index';
+  import {slickOptions_} from "@/components/helpers";
 
   export default {
     components: {IndexSection, ProductLoop: ItemLoop},
     data() {
-      const self = this,
-        responsive = (breakpoint, settings) => ({breakpoint, settings});
       return {
-        articles: window.blog.map(article => {
-          const obj = {
-            ...article,
-            diff: ''
-          };
-          (async () => {
-            const moment = await import(/* webpackChunkName: "locale" */ '../plugins/moment');
-            self.$set(obj, 'diff', moment.default(article.created, 'DD/MM/YYYY HH:mm:ss').fromNow())
-          })();
-          return obj;
-        }),
-        slickOptions_: {
-          infinite: false,
-          slidesToShow: 4,
-          slidesToScroll: 2,
-          responsive: [
-            responsive(1111, {
-              slidesToShow: 3,
-              slidesToScroll: 2,
-              infinite: false,
-            }),
-            responsive(768, {
-              slidesToShow: 3,
-              slidesToScroll: 2,
-              infinite: false,
-              arrow: false,
-            }),
-            responsive(426, {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              infinite: false,
-              autoplay: true,
-              autoplaySpeed: 3000
-            })
-          ]
-        }
-      }
+        articles: window.blog,
+        slickOptions_
+      };
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "0": "top news",
-  "seemore": "Learn more"
-  },
-  "vi": {
-  "0": "tin tức",
-  "seemore": "Đọc thêm"
-  }
+    "en": {
+      "0": "top news",
+      "seemore": "Learn more"
+    },
+    "vi": {
+      "0": "tin tức",
+      "seemore": "Đọc thêm"
+    }
   }
 </i18n>

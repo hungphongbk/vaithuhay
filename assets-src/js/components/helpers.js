@@ -18,11 +18,11 @@ export const slickOptions_ = {
       arrow: false,
     }),
     responsive(426, {
-      slidesToShow: 2,
-      slidesToScroll: 2,
+      slidesToShow: 2.33,
+      slidesToScroll: 2.33,
       infinite: false,
       autoplay: true,
-      autoplaySpeed: 3000
+      autoplaySpeed: 2700
     })
   ]
 }
