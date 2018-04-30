@@ -211,6 +211,7 @@
       margin-left: 0.85rem;
     }
     margin-right: .3rem;
+    color: $theme-color-dark-2;
   }
 </style>
 <template lang="pug" src="./product.vue.pug"></template>
