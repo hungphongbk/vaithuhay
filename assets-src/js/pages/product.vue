@@ -26,27 +26,6 @@
     }
   }
 
-  .add-to-cart {
-    text-transform: uppercase;
-    font-weight: 700;
-    border: 2px solid $theme-red-color;
-    padding: {
-      left: 2em;
-      right: 2em;
-    }
-    .fa {
-      margin-right: 0.7em;
-      font-weight: 700;
-    }
-    @include responsive('xs-max') {
-      padding: {
-        left: 0;
-        right: 0;
-      }
-      width: 100%;
-    }
-  }
-
   .product-body {
     @include responsive('xs-max') {
       padding: {
@@ -170,6 +149,7 @@
 </style>
 <style lang="scss" module>
   @import "../../sass/inc/inc";
+
   .price {
     &, + .rating {
       @include font-size-with-line-height($font-size-h1);
@@ -183,18 +163,54 @@
     font-weight: 700;
     color: $theme-red-color;
   }
-  span.oldPrice{
+
+  span.oldPrice {
     text-decoration: line-through;
     color: $theme-color-dark-3;
   }
-  .sale{
+
+  .sale {
     @include font-size-with-line-height($font-size-base*1.05);
     margin-bottom: 0;
     color: $theme-color-dark-3;
-    @at-root .percentageNumber{
+    @at-root .percentageNumber {
       color: $theme-red-color;
       font-weight: 700;
     }
+  }
+
+  .add-to-cart-favorite-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .add-to-cart {
+    flex-grow: 1;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 2px solid $theme-red-color;
+    padding: {
+      left: 2em;
+      right: 2em;
+    }
+    svg {
+      margin-right: 0.5em;
+    }
+    @include responsive('xs-max') {
+      padding: {
+        left: 0;
+        right: 0;
+      }
+      width: 100%;
+    }
+  }
+
+  .favorite {
+    margin-left: 1.85rem;
+    @include responsive('xs-max'){
+      margin-left: 0.85rem;
+    }
+    margin-right: .3rem;
   }
 </style>
 <template lang="pug" src="./product.vue.pug"></template>

@@ -16,6 +16,9 @@ import {delay} from '../components/helpers';
 import transform from '../plugins/content-transform';
 import ripple from 'js-effect-ripple';
 //    import {i18nFields} from '../plugins/i18n'
+import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
+import faHeartSolid from '@fortawesome/fontawesome-free-solid/faHeart';
+import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus'
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -77,6 +80,9 @@ export default {
     // const {current, images, variants, relateds, tops, topPromos, faq} = this.$store.state.product
     // console.log(current)
     return {
+      faHeart,
+      faHeartSolid,
+      faCartPlus,
       productId: current.id * 1,
       title: current._title,
       url: current.url,

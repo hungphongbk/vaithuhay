@@ -8,6 +8,7 @@ import VueLazyload from 'vue-lazyload';
 import {delay} from '../components/helpers';
 import './observe-visibility';
 import {detect} from 'detect-browser';
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 //
 // import 'vue-carousel'
 
@@ -60,3 +61,5 @@ window.fbAsyncInit = function () {
     version: 'v2.10' // or v2.1, v2.2, v2.3, ...
   });
 };
+
+Vue.component('fa-icon', FontAwesomeIcon);

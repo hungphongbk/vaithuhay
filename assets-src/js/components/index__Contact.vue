@@ -116,7 +116,7 @@
           contact: {}
         },
         status: null
-      }
+      };
     },
     methods: {
       async submit({target}) {
@@ -125,13 +125,13 @@
           url: this.contactLink,
           data: $(target).serialize(),
           dataType: 'jsonp'
-        })
+        });
         if (result === 'success') {
           this.status = this.$t('thank');
         }
       }
     }
-  }
+  };
 </script>
 <i18n>
   {
@@ -143,7 +143,7 @@
     "vi": {
       "register": "ĐĂNG KÍ NGAY",
       "or": "hoặc",
-      "thank":"Cám ơn bạn đã theo dõi vài thứ hay nhé!"
+      "thank": "Cám ơn bạn đã theo dõi vài thứ hay nhé!"
     }
   }
 </i18n>

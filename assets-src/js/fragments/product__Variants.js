@@ -5,7 +5,6 @@ export default {
   name: 'ProductVariants',
   functional: true,
   render: (h, {props, data}) => {
-    console.log('it\'s okay :v');
     if (props.options_.length === 1)
       return (<Single {...data} />);
     return (<Multiple {...data} options_={props.options_}/>);

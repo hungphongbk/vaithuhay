@@ -176,9 +176,9 @@
   }
 
   .caption {
-    height: $line-height-computed*10;
+    height: $line-height-computed*9.5;
     @include responsive('xs-max') {
-      height: $line-height-computed*7.5;
+      height: $line-height-computed*6.8;
     }
   }
 

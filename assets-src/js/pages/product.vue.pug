@@ -20,10 +20,11 @@
           .row.gutter-10.gutter-sm-20
             .col-xs-6.col-sm-4
               product-quantity(v-model="quantity")
-            .col-xs-6.col-sm-8
-              add-to-cart-wrapper.btn.btn-theme-red.add-to-cart(v-ripple='', @cart-failed="error")
-                i.fa.fa-shopping-cart
+            .col-xs-6.col-sm-8(:class="$style.addToCartFavoriteGroup")
+              add-to-cart-wrapper.btn.btn-theme-red(:class="$style.addToCart", v-ripple='', @cart-failed="error")
+                fa-icon(:icon="faCartPlus")
                 | {{$t('buyNow')}}
+              fa-icon(:class="$style.favorite", :icon="faHeart", size="2x")
           hr
           social-sharer(:url="url")
   .product-body

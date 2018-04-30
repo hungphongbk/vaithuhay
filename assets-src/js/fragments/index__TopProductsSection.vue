@@ -24,6 +24,7 @@
 
   @include responsive('xs-max') {
     .swiper-slide {
+      margin-bottom: 6px;
       padding: 0 $grid-gutter-width/5 {
         top: 20px;
       }
