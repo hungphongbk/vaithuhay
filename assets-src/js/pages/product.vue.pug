@@ -5,7 +5,7 @@
         .col-sm-6
           product-images.images(ref="images", :images_="images", :fullScreen_="true")
         .col-sm-6
-          h2.entry-title {{title$i18n}}
+          h2(:class="$style.entryTitle") {{title$i18n}}
           .clearfix
             template(v-if="price.current!=='-1'")
               h2(:class="$style.price", style="display: inline-block") {{price.current}}&nbsp;
@@ -34,7 +34,7 @@
           product-tabs
             product-tab(:title="$t('info')")
               component.product-content(:is="body", :class="{contentCollapse}")
-              .text-center.readmore(@click="contentCollapse = !contentCollapse")
+              .text-center(:class="$style.readmore", @click="contentCollapse = !contentCollapse")
                 span.btn.btn-theme(v-if="contentCollapse") {{$t('seeMore')}}
                 span.btn.btn-theme(v-else) {{$t('collapse')}}
             product-tab(title="FAQ", :badge="faq.length")

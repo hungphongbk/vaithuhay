@@ -1,0 +1,57 @@
+div(style="height: 100%")
+  lang.lang
+  user-button.user(@click="!customer.id && login()")
+  transition(name="vth-fade-slide-left", mode="out-in")
+    div(:class="$style.dash", v-if="mode==='dashboard' || mode==='search'", key="dash-search")
+      form.form.search-form
+        .input-group.add-on
+          input.form-control#search(:placeholder="$t('0')", v-model="keyword")
+          .input-group-btn
+            .btn(@click="keyword=''; mode='dashboard'")
+              fa-icon(:icon="faTimes")
+      transition(name="vth-fade-slide-left", mode="out-in")
+        div(:class="$style.dashChild", v-if="mode==='dashboard'", key="dashboard")
+          ul(:class="$style.dashboard")
+            li
+              .customer.clearfix(v-if="customer.id", style="margin-bottom: 3em")
+                h4
+                  fa-icon(:icon="faUserCircle", size="2x", style="margin-right: .7em")
+                  span {{customer.name}}
+                .pull-right
+                  a.small.logout(href="/account/logout")
+                    fa-icon(:icon="faSignOut", size="lg")
+                    | {{$t('signout')}}
+            li
+              a(target="_self", :href="home_")
+                h5 {{$t('homepage')}}
+            li
+              a(@click="mode='discover'")
+                h5 {{$t('discover')}}
+                  fa-icon(:icon="faAngleRight", size="lg")
+            li
+              a(target="_self", :href="`${home_}/blogs/news`")
+                h5 {{$t('news')}}
+            li
+              a(target="_self", :href="`${home_}/pages/vaithuhay`")
+                h5 {{$t('intro')}}
+        div(:class="$style.dashChild", v-else, key="search")
+          h4.mt-4.mb-4
+            span.mr-4(:class="{'disabled': searchType==='article'}", @click="searchType='product'") Sản phẩm
+            span(:class="{'disabled': searchType==='product'}", @click="searchType='article'") Bài viết
+          ul(:class="$style.searchPanel")
+            li(:class="$style.searchItem", v-for="p in currentSearch")
+              a(:href="p.url")
+                h5(v-if="p._type==='product'") {{p._title[$i18n.locale]}}
+                h5(v-else) {{p.title}}
+    div(:class="$style.dash", v-else-if="mode==='discover'", key="discover")
+      div(:class="$style.dashChild")
+        ul(:class="$style.dashboard")
+          li(v-for="cat in categories")
+            a(:href="cat.url")
+              h5 {{cat.title}}
+    div(:class="$style.dash", v-else-if="mode==='cart'", key="cart")
+      div(:class="$style.dashChild")
+        cart-panel
+    div(:class="$style.dash", v-else, key="login")
+      div(:class="$style.dashChild")
+        login-panel

@@ -17,9 +17,17 @@
   border-radius: 0;
   font-size: $font-size-base*1.2;
   transition: all $animation-time ease;
-  &:not(.no-text) .fa {
-    margin-right: .7em;
-    font-weight: 700;
+  &:not(.no-text) {
+    .fa {
+      margin-right: .7em;
+      font-weight: 700;
+    }
+    .svg-inline--fa{
+      margin-right: .7em;
+      @include responsive('xs-max'){
+        margin-right: .5em;
+      }
+    }
   }
 }
 

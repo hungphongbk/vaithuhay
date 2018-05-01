@@ -1,14 +1,6 @@
 <style lang="scss" scoped>
   @import "../../sass/inc/inc";
 
-  .entry-title {
-    @include font-size-with-line-height($font-size-h1);
-    @include responsive('xs-max') {
-      @include font-size-with-line-height($font-size-h3*0.85);
-    }
-    font-weight: 700;
-  }
-
   .images {
     @extend %box-shadow-2;
     @include responsive('xs-max') {
@@ -36,13 +28,6 @@
     position: relative;
     .col-md-8 {
       position: unset;
-    }
-  }
-
-  .readmore {
-    margin-top: 20px;
-    > span {
-      display: inline-block;
     }
   }
 
@@ -150,6 +135,14 @@
 <style lang="scss" module>
   @import "../../sass/inc/inc";
 
+  .entry-title {
+    @include font-size-with-line-height($font-size-h1);
+    @include responsive('xs-max') {
+      @include font-size-with-line-height($font-size-h3*0.85);
+    }
+    font-weight: 700;
+  }
+
   .price {
     &, + .rating {
       @include font-size-with-line-height($font-size-h1);
@@ -212,6 +205,13 @@
     }
     margin-right: .3rem;
     color: $theme-color-dark-2;
+  }
+
+  .readmore {
+    margin-top: 20px;
+    > span {
+      display: inline-block;
+    }
   }
 </style>
 <template lang="pug" src="./product.vue.pug"></template>

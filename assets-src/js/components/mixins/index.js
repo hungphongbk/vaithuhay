@@ -3,6 +3,8 @@ import AppLoginWrapper from '@/components/app__LoginWrapper';
 import {USER_IS_LOGGING_IN_, USER_LOGGED_IN_, USER_LOGIN_} from "@/store/types";
 import debounce from 'lodash/debounce';
 import qs from 'query-string';
+import faFacebook from '@fortawesome/fontawesome-free-brands/faFacebookF'
+import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle'
 
 const $ = jQuery;
 
@@ -76,7 +78,9 @@ export const loginMixins = {
       customer: {
         email: '',
         password: ''
-      }
+      },
+      faFacebook,
+      faGoogle
     };
   },
   methods: {
