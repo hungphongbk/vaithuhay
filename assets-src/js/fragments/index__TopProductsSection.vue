@@ -1,17 +1,6 @@
 <style lang="scss" scoped>
   @import "../../sass/inc/inc";
 
-  .swiper-slide {
-    @extend %no-focus;
-    margin-bottom: 20px;
-    height: auto;
-    padding: 0 $grid-gutter-width/2;
-    .thumbnail {
-      height: 100%;
-      @extend %box-shadow-1;
-    }
-  }
-
   .vth-post-carousel {
     width: 100%;
     padding: 0;
@@ -23,12 +12,6 @@
   }
 
   @include responsive('xs-max') {
-    .swiper-slide {
-      margin-bottom: 6px;
-      padding: 0 $grid-gutter-width/5 {
-        top: 20px;
-      }
-    }
     .product-loop {
       margin: {
         left: -$grid-gutter-width/5;
@@ -45,7 +28,7 @@
   index-section(:title="$t('top')", titleForeground="#e02417", background="#ececec")
     product-loop.pt(:slider-opts="slickOptions_", :list="products")
       template(slot="item", slot-scope="p")
-        .swiper-slide
+        div(:class="slide.swiperSlide")
           product-item(:item="p.item")
     .text-center
       a.btn.btn-theme(href="https://vaithuhay.com/collections/tatcasanpham") KHÁM PHÁ THÊM
@@ -55,6 +38,7 @@
   import {ProductItem1 as ProductItem} from '../components/products';
   import {ProductItem_} from "../components/classes";
   import {slickOptions_} from "@/components/helpers";
+  import slide from './index__slide.m-scss'
 
   const $ = jQuery;
   export default {
@@ -66,7 +50,8 @@
     data() {
       return {
         products$: window.products_sale.filter(i => i !== null) || [],
-        slickOptions_
+        slickOptions_,
+        slide
       };
     },
     computed: {

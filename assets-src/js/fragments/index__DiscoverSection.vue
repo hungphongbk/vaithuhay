@@ -1,13 +1,7 @@
-<style lang="scss" scoped="">
+<style lang="scss" module>
   @import "../../sass/inc/inc";
-
   .homepage-discover {
-    margin: {
-      /*bottom: 20px;*/
-      /*left: 50px;*/
-      /*right: 50px;*/
-    }
-    @media screen and (max-width: $screen-xs-max) {
+    @include responsive('xs-max') {
       margin: {
         /*bottom: 20px;*/
         left: $grid-gutter-width/3;
@@ -25,7 +19,7 @@
     @media screen and (max-width: $screen-xs-max) {
       margin-bottom: $line-height-computed;
     }
-    .right {
+    @at-root .right {
       height: 100%;
       overflow: hidden;
       img {
@@ -39,14 +33,14 @@
     }
     overflow: hidden;
     position: relative;
-    .content {
+    @at-root .content {
       @extend %abs-full;
       overflow: hidden;
       background-color: rgba(#000, .35);
       color: white;
       padding: 0 20%;
     }
-    .title {
+    @at-root .title {
       text-transform: uppercase;
       line-height: $font-size-h3*1.45;
       @include _(text-shadow-2)
@@ -56,7 +50,7 @@
   @mixin item($size, $font) {
     .item {
       height: $size;
-      .right {
+      @at-root .right {
         width: 100%;
         background-color: white;
         img {
@@ -67,13 +61,12 @@
           margin-top: $size/2;
         }
       }
-      .title {
+      @at-root .title {
         font-size: $font;
       }
-    }
-
-    .vth-thumb {
-      width: $size;
+      :global(.vth-thumb) {
+        width: $size;
+      }
     }
   }
 
@@ -88,18 +81,18 @@
 </style>
 <template lang="pug">
   index-section.vth-post-carousel(:title="$t('title')", titleForeground="#fff", background="#666", backgroundImage="pattern1")
-    .homepage-discover
+    div(:class="$style.homepageDiscover")
       .row
         .col-sm-6(v-for="cat in categories")
-          a.item(:href="cat.url")
-            .right
+          a(:class="$style.item", :href="cat.url")
+            div(:class="$style.right")
               img(:src="cat.image")
-              .content.flex-center.text-center
-                h3.title {{cat.title}}
+              .flex-center.text-center(:class="$style.content")
+                h3(:class="$style.title") {{cat.title}}
 </template>
 <script>
-  import {IndexSection} from '../components/index'
-  import {mapGetters} from 'vuex'
+  import {IndexSection} from '../components/index';
+  import {mapGetters} from 'vuex';
   import {CATEGORIES_LIST_} from "../store/types";
 
   export default {
@@ -107,22 +100,22 @@
     data() {
       return {
         demo_: require('../../img/pexels-photo-62689.png')
-      }
+      };
     },
     computed: {
       ...mapGetters({
         categories: CATEGORIES_LIST_
       })
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "title": "discover"
-  },
-  "vi": {
-  "title": "khám phá"
-  }
+    "en": {
+      "title": "discover"
+    },
+    "vi": {
+      "title": "khám phá"
+    }
   }
 </i18n>

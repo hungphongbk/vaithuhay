@@ -1,0 +1,21 @@
+@import "../../sass/inc/inc";
+
+.swiper-slide {
+  @extend %no-focus;
+  margin-bottom: 20px;
+  height: auto;
+  padding: 0 $grid-gutter-width/2;
+  :global(.thumbnail) {
+    height: 100%;
+    @extend %box-shadow-1;
+  }
+}
+
+@include responsive('xs-max') {
+  .swiper-slide {
+    margin-bottom: 6px;
+    padding: 0 $grid-gutter-width/5 {
+      top: 20px;
+    }
+  }
+}

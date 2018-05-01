@@ -19,3 +19,6 @@ export const USER_LOGIN_FAILED_ = 'user/login-failed';
 export const USER_IS_LOGGING_IN_ = 'user/is-logging-in';
 export const USER_IS_LOGGED_IN_ = 'user/is-logged-in';
 export const USER_LOYALTY_ = 'user/loyalty';
+export const PRODUCT_MUTATION_FAVORITE_ADD_ = 'product/add-favorite';
+export const PRODUCT_MUTATION_FAVORITE_REMOVE_ = 'product/remove-favorite';
+export const PRODUCT_ACTION_FAVORITE_TOGGLE_ = 'product/toggle-favorite';

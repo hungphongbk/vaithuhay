@@ -22,6 +22,7 @@ Vue.filter('vnd', function (value) {
 });
 Vue.filter('percentage', value => Math.round(value * 100) + '%');
 Vue.use(VueCookie);
+console.log('vue.use cookie');
 
 Vue.directive('anim', async (el) => {
   const $children = el.children;

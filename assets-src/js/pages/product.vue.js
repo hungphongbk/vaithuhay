@@ -15,10 +15,12 @@ import {ProductItem_, WholeSale} from '../components/classes';
 import {delay} from '../components/helpers';
 import transform from '../plugins/content-transform';
 import ripple from 'js-effect-ripple';
+import ProductModule from '../store/product';
+import {mapState} from 'vuex';
 //    import {i18nFields} from '../plugins/i18n'
 import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
 import faHeartSolid from '@fortawesome/fontawesome-free-solid/faHeart';
-import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus'
+import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus';
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -138,7 +140,10 @@ export default {
     },
     top6() {
       return this.tops.slice(0, 6);
-    }
+    },
+    ...mapState({
+      favorite: state => state.product.favorite
+    })
   },
   asyncComputed: {
     async body() {
@@ -189,10 +194,13 @@ export default {
       this.commentCount = share.comment_count;
     }
   },
-  beforeRouteEnter(to, from, next) {
-
+  beforeMount() {
+    this.$store.registerModule('product', ProductModule, {preserveState: true});
   },
   async mounted() {
     await Promise.all([this.fetchWholesale(), this.fetchCommentCount()]);
+  },
+  destroyed() {
+    this.$store.unregisterModule('product');
   }
 };
