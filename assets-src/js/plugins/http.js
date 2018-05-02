@@ -16,11 +16,11 @@ function getUserId() {
 
 export default {
   get(url, auth = false): Promise<any> {
-    const newUrl = mix(url, auth ? {} : {userId: getUserId()});
+    const newUrl = mix(url, auth ? {userId: getUserId()} : {});
     return $.get(newUrl);
   },
   post(url, data = {}, auth = false): Promise<any> {
-    const newData = Object.assign({}, data, auth ? {} : {userId: getUserId()});
-    return $.post(url, data);
+    const newData = Object.assign({}, data, auth ? {userId: getUserId()} : {});
+    return $.post(url, newData);
   }
 };

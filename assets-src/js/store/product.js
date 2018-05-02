@@ -30,7 +30,7 @@ export default {
         const {behavior} = await http.post(SERVER_URL + 'products/' + state.current.id + '/favorite', {}, true);
         const mutation = behavior === 'add' ? PRODUCT_MUTATION_FAVORITE_ADD_ : PRODUCT_MUTATION_FAVORITE_REMOVE_;
         commit(mutation);
-      });
+      })();
     }
   }
 };

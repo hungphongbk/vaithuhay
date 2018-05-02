@@ -21,6 +21,7 @@ import {mapState} from 'vuex';
 import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
 import faHeartSolid from '@fortawesome/fontawesome-free-solid/faHeart';
 import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus';
+import {PRODUCT_ACTION_FAVORITE_TOGGLE_} from "@/store/types";
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -192,6 +193,9 @@ export default {
     async fetchCommentCount() {
       const {share} = await $.get(`https://graph.facebook.com/v2.8/?fields=share%7Bcomment_count%7D&id=http://vaithuhay.com${this.url}`);
       this.commentCount = share.comment_count;
+    },
+    addToFavorite(){
+      return this.$store.dispatch(PRODUCT_ACTION_FAVORITE_TOGGLE_);
     }
   },
   beforeMount() {

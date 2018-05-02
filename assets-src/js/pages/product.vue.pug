@@ -24,7 +24,8 @@
               add-to-cart-wrapper.btn.btn-theme-red(:class="$style.addToCart", v-ripple='', @cart-failed="error")
                 fa-icon(:icon="faCartPlus")
                 | {{$t('buyNow')}}
-              fa-icon(:class="$style.favorite", :icon="favorite ? faHeartSolid : faHeart", size="2x")
+              div(@click="addToFavorite", style="padding-top: .4rem; padding-bottom: .4rem")
+                fa-icon(:class="$style.favorite", :icon="favorite ? faHeartSolid : faHeart", size="2x")
           hr
           social-sharer(:url="url")
   .product-body

@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import categories from './categories';
 import cart from './cart';
 import promo from './promo';
-import product from './product';
 import customer from './customer';
 import extend from 'lodash/extend';
 
@@ -14,7 +13,6 @@ const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     customer,
-    product,
     categories,
     cart,
     promo
