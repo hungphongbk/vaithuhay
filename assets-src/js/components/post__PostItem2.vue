@@ -12,7 +12,9 @@
     &thumbnail {
       @extend %reset-link;
       display: block;
-      width: 17%;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: 17%;
       @include responsive('md-max') {
         width: 20%;
       }
@@ -31,6 +33,10 @@
         font-weight: 700;
         text-transform: uppercase;
       }
+    }
+    &desc{
+      white-space: pre-wrap;
+      @include font-size-with-line-height($font-size-base*0.9);
     }
     &price {
       padding-top: 1rem;
@@ -60,6 +66,7 @@
     div(:class="$style.postDetail")
       a(:href="url", :class="$style.postTitle")
         h5 {{item.title}}
+      p(:class="$style.postDesc") {{item.desc | i18n}}
     div(:class="$style.postPrice")
       p(:class="$style.current") {{price.current | vnd}}
       template(v-if="price.old>0")

@@ -2,13 +2,14 @@ import './responsive';
 import './animateCss';
 import Vue from 'vue';
 import AsyncComputed from 'vue-async-computed';
-import VueCookie from 'vue-cookie';
 import VueLocalStorage from 'vue-localstorage';
 import VueLazyload from 'vue-lazyload';
 import {delay} from '../components/helpers';
 import './observe-visibility';
 import {detect} from 'detect-browser';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+import './cookie';
+import i18n from './i18n';
 //
 // import 'vue-carousel'
 
@@ -21,8 +22,7 @@ Vue.filter('vnd', function (value) {
   return Math.round(value / 100).toLocaleString("vi-VN") + '₫';
 });
 Vue.filter('percentage', value => Math.round(value * 100) + '%');
-Vue.use(VueCookie);
-console.log('vue.use cookie');
+Vue.filter('i18n', value => value[i18n.locale]);
 
 Vue.directive('anim', async (el) => {
   const $children = el.children;
