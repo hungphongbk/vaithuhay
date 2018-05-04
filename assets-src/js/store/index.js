@@ -20,14 +20,16 @@ const store = new Vuex.Store({
 });
 
 if (vth) {
-  store.replaceState(extend({}, vth, {
+  const obj = extend({}, vth, {
     customer: {
       id: null,
       name: '',
       isLoggingIn: false,
       form: false,
-      loyalty: {}
+      loyalty: {},
+      favorites: []
     }
-  }));
+  });
+  store.replaceState(obj);
 }
 export default store;

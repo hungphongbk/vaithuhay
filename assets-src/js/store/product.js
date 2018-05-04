@@ -1,11 +1,13 @@
 import {
+  PRODUCT_ACTION_FAVORITE_FETCH_,
   PRODUCT_ACTION_FAVORITE_TOGGLE_,
   PRODUCT_MUTATION_FAVORITE_ADD_,
-  PRODUCT_MUTATION_FAVORITE_REMOVE_
+  PRODUCT_MUTATION_FAVORITE_REMOVE_,
+  USER_FAVORITES_
 } from "@/store/types";
 
-import auth from '@/plugins/auth';
-import http from "@/plugins/http";
+import auth, {authWithoutWarning} from '@/plugins/auth';
+import {ProductFavoriteAPI} from "@/store/api";
 
 export default {
   state() {
@@ -25,11 +27,20 @@ export default {
     }
   },
   actions: {
+    [PRODUCT_ACTION_FAVORITE_FETCH_]({commit, state}) {
+      authWithoutWarning.wrap(async () => {
+        const {value} = await ProductFavoriteAPI.fetch(state.current.id);
+        const mutation = value ? PRODUCT_MUTATION_FAVORITE_ADD_ : PRODUCT_MUTATION_FAVORITE_REMOVE_;
+        commit(mutation);
+      })();
+    },
     [PRODUCT_ACTION_FAVORITE_TOGGLE_]({commit, dispatch, state}) {
       auth.wrap(async () => {
-        const {behavior} = await http.post(SERVER_URL + 'products/' + state.current.id + '/favorite', {}, true);
+        const {behavior} = await ProductFavoriteAPI.toggle(state.current.id);
         const mutation = behavior === 'add' ? PRODUCT_MUTATION_FAVORITE_ADD_ : PRODUCT_MUTATION_FAVORITE_REMOVE_;
         commit(mutation);
+
+        await dispatch(USER_FAVORITES_);
       })();
     }
   }

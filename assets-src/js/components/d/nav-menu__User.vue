@@ -75,8 +75,22 @@
         right: 1rem;
       }
     }
-    &:not(:last-child)>a{
+    &:not(:last-child) > a {
       border-bottom: 1px solid #ccc;
+    }
+  }
+
+  .favorite-item {
+    &-wrapper {
+      padding: .7rem;
+      border-radius: .3rem;
+      background: white;
+      margin-bottom: .2rem;
+    }
+    &-remove {
+      display: block;
+      margin-top: 1.3rem;
+      color: #888;
     }
   }
 </style>
@@ -123,34 +137,49 @@
                 a(href="#", style="display: block")
                   loyalty
               li(:class="$style.popoverItem")
+                a(href="javascript:void(0)", @click="show_ = false; favoriteModal = true") Sản phẩm yêu thích
+              li(:class="$style.popoverItem")
                 a(href="#") Cài đặt
               li(:class="$style.popoverItem")
                 a(href="/account/logout") {{$t('signout')}}
     modal(v-if="orderTrackingForm", title="Kiểm tra đơn hàng", @dismiss="orderTrackingForm = false", size="lg")
       .modal-body
         order-tracking
+    modal(v-if="favoriteModal", title="Danh sách sản phẩm yêu thích", @dismiss="favoriteModal = false", size="lg")
+      .modal-body(style="background-color: #dddfe2")
+        ul
+          li(v-for="product in favorites", :key="product.id", :class="$style.favoriteItemWrapper")
+            product-item(:class="$style.favoriteItem", :item="product", :item-style="2")
+              div
+                fa-icon(:class="$style.favoriteItemRemove", :icon="faTimesCircle", size="lg", @click="favoriteToggle(product)")
 </template>
 <script>
   import {loginMixins, overlayMixin} from '../mixins';
   import {OrderTracking, UserButton} from "../index";
   import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
-  import {mapGetters} from 'vuex';
+  import {mapGetters, mapActions} from 'vuex';
   import Loyalty from './nav-menu__Loyalty';
+  import {USER_FAVORITES_, USER_TOGGLE_FAVORITE} from "@/store/types";
+  import ProductItem from '@/components/products';
+  import faTimesCircle from '@fortawesome/fontawesome-free-solid/faTimes';
 
   export default {
     mixins: [overlayMixin, loginMixins],
-    components: {UserButton, OrderTracking, Loyalty},
+    components: {UserButton, OrderTracking, Loyalty, ProductItem},
     data() {
       return {
         orderTrackingForm: false,
-        isExperiment: window.o.isExperiment
+        favoriteModal: false,
+        isExperiment: window.o.isExperiment,
+        faTimesCircle
       };
     },
     computed: {
       ...mapGetters({
         loggedIn: USER_LOGGED_IN_,
         loginForm: USER_LOGIN_FORM_SHOW_,
-        loyalty: USER_LOYALTY_
+        loyalty: USER_LOYALTY_,
+        favorites: USER_FAVORITES_
       }),
       user() {
         return this.$store.state.customer;
@@ -160,6 +189,11 @@
       loginForm(value) {
         this.show_ = value;
       }
+    },
+    methods:{
+      ...mapActions({
+        favoriteToggle: USER_TOGGLE_FAVORITE
+      })
     }
   };
 </script>

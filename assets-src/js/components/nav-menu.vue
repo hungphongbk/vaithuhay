@@ -21,7 +21,7 @@
   export default {
     components: {
       MobileMenu, DesktopMenu
-    }
+    },
     // data() {
     //   return {
     //     logo_: require('../../img/logo.png?size=130'),
@@ -36,6 +36,9 @@
     //       mobileMenu.goBack();
     //     else this.show_ = !this.show_;
     //   }
+    // },
+    // created(){
+    //   this.$store.dispatch(USER_LOGIN_);
     // }
   }
 </script>

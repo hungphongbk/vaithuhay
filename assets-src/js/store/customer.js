@@ -1,12 +1,16 @@
 import {
+  USER_FAVORITES_,
   USER_IS_LOGGED_IN_,
   USER_IS_LOGGING_IN_,
   USER_LOGGED_IN_,
   USER_LOGIN_,
   USER_LOGIN_FAILED_,
   USER_LOGIN_FORM_SHOW_,
-  USER_LOYALTY_
+  USER_LOYALTY_,
+  USER_TOGGLE_FAVORITE
 } from "@/store/types";
+import Vue from 'vue';
+import {ProductFavoriteAPI} from "@/store/api";
 
 const $ = jQuery;
 
@@ -19,12 +23,14 @@ export default {
     loyalty: {
       point: 0,
       balance: 0
-    }
+    },
+    favorites: []
   },
   getters: {
     [USER_LOGGED_IN_]: (state) => typeof state.id !== 'undefined' && state.id !== null,
     [USER_LOGIN_FORM_SHOW_]: (state) => state.form,
-    [USER_LOYALTY_]: (state) => state.loyalty
+    [USER_LOYALTY_]: (state) => state.loyalty,
+    [USER_FAVORITES_]: (state) => state.favorites
   },
   mutations: {
     [USER_LOGIN_FAILED_](state) {
@@ -43,9 +49,12 @@ export default {
     [USER_LOGIN_](state, value) {
       // state = Object.assign({}, state, value);
       for (const key of Object.keys(state)) if (typeof key === 'string') {
-        console.log(key);
         state[key] = value[key];
       }
+    },
+    [USER_FAVORITES_](state, favorites) {
+      //state.favorites = state.favorites.splice(0, state.favorites.length, ...favorites);
+      Vue.set(state, 'favorites', favorites);
     }
   },
   actions: {
@@ -60,6 +69,13 @@ export default {
     [USER_LOGIN_FORM_SHOW_]({commit}) {
       commit(USER_LOGIN_FORM_SHOW_);
     },
+    async [USER_FAVORITES_]({commit}) {
+      commit(USER_FAVORITES_, await ProductFavoriteAPI.fetchAll());
+    },
+    async [USER_TOGGLE_FAVORITE]({dispatch}, {id}) {
+      await ProductFavoriteAPI.toggle(id);
+      dispatch(USER_FAVORITES_);
+    },
     async [USER_LOGIN_]({commit, dispatch}, form = null) {
       if (form)
         await $.ajax({
@@ -72,6 +88,11 @@ export default {
       if (customer) {
         commit(USER_IS_LOGGED_IN_);
         commit(USER_LOGIN_, customer);
+
+        //preload user data
+        await Promise.all([
+          dispatch(USER_FAVORITES_)
+        ]);
       } else {
         commit(USER_LOGIN_FAILED_);
       }

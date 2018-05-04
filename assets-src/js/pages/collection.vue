@@ -235,7 +235,7 @@
 </template>
 <script>
   import {ItemLoop, Paginate, OverlaySelector, PageSlider} from '../components/index'
-  import {ProductItem1 as ProductItem} from '../components/products'
+  import ProductItem from '@/components/products';
   import Slick from 'vue-slick'
   import {mapGetters} from 'vuex';
   import {PRODUCTS_LIST_, PRODUCTS_FETCH_, PRODUCTS_SORT_, CATEGORIES_LIST_} from '../store/types'

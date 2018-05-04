@@ -70,10 +70,10 @@
           .toast-btn(@click="showRegister=false") Bỏ qua
 </template>
 <script>
-  import firebase from 'firebase/app'
-  import 'firebase/auth'
-  import 'firebase/messaging'
-  import sw from '@/modules/iframe/sw'
+  import firebase from 'firebase/app';
+  import 'firebase/auth';
+  import 'firebase/messaging';
+  import sw from '@/modules/iframe/sw';
 
   firebase.initializeApp({
     apiKey: "AIzaSyDu888R1nyP_W_xFX7aATSB0U5irf79lrM",
@@ -94,7 +94,7 @@
             _message.useServiceWorker(registration);
             resolve(_message);
           })
-          .catch(reject)
+          .catch(reject);
       } else reject();
     }),
     registerToken = (token, dev = false) => $.post('https://api.v1.hungphongbk.com/vaithuhay/b/noti/register', {
@@ -102,29 +102,34 @@
       ...(dev ? {topics: '/topics/dev'} : {}),
       refresh: true
     }).then(() => {
-      console.log('token refreshed')
+      console.log('token refreshed');
     });
 
   export default {
+    localStorage: {
+      show: {
+        type: Boolean
+      }
+    },
     data() {
       return {
         showRegister: false,
         token: null
-      }
+      };
     },
     methods: {
       async doToken() {
         const self = this,
           token = self.token;
         if ((!token) || token.length === 0) {
-          self.showRegister = true;
+          self.showRegister = self.$localStorage.get('show', true);
         } else {
           await registerToken(self.$isExperiment, token);
           const message = await app;
           message.onTokenRefresh(async () => {
             self.token = await message.getToken();
-            await registerToken(self.$isExperiment, self.token)
-          })
+            await registerToken(self.$isExperiment, self.token);
+          });
         }
       },
       async getPermission() {
@@ -136,6 +141,10 @@
       },
       splash({target}) {
         $(target).find('.fa-stack').animateCss('rubberBand');
+      },
+      ignore() {
+        this.showRegister = false;
+        this.$localStorage.set('show', false);
       }
     },
     async mounted() {
@@ -148,5 +157,5 @@
         //do nothing
       }
     }
-  }
+  };
 </script>

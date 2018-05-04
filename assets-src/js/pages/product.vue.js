@@ -6,7 +6,7 @@ import ProductFaq from '../fragments/product__FAQ.vue';
 import ProductExpandable from '../fragments/product__Expandable.vue';
 import ProductWholeSale from '../fragments/product__Wholesale.vue';
 import {AddToCartWrapper, ItemLoop, ProductRating} from '../components/index';
-import {ProductItem1 as ProductItem} from '../components/products';
+import ProductItem from '@/components/products';
 import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue';
 import ProductSmallItem from '../components/app__ProductSmallItem';
 // mixins & helpers
@@ -21,7 +21,7 @@ import {mapState} from 'vuex';
 import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
 import faHeartSolid from '@fortawesome/fontawesome-free-solid/faHeart';
 import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus';
-import {PRODUCT_ACTION_FAVORITE_TOGGLE_} from "@/store/types";
+import {PRODUCT_ACTION_FAVORITE_FETCH_, PRODUCT_ACTION_FAVORITE_TOGGLE_} from "@/store/types";
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -194,7 +194,7 @@ export default {
       const {share} = await $.get(`https://graph.facebook.com/v2.8/?fields=share%7Bcomment_count%7D&id=http://vaithuhay.com${this.url}`);
       this.commentCount = share.comment_count;
     },
-    addToFavorite(){
+    addToFavorite() {
       return this.$store.dispatch(PRODUCT_ACTION_FAVORITE_TOGGLE_);
     }
   },
@@ -203,6 +203,7 @@ export default {
   },
   async mounted() {
     await Promise.all([this.fetchWholesale(), this.fetchCommentCount()]);
+    this.$store.dispatch(PRODUCT_ACTION_FAVORITE_FETCH_);
   },
   destroyed() {
     this.$store.unregisterModule('product');
