@@ -39,7 +39,6 @@ export default {
         const {behavior} = await ProductFavoriteAPI.toggle(state.current.id);
         const mutation = behavior === 'add' ? PRODUCT_MUTATION_FAVORITE_ADD_ : PRODUCT_MUTATION_FAVORITE_REMOVE_;
         commit(mutation);
-
         await dispatch(USER_FAVORITES_);
       })();
     }

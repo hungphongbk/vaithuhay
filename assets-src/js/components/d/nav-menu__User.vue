@@ -99,14 +99,14 @@
     p {
       margin-top: 1.5rem;
     }
-    :global(.svg-inline--fa){
+    :global(.svg-inline--fa) {
       color: $theme-red-color;
     }
   }
 </style>
 <template lang="pug">
-  user-button(@click="show_ = !show_")
-    static-overlay(name_="vth-fade-slide-down-bz", @click.self.native="show_ = false", v-if="!loggedIn")
+  user-button(@click="show=!show")
+    static-overlay(name_="vth-fade-slide-down-bz", @click.self.native="closeForm", v-if="!loggedIn")
       .container
         .row(@click.self="show_=false")
           .col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
@@ -132,7 +132,7 @@
                     | google
     div(v-else)
       transition(name="vth-fade-slide-up")
-        .popover.bottom(v-if="show_")
+        .popover.bottom(v-if="show")
           .arrow
           .popover-content.text-center.popover-user
             p
@@ -171,7 +171,8 @@
             | &nbsp;sản phẩm bạn yêu thích khi mua sắm để xem lại thuận tiện nhất nhé
 </template>
 <script>
-  import {loginMixins, overlayMixin} from '../mixins';
+  import {loginMixins} from '../mixins';
+  import StaticOverlay from '@/components/static-overlay';
   import {OrderTracking, UserButton} from "../index";
   import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
   import {mapActions, mapGetters} from 'vuex';
@@ -182,15 +183,16 @@
   import faHeart from '@fortawesome/fontawesome-free-solid/faHeart';
 
   export default {
-    mixins: [overlayMixin, loginMixins],
-    components: {UserButton, OrderTracking, Loyalty, ProductItem},
+    mixins: [loginMixins],
+    components: {UserButton, OrderTracking, Loyalty, ProductItem, StaticOverlay},
     data() {
       return {
         orderTrackingForm: false,
         favoriteModal: false,
         isExperiment: window.o.isExperiment,
         faTimesCircle,
-        faHeart
+        faHeart,
+        show: false
       };
     },
     computed: {
@@ -204,15 +206,37 @@
         return this.$store.state.customer;
       }
     },
-    watch: {
-      loginForm(value) {
-        this.show_ = value;
-      }
+    provide() {
+      const overlay = {};
+      Object.defineProperty(overlay, 'show_', {
+        get: () => {
+          if (!this.loggedIn)
+            return this.loginForm;
+          return this.show;
+        }
+      });
+      return {overlay};
     },
     methods: {
       ...mapActions({
         favoriteToggle: USER_TOGGLE_FAVORITE
-      })
+      }),
+      closeForm() {
+        if (!this.loggedIn)
+          this.$store.commit(USER_LOGIN_FORM_SHOW_, false);
+        this.show = false;
+      },
+      openForm() {
+        if (!this.loggedIn)
+          this.$store.commit(USER_LOGIN_FORM_SHOW_, true);
+        else this.show = true;
+      }
+    },
+    watch: {
+      show(value) {
+        if (value && !this.loggedIn)
+          this.$store.commit(USER_LOGIN_FORM_SHOW_, true);
+      }
     }
   };
 </script>

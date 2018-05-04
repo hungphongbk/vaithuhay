@@ -30,7 +30,7 @@
             template(v-if="title")
               .modal-header
                 h5.modal-title {{title}}
-                button.close(type="button", aria-label="Close", @click="$emit('dismiss')")
+                button.close(v-if="isDismissable", type="button", aria-label="Close", @click="$emit('dismiss')")
                   span(aria-hidden="true") ×
             slot
 </template>
@@ -42,7 +42,11 @@
         type: String,
         default: 'vth-fade'
       },
-      size:String
+      size: String,
+      isDismissable: {
+        type: Boolean,
+        default: true
+      }
     }
-  }
+  };
 </script>

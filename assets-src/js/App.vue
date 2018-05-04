@@ -1,5 +1,6 @@
 <style lang="scss">
   @import "../sass/inc/inc";
+
   #primary {
     position: relative;
     padding-top: $navbar-height;
@@ -69,12 +70,15 @@
         i.fa.fa-chevron-up
     app-service-worker
     app-offline-mode
+    system-modal(v-if="systemModal !== null", :title="systemModal.title", :content="systemModal.content", :commands="systemModal.commands", :options="systemModal.options")
 </template>
 <script>
   import {Event} from './components/index';
   import AppOfflineMode from './fragments/app__OfflineMode';
   import {tooltip} from '@/plugins';
   import {USER_LOGIN_} from "@/store/types";
+  import {$modalEvent,SystemModal} from "@/plugins/ModalManager";
+  import {SYSTEM_MODAL_HIDE, SYSTEM_MODAL_SHOW} from "@/types";
 
   const $ = jQuery;
 
@@ -82,14 +86,16 @@
     directives: {tooltip},
     components: {
       'app-service-worker': () => import(/* webpackChunkName: "vaithuhay-sw" */ './fragments/app__ServiceWorker'),
-      AppOfflineMode
+      AppOfflineMode,
+      SystemModal
     },
     data() {
       return {
         overlay_: false,
         scrollTop: 0,
         screenHeight: $(window).height(),
-        iframeUrl: 'server.vaithuhay.com'
+        iframeUrl: 'server.vaithuhay.com',
+        systemModal: null
       };
     },
     computed: {
@@ -103,6 +109,15 @@
         $('html,body').animate({
           scrollTop: 0
         }, 400);
+      },
+      initSystemModal() {
+        $modalEvent.$on(SYSTEM_MODAL_SHOW, modal => {
+          console.log(modal);
+          this.systemModal = modal;
+        });
+        $modalEvent.$on(SYSTEM_MODAL_HIDE, () => {
+          this.systemModal = null;
+        });
       }
     },
     async created() {
@@ -114,6 +129,7 @@
       $(document).scroll(() => {
         self.scrollTop = $(window).scrollTop();
       });
+      this.initSystemModal();
     }
   };
 </script>

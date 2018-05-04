@@ -64,3 +64,4 @@ window.fbAsyncInit = function () {
 };
 
 Vue.component('fa-icon', FontAwesomeIcon);
+export {default as ModalManager} from './ModalManager'
