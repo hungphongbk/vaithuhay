@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es5",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es6",
+      "dom",
+      "scripthost"
+    ],
+    "rootDir": "assets-src/"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "assets-src/js/global.d.ts"
+  ],
+  "files": [
+    "assets-src/js/global.d.ts"
+  ]
+}

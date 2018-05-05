@@ -157,6 +157,7 @@
         order-tracking
     modal(v-if="favoriteModal", title="Danh sách sản phẩm yêu thích", @dismiss="favoriteModal = false", size="lg")
       .modal-body(style="background-color: #dddfe2")
+        flash-message-hub(label="product/favorite")
         template(v-if="favorites.length>0")
           ul
             li(v-for="product in favorites", :key="product.id", :class="$style.favoriteItemWrapper")
@@ -173,7 +174,7 @@
 <script>
   import {loginMixins} from '../mixins';
   import StaticOverlay from '@/components/static-overlay';
-  import {OrderTracking, UserButton} from "../index";
+  import {OrderTracking, UserButton, FlashMessageHub} from "../index";
   import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
   import {mapActions, mapGetters} from 'vuex';
   import Loyalty from './nav-menu__Loyalty';
@@ -184,7 +185,7 @@
 
   export default {
     mixins: [loginMixins],
-    components: {UserButton, OrderTracking, Loyalty, ProductItem, StaticOverlay},
+    components: {UserButton, OrderTracking, Loyalty, ProductItem, StaticOverlay, FlashMessageHub},
     data() {
       return {
         orderTrackingForm: false,
