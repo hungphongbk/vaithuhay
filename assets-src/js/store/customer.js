@@ -11,6 +11,8 @@ import {
 } from "@/store/types";
 import Vue from 'vue';
 import {ProductFavoriteAPI} from "@/store/api";
+import {ModalManager} from "@/plugins";
+import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "@/types";
 
 const $ = jQuery;
 
@@ -73,8 +75,14 @@ export default {
       commit(USER_FAVORITES_, await ProductFavoriteAPI.fetchAll());
     },
     async [USER_TOGGLE_FAVORITE]({dispatch}, {id}) {
-      await ProductFavoriteAPI.toggle(id);
-      dispatch(USER_FAVORITES_);
+      const rs = await ModalManager("Xác nhận", "Bạn có muốn xóa sản phẩm này ra khỏi danh sách yêu thích?", [
+        {label: "Bỏ qua", type: SYSTEM_MODAL_CANCEL},
+        {label: "OK", type: SYSTEM_MODAL_OK, isPrimary: true}
+      ]);
+      if (rs === SYSTEM_MODAL_OK) {
+        await ProductFavoriteAPI.toggle(id);
+        dispatch(USER_FAVORITES_);
+      }
     },
     async [USER_LOGIN_]({commit, dispatch}, form = null) {
       if (form)

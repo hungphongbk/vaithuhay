@@ -4,6 +4,7 @@ import categories from './categories';
 import cart from './cart';
 import promo from './promo';
 import customer from './customer';
+import flash from './flashMessages';
 import extend from 'lodash/extend';
 
 const $ = jQuery;
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     customer,
     categories,
     cart,
-    promo
+    promo,
+    flash
   }
 });
 
@@ -28,7 +30,8 @@ if (vth) {
       form: false,
       loyalty: {},
       favorites: []
-    }
+    },
+    flash: flash.state()
   });
   store.replaceState(obj);
 }

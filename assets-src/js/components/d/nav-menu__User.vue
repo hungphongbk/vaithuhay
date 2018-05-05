@@ -233,6 +233,10 @@
       }
     },
     watch: {
+      favoriteModal(value) {
+        if (value)
+          this.show = false;
+      },
       show(value) {
         if (value && !this.loggedIn)
           this.$store.commit(USER_LOGIN_FORM_SHOW_, true);

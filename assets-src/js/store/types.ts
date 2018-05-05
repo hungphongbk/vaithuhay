@@ -1,3 +1,6 @@
+export interface RootState {
+}
+
 export const CATEGORIES_LIST_ = 'categories/list';
 export const CATEGORIES_ALL_ = 'categories/all';
 export const CATEGORY_ONSALE_ = 'categories/sale';
@@ -25,3 +28,11 @@ export const PRODUCT_MUTATION_FAVORITE_ADD_ = 'product/add-favorite';
 export const PRODUCT_MUTATION_FAVORITE_REMOVE_ = 'product/remove-favorite';
 export const PRODUCT_ACTION_FAVORITE_FETCH_ = 'product/toggle-fetch';
 export const PRODUCT_ACTION_FAVORITE_TOGGLE_ = 'product/toggle-favorite';
+export const FLASH_CONTEXT_SUCCESS = 'flash/success';
+export const FLASH_CONTEXT_ALERT = 'flash/alert';
+export const FLASH_CONTEXT_ERROR = 'flash/error';
+export type FlashMessageContext = 'flash/success' | 'flash/alert' | 'flash/error'
+export const FLASH_MUTATION_PUSH_MESSAGE = 'flash/push';
+export const FLASH_MUTATION_POP_MESSAGE = 'flash/pop';
+export const FLASH_ACTION_PUSH_MESSAGE = 'flash/push';
+export const FLASH_ACTION_POP_MESSAGE = 'flash/pop';
