@@ -16,6 +16,8 @@ $border-radius-base: 0;
 
 $text-color: #222;
 
+$headings-font-weight: 700;
+
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
 
 $navbar-padding-vertical: (($navbar-height - $line-height-computed) / 2);

@@ -79,30 +79,6 @@
       border-bottom: 1px solid #ccc;
     }
   }
-
-  .favorite-item {
-    &-wrapper {
-      padding: .7rem;
-      border-radius: .3rem;
-      background: white;
-      margin-bottom: .2rem;
-    }
-    &-remove {
-      display: block;
-      margin-top: 1.3rem;
-      color: #888;
-    }
-  }
-
-  .favorite-empty {
-    padding: 0 20%;
-    p {
-      margin-top: 1.5rem;
-    }
-    :global(.svg-inline--fa) {
-      color: $theme-red-color;
-    }
-  }
 </style>
 <template lang="pug">
   user-button(@click="show=!show")
@@ -157,42 +133,26 @@
         order-tracking
     modal(v-if="favoriteModal", title="Danh sách sản phẩm yêu thích", @dismiss="favoriteModal = false", size="lg")
       .modal-body(style="background-color: #dddfe2")
-        flash-message-hub(label="product/favorite")
-        template(v-if="favorites.length>0")
-          ul
-            li(v-for="product in favorites", :key="product.id", :class="$style.favoriteItemWrapper")
-              product-item(:class="$style.favoriteItem", :item="product", :item-style="2")
-                div
-                  fa-icon(:class="$style.favoriteItemRemove", :icon="faTimesCircle", size="lg", @click="favoriteToggle(product)")
-        .text-center(v-else, :class="$style.favoriteEmpty")
-          img(src="../../../img/vaithuhay-not-found.png")
-          p Danh sách hiện chưa có gì. Hãy&nbsp;
-            span
-              fa-icon(:icon="faHeart")
-            | &nbsp;sản phẩm bạn yêu thích khi mua sắm để xem lại thuận tiện nhất nhé
+        user-panel
 </template>
 <script>
   import {loginMixins} from '../mixins';
   import StaticOverlay from '@/components/static-overlay';
-  import {OrderTracking, UserButton, FlashMessageHub} from "../index";
+  import {OrderTracking, UserButton} from "../index";
   import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
-  import {mapActions, mapGetters} from 'vuex';
+  import {mapGetters} from 'vuex';
   import Loyalty from './nav-menu__Loyalty';
-  import {USER_FAVORITES_, USER_TOGGLE_FAVORITE} from "@/store/types";
   import ProductItem from '@/components/products';
-  import faTimesCircle from '@fortawesome/fontawesome-free-solid/faTimes';
-  import faHeart from '@fortawesome/fontawesome-free-solid/faHeart';
+  import UserPanel from './UserPanel';
 
   export default {
     mixins: [loginMixins],
-    components: {UserButton, OrderTracking, Loyalty, ProductItem, StaticOverlay, FlashMessageHub},
+    components: {UserButton, OrderTracking, Loyalty, ProductItem, StaticOverlay, UserPanel},
     data() {
       return {
         orderTrackingForm: false,
         favoriteModal: false,
         isExperiment: window.o.isExperiment,
-        faTimesCircle,
-        faHeart,
         show: false
       };
     },
@@ -201,7 +161,6 @@
         loggedIn: USER_LOGGED_IN_,
         loginForm: USER_LOGIN_FORM_SHOW_,
         loyalty: USER_LOYALTY_,
-        favorites: USER_FAVORITES_
       }),
       user() {
         return this.$store.state.customer;
@@ -219,9 +178,6 @@
       return {overlay};
     },
     methods: {
-      ...mapActions({
-        favoriteToggle: USER_TOGGLE_FAVORITE
-      }),
       closeForm() {
         if (!this.loggedIn)
           this.$store.commit(USER_LOGIN_FORM_SHOW_, false);

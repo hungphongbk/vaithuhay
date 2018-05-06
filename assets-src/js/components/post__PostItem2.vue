@@ -36,7 +36,7 @@
     }
     &desc{
       white-space: pre-wrap;
-      @include font-size-with-line-height($font-size-base*0.9);
+      @include font-size-with-line-height($font-size-base*0.86);
       padding-right: 3rem;
     }
     &price {

@@ -1,4 +1,6 @@
 import {
+  FLASH_ACTION_PUSH_MESSAGE,
+  FLASH_CONTEXT_SUCCESS,
   USER_FAVORITES_,
   USER_IS_LOGGED_IN_,
   USER_IS_LOGGING_IN_,
@@ -7,12 +9,13 @@ import {
   USER_LOGIN_FAILED_,
   USER_LOGIN_FORM_SHOW_,
   USER_LOYALTY_,
-  USER_TOGGLE_FAVORITE
-} from "@/store/types";
+  USER_TOGGLE_FAVORITE,
+} from "./types";
 import Vue from 'vue';
-import {ProductFavoriteAPI} from "@/store/api";
-import {ModalManager} from "@/plugins";
-import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "@/types";
+import {ProductFavoriteAPI} from "./api";
+import {ModalManager} from "../plugins";
+import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "../types";
+import {FlashMessage} from "./flashMessages";
 
 const $ = jQuery;
 
@@ -74,13 +77,18 @@ export default {
     async [USER_FAVORITES_]({commit}) {
       commit(USER_FAVORITES_, await ProductFavoriteAPI.fetchAll());
     },
-    async [USER_TOGGLE_FAVORITE]({dispatch}, {id}) {
+    async [USER_TOGGLE_FAVORITE]({dispatch}, {id, title}) {
       const rs = await ModalManager("Xác nhận", "Bạn có muốn xóa sản phẩm này ra khỏi danh sách yêu thích?", [
         {label: "Bỏ qua", type: SYSTEM_MODAL_CANCEL},
         {label: "OK", type: SYSTEM_MODAL_OK, isPrimary: true}
       ]);
       if (rs === SYSTEM_MODAL_OK) {
         await ProductFavoriteAPI.toggle(id);
+        dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
+          label: 'product/favorite',
+          context: FLASH_CONTEXT_SUCCESS,
+          message: `Sản phẩm ${title} đã được xóa khỏi danh sách yêu thích thành công`,
+        }, {root: true});
         dispatch(USER_FAVORITES_);
       }
     },

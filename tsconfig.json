@@ -10,13 +10,18 @@
       "dom",
       "scripthost"
     ],
-    "rootDir": "assets-src/"
+    "rootDir": "assets-src/",
+    "baseUrl": "./assets-src/",
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "assets-src/js/global.d.ts"
+    "assets-src/js/global.d.ts",
+    "assets-src/js/**/*.ts",
+    "assets-src/js/**/*.vue",
+    "assets-src/js/**/*.vue.ts"
   ],
   "files": [
     "assets-src/js/global.d.ts"
