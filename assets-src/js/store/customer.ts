@@ -93,8 +93,8 @@ const module: Module<CustomerState, RootState> = {
   actions: {
     async fetch({state}, email = null) {
       try {
-        const user = JSON.parse(await $.get('/account/?view=json'));
-        await CustomerAPI.login(email ? email : user.email);
+        const _user = JSON.parse(await $.get('/account/?view=json')),
+          user = await CustomerAPI.login(email ? email : _user.email);
         return user;
       } catch (e) {
         //login failed

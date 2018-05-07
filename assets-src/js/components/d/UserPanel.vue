@@ -56,6 +56,7 @@
 <script>
   import PageFavorite, {PageFavoriteIcon} from '../UserPanelPageFavorite';
   import PageUserInfo, {PageUserInfoIcon} from "../UserPanelPageUserInfo";
+  import PageAddresses, {PageAddressesIcon} from "js/components/UserPanelPageAddresses.vue";
   import i18n from '../../plugins/i18n';
   import {mapState} from 'vuex';
 
@@ -83,6 +84,16 @@
             }[i18n.locale];
           },
           icon: PageFavoriteIcon
+        },
+        {
+          component: PageAddresses,
+          get title() {
+            return {
+              en: 'Addresses',
+              vi: 'Địa chỉ giao hàng',
+            }[i18n.locale];
+          },
+          icon: PageAddressesIcon
         },
       ]
     }),
