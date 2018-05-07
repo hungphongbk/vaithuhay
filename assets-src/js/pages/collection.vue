@@ -269,7 +269,7 @@
     },
     computed: {
       slides() {
-        return this.$store.state.products.slides;
+        return this.$vthStore.state.products.slides;
       },
       ...mapGetters({
         products: PRODUCTS_LIST_,
@@ -294,7 +294,7 @@
     },
     watch: {
       currentSort_({id}) {
-        this.$store.commit(PRODUCTS_SORT_, id);
+        this.$vthStore.commit(PRODUCTS_SORT_, id);
       }
     },
     methods:{
@@ -304,14 +304,14 @@
     },
     beforeMount() {
       const {list, slides} = window.products;
-      this.$store.registerModule('products', ProductsModule);
-      this.$store.commit(PRODUCTS_FETCH_, {
+      this.$vthStore.registerModule('products', ProductsModule);
+      this.$vthStore.commit(PRODUCTS_FETCH_, {
         list,
         slides
       });
     },
     destroyed() {
-      this.$store.unregisterModule('products')
+      this.$vthStore.unregisterModule('products')
     }
   }
 </script>

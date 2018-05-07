@@ -18,9 +18,10 @@ export interface CustomerAddress {
   district_code: String
   ward: String
   ward_code: String
+  phone: String
 }
 
-interface CustomerAddressState {
+export interface CustomerAddressState {
   list: Array<CustomerAddress>
 }
 
@@ -33,10 +34,10 @@ declare module 'js/store/customer' {
 
 const module: Module<CustomerAddressState, RootState> = {
   namespaced: true,
-  state(){
+  state() {
     return {
       list: [],
-    }
+    };
   },
 };
 

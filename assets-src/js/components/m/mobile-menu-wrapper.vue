@@ -146,7 +146,7 @@
     },
     methods: {
       goBack() {
-        this.$store.commit(USER_LOGIN_FORM_SHOW_, false);
+        this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, false);
         const mobileMenu = this.$refs.mobileMenu;
         if (mobileMenu && typeof mobileMenu.goBack === 'function')
           mobileMenu.goBack();

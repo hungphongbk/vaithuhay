@@ -44,8 +44,8 @@
   export default {
     computed: {
       loggedIn() {
-        console.log(this.$store.state);
-        return this.$store.state.customer.id
+        console.log(this.$vthStore.state);
+        return this.$vthStore.state.customer.id
       }
     }
   }

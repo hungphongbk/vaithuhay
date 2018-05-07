@@ -80,7 +80,7 @@ export default {
     ProductSmallItem
   },
   data() {
-    // const {current, images, variants, relateds, tops, topPromos, faq} = this.$store.state.product
+    // const {current, images, variants, relateds, tops, topPromos, faq} = this.$vthStore.state.product
     // console.log(current)
     return {
       faHeart,
@@ -195,17 +195,17 @@ export default {
       this.commentCount = share.comment_count;
     },
     addToFavorite() {
-      return this.$store.dispatch(PRODUCT_ACTION_FAVORITE_TOGGLE_);
+      return this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_TOGGLE_);
     }
   },
   beforeMount() {
-    this.$store.registerModule('product', ProductModule, {preserveState: true});
+    this.$vthStore.registerModule('product', ProductModule, {preserveState: true});
   },
   async mounted() {
     await Promise.all([this.fetchWholesale(), this.fetchCommentCount()]);
-    this.$store.dispatch(PRODUCT_ACTION_FAVORITE_FETCH_);
+    this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_FETCH_);
   },
   destroyed() {
-    this.$store.unregisterModule('product');
+    this.$vthStore.unregisterModule('product');
   }
 };

@@ -1,5 +1,6 @@
 <style lang="scss" module>
   @import "../../sass/inc/inc";
+
   .container {
     background: white;
     padding: 1.3rem {
@@ -7,10 +8,10 @@
     }
     height: 100%;
     :global {
-      .control-label{
+      .control-label {
         text-align: left;
       }
-      .form-control{
+      .form-control {
         border: 1px solid #ccc {
           radius: .4rem;
         }
@@ -26,6 +27,15 @@
         label.control-label.col-sm-3 Họ và tên
         .col-sm-9
           input.form-control(type="text", v-model="name")
+      .form-group
+        label.control-label.col-sm-3 Giới tính
+        .col-sm-9
+          label.radio-inline
+            input#gender-male(type="radio" value="1" v-model="gender")
+            | Nam
+          label.radio-inline
+            input#gender-female(type="radio" value="2" v-model="gender")
+            | Nữ
       .form-group
         .col-sm-9.col-sm-offset-3
           .btn.btn-theme(@click="update") CẬP NHẬT

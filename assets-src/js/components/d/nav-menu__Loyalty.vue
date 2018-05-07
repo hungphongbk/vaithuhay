@@ -24,7 +24,7 @@
     name: "Loyalty",
     computed: {
       loyalty() {
-        return this.$store.getters[USER_LOYALTY_];
+        return this.$vthStore.getters[USER_LOYALTY_];
       }
     }
   };

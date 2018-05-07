@@ -56,15 +56,15 @@
       async fetch() {
         let promise;
         if (typeof this.label === 'string')
-          promise = this.$store.dispatch(FLASH_ACTION_POP_MESSAGE, this.label);
+          promise = this.$vthStore.dispatch(FLASH_ACTION_POP_MESSAGE, this.label);
         else promise = Promise.all(this.label.map(l =>
-          promise = this.$store.dispatch(FLASH_ACTION_POP_MESSAGE, l)));
+          promise = this.$vthStore.dispatch(FLASH_ACTION_POP_MESSAGE, l)));
         this.messages = await promise;
       }
     },
     async mounted() {
       await this.fetch();
-      this.$store.subscribe(async mutation => {
+      this.$vthStore.subscribe(async mutation => {
         if (mutation.type === FLASH_MUTATION_PUSH_MESSAGE) {
           await this.fetch();
         }

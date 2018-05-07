@@ -142,7 +142,7 @@
         all: CATEGORIES_ALL_
       }),
       customer() {
-        return this.$store.state.customer;
+        return this.$vthStore.state.customer;
       },
       goBack() {
         const self = this;
@@ -168,7 +168,7 @@
         this.keyword = target.value;
       }, 300),
       login() {
-        this.$store.commit(USER_LOGIN_FORM_SHOW_, true);
+        this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, true);
       },
       signOut() {
 

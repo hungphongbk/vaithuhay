@@ -1,7 +1,8 @@
+import Vue from 'vue';
 import extend from 'lodash/extend';
-import cloneDeep from 'lodash/cloneDeep'
-import customer from './customer'
-import address from './customer.address'
+import cloneDeep from 'lodash/cloneDeep';
+import customer from './customer';
+import address from './customer.address';
 
 export default function (store) {
   const obj = extend({}, vth, {
@@ -13,8 +14,11 @@ export default function (store) {
       messages: []
     },
   });
-  console.log(cloneDeep(obj));
   store.replaceState(cloneDeep(obj));
-  // store.registerModule('customer',customer);
-  // store.registerModule(['customer', 'address'], address);
+
+  Object.defineProperty(Vue.prototype, '$vthStore', {
+    get() {
+      return store;
+    }
+  });
 }

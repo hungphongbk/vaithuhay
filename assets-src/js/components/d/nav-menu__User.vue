@@ -163,7 +163,7 @@
         loyalty: USER_LOYALTY_,
       }),
       user() {
-        return this.$store.state.customer;
+        return this.$vthStore.state.customer;
       }
     },
     provide() {
@@ -180,12 +180,12 @@
     methods: {
       closeForm() {
         if (!this.loggedIn)
-          this.$store.commit(USER_LOGIN_FORM_SHOW_, false);
+          this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, false);
         this.show = false;
       },
       openForm() {
         if (!this.loggedIn)
-          this.$store.commit(USER_LOGIN_FORM_SHOW_, true);
+          this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, true);
         else this.show = true;
       }
     },
@@ -196,7 +196,7 @@
       },
       show(value) {
         if (value && !this.loggedIn)
-          this.$store.commit(USER_LOGIN_FORM_SHOW_, true);
+          this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, true);
       }
     }
   };

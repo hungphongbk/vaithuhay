@@ -26,6 +26,7 @@ export interface CustomerState {
   id: number | string
   name: string
   email: string
+  gender: number
   form: boolean
   isLoggingIn: boolean
   loyalty: {
@@ -49,6 +50,7 @@ const module: Module<CustomerState, RootState> = {
     id: null,
     name: '',
     email: '',
+    gender: null,
     form: false,
     isLoggingIn: false,
     loyalty: {

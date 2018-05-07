@@ -85,7 +85,7 @@ export const loginMixins = {
   },
   methods: {
     facebookLogin() {
-      this.$store.commit(USER_IS_LOGGING_IN_);
+      this.$vthStore.commit(USER_IS_LOGGING_IN_);
       FB.login(async ({authResponse}) => {
         console.log(authResponse);
         if (authResponse) {
@@ -116,10 +116,10 @@ export const orderTrackingMixin = {
   },
   computed: {
     loggedIn() {
-      return this.$store.getters[USER_LOGGED_IN_];
+      return this.$vthStore.getters[USER_LOGGED_IN_];
     },
     customerId() {
-      return this.$store.state.customer.id;
+      return this.$vthStore.state.customer.id;
     },
     manualFind() {
       if (!this.loggedIn) return true;

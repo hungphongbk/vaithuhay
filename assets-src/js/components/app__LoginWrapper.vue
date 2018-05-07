@@ -18,10 +18,10 @@
     methods: {
       async onSubmit() {
         // console.log('submit login form')
-        this.$store.commit(USER_IS_LOGGING_IN_);
-        await this.$store.dispatch(USER_LOGIN_, this.$refs.form);
+        this.$vthStore.commit(USER_IS_LOGGING_IN_);
+        await this.$vthStore.dispatch(USER_LOGIN_, this.$refs.form);
         await delay(100);
-        this.$store.commit(USER_LOGIN_FORM_SHOW_, false);
+        this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, false);
       },
       async login(email, password) {
         // console.log(`login via social, get username=${email}`);
