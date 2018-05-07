@@ -5,12 +5,13 @@ import Vue from "vue";
 import "../sass/frontend.scss";
 import '@/plugins'
 import i18n from '@/plugins/i18n'
-import store from '@/store'
+import store from '@/store/index'
 // import '@/plugins/socket'
 import '@/components'
 import '@/pages'
 import App from './App.vue'
 import mq from './store/mq'
+import polyfill from './store/polyfill'
 // import router from './router'
 // import {sync} from 'vuex-router-sync'
 
@@ -41,4 +42,5 @@ window.vm = new Vue({
     desktop: '(min-width: 1199px)'
   }
 });
+polyfill(store);
 mq(vm, store);

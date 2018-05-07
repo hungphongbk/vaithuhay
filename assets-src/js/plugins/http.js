@@ -1,5 +1,5 @@
 import qs from 'query-string';
-import store from '../store';
+import store from '../store/index';
 import {USER_LOGGED_IN_} from "@/store/types";
 
 const $ = jQuery;
@@ -21,6 +21,14 @@ export default {
   },
   post(url, data = {}, auth = false): Promise<any> {
     const newData = Object.assign({}, data, auth ? {userId: getUserId()} : {});
-    return $.post(url, newData);
+    // return $.post(url, newData);
+    return $.ajax({
+      method: 'POST',
+      url,
+      data: newData,
+      xhrFields: {
+        withCredentials: true
+      }
+    });
   }
 };

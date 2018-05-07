@@ -1,43 +1,33 @@
 <style lang="scss" module>
   @import "../../sass/inc/inc";
-  .favorite-item {
-    &-wrapper {
-      padding: .7rem;
-      border-radius: .3rem;
-      background: white;
-      margin-bottom: .2rem;
+  .container {
+    background: white;
+    padding: 1.3rem {
+      top: 2rem;
     }
-    &-remove {
-      display: block;
-      margin-top: 1.3rem;
-      color: #888;
-    }
-  }
-
-  .favorite-empty {
-    padding: 0 20%;
-    p {
-      margin-top: 1.5rem;
-    }
-    :global(.svg-inline--fa) {
-      color: $theme-red-color;
+    height: 100%;
+    :global {
+      .control-label{
+        text-align: left;
+      }
+      .form-control{
+        border: 1px solid #ccc {
+          radius: .4rem;
+        }
+      }
     }
   }
 </style>
 <template lang="pug">
-  div
-    flash-message-hub(label="product/favorite")
-    template(v-if="favorites.length>0")
-      ul
-        li(v-for="product in favorites", :key="product.id", :class="$style.favoriteItemWrapper")
-          product-item(:class="$style.favoriteItem", :item="product", :item-style="2")
-            div
-              fa-icon(:class="$style.favoriteItemRemove", :icon="faTimesCircle", size="lg", @click="favoriteToggle(product)")
-    .text-center(v-else, :class="$style.favoriteEmpty")
-      img(src="../../img/vaithuhay-not-found.png")
-      p Danh sách hiện chưa có gì. Hãy&nbsp;
-        span
-          fa-icon(:icon="faHeart")
-        | &nbsp;sản phẩm bạn yêu thích khi mua sắm để xem lại thuận tiện nhất nhé
+  div(:class="$style.container")
+    flash-message-hub(label="user/information")
+    form.form-horizontal
+      .form-group
+        label.control-label.col-sm-3 Họ và tên
+        .col-sm-9
+          input.form-control(type="text", v-model="name")
+      .form-group
+        .col-sm-9.col-sm-offset-3
+          .btn.btn-theme(@click="update") CẬP NHẬT
 </template>
 <script lang="ts" src="./UserPanelPageUserInfo.vue.ts"></script>

@@ -20,12 +20,13 @@
         cursor: pointer;
         border-radius: .4rem;
         margin-top: .4rem;
+        border: 1px solid rgba(#000, 0);
         &:hover, &.selected {
           background: rgba(#000, .07);
         }
 
         &.selected {
-          border: 1px solid rgba(#000, .12);
+          border-color: rgba(#000, .12);
         }
       }
     }
@@ -45,7 +46,7 @@
           div
           div
             h5 {{userName}}
-        li(v-for="(page,index) in pages", :class="{ [$style.menuItem]:true, [$style.selected]:index===selected }")
+        li(v-for="(page,index) in pages", :class="{ [$style.menuItem]:true, [$style.selected]:index===selected }", @click="selected = index")
           fa-icon(:icon="page.icon", size="lg")
           span {{page.title}}
     .col-sm-8
