@@ -5,6 +5,7 @@ import Thumbnail from './thumbnail.vue';
 import SocialSharer from './social-sharer.vue';
 import AsyncButton from './async-button.vue';
 import Modal from './modal.vue';
+import Btn from './app__Button';
 import './products';
 
 Object.entries({
@@ -13,7 +14,8 @@ Object.entries({
   Thumbnail,
   SocialSharer,
   AsyncButton,
-  Modal
+  Modal,
+  Btn
 }).forEach(([name, component]) => {
   Vue.component(name, component);
 });

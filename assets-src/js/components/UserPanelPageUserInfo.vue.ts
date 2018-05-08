@@ -48,6 +48,9 @@ export default class UserPanelPageFavorite extends Vue {
   };
   gender: number = null;
 
+  get customer(){
+    return this.$vthStore.state.customer;
+  }
   get wholeInfo() {
     const {name, gender} = this,
       first_name = name.split(' ').slice(0, -1).join(' '),
@@ -60,8 +63,8 @@ export default class UserPanelPageFavorite extends Vue {
   }
 
   fetch() {
-    this.name = this.$vthStore.state.customer.name;
-    this.gender = this.$vthStore.state.customer.gender;
+    this.name = this.customer.name;
+    this.gender = this.customer.gender;
   }
 
   async update() {

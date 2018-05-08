@@ -3,6 +3,9 @@
 
   .container {
     font-size: $font-size-base*0.86;
+    :global(.form-control){
+      font-size: $font-size-base*0.9;
+    }
   }
 
   .sidebar {

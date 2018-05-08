@@ -8,7 +8,7 @@
     }
     height: 100%;
     :global {
-      .control-label {
+      .col-form-label {
         text-align: left;
       }
       .form-control {
@@ -22,13 +22,13 @@
 <template lang="pug">
   div(:class="$style.container")
     flash-message-hub(label="user/information")
-    form.form-horizontal
-      .form-group
-        label.control-label.col-sm-3 Họ và tên
+    form
+      .form-group.row
+        label.col-form-label.col-sm-3 Họ và tên
         .col-sm-9
           input.form-control(type="text", v-model="name")
-      .form-group
-        label.control-label.col-sm-3 Giới tính
+      .form-group.row
+        label.col-form-label.col-sm-3 Giới tính
         .col-sm-9
           label.radio-inline
             input#gender-male(type="radio" value="1" v-model="gender")
@@ -36,7 +36,7 @@
           label.radio-inline
             input#gender-female(type="radio" value="2" v-model="gender")
             | Nữ
-      .form-group
+      .form-group.row
         .col-sm-9.col-sm-offset-3
           .btn.btn-theme(@click="update") CẬP NHẬT
 </template>
