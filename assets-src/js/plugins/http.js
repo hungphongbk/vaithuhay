@@ -30,5 +30,14 @@ export default {
         withCredentials: true
       }
     });
+  },
+  del(url): Promise<any> {
+    return $.ajax({
+      method: 'DELETE',
+      url,
+      xhrFields: {
+        withCredentials: true
+      }
+    });
   }
 };

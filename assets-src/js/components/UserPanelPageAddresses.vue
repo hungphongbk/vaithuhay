@@ -72,6 +72,7 @@
 </style>
 <template lang="pug">
   div(:class="$style.container")
+    flash-message-hub(label="user/address")
     ul
       li(v-for="item in address", :class="{ [$style.item]: true, [$style.editMode]: item.isEditMode }")
         transition(name="vth-fade")
@@ -90,7 +91,7 @@
             div(:class="$style.actions")
               div(:class="[$style.action, $style.edit]", @click="beginEdit(item)")
                 fa-icon(:icon="faEdit", size="lg")
-              div(v-if="!item.default", :class="[$style.action, $style.remove]")
+              div(v-if="!item.default", :class="[$style.action, $style.remove]", @click="deleteItem(item)")
                 fa-icon(:icon="faTrashAlt", size="lg")
           div(v-else, :class="$style.editPanel")
             form
@@ -112,6 +113,7 @@
               .form-group.row
                 .col-sm-9.col-sm-offset-3
                   btn.btn-success(:icon="faSave") CẬP NHẬT
-                  .btn.btn-default.ml-2 BỎ QUA
+                  btn.btn-danger.ml-2(v-if="!item.default", :icon="faTrashAlt", @click="deleteItem(item)") XÓA
+                  .btn.btn-default.ml-2(@click="cancelEdit") BỎ QUA
 </template>
 <script lang="ts" src="./UserPanelPageAddresses.vue.ts"></script>
