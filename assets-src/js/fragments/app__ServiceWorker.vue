@@ -76,7 +76,7 @@
   import sw       from '@/modules/iframe/sw';
 
   firebase.initializeApp({
-    apiKey: "AIzaSyDu888R1nyP_W_xFX7aATSB0U5irf79lrM",
+    apiKey: FIREBASE_API_KEY,
     authDomain: "hungphongbk-1812.firebaseapp.com",
     databaseURL: "https://hungphongbk-1812.firebaseio.com",
     projectId: "hungphongbk-1812",

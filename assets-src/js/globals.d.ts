@@ -1,5 +1,6 @@
 declare global {
   const SERVER_URL: string;
+  const FIREBASE_API_KEY: string;
 
   interface I18nObject<T> {
     en: T,

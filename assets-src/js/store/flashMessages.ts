@@ -73,7 +73,7 @@ export const FlashMessagesApi = ({dispatch}: Store<RootState>) => ({
    * @param {string} errMessage Nếu Fn có lỗi, sẽ hiện ra thông báo lỗi màu đỏ với message này
    * @returns {Promise<void>}
    */
-  async pushSuccessWithErrHandler(label: string, fn: PromiseHandler, successMessage: string, errMessage: string) {
+  async pushSuccessWithErrHandler(label: string, fn: PromiseHandler, successMessage: string, errMessage: string = 'Có lỗi xảy ra. Hãy thử lại!') {
     try {
       await fn();
       // noinspection JSIgnoredPromiseFromCall

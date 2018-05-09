@@ -4,14 +4,12 @@ import {
   CUSTOMER_ADDRESS_ACTION_UPDATE,
   CUSTOMER_ADDRESS_MUTATION_DELETE,
   CUSTOMER_ADDRESS_MUTATION_UPDATE,
-  FLASH_ACTION_PUSH_MESSAGE,
-  FLASH_CONTEXT_SUCCESS,
   RootState,
 }                                             from '@/store/types';
 import {CustomerAPI}                          from '@/store/api';
 import {ModalManager}                         from '../plugins';
 import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "@/types";
-import {FlashMessage}                         from "./flashMessages";
+import {FlashMessagesAPI}                     from "@/store/index";
 
 //region Typing
 export interface CustomerAddress {
@@ -68,26 +66,24 @@ const module: Module<CustomerAddressState, RootState> = {
         {label: "OK", type: SYSTEM_MODAL_OK, isPrimary: true},
       ]);
       if (rs === SYSTEM_MODAL_OK) {
-        await CustomerAPI.address.delete(id);
-        commit(CUSTOMER_ADDRESS_MUTATION_DELETE, id);
-
-        //message
-        dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
-          label: 'user/address',
-          context: FLASH_CONTEXT_SUCCESS,
-          message: `Địa chỉ của "${first_name} ${last_name}" đã được xóa khỏi danh sách`,
-        }, {root: true});
+        // noinspection JSIgnoredPromiseFromCall
+        FlashMessagesAPI.pushSuccessWithErrHandler(
+          'user/address',
+          async () => {
+            await CustomerAPI.address.delete(id);
+            commit(CUSTOMER_ADDRESS_MUTATION_DELETE, id);
+          }, `Địa chỉ của "${first_name} ${last_name}" đã được xóa khỏi danh sách`);
       }
     },
     async [CUSTOMER_ADDRESS_ACTION_UPDATE]({commit, dispatch}, address: CustomerAddress) {
-      await CustomerAPI.address.update(address);
-      commit(CUSTOMER_ADDRESS_MUTATION_UPDATE, address);
-
-      dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
-        label: 'user/address',
-        context: FLASH_CONTEXT_SUCCESS,
-        message: `Địa chỉ của "${address.first_name} ${address.last_name}" đã được cập nhật thành công`,
-      }, {root: true});
+      // noinspection JSIgnoredPromiseFromCall
+      FlashMessagesAPI.pushSuccessWithErrHandler(
+        'user/address',
+        async () => {
+          await CustomerAPI.address.update(address);
+          commit(CUSTOMER_ADDRESS_MUTATION_UPDATE, address);
+        },
+        `Địa chỉ của "${address.first_name} ${address.last_name}" đã được cập nhật thành công`);
     },
   },
 };
