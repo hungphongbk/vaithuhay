@@ -3,7 +3,7 @@
 
   .container {
     font-size: $font-size-base*0.86;
-    :global(.form-control){
+    :global(.form-control) {
       font-size: $font-size-base*0.9;
     }
   }
@@ -49,12 +49,12 @@
           div
           div
             h5 {{userName}}
-        li(v-for="(page,index) in pages", :class="{ [$style.menuItem]:true, [$style.selected]:index===selected }", @click="selected = index")
+        li(v-for="(page,index) in pages", :class="{ [$style.menuItem]:true, [$style.selected]:index===selectedId }", @click="navigate(index)")
           fa-icon(:icon="page.icon", size="lg")
           span {{page.title}}
     .col-sm-8
       div(:class="$style.content")
-        component(:is="pages[selected].component")
+        component(:is="selected.component")
 </template>
 <script>
   import PageFavorite, {PageFavoriteIcon} from '../UserPanelPageFavorite';
@@ -62,12 +62,28 @@
   import PageAddresses, {PageAddressesIcon} from "js/components/UserPanelPageAddresses.vue";
   import i18n from '../../plugins/i18n';
   import {mapState} from 'vuex';
+  import {USER_GETTER_CURRENT_PAGE, USER_MUTATION_INIT_PAGES, USER_MUTATION_NAVIGATE_PAGE} from "@/store/types";
 
   export default {
     components: {},
-    data: () => ({
-      selected: 0,
-      pages: [
+    computed: {
+      ...mapState({
+        userName: state => state.customer.name,
+        pages: state => state.customer.pages.list,
+        selectedId: state => state.customer.pages.current
+      }),
+      selected() {
+        return this.$vthStore.getters[USER_GETTER_CURRENT_PAGE];
+      }
+    },
+    methods: {
+      navigate(index) {
+        this.$vthStore.commit(USER_MUTATION_NAVIGATE_PAGE, index);
+      }
+    },
+    created() {
+      const commit = this.$vthStore.commit;
+      commit(USER_MUTATION_INIT_PAGES, [
         {
           component: PageUserInfo,
           get title() {
@@ -98,12 +114,8 @@
           },
           icon: PageAddressesIcon
         },
-      ]
-    }),
-    computed: {
-      ...mapState({
-        userName: state => state.customer.name
-      })
+      ]);
+      commit(USER_MUTATION_NAVIGATE_PAGE, 0);
     }
   };
 </script>

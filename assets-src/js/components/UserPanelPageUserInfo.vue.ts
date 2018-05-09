@@ -2,8 +2,9 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import faTimesCircle from '@fortawesome/fontawesome-free-solid/faTimesCircle';
 import faHeart from '@fortawesome/fontawesome-free-solid/faHeart';
+import faSave from '@fortawesome/fontawesome-free-regular/faSave';
 import {FlashMessageHub} from './index';
-import {USER_ACTION_UPDATE} from "../store/types";
+import {USER_ACTION_UPDATE, USER_MUTATION_NAVIGATE_PAGE} from "@/store/types";
 
 @Component({
   components: {FlashMessageHub},
@@ -11,6 +12,7 @@ import {USER_ACTION_UPDATE} from "../store/types";
     return {
       faTimesCircle,
       faHeart,
+      faSave,
       dateTimeOption: {
         type: 'day',
         week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
@@ -48,9 +50,10 @@ export default class UserPanelPageFavorite extends Vue {
   };
   gender: number = null;
 
-  get customer(){
+  get customer() {
     return this.$vthStore.state.customer;
   }
+
   get wholeInfo() {
     const {name, gender} = this,
       first_name = name.split(' ').slice(0, -1).join(' '),
@@ -70,6 +73,10 @@ export default class UserPanelPageFavorite extends Vue {
   async update() {
     await this.$vthStore.dispatch(USER_ACTION_UPDATE, this.wholeInfo);
     this.fetch();
+  }
+
+  goToPageAddress() {
+    this.$vthStore.commit(USER_MUTATION_NAVIGATE_PAGE, 2);
   }
 
   mounted() {

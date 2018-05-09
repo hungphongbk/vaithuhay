@@ -114,6 +114,6 @@
                 .col-sm-9.col-sm-offset-3
                   btn.btn-success(:icon="faSave", @click="updateItem(edit.toObject)") CẬP NHẬT
                   btn.btn-danger.ml-2(v-if="!item.default", :icon="faTrashAlt", @click="deleteItem(item)") XÓA
-                  .btn.btn-default.ml-2(@click="cancelEdit") BỎ QUA
+                  btn.btn-default.ml-2(@click="cancelEdit") BỎ QUA
 </template>
 <script lang="ts" src="./UserPanelPageAddresses.vue.ts"></script>

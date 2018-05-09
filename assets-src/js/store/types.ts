@@ -15,6 +15,7 @@ export const CART_ADD_ = 'cart/add';
 export const CART_REMOVE_ = 'cart/remove';
 export const PROMO_LIST_ = 'promo/list';
 
+//region Module: Customer
 export const USER_LOGGED_IN_ = 'user/logged-in';
 export const USER_LOGIN_FORM_SHOW_ = 'user/login-form-show';
 export const USER_LOGIN_ = 'user/login';
@@ -26,6 +27,10 @@ export const USER_FAVORITES_ = 'user/favorites';
 export const USER_TOGGLE_FAVORITE = 'user/toggle-favorite';
 export const USER_MUTATION_UPDATE = 'user/update';
 export const USER_ACTION_UPDATE = 'user/update';
+export const USER_GETTER_CURRENT_PAGE = 'user/current-page';
+export const USER_MUTATION_INIT_PAGES = 'user/init-pages';
+export const USER_MUTATION_NAVIGATE_PAGE = 'user/navigate-page';
+//endregion
 
 export const PRODUCT_MUTATION_FAVORITE_ADD_ = 'product/add-favorite';
 export const PRODUCT_MUTATION_FAVORITE_REMOVE_ = 'product/remove-favorite';

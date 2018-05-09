@@ -37,7 +37,20 @@
             input#gender-female(type="radio" value="2" v-model="gender")
             | Nữ
       .form-group.row
+        label.col-form-label.col-sm-3 Địa chỉ
+        .col-sm-9
+          span Truy cập&nbsp;
+            a(href="#", @click="goToPageAddress") Danh sách địa chỉ
+      .form-group.row
+        label.col-form-label.col-sm-3 Ngày sinh
+        .col-sm-3
+          input.form-control(type="text")
+        .col-sm-3
+          input.form-control(type="text")
+        .col-sm-3
+          input.form-control(type="text")
+      .form-group.row
         .col-sm-9.col-sm-offset-3
-          .btn.btn-theme(@click="update") CẬP NHẬT
+          btn.btn-theme(@click="update", :icon="faSave") CẬP NHẬT
 </template>
 <script lang="ts" src="./UserPanelPageUserInfo.vue.ts"></script>

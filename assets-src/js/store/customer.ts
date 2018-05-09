@@ -4,6 +4,7 @@ import {
   RootState,
   USER_ACTION_UPDATE,
   USER_FAVORITES_,
+  USER_GETTER_CURRENT_PAGE,
   USER_IS_LOGGED_IN_,
   USER_IS_LOGGING_IN_,
   USER_LOGGED_IN_,
@@ -11,6 +12,8 @@ import {
   USER_LOGIN_FAILED_,
   USER_LOGIN_FORM_SHOW_,
   USER_LOYALTY_,
+  USER_MUTATION_INIT_PAGES,
+  USER_MUTATION_NAVIGATE_PAGE,
   USER_MUTATION_UPDATE,
   USER_TOGGLE_FAVORITE,
 } from "js/store/types";
@@ -27,8 +30,13 @@ export interface CustomerState {
   name: string
   email: string
   gender: number
+  birthday: string
   form: boolean
   isLoggingIn: boolean
+  pages: {
+    list: Array<any>,
+    current: number
+  }
   loyalty: {
     point: number
     balance: number
@@ -51,8 +59,13 @@ const module: Module<CustomerState, RootState> = {
     name: '',
     email: '',
     gender: null,
+    birthday: '',
     form: false,
     isLoggingIn: false,
+    pages: {
+      list: [],
+      current: -1,
+    },
     loyalty: {
       point: 0,
       balance: 0,
@@ -64,6 +77,7 @@ const module: Module<CustomerState, RootState> = {
     [USER_LOGIN_FORM_SHOW_]: (state) => state.form,
     [USER_LOYALTY_]: (state) => state.loyalty,
     [USER_FAVORITES_]: (state) => state.favorites,
+    [USER_GETTER_CURRENT_PAGE]: (state) => state.pages.list[state.pages.current],
   },
   mutations: {
     [USER_LOGIN_FAILED_](state) {
@@ -90,6 +104,12 @@ const module: Module<CustomerState, RootState> = {
     },
     [USER_MUTATION_UPDATE](state) {
 
+    },
+    [USER_MUTATION_INIT_PAGES](state, pages: Array<any>) {
+      state.pages.list = pages;
+    },
+    [USER_MUTATION_NAVIGATE_PAGE](state, id: number) {
+      state.pages.current = id;
     },
   },
   actions: {
