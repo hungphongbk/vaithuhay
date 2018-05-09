@@ -1,14 +1,16 @@
 import {Module} from "vuex";
 import {
   CUSTOMER_ADDRESS_ACTION_DELETE,
+  CUSTOMER_ADDRESS_ACTION_UPDATE,
   CUSTOMER_ADDRESS_MUTATION_DELETE,
+  CUSTOMER_ADDRESS_MUTATION_UPDATE,
   FLASH_ACTION_PUSH_MESSAGE,
   FLASH_CONTEXT_SUCCESS,
   RootState,
-} from 'js/store/types';
-import {CustomerAPI} from 'js/store/api';
+} from '@/store/types';
+import {CustomerAPI} from '@/store/api';
 import {ModalManager} from '../plugins';
-import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "../types";
+import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "@/types";
 import {FlashMessage} from "./flashMessages";
 
 //region Typing
@@ -54,6 +56,10 @@ const module: Module<CustomerAddressState, RootState> = {
       const index = state.list.findIndex(address => address.id === id);
       state.list.splice(index, 1);
     },
+    [CUSTOMER_ADDRESS_MUTATION_UPDATE](state, address: CustomerAddress) {
+      const index = state.list.findIndex(i => i.id === address.id);
+      state.list.splice(index, 1, address);
+    },
   },
   actions: {
     async [CUSTOMER_ADDRESS_ACTION_DELETE]({commit, dispatch}, {id, first_name, last_name}: CustomerAddress) {
@@ -72,6 +78,16 @@ const module: Module<CustomerAddressState, RootState> = {
           message: `Địa chỉ của "${first_name} ${last_name}" đã được xóa khỏi danh sách`,
         }, {root: true});
       }
+    },
+    async [CUSTOMER_ADDRESS_ACTION_UPDATE]({commit, dispatch}, address: CustomerAddress) {
+      await CustomerAPI.address.update(address);
+      commit(CUSTOMER_ADDRESS_MUTATION_UPDATE, address);
+
+      dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
+        label: 'user/address',
+        context: FLASH_CONTEXT_SUCCESS,
+        message: `Địa chỉ của "${address.first_name} ${address.last_name}" đã được cập nhật thành công`,
+      }, {root: true});
     },
   },
 };

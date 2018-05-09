@@ -6,23 +6,33 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "lib": [
-      "es6",
+      "es2017",
       "dom",
       "scripthost"
     ],
     "rootDir": "assets-src/",
     "baseUrl": "./assets-src/",
-    "experimentalDecorators": true
+    "paths": {
+      "@/*": [
+        "js/*"
+      ]
+    },
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
+  "compileOnSave": false,
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "assets-src/js/global.d.ts",
+    "assets-src/js/globals.d.ts",
     "assets-src/js/**/*.ts",
     "assets-src/js/**/*.vue"
   ],
   "files": [
-    "assets-src/js/global.d.ts"
+    "assets-src/js/globals.d.ts"
   ]
 }

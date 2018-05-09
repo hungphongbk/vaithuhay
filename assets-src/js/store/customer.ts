@@ -16,7 +16,7 @@ import {
 } from "js/store/types";
 import {CustomerAPI, ProductFavoriteAPI} from "./api";
 import {ModalManager} from "../plugins";
-import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "../types";
+import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "@/types";
 import {FlashMessage} from "./flashMessages";
 import address from './customer.address';
 import {Module} from "vuex";

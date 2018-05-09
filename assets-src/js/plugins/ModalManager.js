@@ -23,7 +23,7 @@ const SystemModal = {
 
 export {$modalEvent, SystemModal};
 
-export default (title, content, commands: Array, _options = {}) => new Promise(resolve => {
+export default (title, content, commands, _options = {}) => new Promise(resolve => {
   const _commands = commands.map(({label, type, isPrimary = false}) => ({
     label,
     isPrimary,

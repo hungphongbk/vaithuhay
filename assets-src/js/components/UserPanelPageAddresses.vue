@@ -112,7 +112,7 @@
                   textarea.form-control(rows="3", v-model="edit.address1")
               .form-group.row
                 .col-sm-9.col-sm-offset-3
-                  btn.btn-success(:icon="faSave") CẬP NHẬT
+                  btn.btn-success(:icon="faSave", @click="updateItem(edit.toObject)") CẬP NHẬT
                   btn.btn-danger.ml-2(v-if="!item.default", :icon="faTrashAlt", @click="deleteItem(item)") XÓA
                   .btn.btn-default.ml-2(@click="cancelEdit") BỎ QUA
 </template>

@@ -27,8 +27,18 @@ export default {
       url,
       data: newData,
       xhrFields: {
-        withCredentials: true
-      }
+        withCredentials: true,
+      },
+    });
+  },
+  put(url, data = {}): Promise<any> {
+    return $.ajax({
+      method: 'PUT',
+      url,
+      data,
+      xhrFields: {
+        withCredentials: true,
+      },
     });
   },
   del(url): Promise<any> {
@@ -36,8 +46,8 @@ export default {
       method: 'DELETE',
       url,
       xhrFields: {
-        withCredentials: true
-      }
+        withCredentials: true,
+      },
     });
-  }
+  },
 };

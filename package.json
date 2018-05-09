@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "author": "Trương Phong <programmingd32@gmail.com>",
   "private": true,
+  "types": "./assets-src/js/global.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --https --cert=../../../../localhost.pem --key=../../../../localhost.pem",
     "dev-frame": "cross-env NODE_ENV=development webpack-dev-server --config webpack.frame.config.js --inline --hot --https --cert=../../../../localhost.pem --key=../../../../localhost.pem",

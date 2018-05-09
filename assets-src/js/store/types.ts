@@ -1,8 +1,3 @@
-declare module 'js/store/types' {
-  export interface RootState {
-  }
-}
-
 export const CATEGORIES_LIST_ = 'categories/list';
 export const CATEGORIES_ALL_ = 'categories/all';
 export const CATEGORY_ONSALE_ = 'categories/sale';
@@ -39,7 +34,7 @@ export const PRODUCT_ACTION_FAVORITE_TOGGLE_ = 'product/toggle-favorite';
 
 //region Module: Flash
 export const FLASH_CONTEXT_SUCCESS = 'success';
-export const FLASH_CONTEXT_ALERT = '/alert';
+export const FLASH_CONTEXT_ALERT = 'alert';
 export const FLASH_CONTEXT_ERROR = 'error';
 export type FlashMessageContext = 'success' | 'alert' | 'error'
 export const FLASH_MUTATION_PUSH_MESSAGE = 'flash/push';
@@ -48,5 +43,9 @@ export const FLASH_ACTION_PUSH_MESSAGE = 'flash/push';
 export const FLASH_ACTION_POP_MESSAGE = 'flash/pop';
 //endregion
 
+//region Module: Customer.Address
 export const CUSTOMER_ADDRESS_MUTATION_DELETE = 'user/address/delete';
+export const CUSTOMER_ADDRESS_MUTATION_UPDATE = 'user/address/update';
 export const CUSTOMER_ADDRESS_ACTION_DELETE = 'user/address/delete';
+export const CUSTOMER_ADDRESS_ACTION_UPDATE = 'user/address/update';
+//endregion

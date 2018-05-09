@@ -1,13 +1,14 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import {Action, namespace, State} from "vuex-class";
-import {CustomerAddress, CustomerAddressState} from "../store/customer.address";
+import {CustomerAddress, CustomerAddressState} from "@/store/customer.address";
 import faCheckCircle from '@fortawesome/fontawesome-free-regular/faCheckCircle';
 import faEdit from '@fortawesome/fontawesome-free-regular/faEdit';
 import faTrashAlt from '@fortawesome/fontawesome-free-regular/faTrashAlt';
 import faSave from '@fortawesome/fontawesome-free-regular/faSave';
 import {FlashMessageHub} from './index';
-import {CUSTOMER_ADDRESS_ACTION_DELETE} from "../store/types";
+import {CUSTOMER_ADDRESS_ACTION_DELETE, CUSTOMER_ADDRESS_ACTION_UPDATE} from "@/store/types";
+import omit from 'lodash/omit';
 
 const ModuleState = namespace('address', State),
   ModuleAction = namespace('address', Action);
@@ -62,6 +63,10 @@ class Address implements AddressExtended {
     const context = this.context;
     return context.edit && context.edit.id === this.id;
   }
+
+  get toObject(): CustomerAddress {
+    return omit(Object.assign({}, this), ['context', 'fullname', 'fullAddress', 'isEditMode']) as CustomerAddress;
+  }
 }
 
 @Component({
@@ -86,6 +91,7 @@ export default class UserPanelPageAddresses extends Vue {
   }
 
   @ModuleAction(CUSTOMER_ADDRESS_ACTION_DELETE) deleteItem;
+  @ModuleAction(CUSTOMER_ADDRESS_ACTION_UPDATE) updateItem;
 
   beginEdit(item) {
     this.edit = item;

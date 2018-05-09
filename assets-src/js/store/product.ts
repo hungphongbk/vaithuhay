@@ -1,4 +1,3 @@
-///<reference path="../global.d.ts"/>
 import {
   FLASH_ACTION_PUSH_MESSAGE,
   FLASH_CONTEXT_SUCCESS,
@@ -14,7 +13,6 @@ import auth, {authWithoutWarning} from '../plugins/auth';
 import {ProductFavoriteAPI} from "./api";
 import {FlashMessage} from "./flashMessages";
 import {Module} from "vuex";
-import {I18nObject} from "../global";
 
 export interface ProductState {
   current: {
