@@ -93,8 +93,8 @@
         i.fa.fa-chevron-right
 </template>
 <script>
-  import Slick from 'vue-slick'
-  import 'slick-carousel/slick/slick.scss'
+  import Slick from 'vue-slick';
+  import 'slick-carousel/slick/slick.scss';
 
   const $ = jQuery;
 
@@ -124,7 +124,7 @@
             })
           ]
         }
-      }
+      };
     },
     computed: {
       thumbnail() {
@@ -134,5 +134,5 @@
         return '600w';
       }
     }
-  }
+  };
 </script>

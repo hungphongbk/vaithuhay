@@ -25,4 +25,4 @@ export const slickOptions_ = {
       autoplaySpeed: 2700
     })
   ]
-}
+};

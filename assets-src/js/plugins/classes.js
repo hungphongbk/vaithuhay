@@ -4,12 +4,12 @@ class Middleware {
   }
 
   go(next) {
-    return next()
+    return next();
   }
 
   wrap(cb) {
-    return this.go.bind(null, cb)
+    return this.go.bind(null, cb);
   }
 }
 
-export {Middleware}
+export {Middleware};

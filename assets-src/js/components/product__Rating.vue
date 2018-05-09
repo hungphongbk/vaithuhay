@@ -18,7 +18,7 @@
     span.fa.fa-star(v-for="i in 5", :style="styles[i-1]", @click="clickable && vote(i)")
 </template>
 <script>
-  import range from 'lodash/range'
+  import range from 'lodash/range';
 
   export default {
     model: {
@@ -33,8 +33,8 @@
         type: String,
         default: '#fc0'
       },
-      backgroundColor:{
-        type:String,
+      backgroundColor: {
+        type: String,
         default: '#ddd'
       },
       clickable: {
@@ -46,7 +46,7 @@
       points() {
         const {vote5, vote4, vote3, vote2, vote1} = this.rating,
           pts = (vote5 * 5 + vote4 * 4 + vote3 * 3 + vote2 * 2 + vote1) * 10.0;
-        return Math.round(pts / (vote5 + vote4 + vote3 + vote2 + vote1)) / 10
+        return Math.round(pts / (vote5 + vote4 + vote3 + vote2 + vote1)) / 10;
       },
       styles() {
         const {points, color, backgroundColor} = this,
@@ -58,16 +58,16 @@
               return color;
             } else if (i + 1 < high) {
               const percentage = Math.round((points - low) * 1000) / 10;
-              return `linear-gradient(to right, ${color} 0, ${color} ${percentage - 0.001}%, ${backgroundColor} ${percentage}%)`
-            } else return backgroundColor
+              return `linear-gradient(to right, ${color} 0, ${color} ${percentage - 0.001}%, ${backgroundColor} ${percentage}%)`;
+            } else return backgroundColor;
           })()
-        }))
+        }));
       }
     },
-    methods:{
-      vote(i){
+    methods: {
+      vote(i) {
 
       }
     }
-  }
+  };
 </script>

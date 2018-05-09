@@ -131,7 +131,7 @@
       slot
 </template>
 <script>
-  import 'jquery-sticky'
+  import 'jquery-sticky';
 
   const $ = jQuery;
   export default {
@@ -139,16 +139,16 @@
       return {
         tabs_: [],
         active_: -1
-      }
+      };
     },
     provide() {
       const self = this,
         tabs_ = {
           get active_() {
-            return self.active_
+            return self.active_;
           }
         };
-      return {tabs_}
+      return {tabs_};
     },
     methods: {
       add_(tab) {
@@ -165,5 +165,5 @@
 //                })
 //            }
     }
-  }
+  };
 </script>

@@ -84,7 +84,7 @@
 </template>
 <script>
   import {IndexSection, ItemLoop} from '../components/index';
-  import {slickOptions_} from "@/components/helpers";
+  import {slickOptions_}          from "@/components/helpers";
 
   export default {
     components: {IndexSection, ProductLoop: ItemLoop},

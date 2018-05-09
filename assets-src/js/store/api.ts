@@ -1,4 +1,4 @@
-import http from "@/plugins/http";
+import http              from "@/plugins/http";
 // import {SERVER_URL} from "@/global.d";
 import {CustomerAddress} from "@/store/customer.address";
 

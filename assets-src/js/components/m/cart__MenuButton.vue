@@ -63,8 +63,8 @@
     span(:class="$style.count")= '{{count_}}'
 </template>
 <script>
-  import {CART_COUNT_, CART_FETCH_} from '../../store/types'
-  import {mapGetters, mapActions} from 'vuex'
+  import {CART_COUNT_, CART_FETCH_} from '../../store/types';
+  import {mapActions, mapGetters}   from 'vuex';
 
   export default {
     computed: {
@@ -85,5 +85,5 @@
     async mounted() {
       await this.fetch_();
     }
-  }
+  };
 </script>

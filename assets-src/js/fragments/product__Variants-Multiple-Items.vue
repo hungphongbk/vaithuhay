@@ -37,7 +37,7 @@
         span(v-else) {{item.title}}
 </template>
 <script>
-  import {tooltip} from '../plugins'
+  import {tooltip} from '../plugins';
 
   export default {
     directives: {
@@ -57,11 +57,11 @@
     },
     computed: {
       hasImage() {
-        return this.type === 'image'
+        return this.type === 'image';
       }
     },
     mounted() {
-      this.$emit('input', this.items[0])
+      this.$emit('input', this.items[0]);
     }
-  }
+  };
 </script>

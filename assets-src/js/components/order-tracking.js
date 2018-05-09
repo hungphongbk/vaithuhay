@@ -9,4 +9,4 @@ export default {
       component = $store.state.mq.desktop ? Desktop : Mobile;
     return h(component, data);
   }
-}
+};

@@ -1,5 +1,5 @@
-import i18n from '../plugins/i18n'
-import {CATEGORIES_LIST_, CATEGORIES_ALL_, CATEGORY_ONSALE_} from "./types"
+import i18n                                from '../plugins/i18n';
+import {CATEGORIES_ALL_, CATEGORIES_LIST_} from "./types";
 
 const trans = list => list
   .map(cat => ({
@@ -21,4 +21,4 @@ export default {
     [CATEGORIES_LIST_]: ({list}) => trans(list),
     [CATEGORIES_ALL_]: ({list}) => trans(list).find(({url}) => /tatcasanpham/.test(url))
   }
-}
+};

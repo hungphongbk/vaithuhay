@@ -136,14 +136,14 @@
         user-panel
 </template>
 <script>
-  import {loginMixins} from '../mixins';
-  import StaticOverlay from '@/components/static-overlay';
-  import {OrderTracking, UserButton} from "../index";
+  import {loginMixins}                                           from '../mixins';
+  import StaticOverlay                                           from '@/components/static-overlay';
+  import {OrderTracking, UserButton}                             from "../index";
   import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
-  import {mapGetters} from 'vuex';
-  import Loyalty from './nav-menu__Loyalty';
-  import ProductItem from '@/components/products';
-  import UserPanel from './UserPanel';
+  import {mapGetters}                                            from 'vuex';
+  import Loyalty                                                 from './nav-menu__Loyalty';
+  import ProductItem                                             from '@/components/products';
+  import UserPanel                                               from './UserPanel';
 
   export default {
     mixins: [loginMixins],

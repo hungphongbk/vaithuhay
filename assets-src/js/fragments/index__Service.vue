@@ -44,7 +44,7 @@
   }
 
   .modal-wrapper {
-    /deep/ .modal-dialog{
+    /deep/ .modal-dialog {
       margin-top: 200px;
     }
     /deep/ .modal-content {
@@ -81,9 +81,9 @@
     contact(v-else, :popup-in-mobile_="true")
 </template>
 <script>
-  import {IndexSection, ItemLoop} from '../components'
-  import {slickOptions_} from "../components/helpers"
-  import Contact from '../components/index__Contact.vue'
+  import {IndexSection, ItemLoop} from '../components';
+  import {slickOptions_}          from "../components/helpers";
+  import Contact                  from '../components/index__Contact.vue';
 
   export default {
     components: {
@@ -94,7 +94,7 @@
           return <div>
             <img src={item.thumbnail} alt={item.title}/>
             <h4 class="service-title">{item.title}</h4>
-          </div>
+          </div>;
         },
         props: {
           item: Object
@@ -114,7 +114,7 @@
         slickOptions_,
         showInMobile: false,
         firstShow: true,
-      }
+      };
     },
     computed: {
       services$() {
@@ -122,7 +122,7 @@
         return self.content[self.$i18n.locale].map((obj, index) => ({
           title: obj.text,
           thumbnail: self.services[index]
-        }))
+        }));
       }
     },
     methods: {
@@ -131,7 +131,7 @@
           this.showInMobile = isVisible && this.firstShow;
       }
     }
-  }
+  };
 </script>
 <i18n>
   {

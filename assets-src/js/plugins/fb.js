@@ -7,7 +7,7 @@ export default new Promise(resolve => {
       version: 'v2.10' // or v2.1, v2.2, v2.3, ...
     });
     resolve((...args) => new Promise(resolve => {
-      window.FB.api(...args, response => resolve(response))
-    }))
+      window.FB.api(...args, response => resolve(response));
+    }));
   });
-})
+});

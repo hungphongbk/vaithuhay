@@ -1,8 +1,8 @@
-import {Middleware} from "./classes";
-import store from '../store/index';
+import {Middleware}                             from "./classes";
+import store                                    from '../store/index';
 import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_} from "../store/types";
-import {ModalManager} from "@/plugins/index";
-import {SYSTEM_MODAL_OK} from "@/types";
+import {ModalManager}                           from "@/plugins/index";
+import {SYSTEM_MODAL_OK}                        from "@/types";
 
 const auth = new Middleware();
 auth.use(async next => {

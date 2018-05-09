@@ -75,7 +75,7 @@
           ['fa-instagram', '#60453B', links.socials.insta],
           ['fa-twitter', '#73a9ee', links.socials.twitter]
         ]
-      }
+      };
     }
-  }
+  };
 </script>

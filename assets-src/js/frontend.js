@@ -1,17 +1,17 @@
 /**
  * Created by hungphongbk on 5/6/17.
  */
-import Vue from "vue";
+import Vue      from "vue";
 import "../sass/frontend.scss";
-import '@/plugins'
-import i18n from '@/plugins/i18n'
-import store from '@/store/index'
+import '@/plugins';
+import i18n     from '@/plugins/i18n';
+import store    from '@/store/index';
 // import '@/plugins/socket'
-import '@/components'
-import '@/pages'
-import App from './App.vue'
-import mq from './store/mq'
-import polyfill from './store/polyfill'
+import '@/components';
+import '@/pages';
+import App      from './App.vue';
+import mq       from './store/mq';
+import polyfill from './store/polyfill';
 // import router from './router'
 // import {sync} from 'vuex-router-sync'
 

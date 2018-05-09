@@ -85,14 +85,14 @@
           discover#menu-discover(:isShow_="discover_")
 </template>
 <script>
-  import User from "./nav-menu__User.vue"
-  import Cart from "../cart.vue"
-  import Search from './nav-menu__Search.vue'
-  import Lang from './nav-menu__Lang.vue'
-  import LoginPanel from '../app__Login'
-  import Discover from './nav-menu__Discover'
+  import User       from "./nav-menu__User.vue";
+  import Cart       from "../cart.vue";
+  import Search     from './nav-menu__Search.vue';
+  import Lang       from './nav-menu__Lang.vue';
+  import LoginPanel from '../app__Login';
+  import Discover   from './nav-menu__Discover';
 
-  import {overlayMixin} from '../mixins'
+  import {overlayMixin} from '../mixins';
 
   const $ = jQuery;
   export default {
@@ -106,9 +106,9 @@
         logo_: require('../../../img/logo.png'),
         home_: vth.links.home,
         discover_: false
-      }
+      };
     }
-  }
+  };
 </script>
 <i18n>
   {

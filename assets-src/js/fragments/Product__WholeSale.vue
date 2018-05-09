@@ -18,10 +18,9 @@
 </template>
 <script>
 
-  import {overlayMixin} from '../components/mixins'
-  import Variants from "./product__Variants-Single.vue"
-  import StaticOverlayInternal from "../components/static-overlay-2.vue"
-  import ProductWholeSaleItem from './product__WholeSale-Item'
+  import {overlayMixin}       from '../components/mixins';
+  import Variants             from "./product__Variants-Single.vue";
+  import ProductWholeSaleItem from './product__WholeSale-Item';
 
   export default {
     props: {
@@ -31,5 +30,5 @@
     mixins: [overlayMixin],
     components: {Variants, ProductWholeSaleItem},
 
-  }
+  };
 </script>

@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
 const Index = () => import(/* webpackChunkName: "index" */ './index.vue'),
   Collection = () => import(/* webpackChunkName: "collection" */ './collection.vue'),
@@ -13,7 +13,7 @@ const Pages = {Index, Collection, Blog, Article, PageVaithuhay, Product};
 // })
 
 const component = () => {
-  console.log(window.vth.template+' ahuhu');
+  console.log(window.vth.template + ' ahuhu');
   switch (window.vth.template) {
     case 'index':
       return Pages.Index;
@@ -26,7 +26,7 @@ const component = () => {
     case 'page-vaithuhay':
       return Pages.PageVaithuhay;
     case 'product':
-      return Pages.Product
+      return Pages.Product;
   }
 };
 //

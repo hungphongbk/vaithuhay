@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
 class Product {
   variants;
@@ -7,7 +7,7 @@ class Product {
     Object.assign(this, product, {
       __product: true,
       variantSelected: product.variants[0]
-    })
+    });
   }
 
   get hasMultipleVariants() {
@@ -30,20 +30,20 @@ export default class WholeSale {
     this.giftVariants = [];
     this.giftVariantOptions = [];
     this.additionalProductObj = null;
-    Vue.nextTick(() => this.init())
+    Vue.nextTick(() => this.init());
   }
 
   get currentPrice() {
     if (!this.product) return "0";
-    return this.product.variantSelected.price.current
+    return this.product.variantSelected.price.current;
   }
 
   get discountPrice() {
     const number = Number(this.currentPrice.replace(/[^0-9\.-]+/g, ""));
     if (this.unit === 'percentage')
-      return Math.round(number * (100 - this.amount) / 100) + '₫'
+      return Math.round(number * (100 - this.amount) / 100) + '₫';
     else
-      return (number - this.amount) + '₫'
+      return (number - this.amount) + '₫';
   }
 
   get amount$() {
@@ -54,11 +54,11 @@ export default class WholeSale {
   }
 
   get isBuyOneGetOne() {
-    return this.type !== 'wholesale'
+    return this.type !== 'wholesale';
   }
 
   get isGift() {
-    return this.isBuyOneGetOne && this.unit === 'gift'
+    return this.isBuyOneGetOne && this.unit === 'gift';
   }
 
   init() {
@@ -70,10 +70,10 @@ export default class WholeSale {
         .then(response => {
           const product = JSON.parse(response),
             {variants} = product;
-          product.variantSelected = variants[0]
+          product.variantSelected = variants[0];
           Vue.set(self, 'product', product);
           Vue.set(self, 'variants', variants);
-        }))
+        }));
     }
 
     //Download gift product data, if has
@@ -86,8 +86,8 @@ export default class WholeSale {
           self.additionalProductObj = new Product(product);
           self.giftAvatar = thumbnail;
           self.giftVariants = variants;
-        }))
+        }));
     Promise.all(promises)
-      .then(() => Vue.set(self, '__wholesale', true))
+      .then(() => Vue.set(self, '__wholesale', true));
   }
 }

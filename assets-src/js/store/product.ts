@@ -10,9 +10,9 @@ import {
 } from "./types";
 
 import auth, {authWithoutWarning} from '../plugins/auth';
-import {ProductFavoriteAPI} from "./api";
-import {FlashMessage} from "./flashMessages";
-import {Module} from "vuex";
+import {ProductFavoriteAPI}       from "./api";
+import {FlashMessage}             from "./flashMessages";
+import {Module}                   from "vuex";
 
 export interface ProductState {
   current: {

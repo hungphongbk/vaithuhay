@@ -42,9 +42,9 @@
       a.btn.btn-theme(href="https://vaithuhay.com/collections/onsale") KHÁM PHÁ THÊM
 </template>
 <script>
-  import {IndexSection} from '../components/index'
-  import {PROMO_LIST_} from '../store/types'
-  import {mapGetters} from 'vuex'
+  import {IndexSection} from '../components/index';
+  import {PROMO_LIST_}  from '../store/types';
+  import {mapGetters}   from 'vuex';
 
   const $ = jQuery;
   export default {
@@ -56,15 +56,15 @@
         promo: PROMO_LIST_
       })
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "title": "top sales"
-  },
-  "vi": {
-  "title": "đang khuyến mãi"
-  }
+    "en": {
+      "title": "top sales"
+    },
+    "vi": {
+      "title": "đang khuyến mãi"
+    }
   }
 </i18n>

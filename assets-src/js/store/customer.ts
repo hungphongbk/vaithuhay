@@ -1,6 +1,4 @@
 import {
-  FLASH_ACTION_PUSH_MESSAGE,
-  FLASH_CONTEXT_SUCCESS,
   RootState,
   USER_ACTION_UPDATE,
   USER_FAVORITES_,
@@ -8,21 +6,21 @@ import {
   USER_IS_LOGGED_IN_,
   USER_IS_LOGGING_IN_,
   USER_LOGGED_IN_,
-  USER_LOGIN_,
   USER_LOGIN_FAILED_,
   USER_LOGIN_FORM_SHOW_,
   USER_LOYALTY_,
   USER_MUTATION_INIT_PAGES,
+  USER_MUTATION_LOGIN_,
   USER_MUTATION_NAVIGATE_PAGE,
   USER_MUTATION_UPDATE,
   USER_TOGGLE_FAVORITE,
-} from "js/store/types";
-import {CustomerAPI, ProductFavoriteAPI} from "./api";
-import {ModalManager} from "../plugins";
+}                                             from "js/store/types";
+import {CustomerAPI, ProductFavoriteAPI}      from "./api";
+import {ModalManager}                         from "../plugins";
 import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "@/types";
-import {FlashMessage} from "./flashMessages";
-import address from './customer.address';
-import {Module} from "vuex";
+import address                                from './customer.address';
+import {Module}                               from "vuex";
+import {FlashMessagesAPI}                     from "@/store/index";
 
 //region Typing
 export interface CustomerState {
@@ -93,7 +91,7 @@ const module: Module<CustomerState, RootState> = {
         state.form = !state.form;
       else state.form = value;
     },
-    [USER_LOGIN_](state, value) {
+    [USER_MUTATION_LOGIN_](state, value) {
       // state = Object.assign({}, state, value);
       for (const key of Object.keys(state)) if (value.hasOwnProperty(key)) {
         state[key] = value[key];
@@ -115,9 +113,8 @@ const module: Module<CustomerState, RootState> = {
   actions: {
     async fetch({state}, email = null) {
       try {
-        const _user = JSON.parse(await $.get('/account/?view=json')),
-          user = await CustomerAPI.login(email ? email : _user.email);
-        return user;
+        const _user = JSON.parse(await $.get('/account/?view=json'));
+        return await CustomerAPI.login(email ? email : _user.email);
       } catch (e) {
         //login failed
         return null;
@@ -135,16 +132,18 @@ const module: Module<CustomerState, RootState> = {
         {label: "OK", type: SYSTEM_MODAL_OK, isPrimary: true},
       ]);
       if (rs === SYSTEM_MODAL_OK) {
-        await ProductFavoriteAPI.toggle(id);
-        dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
-          label: 'product/favorite',
-          context: FLASH_CONTEXT_SUCCESS,
-          message: `Sản phẩm ${title} đã được xóa khỏi danh sách yêu thích thành công`,
-        }, {root: true});
-        dispatch(USER_FAVORITES_);
+        // noinspection JSIgnoredPromiseFromCall
+        FlashMessagesAPI.pushSuccessWithErrHandler(
+          'product/information',
+          async () => {
+            await ProductFavoriteAPI.toggle(id);
+            dispatch(USER_FAVORITES_);
+          },
+          `Sản phẩm ${title} đã được xóa khỏi danh sách yêu thích thành công`,
+          'Có lỗi xảy ra. Hãy thử lại');
       }
     },
-    async [USER_LOGIN_]({commit, dispatch}, form = null) {
+    async [USER_MUTATION_LOGIN_]({commit, dispatch}, form = null) {
       if (form)
         await $.ajax({
           type: "POST",
@@ -155,7 +154,7 @@ const module: Module<CustomerState, RootState> = {
       const customer = await dispatch('fetch', form ? form.customer_email : null);
       if (customer) {
         commit(USER_IS_LOGGED_IN_);
-        commit(USER_LOGIN_, customer);
+        commit(USER_MUTATION_LOGIN_, customer);
 
         //preload user data
         await Promise.all([
@@ -166,14 +165,16 @@ const module: Module<CustomerState, RootState> = {
       }
     },
     async [USER_ACTION_UPDATE]({commit, dispatch}, body = {}) {
-      await CustomerAPI.update(body);
-      const customer = await dispatch('fetch');
-      commit(USER_LOGIN_, customer);
-      await dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
-        label: 'user/information',
-        context: FLASH_CONTEXT_SUCCESS,
-        message: `Bạn đã cập nhật thông tin người dùng thành công`,
-      }, {root: true});
+      // noinspection JSIgnoredPromiseFromCall
+      FlashMessagesAPI.pushSuccessWithErrHandler(
+        'user/information',
+        async () => {
+          await CustomerAPI.update(body);
+          const customer = await dispatch('fetch');
+          commit(USER_MUTATION_LOGIN_, customer);
+        },
+        `Bạn đã cập nhật thông tin người dùng thành công`,
+        'Có lỗi xảy ra. Hãy thử lại');
     },
   },
   modules: {

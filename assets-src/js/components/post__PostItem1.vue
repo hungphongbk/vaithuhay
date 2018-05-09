@@ -4,8 +4,8 @@
   %fix-backface {
     -webkit-perspective: 0;
     -webkit-backface-visibility: hidden;
-    -webkit-transform: translate3d(0,0,0);
-    visibility:visible;
+    -webkit-transform: translate3d(0, 0, 0);
+    visibility: visible;
     backface-visibility: hidden;
   }
 
@@ -216,9 +216,9 @@
       //product-rating.large(:rating="rating")
 </template>
 <script>
-  import {CART_ADD_} from '../store/types'
-  import {mapActions} from 'vuex'
-  import {delay} from './helpers'
+  import {CART_ADD_}  from '../store/types';
+  import {mapActions} from 'vuex';
+  import {delay}      from './helpers';
   // import {ProductRating} from "../components";
 
   const $ = jQuery;
@@ -239,7 +239,7 @@
           params: {
             product: this.handle
           }
-        }
+        };
       },
       defaultThumbnailSize_() {
         if (this.thumbnailSize_) return this.thumbnailSize_;
@@ -268,5 +268,5 @@
         $btn.removeClass('pre-added fa-check').addClass('fa-cart-plus');
       }
     }
-  }
+  };
 </script>

@@ -45,8 +45,8 @@
     computed: {
       loggedIn() {
         console.log(this.$vthStore.state);
-        return this.$vthStore.state.customer.id
+        return this.$vthStore.state.customer.id;
       }
     }
-  }
+  };
 </script>

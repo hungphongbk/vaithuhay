@@ -32,8 +32,6 @@
       slot
 </template>
 <script>
-  import {Event} from './index'
-  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     inject: ['overlay'],
@@ -63,5 +61,5 @@
         done();
       }
     }
-  }
+  };
 </script>

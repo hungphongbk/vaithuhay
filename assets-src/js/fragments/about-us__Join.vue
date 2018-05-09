@@ -136,7 +136,7 @@
               | {{currentAgency.email}}
 </template>
 <script>
-  import {IndexSection, OverlaySelector} from '../components'
+  import {IndexSection, OverlaySelector} from '../components';
 
   const $ = jQuery;
 
@@ -152,22 +152,22 @@
         email: '',
         wish: '',
         status: null
-      }
+      };
     },
     computed: {
       content() {
-        return this.section.join[this.$i18n.locale]
+        return this.section.join[this.$i18n.locale];
       },
       agencies() {
         return this.section.agencies;
       },
       currentAgency: {
         get() {
-          return this.agencies[this.currentAgencyIndex]
+          return this.agencies[this.currentAgencyIndex];
         },
         set(value) {
-          console.log(value)
-          this.currentAgencyIndex = this.agencies.findIndex(a => a === value)
+          console.log(value);
+          this.currentAgencyIndex = this.agencies.findIndex(a => a === value);
         }
       }
     },
@@ -181,11 +181,11 @@
             NAME, PHONE, EMAIL, WISH
           }),
           dataType: 'jsonp'
-        })
-        if (result === 'success') this.status = this.$t('thank')
+        });
+        if (result === 'success') this.status = this.$t('thank');
       }
     }
-  }
+  };
 </script>
 <i18n>
   {

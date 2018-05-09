@@ -6,7 +6,7 @@ function entry(message) {
   //for debug only: show current token
   message.getToken()
     .then(function (token) {
-      return post('https://api.v1.hungphongbk.com/vaithuhay/b/noti/register', {token, refresh: true})
+      return post('https://api.v1.hungphongbk.com/vaithuhay/b/noti/register', {token, refresh: true});
     })
     .then(() => {
       log('token refreshed');
@@ -21,10 +21,10 @@ function entry(message) {
   message.onTokenRefresh(function () {
     message.getToken()
       .then(function (token) {
-        return post('https://api.v1.hungphongbk.com/vaithuhay/b/noti/register', {token, refresh: true})
+        return post('https://api.v1.hungphongbk.com/vaithuhay/b/noti/register', {token, refresh: true});
       })
       .then(() => log('token refreshed'));
-  })
+  });
 }
 
 Messaging.then(entry);

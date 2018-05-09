@@ -20,17 +20,17 @@
         img(:src="content.image")
 </template>
 <script>
-  import {IndexSection} from '../components/index'
+  import {IndexSection} from '../components/index';
 
   export default {
     components: {IndexSection},
     inject: ['section'],
     computed: {
       content() {
-        return this.section.mission[this.$i18n.locale]
+        return this.section.mission[this.$i18n.locale];
       }
     }
-  }
+  };
 </script>
 <i18n>
   {

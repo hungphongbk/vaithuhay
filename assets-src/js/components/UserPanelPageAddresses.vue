@@ -11,10 +11,10 @@
     background: white;
     margin-bottom: .7rem;
 
-    .item-inner{
+    .item-inner {
       display: flex;
     }
-    &:hover, &.edit-mode{
+    &:hover, &.edit-mode {
       background: #f3f3f3;
     }
   }
@@ -53,10 +53,10 @@
     }
   }
 
-  .edit-panel{
+  .edit-panel {
     display: block;
     :global {
-      .form-group{
+      .form-group {
         margin-bottom: 7px;
       }
       .col-form-label {

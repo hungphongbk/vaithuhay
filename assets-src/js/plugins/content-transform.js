@@ -1,7 +1,7 @@
 const $ = jQuery;
-import 'lazyloadxt/src/jquery.lazyloadxt'
-import 'readmore-js'
-import Vue from 'vue'
+import 'lazyloadxt/src/jquery.lazyloadxt';
+import 'readmore-js';
+import Vue from 'vue';
 
 function lazyloadImg($html) {
   let i = 0;
@@ -20,16 +20,16 @@ function ptype($html) {
   //Neu $html chi co mot child, can phai chuan hoa lai HTML
   while ($html.children().length === 1) {
     const firstChild = $html.children(0);
-    firstChild.replaceWith(firstChild.children())
+    firstChild.replaceWith(firstChild.children());
   }
-  const is = (node, tag) => node.nodeName.toLowerCase() === tag
+  const is = (node, tag) => node.nodeName.toLowerCase() === tag;
 
   function normalize(child) {
 
   }
 
   //Danh dau type
-  $html.children().each((_, child) => normalize(child))
+  $html.children().each((_, child) => normalize(child));
   $html.children().each((_, child) => {
     const $child = child.nodeName === 'P' ? $(child).children(0)[0] : child;
     if ($child) {
@@ -60,7 +60,7 @@ function ptype($html) {
       }
       // else $(child).detach();
     }
-  })
+  });
 }
 
 function responsiveFrame($html) {
@@ -81,7 +81,7 @@ function responsiveFrame($html) {
     //   console.log(`${ratio} ${w} ${h}`);
     //   $frame.width(w).height(h);
     // }, 3000)
-  })
+  });
 }
 
 function markupTable($html) {
@@ -96,7 +96,7 @@ function responsiveImg($html) {
   $html.find('img').css({
     'max-width': '100%',
     'height': 'auto'
-  })
+  });
 }
 
 //TODO: edit /products/:id/wholesale?i={uuid}, get wholesale description by uuid
@@ -109,8 +109,8 @@ async function productComboEmbed($html) {
       // console.log(rules);
       $(child).replaceWith(`<product-whole-sale-item class='in-content' :apply='${apply * 1}' :rule=\'${JSON.stringify(rules[0])}\'></product-whole-sale-item>`);
     }
-    resolve()
-  })))
+    resolve();
+  })));
   // console.log('resolved all')
 }
 
@@ -131,7 +131,7 @@ function makeGallery($html, options) {
         $el.replaceWith(`<product-images :images_=\'${JSON.stringify(images.map(i => ({
           small: i,
           original: i
-        })))}\' :label-indicator_="true" :full-screen_="true"></product-images>`)
+        })))}\' :label-indicator_="true" :full-screen_="true"></product-images>`);
       }
     });
   }
@@ -173,7 +173,7 @@ function makeExpandable($html) {
     if ($(child).data('type') === 'header') {
       if (stack.length > 1) process();
     }
-    stack.push($(child))
+    stack.push($(child));
   });
 
   if (stack.length > 1) process();

@@ -69,7 +69,7 @@
       return {
         animatedQuantity_: this.quantity_,
         mode_: 0
-      }
+      };
     },
     watch: {
       quantity_(newValue, oldValue) {
@@ -97,7 +97,7 @@
           $(animThumb).css({
             opacity: this.opacity_,
             transform: `translateY(${this.translateY_}%)`
-          })
+          });
         }
 
         const twOut = new TWEEN.Tween({opacity_: 1.0, translateY_: 0})
@@ -111,7 +111,7 @@
           .onUpdate(updateStyle);
         twOut.chain(twIn)
           .onComplete(() => {
-            cancelAnimationFrame(animate)
+            cancelAnimationFrame(animate);
           }).start();
         animFrame = requestAnimationFrame(animate);
       }
@@ -119,5 +119,5 @@
     mounted() {
       const self = this;
     }
-  }
+  };
 </script>

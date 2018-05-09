@@ -57,11 +57,11 @@
         component(:is="selected.component")
 </template>
 <script>
-  import PageFavorite, {PageFavoriteIcon} from '../UserPanelPageFavorite';
-  import PageUserInfo, {PageUserInfoIcon} from "../UserPanelPageUserInfo";
-  import PageAddresses, {PageAddressesIcon} from "js/components/UserPanelPageAddresses.vue";
-  import i18n from '../../plugins/i18n';
-  import {mapState} from 'vuex';
+  import PageFavorite, {PageFavoriteIcon}                                                  from '../UserPanelPageFavorite';
+  import PageUserInfo, {PageUserInfoIcon}                                                  from "../UserPanelPageUserInfo";
+  import PageAddresses, {PageAddressesIcon}                                                from "js/components/UserPanelPageAddresses.vue";
+  import i18n                                                                              from '../../plugins/i18n';
+  import {mapState}                                                                        from 'vuex';
   import {USER_GETTER_CURRENT_PAGE, USER_MUTATION_INIT_PAGES, USER_MUTATION_NAVIGATE_PAGE} from "@/store/types";
 
   export default {

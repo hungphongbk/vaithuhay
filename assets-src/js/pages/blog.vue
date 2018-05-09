@@ -72,15 +72,15 @@
     display: flex;
     align-items: flex-end;
     background-color: rgba(black, .45);
-    &, &:hover{
+    &, &:hover {
       color: white;
     }
     transition: all $animation-time ease;
-    opacity:0;
+    opacity: 0;
     .headline-post:hover & {
       opacity: 1;
     }
-    .post-title{
+    .post-title {
       width: 75%;
     }
   }
@@ -168,7 +168,7 @@
     }
   }
 
-  #main-list{
+  #main-list {
     position: absolute;
     top: -$navbar-height;
   }
@@ -219,8 +219,8 @@
                 h5.title {{rel.title}}
 </template>
 <script>
-  import {ItemLoop as ArticleLoop, OverlaySelector} from '../components/index'
-  import Paginate from '../components/paginate.vue'
+  import {ItemLoop as ArticleLoop, OverlaySelector} from '../components/index';
+  import Paginate                                   from '../components/paginate.vue';
 
   export default {
     components: {ArticleLoop, Paginate, OverlaySelector},
@@ -241,7 +241,7 @@
         relateds: window.blog.slice(0, 6),
         sort_,
         currentSort_: sort_[0]
-      }
+      };
     },
     computed: {
       headlines() {
@@ -251,20 +251,20 @@
         return this.blog.slice(4);
       }
     },
-    methods:{
-      navigated(){
+    methods: {
+      navigated() {
         $.scrollTo('#main-list');
       }
     }
-  }
+  };
 </script>
 <i18n>
   {
-    "en":{
-      "related":"RELATED ARTICLES"
+    "en": {
+      "related": "RELATED ARTICLES"
     },
-    "vi":{
-      "related":"CÁC BÀI VIẾT LIÊN QUAN"
+    "vi": {
+      "related": "CÁC BÀI VIẾT LIÊN QUAN"
     }
   }
 </i18n>

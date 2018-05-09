@@ -8,7 +8,7 @@ declare global {
 }
 
 import "vue-i18n/types/index";
-import {Store} from "vuex";
+import {Store}     from "vuex";
 import {RootState} from 'js/store/types';
 
 declare module "vue/types/vue" {

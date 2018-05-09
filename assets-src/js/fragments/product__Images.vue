@@ -155,8 +155,8 @@
                 thumbnail.big.no-effect(v-else, :url_="p.item.original", :overlay_="false")
 </template>
 <script>
-  import {ItemLoop} from '../components/index'
-  import {overlayMixin} from '../components/mixins'
+  import {ItemLoop}     from '../components/index';
+  import {overlayMixin} from '../components/mixins';
   // import exposure from '../plugins/image-exposure'
 
   const $ = jQuery;
@@ -189,7 +189,7 @@
           fade: true,
           nav: true
         }
-      }
+      };
     },
     methods: {
       goTo(img) {
@@ -198,12 +198,12 @@
       },
       reInit() {
         console.log('ahihi');
-        this.$refs.loop.reInit()
+        this.$refs.loop.reInit();
       },
       exp(el, brightness) {
         if (brightness >= 70) $(el).addClass('light');
         else $(el).addClass('dark');
       }
     }
-  }
+  };
 </script>

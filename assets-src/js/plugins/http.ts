@@ -1,5 +1,5 @@
-import qs from 'query-string';
-import store from '../store/index';
+import qs                from 'query-string';
+import store             from '../store/index';
 import {USER_LOGGED_IN_} from "@/store/types";
 
 const $ = jQuery;

@@ -1,15 +1,17 @@
 <style lang="scss" module>
   @import "../../sass/inc/inc";
-  .item{
+
+  .item {
     @extend %reset-link;
     @extend %clearfix;
     display: block;
-    :global(.vth-thumb){
+    :global(.vth-thumb) {
       width: 80px;
       float: left;
       margin-right: 15px;
     }
   }
+
   .title {
     margin-top: 0;
     color: #666;
@@ -20,12 +22,13 @@
       color: #444;
     }
   }
-  .price{
-    .current{
+
+  .price {
+    .current {
       color: $theme-red-color;
       font-weight: 600;
     }
-    .old{
+    .old {
       color: #aaa;
       text-decoration: line-through $theme-red-color;
     }
@@ -48,11 +51,11 @@
         required: true
       }
     },
-    computed:{
-      hasSale(){
-        const price=this.product.price;
-        if(!price.old) return false;
-        return true;
+    computed: {
+      hasSale() {
+        const price = this.product.price;
+        return price.old;
+
       }
     }
   };

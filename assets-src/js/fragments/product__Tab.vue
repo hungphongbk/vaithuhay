@@ -3,7 +3,7 @@
 
   .tab-pane {
     padding: 10px 0;
-    @include responsive('sm-min'){
+    @include responsive('sm-min') {
       padding: 30px 0;
     }
     /deep/ {
@@ -27,15 +27,15 @@
     data() {
       return {
         hash: -1
-      }
+      };
     },
     computed: {
       active_() {
-        return this.hash === this.tabs_.active_
+        return this.hash === this.tabs_.active_;
       }
     },
     mounted() {
       this.$parent.add_(this);
     }
-  }
+  };
 </script>

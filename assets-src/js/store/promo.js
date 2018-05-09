@@ -1,5 +1,5 @@
-import {PROMO_LIST_} from "./types"
-import i18n from "../plugins/i18n"
+import {PROMO_LIST_} from "./types";
+import i18n          from "../plugins/i18n";
 
 export default {
   state: {
@@ -13,4 +13,4 @@ export default {
       }
     }))
   }
-}
+};

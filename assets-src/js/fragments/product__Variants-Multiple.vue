@@ -17,10 +17,9 @@
     //items(:type="optHasThumbnail2?'image':'text'", :items="optList2", v-model="opts[1]")
 </template>
 <script>
-  import unzip from 'lodash/unzip'
-  import uniq from 'lodash/uniqBy'
-  import chain from 'lodash/chain'
-  import Items from './product__Variants-Multiple-Items'
+  import unzip from 'lodash/unzip';
+  import uniq  from 'lodash/uniqBy';
+  import Items from './product__Variants-Multiple-Items';
 
   const $ = jQuery,
     mapVariant = variant => variant.title.split(/\s\/\s/).map(title => ({
@@ -48,11 +47,11 @@
       return {
         opts,
         optHasThumbnail: options_.map(i => i === 'Kiểu dáng')
-      }
+      };
     },
     computed: {
       optLength() {
-        return this.options_.length
+        return this.options_.length;
       },
       optLists() {
         const {opts} = this;
@@ -70,8 +69,8 @@
                 (rs, optVal) => rs && title.includes(optVal.title),
                 true)
             )
-            .map(mapVariant))[index]
-          return uniq(subList, i => i.title)
+            .map(mapVariant))[index];
+          return uniq(subList, i => i.title);
         });
       },
       selected() {
@@ -87,11 +86,11 @@
     },
     watch: {
       selected(value) {
-        this.$emit('input', value)
+        this.$emit('input', value);
       }
     },
     mounted() {
-      this.$emit('input', this.list[0])
+      this.$emit('input', this.list[0]);
     }
-  }
+  };
 </script>

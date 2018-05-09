@@ -73,11 +73,11 @@
     system-modal(v-if="systemModal !== null", :title="systemModal.title", :content="systemModal.content", :commands="systemModal.commands", :options="systemModal.options")
 </template>
 <script>
-  import {Event} from './components/index';
-  import AppOfflineMode from './fragments/app__OfflineMode';
-  import {tooltip} from '@/plugins';
-  import {USER_LOGIN_} from "@/store/types";
-  import {$modalEvent,SystemModal} from "@/plugins/ModalManager";
+  import {Event}                                from './components/index';
+  import AppOfflineMode                         from './fragments/app__OfflineMode';
+  import {tooltip}                              from '@/plugins';
+  import {USER_MUTATION_LOGIN_}                 from "@/store/types";
+  import {$modalEvent, SystemModal}             from "@/plugins/ModalManager";
   import {SYSTEM_MODAL_HIDE, SYSTEM_MODAL_SHOW} from "@/types";
 
   const $ = jQuery;
@@ -121,7 +121,7 @@
       }
     },
     async created() {
-      await this.$store.dispatch(USER_LOGIN_);
+      await this.$store.dispatch(USER_MUTATION_LOGIN_);
     },
     mounted() {
       const self = this;

@@ -238,10 +238,9 @@
                   h5.title {{rel.current._title[$i18n.locale]}}
 </template>
 <script>
-  import transform from '../plugins/content-transform'
-  import {delay} from '../components/helpers'
-  import auth from '../plugins/auth'
-  import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue'
+  import transform            from '../plugins/content-transform';
+  import {delay}              from '../components/helpers';
+  import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue';
 
   const $ = jQuery,
     urlConcat = (base, append) => {
@@ -271,11 +270,11 @@
           content: ''
         },
         status: null
-      }
+      };
     },
     computed: {
       commentCount_() {
-        return comments.list.length
+        return comments.list.length;
       }
     },
     asyncComputed: {
@@ -297,8 +296,8 @@
       flashStatus(status, timeout = 3000) {
         this.status = status;
         setTimeout(() => {
-          this.status = null
-        }, timeout)
+          this.status = null;
+        }, timeout);
       },
       async sendComment() {
         const self = this;
@@ -314,7 +313,7 @@
             url: urlConcat(window.location.href, 'comments'),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: $(this.$refs.form).serialize()
-          })
+          });
           if (self.comments.moderated) {
             self.flashStatus('Bình luận thành công! Tuy nhiên, lời bình cần được kiểm duyệt trước khi đăng lên', 5000);
           } else {
@@ -322,7 +321,7 @@
             self.comments.list.push({
               author: name,
               content
-            })
+            });
           }
           await $.ajax({
             type: 'POST',
@@ -331,7 +330,7 @@
               EMAIL: email
             }),
             dataType: 'jsonp'
-          })
+          });
         }
       }
     },
@@ -342,19 +341,19 @@
       const relateds = await Promise.all(products.map(({handle}) => new Promise(resolve => {
         $.get('/products/' + handle + '/?view=json')
           .then(rs => {
-            resolve(JSON.parse(rs))
-          })
+            resolve(JSON.parse(rs));
+          });
       })));
-      this.relatedProducts.push(...relateds)
+      this.relatedProducts.push(...relateds);
 
       //init captcha
       $.getScript('https://www.google.com/recaptcha/api.js?render=explicit', () => {
         grecaptcha.render(this.$refs.captcha, {
           sitekey: '6LegnfkSAAAAAOV7USensnoe5Ku5UVMqktvu6_Ui'
-        })
-      })
+        });
+      });
     }
-  }
+  };
 </script>
 <i18n>
   {

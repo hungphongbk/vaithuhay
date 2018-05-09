@@ -84,7 +84,7 @@
     data() {
       return {
         canonicalUrl: window.location.origin + this.url
-      }
+      };
     },
     methods: {
       shareFb() {
@@ -92,7 +92,7 @@
           method: 'share',
           href: this.canonicalUrl,
           mobile_iframe: true
-        })
+        });
       },
       shareMessenger() {
         if (this.$md.os() === 'AndroidOS' || this.$md.os() === 'iOS') {
@@ -105,5 +105,5 @@
         }
       }
     }
-  }
+  };
 </script>

@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import Modal from '@/components/modal';
+import Vue                                    from 'vue';
+import Modal                                  from '@/components/modal';
 import {SYSTEM_MODAL_HIDE, SYSTEM_MODAL_SHOW} from "@/types";
 
 const $modalEvent = new Vue();

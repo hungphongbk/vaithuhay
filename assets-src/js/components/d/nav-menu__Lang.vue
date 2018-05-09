@@ -43,7 +43,7 @@
     img(:src="flags_[$i18n.locale]")
 </template>
 <script>
-  import {Event} from '../index'
+  import {Event} from '../index';
 
   export default {
     data() {
@@ -52,7 +52,7 @@
           vi: require('../../../img/lang/002-vietnam.svg'),
           en: require('../../../img/lang/001-united-states-of-america.svg')
         }
-      }
+      };
     },
     methods: {
       switch_() {
@@ -62,5 +62,5 @@
         Event.$emit('lang', sw);
       }
     }
-  }
+  };
 </script>

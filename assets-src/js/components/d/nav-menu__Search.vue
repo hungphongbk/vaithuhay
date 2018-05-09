@@ -84,8 +84,8 @@
                     h5.title {{i.title}}
 </template>
 <script>
-  import {Paginate} from "@/components"
-  import {searchMixin} from "@/components/mixins"
+  import {Paginate}    from "@/components";
+  import {searchMixin} from "@/components/mixins";
 
   const $ = jQuery;
 
@@ -95,14 +95,14 @@
     data() {
       return {
         view: 'product'
-      }
+      };
     },
     computed: {
       isOpen_() {
-        return this.keyword.length > 0
+        return this.keyword.length > 0;
       }
     }
-  }
+  };
 </script>
 <i18n>
   {

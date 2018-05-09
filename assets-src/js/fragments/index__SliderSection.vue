@@ -15,16 +15,16 @@
 
   .index-slider-outer {
     position: relative;
-    .Masthead{
+    .Masthead {
       min-height: unset;
-      @include responsive('xs-max'){
+      @include responsive('xs-max') {
         height: 100vw*(4/5) !important;
       }
-      @include responsive('sm-min'){
+      @include responsive('sm-min') {
         height: 100vw*(638/1639) !important;
       }
     }
-    .Masthead__image.is-parallax>img, .Masthead__image>img{
+    .Masthead__image.is-parallax > img, .Masthead__image > img {
       height: unset;
     }
   }
@@ -99,12 +99,12 @@
   @keyframes myMove {
     0% {
       transform: scale(1.0, 1.0);
-      opacity:1;
+      opacity: 1;
       /*transform-origin: 50% 50%;*/
     }
     99% {
       transform: scale(1.05, 1.05);
-      opacity:1;
+      opacity: 1;
       /*transform-origin: 50% 0%;*/
     }
     100% {
@@ -137,9 +137,9 @@
         i.fa.fa-chevron-right
 </template>
 <script>
-  import Slick from 'vue-slick'
-  import 'slick-carousel/slick/slick.scss'
-  import Parallax from 'vue-parallaxy'
+  import Slick    from 'vue-slick';
+  import 'slick-carousel/slick/slick.scss';
+  import Parallax from 'vue-parallaxy';
 
   const $ = jQuery;
 
@@ -166,12 +166,12 @@
 //                    ]
         },
         images_: window.vth.homepage.slider
-      }
+      };
     },
     computed: {
       images() {
-        return this.images_.filter(slide => true)
+        return this.images_.filter(slide => true);
       }
     }
-  }
+  };
 </script>

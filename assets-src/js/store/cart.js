@@ -1,5 +1,5 @@
-import {CART_LIST_, CART_COUNT_, CART_TOTAL_, CART_FETCH_, CART_ADD_, CART_REMOVE_, CART_HAS_PRODUCT_} from "./types"
-import {CartItem} from "../components/classes"
+import {CART_ADD_, CART_COUNT_, CART_FETCH_, CART_HAS_PRODUCT_, CART_LIST_, CART_REMOVE_, CART_TOTAL_} from "./types";
+import {CartItem}                                                                                      from "../components/classes";
 
 const $ = jQuery,
   {list: listUrl, add: addUrl, change: changeUrl} = vth.links.cart;
@@ -23,11 +23,11 @@ export default {
     },
     [CART_HAS_PRODUCT_]: ({items}, id) => {
       // if (process.env.NODE_ENV === 'development') {
-      console.log('[store/cart] Checking cart has product with id=' + id)
+      console.log('[store/cart] Checking cart has product with id=' + id);
       // }
       const found = items.find(item => item.product_id * 1 === id * 1);
       console.log(typeof found);
-      return typeof found !== 'undefined'
+      return typeof found !== 'undefined';
     }
   },
   actions: {
@@ -36,7 +36,7 @@ export default {
       commit(CART_FETCH_, data);
     },
     async [CART_ADD_]({dispatch}, {id, quantity = 1}) {
-      console.log('[store/cart] Add product with variant id=' + id)
+      console.log('[store/cart] Add product with variant id=' + id);
       try {
         await $.ajax({
           url: addUrl,
@@ -44,7 +44,7 @@ export default {
           dataType: 'json',
           data: {id, quantity}
         });
-        await dispatch(CART_FETCH_)
+        await dispatch(CART_FETCH_);
       } catch (e) {
 
       }
@@ -63,7 +63,7 @@ export default {
       }
     }
   }
-}
+};
 
 if (module.hot) {
 

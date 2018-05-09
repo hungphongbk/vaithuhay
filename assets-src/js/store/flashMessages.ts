@@ -1,16 +1,18 @@
 import {
   FLASH_ACTION_POP_MESSAGE,
   FLASH_ACTION_PUSH_MESSAGE,
+  FLASH_CONTEXT_ERROR,
+  FLASH_CONTEXT_SUCCESS,
   FLASH_MUTATION_POP_MESSAGE,
   FLASH_MUTATION_PUSH_MESSAGE,
   FlashMessageContext,
   RootState,
-} from "./types";
-import sortBy from 'lodash/sortBy';
-import filter from 'lodash/filter';
-import remove from 'lodash/remove';
-import {Module} from "vuex";
-import objectHash from 'object-hash';
+}                      from "./types";
+import sortBy          from 'lodash/sortBy';
+import filter          from 'lodash/filter';
+import remove          from 'lodash/remove';
+import {Module, Store} from "vuex";
+import objectHash      from 'object-hash';
 
 //region Typing
 export interface FlashMessage {
@@ -60,3 +62,33 @@ const module: Module<FlashState, RootState> = {
 };
 
 export default module;
+
+type PromiseHandler = () => (void | Promise<any>)
+export const FlashMessagesApi = ({dispatch}: Store<RootState>) => ({
+  /**
+   *
+   * @param {string} label Label của thông báo
+   * @param {PromiseHandler} fn Hàm thực thi chính Fn
+   * @param {string} successMessage Nếu Fn thành công, sẽ hiện ra thông báo thành công màu xanh lá với message này
+   * @param {string} errMessage Nếu Fn có lỗi, sẽ hiện ra thông báo lỗi màu đỏ với message này
+   * @returns {Promise<void>}
+   */
+  async pushSuccessWithErrHandler(label: string, fn: PromiseHandler, successMessage: string, errMessage: string) {
+    try {
+      await fn();
+      // noinspection JSIgnoredPromiseFromCall
+      dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
+        label,
+        context: FLASH_CONTEXT_SUCCESS,
+        message: successMessage,
+      });
+    } catch (e) {
+      // noinspection JSIgnoredPromiseFromCall
+      dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
+        label,
+        context: FLASH_CONTEXT_ERROR,
+        message: errMessage,
+      });
+    }
+  },
+});

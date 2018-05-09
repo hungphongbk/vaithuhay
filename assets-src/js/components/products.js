@@ -12,7 +12,7 @@ export default {
   props: {
     itemStyle: {
       type: Number,
-      default:1
+      default: 1
     }
   }
 };

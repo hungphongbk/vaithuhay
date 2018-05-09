@@ -34,25 +34,25 @@
           p {{i.content}}
 </template>
 <script>
-  import {IndexSection} from '../components/index'
+  import {IndexSection} from '../components/index';
 
   export default {
     components: {IndexSection},
     inject: ['section'],
     computed: {
       items() {
-        return this.section.aboutUs[this.$i18n.locale]
+        return this.section.aboutUs[this.$i18n.locale];
       }
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "title": "about vaithuhay"
-  },
-  "vi": {
-  "title": "về vaithuhay"
-  }
+    "en": {
+      "title": "about vaithuhay"
+    },
+    "vi": {
+      "title": "về vaithuhay"
+    }
   }
 </i18n>

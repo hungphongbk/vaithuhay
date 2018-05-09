@@ -18,11 +18,11 @@ const getImageBrightness = el => new Promise(resolve => {
       colorSum += (r + g + b) / 3;
     }
     resolve(colorSum / (width * height));
-  }
+  };
 });
 
 export default function (el, {value}) {
   // console.log(value);
   getImageBrightness(el)
-    .then(brightness => value(el, brightness))
+    .then(brightness => value(el, brightness));
 }

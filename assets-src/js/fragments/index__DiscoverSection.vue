@@ -1,5 +1,6 @@
 <style lang="scss" module>
   @import "../../sass/inc/inc";
+
   .homepage-discover {
     @include responsive('xs-max') {
       margin: {
@@ -91,8 +92,8 @@
                 h3(:class="$style.title") {{cat.title}}
 </template>
 <script>
-  import {IndexSection} from '../components/index';
-  import {mapGetters} from 'vuex';
+  import {IndexSection}     from '../components/index';
+  import {mapGetters}       from 'vuex';
   import {CATEGORIES_LIST_} from "../store/types";
 
   export default {

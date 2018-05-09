@@ -200,7 +200,7 @@
 
   .favorite {
     margin-left: 1.85rem;
-    @include responsive('xs-max'){
+    @include responsive('xs-max') {
       margin-left: 0.85rem;
     }
     margin-right: .3rem;

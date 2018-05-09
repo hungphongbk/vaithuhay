@@ -1,4 +1,4 @@
-import {Module} from "vuex";
+import {Module}                               from "vuex";
 import {
   CUSTOMER_ADDRESS_ACTION_DELETE,
   CUSTOMER_ADDRESS_ACTION_UPDATE,
@@ -7,11 +7,11 @@ import {
   FLASH_ACTION_PUSH_MESSAGE,
   FLASH_CONTEXT_SUCCESS,
   RootState,
-} from '@/store/types';
-import {CustomerAPI} from '@/store/api';
-import {ModalManager} from '../plugins';
+}                                             from '@/store/types';
+import {CustomerAPI}                          from '@/store/api';
+import {ModalManager}                         from '../plugins';
 import {SYSTEM_MODAL_CANCEL, SYSTEM_MODAL_OK} from "@/types";
-import {FlashMessage} from "./flashMessages";
+import {FlashMessage}                         from "./flashMessages";
 
 //region Typing
 export interface CustomerAddress {

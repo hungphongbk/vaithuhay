@@ -4,11 +4,11 @@ export default class CartItem {
   line_price_orginal;
 
   constructor(specs) {
-    Object.assign(this, specs)
+    Object.assign(this, specs);
   }
 
   get thumbnail() {
-    return this.image.replace('http:/', 'https:/')
+    return this.image.replace('http:/', 'https:/');
   }
 
   get discountPercentage() {

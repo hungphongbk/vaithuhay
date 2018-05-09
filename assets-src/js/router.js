@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import PageContent from './pages/index'
+import Vue         from 'vue';
+import VueRouter   from 'vue-router';
+import PageContent from './pages/index';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 export default new VueRouter({
   // mode: 'history',
@@ -17,4 +17,4 @@ export default new VueRouter({
       component: PageContent
     }
   ]
-})
+});

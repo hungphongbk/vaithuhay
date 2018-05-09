@@ -37,7 +37,7 @@
     overflow: hidden;
   }
 
-  .row-wrap{
+  .row-wrap {
     display: flex;
     flex-direction: column;
   }
@@ -139,8 +139,8 @@
       slot(v-for="item in chunkedList_", name="item", :item="item")
 </template>
 <script>
-  import Slick from 'vue-slick'
-  import chunk from 'lodash/chunk'
+  import Slick from 'vue-slick';
+  import chunk from 'lodash/chunk';
 
   const responsive = (breakpoint, settings) => ({breakpoint, settings});
   const $ = jQuery;
@@ -176,7 +176,7 @@
           arrows: false
         },
         current_: 0
-      }
+      };
     },
     computed: {
       slickOpts() {
@@ -192,18 +192,18 @@
         return opts;
       },
       indicator_() {
-        return `${this.current_ + 1} / ${this.list.length}`
+        return `${this.current_ + 1} / ${this.list.length}`;
       },
       leftIcon_() {
-        return this.$mq.tablet ? 'fa-caret-left' : 'fa-chevron-left'
+        return this.$mq.tablet ? 'fa-caret-left' : 'fa-chevron-left';
       },
       rightIcon_() {
-        return this.$mq.tablet ? 'fa-caret-right' : 'fa-chevron-right'
+        return this.$mq.tablet ? 'fa-caret-right' : 'fa-chevron-right';
       },
       chunkedList_() {
         const {list, slickOpts} = this;
         if (!slickOpts) return list;
-        return chunk(list, this.rows_)
+        return chunk(list, this.rows_);
       }
     },
     methods: {
@@ -225,5 +225,5 @@
         this.current_ = currentSlide;
       }
     }
-  }
+  };
 </script>

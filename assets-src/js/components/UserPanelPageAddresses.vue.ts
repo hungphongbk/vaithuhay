@@ -1,14 +1,18 @@
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import {Action, namespace, State} from "vuex-class";
-import {CustomerAddress, CustomerAddressState} from "@/store/customer.address";
-import faCheckCircle from '@fortawesome/fontawesome-free-regular/faCheckCircle';
-import faEdit from '@fortawesome/fontawesome-free-regular/faEdit';
-import faTrashAlt from '@fortawesome/fontawesome-free-regular/faTrashAlt';
-import faSave from '@fortawesome/fontawesome-free-regular/faSave';
-import {FlashMessageHub} from './index';
+import Vue                                                              from 'vue';
+import Component                                                        from 'vue-class-component';
+import {Action, namespace, State}                                       from "vuex-class";
+import {CustomerAddress, CustomerAddressState}                          from "@/store/customer.address";
+import faCheckCircle
+                                                                        from '@fortawesome/fontawesome-free-regular/faCheckCircle';
+import faEdit
+                                                                        from '@fortawesome/fontawesome-free-regular/faEdit';
+import faTrashAlt
+                                                                        from '@fortawesome/fontawesome-free-regular/faTrashAlt';
+import faSave
+                                                                        from '@fortawesome/fontawesome-free-regular/faSave';
+import {FlashMessageHub}                                                from './index';
 import {CUSTOMER_ADDRESS_ACTION_DELETE, CUSTOMER_ADDRESS_ACTION_UPDATE} from "@/store/types";
-import omit from 'lodash/omit';
+import omit                                                             from 'lodash/omit';
 
 const ModuleState = namespace('address', State),
   ModuleAction = namespace('address', Action);
@@ -79,9 +83,11 @@ class Address implements AddressExtended {
   }),
 })
 export default class UserPanelPageAddresses extends Vue {
-  @ModuleState((state: CustomerAddressState) => state.list) _address: Array<CustomerAddress>;
-
   edit: AddressExtended = null;
+  @ModuleAction(CUSTOMER_ADDRESS_ACTION_DELETE) deleteItem;
+  @ModuleAction(CUSTOMER_ADDRESS_ACTION_UPDATE) updateItem;
+
+  @ModuleState((state: CustomerAddressState) => state.list) _address: Array<CustomerAddress>;
 
   get address(): Array<AddressExtended> {
     const self = this;
@@ -89,9 +95,6 @@ export default class UserPanelPageAddresses extends Vue {
       return new Address(item, self);
     });
   }
-
-  @ModuleAction(CUSTOMER_ADDRESS_ACTION_DELETE) deleteItem;
-  @ModuleAction(CUSTOMER_ADDRESS_ACTION_UPDATE) updateItem;
 
   beginEdit(item) {
     this.edit = item;

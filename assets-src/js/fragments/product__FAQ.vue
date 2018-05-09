@@ -2,10 +2,10 @@
   @import "../../sass/inc/inc";
 
   .faq {
-      padding: {
-        left: 0;
-        right: 0;
-      }
+    padding: {
+      left: 0;
+      right: 0;
+    }
   }
 
   .item {
@@ -79,7 +79,7 @@
     .btn.btn-grey(@click="sendFaq") {{$t('send')}}
 </template>
 <script>
-  import auth from '../plugins/auth'
+  import auth from '../plugins/auth';
 
   const $ = jQuery;
   export default {
@@ -94,7 +94,7 @@
         toggle: Array(20).fill(false),
         newAsk: '',
         status: null
-      }
+      };
     },
     computed: {
       list$() {
@@ -105,7 +105,7 @@
     },
     methods: {
       toggles(i) {
-        this.$set(this.toggle, i, !this.toggle[i])
+        this.$set(this.toggle, i, !this.toggle[i]);
       },
       sendFaq() {
         const self = this;
@@ -117,16 +117,16 @@
             data: $.param({
               ask: self.newAsk
             })
-          })
+          });
           if (status === 'ok') {
-            self.status = 'Cám ơn bạn. Câu hỏi của bạn đã được gửi đi!'
+            self.status = 'Cám ơn bạn. Câu hỏi của bạn đã được gửi đi!';
           } else {
-            self.status = 'Oops. Something went wrong :('
+            self.status = 'Oops. Something went wrong :(';
           }
-        })()
+        })();
       }
     }
-  }
+  };
 </script>
 <i18n>
   {

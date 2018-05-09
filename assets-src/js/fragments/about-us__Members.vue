@@ -119,25 +119,25 @@
               i.fa.fa-envelope
 </template>
 <script>
-  import {IndexSection} from '../components/index'
+  import {IndexSection} from '../components/index';
 
   export default {
     components: {IndexSection},
     inject: ['section'],
     computed: {
       items() {
-        return this.section.member[this.$i18n.locale]
+        return this.section.member[this.$i18n.locale];
       }
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "0": "our members"
-  },
-  "vi": {
-  "0": "thành viên"
-  }
+    "en": {
+      "0": "our members"
+    },
+    "vi": {
+      "0": "thành viên"
+    }
   }
 </i18n>

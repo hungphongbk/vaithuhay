@@ -1,5 +1,5 @@
-import 'intersection-observer'
-import Vue from 'vue'
-import ObserveVisibility from 'vue-observe-visibility'
+import 'intersection-observer';
+import Vue               from 'vue';
+import ObserveVisibility from 'vue-observe-visibility';
 
-Vue.use(ObserveVisibility)
+Vue.use(ObserveVisibility);

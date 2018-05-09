@@ -1,5 +1,6 @@
 <style lang="scss" module>
   @import "../../sass/inc/inc";
+
   .favorite-item {
     &-wrapper {
       padding: .7rem;

@@ -97,12 +97,11 @@
       h2.text {{$t('0')}}
 </template>
 <script>
-  import {mapGetters} from 'vuex'
-  import {Event} from '../index'
-  import {CATEGORIES_LIST_, CATEGORIES_ALL_} from "../../store/types";
-  import StaticOverlay from '../static-overlay.vue'
-  import {overlayMixin} from '../mixins'
-  import {delay} from '../helpers'
+  import {mapGetters}                        from 'vuex';
+  import {CATEGORIES_ALL_, CATEGORIES_LIST_} from "../../store/types";
+  import StaticOverlay                       from '../static-overlay.vue';
+  import {overlayMixin}                      from '../mixins';
+  import {delay}                             from '../helpers';
 
   const $ = jQuery;
 
@@ -118,7 +117,7 @@
       StaticOverlay
     },
     data() {
-      return {}
+      return {};
     },
     watch: {
       isShow_(value) {
@@ -136,27 +135,27 @@
         await delay(100);
         for (const elem of this.$refs.elem) {
           await delay(60);
-          $(elem).removeClass('not-show')
+          $(elem).removeClass('not-show');
         }
         await delay(200);
-        $(el).find('.see-more .text').animateCss('rubberBand')
+        $(el).find('.see-more .text').animateCss('rubberBand');
       },
       async leave_(el, done) {
         for (const elem of this.$refs.elem) {
-          $(elem).addClass('not-show')
+          $(elem).addClass('not-show');
         }
         await delay(100);
       }
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "0": "See Everything"
-  },
-  "vi": {
-  "0": "Xem tất cả"
-  }
+    "en": {
+      "0": "See Everything"
+    },
+    "vi": {
+      "0": "Xem tất cả"
+    }
   }
 </i18n>

@@ -18,7 +18,7 @@ export const PROMO_LIST_ = 'promo/list';
 //region Module: Customer
 export const USER_LOGGED_IN_ = 'user/logged-in';
 export const USER_LOGIN_FORM_SHOW_ = 'user/login-form-show';
-export const USER_LOGIN_ = 'user/login';
+export const USER_MUTATION_LOGIN_ = 'user/login';
 export const USER_LOGIN_FAILED_ = 'user/login-failed';
 export const USER_IS_LOGGING_IN_ = 'user/is-logging-in';
 export const USER_IS_LOGGED_IN_ = 'user/is-logged-in';

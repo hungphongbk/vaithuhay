@@ -29,12 +29,12 @@
     }
     &title {
       @extend %reset-link;
-      h5{
+      h5 {
         font-weight: 700;
         text-transform: uppercase;
       }
     }
-    &desc{
+    &desc {
       white-space: pre-wrap;
       @include font-size-with-line-height($font-size-base*0.86);
       padding-right: 3rem;
@@ -49,13 +49,13 @@
         color: $text-muted;
         text-decoration: line-through $theme-red-color;
       }
-      .percentage{
+      .percentage {
         color: $theme-red-color;
         font-weight: 700;
         margin-left: 1.3rem;
       }
     }
-    &context{
+    &context {
       margin-left: 3rem;
     }
   }

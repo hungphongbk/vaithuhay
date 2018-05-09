@@ -1,14 +1,16 @@
 // importScripts('/local-sw-analytics.js');
-import sendPushNotificationAnalyticsEvent from './local-sw-analytics'
+import sendPushNotificationAnalyticsEvent from './local-sw-analytics';
+import './local-sw-cache';
+import firebase                           from 'firebase/app';
+import 'firebase/messaging';
 
 self.addEventListener('install', event => {
   console.log('[vaithuhay.com] Service Worker cài đặt thành công!');
-  event.waitUntil(self.skipWaiting())
+  event.waitUntil(self.skipWaiting());
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim())
+  event.waitUntil(self.clients.claim());
 });
-import './local-sw-cache'
 
 self.addEventListener('push', function (event) {
 
@@ -63,8 +65,6 @@ self.addEventListener('notificationclose', event => {
 //   return fetch(request)
 // }
 
-import firebase from 'firebase/app'
-import 'firebase/messaging'
 firebase.initializeApp({
   'messagingSenderId': '1926697148'
 });

@@ -65,6 +65,7 @@
 </style>
 <style lang="scss" module="">
   @import "../../../sass/inc/inc";
+
   .dashboard {
     padding-top: $padding-base-vertical*4;
     width: 100%;
@@ -80,6 +81,7 @@
       }
     }
   }
+
   .dash {
     display: flex;
     height: 100%;
@@ -91,6 +93,7 @@
       flex-grow: 1;
     }
   }
+
   .search-panel {
     padding-top: $padding-base-vertical*1;
     border-top: 1px solid rgba(#fff, .25);
@@ -108,19 +111,22 @@
 </style>
 <template lang="pug" src="./mobile-menu.vue.pug"></template>
 <script>
-  import debounce from 'lodash/debounce';
-  import Paginate from '../paginate.vue';
-  import Lang from '../d/nav-menu__Lang.vue';
-  import CartPanel from './cart__Panel.vue';
-  import LoginPanel from './app__Login.vue';
-  import {UserButton} from "../index";
-  import {mapGetters} from 'vuex';
+  import debounce                                                   from 'lodash/debounce';
+  import Paginate                                                   from '../paginate.vue';
+  import Lang                                                       from '../d/nav-menu__Lang.vue';
+  import CartPanel                                                  from './cart__Panel.vue';
+  import LoginPanel                                                 from './app__Login.vue';
+  import {UserButton}                                               from "../index";
+  import {mapGetters}                                               from 'vuex';
   import {CATEGORIES_ALL_, CATEGORIES_LIST_, USER_LOGIN_FORM_SHOW_} from "../../store/types";
-  import {searchMixin} from "@/components/mixins";
-  import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
-  import faSignOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt'
-  import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle'
-  import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight'
+  import {searchMixin}                                              from "@/components/mixins";
+  import faTimes                                                    from '@fortawesome/fontawesome-free-solid/faTimes';
+  import faSignOut
+                                                                    from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
+  import faUserCircle
+                                                                    from '@fortawesome/fontawesome-free-solid/faUserCircle';
+  import faAngleRight
+                                                                    from '@fortawesome/fontawesome-free-solid/faAngleRight';
 
   export default {
     mixins: [searchMixin],

@@ -73,7 +73,7 @@
   import firebase from 'firebase/app';
   import 'firebase/auth';
   import 'firebase/messaging';
-  import sw from '@/modules/iframe/sw';
+  import sw       from '@/modules/iframe/sw';
 
   firebase.initializeApp({
     apiKey: "AIzaSyDu888R1nyP_W_xFX7aATSB0U5irf79lrM",

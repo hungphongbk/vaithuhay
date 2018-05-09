@@ -134,16 +134,16 @@
         alert(e.message);
       }
     }
-  }
+  };
 
   export default {
     data() {
       return {
         token: null
-      }
+      };
     },
     methods: {
       register
     }
-  }
+  };
 </script>

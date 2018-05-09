@@ -1,7 +1,7 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/messaging'
-import registerSW from 'service-worker-loader!../local-sw.js'
+import firebase   from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/messaging';
+import registerSW from 'service-worker-loader!../local-sw.js';
 // import 'service-worker-loader!../local-sw-analytics.js'
 
 firebase.initializeApp({
@@ -21,6 +21,6 @@ export default new Promise(resolve => {
       .then(registration => {
         message.useServiceWorker(registration);
         resolve(message);
-      })
+      });
   }
-})
+});

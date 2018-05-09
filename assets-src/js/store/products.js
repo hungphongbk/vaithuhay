@@ -1,6 +1,6 @@
-import {PRODUCTS_LIST_, PRODUCTS_FETCH_, PRODUCTS_SORT_} from "./types"
-import sortBy from 'lodash/sortBy'
-import {ProductItem_} from "../components/classes"
+import {PRODUCTS_FETCH_, PRODUCTS_LIST_, PRODUCTS_SORT_} from "./types";
+import sortBy                                            from 'lodash/sortBy';
+import {ProductItem_}                                    from "../components/classes";
 
 export default {
   state: {
@@ -35,4 +35,4 @@ export default {
     },
     [PRODUCTS_SORT_]: (state, type) => state.sort = type
   },
-}
+};

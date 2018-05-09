@@ -88,7 +88,8 @@
       }
     }
   }
-  .dmca-badge{
+
+  .dmca-badge {
     margin-top: .9rem;
     margin-left: 1rem;
     display: inline-block;
@@ -185,9 +186,10 @@
 
 </template>
 <script>
-  import {mapGetters} from 'vuex'
-  import {CATEGORIES_LIST_} from '../store/types'
-  import ContactDetail from './footer__ContactDetail.vue'
+  import {mapGetters}       from 'vuex';
+  import {CATEGORIES_LIST_} from '../store/types';
+  import ContactDetail      from './footer__ContactDetail.vue';
+
   const $ = jQuery;
 
   export default {
@@ -223,7 +225,7 @@
         aboutLinks$: links.about,
         policyLinks$: links.policy,
         location: window.document.location
-      }
+      };
     },
     computed: {
       ...mapGetters({
@@ -234,10 +236,10 @@
         return $mq.tablet && !$mq.phone;
       }
     },
-    mounted(){
+    mounted() {
       // $.cachedScript('//images.dmca.com/Badges/DMCABadgeHelper.min.js')
     }
-  }
+  };
 </script>
 <i18n>
   {

@@ -87,8 +87,8 @@
 <script>
   //TODO: migrate function rule->new WholeSale from page/product.vue to here
   import {CART_ADD_, CART_HAS_PRODUCT_} from '../store/types';
-  import {mapActions, mapMutations} from 'vuex';
-  import {WholeSale} from "../components/classes";
+  import {mapActions, mapMutations}     from 'vuex';
+  import {WholeSale}                    from "../components/classes";
 
   const ProductVariants = () => import(/* webpackChunkName: "product-variant" */ '../fragments/product__Variants');
   export default {

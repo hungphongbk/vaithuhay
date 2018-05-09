@@ -16,7 +16,7 @@
   .vth-section-title {
     font-weight: bold;
     text-transform: uppercase;
-    @include responsive('xs-max'){
+    @include responsive('xs-max') {
       /*margin-bottom: 10px;*/
     }
   }
@@ -68,5 +68,5 @@
         return style;
       }
     }
-  }
+  };
 </script>

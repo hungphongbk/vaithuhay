@@ -78,7 +78,7 @@
           const children = slots().default;
           //   notHasRatio = !(parent.ratio_) ;
           // if (notHasRatio) return children;
-          return (<div class="content">{children}</div>)
+          return (<div class="content">{children}</div>);
         }
       }
     },
@@ -117,5 +117,5 @@
       }
     }
 
-  }
+  };
 </script>

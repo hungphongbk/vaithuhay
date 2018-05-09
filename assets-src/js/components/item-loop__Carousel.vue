@@ -112,7 +112,7 @@
   }
 </style>
 <script>
-  import {Carousel, Slide} from 'vue-carousel'
+  import {Carousel, Slide} from 'vue-carousel';
 
   export default {
     components: {Carousel, Slide},
@@ -126,7 +126,7 @@
             })]}</Slide>)
           )}
         </Carousel>
-      </div>)
+      </div>);
     },
     props: {
       list: {
@@ -162,7 +162,7 @@
             attrs.perPageCustom.push([
               responsive[i].breakpoint,
               responsive[i - 1].settings.slidesToShow
-            ])
+            ]);
           }
           attrs.perPage = mobile.slidesToShow;
         }
@@ -172,5 +172,5 @@
       }
     },
     methods: {}
-  }
+  };
 </script>

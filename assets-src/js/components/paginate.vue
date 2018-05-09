@@ -31,7 +31,7 @@
         i.fa.fa-chevron-right
 </template>
 <script>
-  import range from 'lodash/range'
+  import range from 'lodash/range';
 
   export default {
     props: {
@@ -44,11 +44,11 @@
     data() {
       return {
         current: 0
-      }
+      };
     },
     computed: {
       currentPage_() {
-        return Math.ceil(this.current / this.perPage)
+        return Math.ceil(this.current / this.perPage);
       },
       pages_() {
         let {for_, perPage, currentPage_} = this,
@@ -66,7 +66,7 @@
           offsetLast = lastPage;
           if (offsetFirst < 0) offsetFirst = 0;
         }
-        return range(offsetFirst, offsetLast + 1)
+        return range(offsetFirst, offsetLast + 1);
       },
       canPrev_() {
         const {current, perPage} = this;
@@ -78,12 +78,12 @@
       },
       paginated_() {
         const {current, perPage, for_} = this;
-        return for_.slice(current, current + perPage)
+        return for_.slice(current, current + perPage);
       }
     },
     watch: {
       current(val) {
-        this.$emit('navigated', {current: val})
+        this.$emit('navigated', {current: val});
       }
     },
     methods: {
@@ -99,5 +99,5 @@
         this.current = this.perPage * index;
       }
     }
-  }
+  };
 </script>

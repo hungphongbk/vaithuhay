@@ -34,11 +34,11 @@
         .btn.btn-white KHÁM PHÁ THÊM
 </template>
 <script>
-  import {ItemLoop, IndexSection} from '../components/index'
-  import ProductItem from '@/components/products';
-  import {ProductItem_} from "../components/classes"
-  import {slickOptions_} from "../components/helpers"
-  import slide from './index__slide.m-scss'
+  import {IndexSection, ItemLoop} from '../components/index';
+  import ProductItem              from '@/components/products';
+  import {ProductItem_}           from "../components/classes";
+  import {slickOptions_}          from "../components/helpers";
+  import slide                    from './index__slide.m-scss';
 
   const $ = jQuery;
   export default {
@@ -52,9 +52,9 @@
         products: window.products_new.filter(i => i !== null).map(ProductItem_),
         slickOptions_,
         slide
-      }
+      };
     }
-  }
+  };
 </script>
 <i18n>
   {

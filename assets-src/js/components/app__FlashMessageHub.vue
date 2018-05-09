@@ -29,10 +29,10 @@
     FLASH_CONTEXT_ERROR,
     FLASH_CONTEXT_SUCCESS,
     FLASH_MUTATION_PUSH_MESSAGE
-  } from "@/store/types";
-  import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
+  }                            from "@/store/types";
+  import faCheckCircle         from '@fortawesome/fontawesome-free-solid/faCheckCircle';
   import faExclamationTriangle from '@fortawesome/fontawesome-free-solid/faExclamationTriangle';
-  import faExclamationCircle from '@fortawesome/fontawesome-free-solid/faExclamationCircle';
+  import faExclamationCircle   from '@fortawesome/fontawesome-free-solid/faExclamationCircle';
 
   export default {
     name: "FlashMessageHub",

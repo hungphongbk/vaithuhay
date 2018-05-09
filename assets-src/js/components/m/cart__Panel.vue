@@ -175,14 +175,14 @@
       p.text-muted {{$t('cartEmpty')}}
 </template>
 <script>
-  import {CART_LIST_, CART_COUNT_, CART_TOTAL_, CART_FETCH_, CART_ADD_, CART_REMOVE_} from '../../store/types'
-  import {mapActions, mapGetters} from 'vuex'
+  import {CART_ADD_, CART_COUNT_, CART_FETCH_, CART_LIST_, CART_REMOVE_, CART_TOTAL_} from '../../store/types';
+  import {mapActions, mapGetters}                                                     from 'vuex';
 
   export default {
     data() {
       return {
         checkOutLink_: vth.links.cart.checkout
-      }
+      };
     },
     computed: {
       ...mapGetters({
@@ -201,23 +201,23 @@
     async mounted() {
       await this.fetch_();
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "cart": "CART",
-  "cartEmpty": "Cart empty",
-  "amount": "Amount",
-  "totalAmount": "Total",
-  "checkoutBtn": "Proceed to Checkout"
-  },
-  "vi": {
-  "cart": "GIỎ HÀNG",
-  "cartEmpty": "Chưa có sản phẩm nào",
-  "amount": "Thành tiền",
-  "totalAmount": "Tổng đơn hàng",
-  "checkoutBtn": "Đặt hàng & Thanh toán"
-  }
+    "en": {
+      "cart": "CART",
+      "cartEmpty": "Cart empty",
+      "amount": "Amount",
+      "totalAmount": "Total",
+      "checkoutBtn": "Proceed to Checkout"
+    },
+    "vi": {
+      "cart": "GIỎ HÀNG",
+      "cartEmpty": "Chưa có sản phẩm nào",
+      "amount": "Thành tiền",
+      "totalAmount": "Tổng đơn hàng",
+      "checkoutBtn": "Đặt hàng & Thanh toán"
+    }
   }
 </i18n>

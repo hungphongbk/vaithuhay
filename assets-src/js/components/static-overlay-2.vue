@@ -32,8 +32,6 @@
       slot
 </template>
 <script>
-  import {Event} from './index'
-  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     props: {
@@ -55,7 +53,7 @@
     data() {
       return {
         show: false
-      }
+      };
     },
     methods: {
       async show() {
@@ -73,5 +71,5 @@
         done();
       }
     }
-  }
+  };
 </script>

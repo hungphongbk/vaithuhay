@@ -74,5 +74,5 @@ function sendAnalyticsEvent(eventAction, eventCategory, label = null) {
 export default function sendPushNotificationAnalyticsEvent(eventAction, eventCategory, notificationId = null) {
   if (notificationId)
     notificationId = "noti/" + notificationId;
-  return sendAnalyticsEvent(eventAction, eventCategory, notificationId)
+  return sendAnalyticsEvent(eventAction, eventCategory, notificationId);
 }

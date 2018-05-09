@@ -28,7 +28,7 @@
     data() {
       return {
         offline: false
-      }
+      };
     },
     methods: {
       detect(online) {
@@ -36,11 +36,11 @@
         this.offline = !online;
         const $body = $('body');
         if ((!online) && (!$body.hasClass('site-offline-mode'))) {
-          $body.addClass('site-offline-mode')
+          $body.addClass('site-offline-mode');
         }
       }
     }
-  }
+  };
 </script>
 <i18n>
   {

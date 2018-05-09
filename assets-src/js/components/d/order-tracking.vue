@@ -81,15 +81,15 @@
                       span.count {{line_item.quantity}}
 </template>
 <script>
-  import {orderTrackingMixin} from "../mixins"
-  import {Paginate} from "../../components"
+  import {orderTrackingMixin} from "../mixins";
+  import {Paginate}           from "../../components";
 
   export default {
     mixins: [orderTrackingMixin],
-    components:{Paginate},
+    components: {Paginate},
     data() {
-      return {}
+      return {};
     },
     computed: {}
-  }
+  };
 </script>

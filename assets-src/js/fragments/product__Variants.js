@@ -1,4 +1,4 @@
-import Single from './product__Variants-Single';
+import Single   from './product__Variants-Single';
 import Multiple from './product__Variants-Multiple';
 
 export default {

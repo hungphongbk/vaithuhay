@@ -217,9 +217,9 @@
                   | {{$t('checkoutBtn')}}
 </template>
 <script>
-  import {CART_LIST_, CART_COUNT_, CART_TOTAL_, CART_FETCH_, CART_ADD_, CART_REMOVE_} from '../store/types'
-  import {overlayMixin} from './mixins'
-  import {mapActions, mapGetters} from 'vuex'
+  import {CART_ADD_, CART_COUNT_, CART_FETCH_, CART_LIST_, CART_REMOVE_, CART_TOTAL_} from '../store/types';
+  import {overlayMixin}                                                               from './mixins';
+  import {mapActions, mapGetters}                                                     from 'vuex';
 
   const $ = jQuery;
 
@@ -228,7 +228,7 @@
     data() {
       return {
         checkOutLink_: vth.links.cart.checkout
-      }
+      };
     },
     computed: {
       ...mapGetters({
@@ -256,7 +256,7 @@
 //            this.show_ = true;
       await this.fetch_();
     }
-  }
+  };
 </script>
 <i18n>
   {

@@ -29,7 +29,8 @@
     border-radius: 15px;
     border: 1px solid #ddd;
   }
-  .inner{
+
+  .inner {
     padding-bottom: $line-height-computed
   }
 </style>
@@ -67,7 +68,7 @@
     data() {
       return {
         expanded_: false
-      }
+      };
     }
-  }
+  };
 </script>

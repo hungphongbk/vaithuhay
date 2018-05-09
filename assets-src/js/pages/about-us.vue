@@ -32,12 +32,12 @@
     join-section
 </template>
 <script>
-  import SliderSection from '../fragments/about-us__SliderSection.vue'
-  import AboutUsSection from '../fragments/about-us__AboutUs.vue'
-  import MissionSection from '../fragments/about-us__Mission.vue'
-  import MemberSection from '../fragments/about-us__Members.vue'
-  import ClientsSection from '../fragments/about-us__Clients.vue'
-  import JoinSection from '../fragments/about-us__Join.vue'
+  import SliderSection  from '../fragments/about-us__SliderSection.vue';
+  import AboutUsSection from '../fragments/about-us__AboutUs.vue';
+  import MissionSection from '../fragments/about-us__Mission.vue';
+  import MemberSection  from '../fragments/about-us__Members.vue';
+  import ClientsSection from '../fragments/about-us__Clients.vue';
+  import JoinSection    from '../fragments/about-us__Join.vue';
 
   const $ = jQuery;
 
@@ -53,7 +53,7 @@
     data() {
       return {
         data: window.aboutUs
-      }
+      };
     },
     provide() {
       const {data} = this,
@@ -78,13 +78,13 @@
           get: () => data.agencies
         }
       });
-      return {section}
+      return {section};
     },
     mounted() {
       const {hash} = window.location;
       this.$nextTick(() => {
         $.scrollTo(hash);
-      })
+      });
     }
-  }
+  };
 </script>

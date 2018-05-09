@@ -41,35 +41,35 @@
               img(:src="item.image")
 </template>
 <script>
-  import {IndexSection} from '../components/index'
+  import {IndexSection} from '../components/index';
 
   export default {
     components: {IndexSection},
     inject: ['section'],
     computed: {
       content() {
-        return this.section.clients
+        return this.section.clients;
       }
     }
-  }
+  };
 </script>
 <i18n>
   {
-  "en": {
-  "title": "our clients",
-  "reg": "LOVE VAITHUHAY? LET'S FIGHT IN!",
-  "btnReg": "REGISTER NOW",
-  "name": "First name & Last name",
-  "phone": "Phone number",
-  "wish": "What would you wish for?"
-  },
-  "vi": {
-  "title": "các thương hiệu đang hợp tác",
-  "reg": "ĐĂNG KÝ NHẬN TIN TUYỂN DỤNG",
-  "btnReg": "ĐĂNG KÝ NGAY",
-  "name": "Họ và tên",
-  "phone": "Số điện thoại",
-  "wish": "Bạn mong muốn điều gì từ chúng tôi?"
-  }
+    "en": {
+      "title": "our clients",
+      "reg": "LOVE VAITHUHAY? LET'S FIGHT IN!",
+      "btnReg": "REGISTER NOW",
+      "name": "First name & Last name",
+      "phone": "Phone number",
+      "wish": "What would you wish for?"
+    },
+    "vi": {
+      "title": "các thương hiệu đang hợp tác",
+      "reg": "ĐĂNG KÝ NHẬN TIN TUYỂN DỤNG",
+      "btnReg": "ĐĂNG KÝ NGAY",
+      "name": "Họ và tên",
+      "phone": "Số điện thoại",
+      "wish": "Bạn mong muốn điều gì từ chúng tôi?"
+    }
   }
 </i18n>

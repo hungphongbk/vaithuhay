@@ -5,8 +5,8 @@
     slot
 </template>
 <script>
-  import {CART_ADD_} from '../store/types'
-  import {mapActions} from 'vuex'
+  import {CART_ADD_}  from '../store/types';
+  import {mapActions} from 'vuex';
 
   export default {
     inject: ['cartItem_'],
@@ -27,5 +27,5 @@
         }
       }
     }
-  }
+  };
 </script>

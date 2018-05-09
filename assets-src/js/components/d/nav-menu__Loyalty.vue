@@ -32,12 +32,12 @@
 <i18n>
   {
     "en": {
-      "balance":"Your current balance",
-      "status":"You have %{p} points"
+      "balance": "Your current balance",
+      "status": "You have %{p} points"
     },
-    "vi":{
-      "balance":"Số điểm thưởng hiện tại",
-      "status":"Bạn đang có %{p} điểm thưởng"
+    "vi": {
+      "balance": "Số điểm thưởng hiện tại",
+      "status": "Bạn đang có %{p} điểm thưởng"
     }
   }
 </i18n>

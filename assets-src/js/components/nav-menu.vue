@@ -22,7 +22,7 @@
     components: {
       MobileMenu, DesktopMenu
     }
-  }
+  };
 </script>
 <i18n>
   {

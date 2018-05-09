@@ -26,7 +26,7 @@
     slot
 </template>
 <script>
-  import {delay} from "./helpers"
+  import {delay} from "./helpers";
 
   export default {
     props: {
@@ -43,7 +43,7 @@
     data() {
       return {
         state: 'default'
-      }
+      };
     },
     computed: {
       iconCls() {
@@ -53,7 +53,7 @@
           case 'ing':
             return 'fa-spin fa-spinner';
           case 'ed':
-            return 'fa-check'
+            return 'fa-check';
         }
 
       }
@@ -68,5 +68,5 @@
         this.state = 'default';
       }
     }
-  }
+  };
 </script>

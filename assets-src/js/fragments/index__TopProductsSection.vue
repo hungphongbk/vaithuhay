@@ -35,10 +35,10 @@
 </template>
 <script>
   import {IndexSection, ItemLoop} from '../components/index';
-  import ProductItem from '@/components/products';
-  import {ProductItem_} from "../components/classes";
-  import {slickOptions_} from "@/components/helpers";
-  import slide from './index__slide.m-scss'
+  import ProductItem              from '@/components/products';
+  import {ProductItem_}           from "../components/classes";
+  import {slickOptions_}          from "@/components/helpers";
+  import slide                    from './index__slide.m-scss';
 
   const $ = jQuery;
   export default {

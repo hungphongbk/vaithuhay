@@ -37,9 +37,9 @@
             slot(name="item", :item="item")
 </template>
 <script>
-  import StaticOverlay from './static-overlay.vue'
-  import {overlayMixin} from './mixins'
-  import {delay} from './helpers'
+  import StaticOverlay  from './static-overlay.vue';
+  import {overlayMixin} from './mixins';
+  import {delay}        from './helpers';
 
   const $ = jQuery;
 
@@ -53,16 +53,16 @@
       StaticOverlay
     },
     data() {
-      return {}
+      return {};
     },
     methods: {
       async enter_() {
         await delay(10);
         for (const elem of this.$refs.item) {
           await delay(50);
-          $(elem).removeClass('not-show')
+          $(elem).removeClass('not-show');
         }
       }
     }
-  }
+  };
 </script>

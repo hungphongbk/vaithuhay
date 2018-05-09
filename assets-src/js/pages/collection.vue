@@ -187,7 +187,7 @@
     }
   }
 
-  #main-list{
+  #main-list {
     position: absolute;
     top: -$navbar-height;
   }
@@ -234,14 +234,14 @@
                   product-item.product-item(:item="item")
 </template>
 <script>
-  import {ItemLoop, Paginate, OverlaySelector, PageSlider} from '../components/index'
-  import ProductItem from '@/components/products';
-  import Slick from 'vue-slick'
-  import {mapGetters} from 'vuex';
-  import {PRODUCTS_LIST_, PRODUCTS_FETCH_, PRODUCTS_SORT_, CATEGORIES_LIST_} from '../store/types'
-  import ProductsModule from '../store/products'
+  import {ItemLoop, OverlaySelector, PageSlider, Paginate}                   from '../components/index';
+  import ProductItem                                                         from '@/components/products';
+  import Slick                                                               from 'vue-slick';
+  import {mapGetters}                                                        from 'vuex';
+  import {CATEGORIES_LIST_, PRODUCTS_FETCH_, PRODUCTS_LIST_, PRODUCTS_SORT_} from '../store/types';
+  import ProductsModule                                                      from '../store/products';
 
-  const $=jQuery;
+  const $ = jQuery;
 
   export default {
     components: {
@@ -265,7 +265,7 @@
         title_: window.products.title,
         sort_,
         currentSort_: sort_[0]
-      }
+      };
     },
     computed: {
       slides() {
@@ -276,7 +276,7 @@
         categories_: CATEGORIES_LIST_
       }),
       currentCategory_() {
-        return this.categories_.find(cat => cat.id === window.products.categoryId)
+        return this.categories_.find(cat => cat.id === window.products.categoryId);
       },
       carousel_() {
         return this.$mq.tablet ? {
@@ -289,7 +289,7 @@
           slidesToShow: 3,
           autoplay: true,
           autoplaySpeed: 2000
-        }
+        };
       }
     },
     watch: {
@@ -297,8 +297,8 @@
         this.$vthStore.commit(PRODUCTS_SORT_, id);
       }
     },
-    methods:{
-      navigated(){
+    methods: {
+      navigated() {
         $.scrollTo('#main-list');
       }
     },
@@ -311,7 +311,7 @@
       });
     },
     destroyed() {
-      this.$vthStore.unregisterModule('products')
+      this.$vthStore.unregisterModule('products');
     }
-  }
+  };
 </script>

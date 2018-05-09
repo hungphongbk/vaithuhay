@@ -100,13 +100,13 @@
         mobile-menu-panel(ref="mobileMenu")
 </template>
 <script>
-  import MobileMenuPanel from './mobile-menu.vue'
+  import MobileMenuPanel from './mobile-menu.vue';
 
-  import CartButton from './cart__MenuButton.vue'
-  import {overlayMixin} from '../mixins'
+  import CartButton     from './cart__MenuButton.vue';
+  import {overlayMixin} from '../mixins';
 
-  import {mapGetters} from 'vuex'
-  import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_} from "../../store/types"
+  import {mapGetters}            from 'vuex';
+  import {USER_LOGIN_FORM_SHOW_} from "../../store/types";
 
   export default {
     mixins: [overlayMixin],
@@ -119,7 +119,7 @@
         logo_: require('../../../img/logo.png'),
         home_: vth.links.home,
         toggle_: 'menu'
-      }
+      };
     },
     computed: {
       ...mapGetters({
@@ -135,7 +135,7 @@
           self.show_ = true;
           self.$nextTick(() => {
             self.$set(self.$refs.mobileMenu, 'mode', 'login');
-          })
+          });
         } else {
           // Truong hop yeu cau dong form dang nhap
           // Tat luon menu
@@ -157,8 +157,8 @@
         if (!self.show_) self.show_ = true;
         self.$nextTick(() => {
           self.$set(self.$refs.mobileMenu, 'mode', 'cart');
-        })
+        });
       }
     }
-  }
+  };
 </script>
