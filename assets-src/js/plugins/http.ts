@@ -1,6 +1,6 @@
-import qs                from 'query-string';
-import store             from '../store/index';
-import {USER_LOGGED_IN_} from "@/store/types";
+import qs               from 'query-string';
+import store            from '../store/index';
+import {USER_LOGGED_IN} from "@/store/types";
 
 const $ = jQuery;
 const mix = (_url, _query) => {
@@ -10,7 +10,7 @@ const mix = (_url, _query) => {
 };
 
 function getUserId() {
-  if (!store.getters[USER_LOGGED_IN_]) return null;
+  if (!store.getters[USER_LOGGED_IN]) return null;
   return store.state.customer.id;
 }
 
@@ -20,7 +20,7 @@ const corsObj = {
     withCredentials: true,
   },
   beforeSend: (req) => {
-    if (store.getters[USER_LOGGED_IN_])
+    if (store.getters[USER_LOGGED_IN])
       req.setRequestHeader('X-Connect-Sid', store.state.customer.id);
   },
 };

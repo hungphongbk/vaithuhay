@@ -76,7 +76,7 @@
   import {Event}                                from './components/index';
   import AppOfflineMode                         from './fragments/app__OfflineMode';
   import {tooltip}                              from '@/plugins';
-  import {USER_MUTATION_LOGIN_}                 from "@/store/types";
+  import {USER_MUTATION_LOGIN}                 from "@/store/types";
   import {$modalEvent, SystemModal}             from "@/plugins/ModalManager";
   import {SYSTEM_MODAL_HIDE, SYSTEM_MODAL_SHOW} from "@/types";
 
@@ -121,7 +121,7 @@
       }
     },
     async created() {
-      await this.$store.dispatch(USER_MUTATION_LOGIN_);
+      await this.$store.dispatch(USER_MUTATION_LOGIN);
     },
     mounted() {
       const self = this;

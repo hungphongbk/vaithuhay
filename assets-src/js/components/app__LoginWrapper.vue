@@ -5,7 +5,7 @@
     slot(:customer="customer")
 </template>
 <script>
-  import {USER_IS_LOGGING_IN_, USER_LOGIN_FORM_SHOW_, USER_MUTATION_LOGIN_} from "../store/types";
+  import {USER_IS_LOGGING_IN, USER_LOGIN_FORM_SHOW, USER_MUTATION_LOGIN} from "../store/types";
   import {delay}                                                            from "./helpers";
 
   export default {
@@ -18,10 +18,10 @@
     methods: {
       async onSubmit() {
         // console.log('submit login form')
-        this.$vthStore.commit(USER_IS_LOGGING_IN_);
-        await this.$vthStore.dispatch(USER_MUTATION_LOGIN_, this.$refs.form);
+        this.$vthStore.commit(USER_IS_LOGGING_IN);
+        await this.$vthStore.dispatch(USER_MUTATION_LOGIN, this.$refs.form);
         await delay(100);
-        this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, false);
+        this.$vthStore.commit(USER_LOGIN_FORM_SHOW, false);
       },
       async login(email, password) {
         // console.log(`login via social, get username=${email}`);

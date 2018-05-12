@@ -1,12 +1,12 @@
 import {
   FLASH_ACTION_PUSH_MESSAGE,
   FLASH_CONTEXT_SUCCESS,
-  PRODUCT_ACTION_FAVORITE_FETCH_,
-  PRODUCT_ACTION_FAVORITE_TOGGLE_,
-  PRODUCT_MUTATION_FAVORITE_ADD_,
-  PRODUCT_MUTATION_FAVORITE_REMOVE_,
+  PRODUCT_ACTION_FAVORITE_FETCH,
+  PRODUCT_ACTION_FAVORITE_TOGGLE,
+  PRODUCT_MUTATION_FAVORITE_ADD,
+  PRODUCT_MUTATION_FAVORITE_REMOVE,
   RootState,
-  USER_FAVORITES_,
+  USER_FAVORITES,
 } from "./types";
 
 import auth, {authWithoutWarning} from '../plugins/auth';
@@ -36,28 +36,28 @@ const module: Module<ProductState, RootState> = {
     };
   },
   mutations: {
-    [PRODUCT_MUTATION_FAVORITE_ADD_](state) {
+    [PRODUCT_MUTATION_FAVORITE_ADD](state) {
       state.favorite = true;
     },
-    [PRODUCT_MUTATION_FAVORITE_REMOVE_](state) {
+    [PRODUCT_MUTATION_FAVORITE_REMOVE](state) {
       state.favorite = false;
     },
   },
   actions: {
-    [PRODUCT_ACTION_FAVORITE_FETCH_]({commit, state}) {
+    [PRODUCT_ACTION_FAVORITE_FETCH]({commit, state}) {
       authWithoutWarning.wrap(async () => {
         const {value} = await ProductFavoriteAPI.fetch(state.current.id);
-        const mutation = value ? PRODUCT_MUTATION_FAVORITE_ADD_ : PRODUCT_MUTATION_FAVORITE_REMOVE_;
+        const mutation = value ? PRODUCT_MUTATION_FAVORITE_ADD : PRODUCT_MUTATION_FAVORITE_REMOVE;
         commit(mutation);
       })();
     },
-    [PRODUCT_ACTION_FAVORITE_TOGGLE_]({commit, dispatch, state}) {
+    [PRODUCT_ACTION_FAVORITE_TOGGLE]({commit, dispatch, state}) {
       auth.wrap(async () => {
         const {behavior} = await ProductFavoriteAPI.toggle(state.current.id);
-        const mutation = behavior === 'add' ? PRODUCT_MUTATION_FAVORITE_ADD_ : PRODUCT_MUTATION_FAVORITE_REMOVE_;
+        const mutation = behavior === 'add' ? PRODUCT_MUTATION_FAVORITE_ADD : PRODUCT_MUTATION_FAVORITE_REMOVE;
         commit(mutation);
         await Promise.all([
-          dispatch(USER_FAVORITES_),
+          dispatch(USER_FAVORITES),
           dispatch(FLASH_ACTION_PUSH_MESSAGE, <FlashMessage>{
             label: 'product/favorite',
             context: FLASH_CONTEXT_SUCCESS,

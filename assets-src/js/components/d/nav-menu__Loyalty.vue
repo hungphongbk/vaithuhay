@@ -18,13 +18,13 @@
     p.small.text-muted ({{$t('status',{p:loyalty.balance})}})
 </template>
 <script>
-  import {USER_LOYALTY_} from "@/store/types";
+  import {USER_LOYALTY} from "@/store/types";
 
   export default {
     name: "Loyalty",
     computed: {
       loyalty() {
-        return this.$vthStore.getters[USER_LOYALTY_];
+        return this.$vthStore.getters[USER_LOYALTY];
       }
     }
   };

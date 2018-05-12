@@ -118,7 +118,7 @@
   import LoginPanel                                                 from './app__Login.vue';
   import {UserButton}                                               from "../index";
   import {mapGetters}                                               from 'vuex';
-  import {CATEGORIES_ALL_, CATEGORIES_LIST_, USER_LOGIN_FORM_SHOW_} from "../../store/types";
+  import {CATEGORIES_ALL_, CATEGORIES_LIST_, USER_LOGIN_FORM_SHOW} from "../../store/types";
   import {searchMixin}                                              from "@/components/mixins";
   import faTimes                                                    from '@fortawesome/fontawesome-free-solid/faTimes';
   import faSignOut
@@ -174,7 +174,7 @@
         this.keyword = target.value;
       }, 300),
       login() {
-        this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, true);
+        this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
       },
       signOut() {
 

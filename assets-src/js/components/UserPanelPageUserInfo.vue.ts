@@ -1,13 +1,13 @@
 import Component                                                               from 'vue-class-component';
-import Vue                                                                     from 'vue';
+import Vue                                                                    from 'vue';
 import faTimesCircle
-                                                                               from '@fortawesome/fontawesome-free-solid/faTimesCircle';
+                                                                              from '@fortawesome/fontawesome-free-solid/faTimesCircle';
 import faHeart
-                                                                               from '@fortawesome/fontawesome-free-solid/faHeart';
+                                                                              from '@fortawesome/fontawesome-free-solid/faHeart';
 import faSave
-                                                                               from '@fortawesome/fontawesome-free-regular/faSave';
-import {USER_ACTION_UPDATE, USER_MUTATION_LOGIN_, USER_MUTATION_NAVIGATE_PAGE} from "@/store/types";
-import {DateTimePicker, FlashMessageHub}                                       from '@/components';
+                                                                              from '@fortawesome/fontawesome-free-regular/faSave';
+import {USER_ACTION_UPDATE, USER_MUTATION_LOGIN, USER_MUTATION_NAVIGATE_PAGE} from "@/store/types";
+import {DateTimePicker, FlashMessageHub}                                      from '@/components';
 
 @Component({
   components: {
@@ -63,7 +63,7 @@ export default class UserPanelPageFavorite extends Vue {
   mounted() {
     this.fetch();
     this.$vthStore.subscribe(mutation => {
-      if (mutation.type === USER_MUTATION_LOGIN_) {
+      if (mutation.type === USER_MUTATION_LOGIN) {
         this.fetch();
       }
     });

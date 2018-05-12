@@ -17,15 +17,15 @@ import {delay}                                                           from '.
 import transform                                                         from '../plugins/content-transform';
 import ripple                                                            from 'js-effect-ripple';
 import ProductModule                                                     from '../store/product';
-import {mapState}                                                        from 'vuex';
+import {mapState}                                                       from 'vuex';
 //    import {i18nFields} from '../plugins/i18n'
 import faHeart
-                                                                         from '@fortawesome/fontawesome-free-regular/faHeart';
+                                                                       from '@fortawesome/fontawesome-free-regular/faHeart';
 import faHeartSolid
-                                                                         from '@fortawesome/fontawesome-free-solid/faHeart';
+                                                                       from '@fortawesome/fontawesome-free-solid/faHeart';
 import faCartPlus
-                                                                         from '@fortawesome/fontawesome-free-solid/faCartPlus';
-import {PRODUCT_ACTION_FAVORITE_FETCH_, PRODUCT_ACTION_FAVORITE_TOGGLE_} from "@/store/types";
+                                                                       from '@fortawesome/fontawesome-free-solid/faCartPlus';
+import {PRODUCT_ACTION_FAVORITE_FETCH, PRODUCT_ACTION_FAVORITE_TOGGLE} from "@/store/types";
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -199,7 +199,7 @@ export default {
       this.commentCount = share.comment_count;
     },
     addToFavorite() {
-      return this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_TOGGLE_);
+      return this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_TOGGLE);
     }
   },
   beforeMount() {
@@ -207,7 +207,7 @@ export default {
   },
   async mounted() {
     await Promise.all([this.fetchWholesale(), this.fetchCommentCount()]);
-    this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_FETCH_);
+    this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_FETCH);
   },
   destroyed() {
     this.$vthStore.unregisterModule('product');

@@ -139,7 +139,7 @@
   import {loginMixins}                                           from '../mixins';
   import StaticOverlay                                           from '@/components/static-overlay';
   import {OrderTracking, UserButton}                             from "../index";
-  import {USER_LOGGED_IN_, USER_LOGIN_FORM_SHOW_, USER_LOYALTY_} from "../../store/types";
+  import {USER_LOGGED_IN, USER_LOGIN_FORM_SHOW, USER_LOYALTY} from "../../store/types";
   import {mapGetters}                                            from 'vuex';
   import Loyalty                                                 from './nav-menu__Loyalty';
   import ProductItem                                             from '@/components/products';
@@ -158,9 +158,9 @@
     },
     computed: {
       ...mapGetters({
-        loggedIn: USER_LOGGED_IN_,
-        loginForm: USER_LOGIN_FORM_SHOW_,
-        loyalty: USER_LOYALTY_,
+        loggedIn: USER_LOGGED_IN,
+        loginForm: USER_LOGIN_FORM_SHOW,
+        loyalty: USER_LOYALTY,
       }),
       user() {
         return this.$vthStore.state.customer;
@@ -180,12 +180,12 @@
     methods: {
       closeForm() {
         if (!this.loggedIn)
-          this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, false);
+          this.$vthStore.commit(USER_LOGIN_FORM_SHOW, false);
         this.show = false;
       },
       openForm() {
         if (!this.loggedIn)
-          this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, true);
+          this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
         else this.show = true;
       }
     },
@@ -196,7 +196,7 @@
       },
       show(value) {
         if (value && !this.loggedIn)
-          this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, true);
+          this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
       }
     }
   };

@@ -16,14 +16,14 @@ export const CART_REMOVE_ = 'cart/remove';
 export const PROMO_LIST_ = 'promo/list';
 
 //region Module: Customer
-export const USER_LOGGED_IN_ = 'user/logged-in';
-export const USER_LOGIN_FORM_SHOW_ = 'user/login-form-show';
-export const USER_MUTATION_LOGIN_ = 'user/login';
+export const USER_LOGGED_IN = 'user/logged-in';
+export const USER_LOGIN_FORM_SHOW = 'user/login-form-show';
+export const USER_MUTATION_LOGIN = 'user/login';
 export const USER_LOGIN_FAILED_ = 'user/login-failed';
-export const USER_IS_LOGGING_IN_ = 'user/is-logging-in';
-export const USER_IS_LOGGED_IN_ = 'user/is-logged-in';
-export const USER_LOYALTY_ = 'user/loyalty';
-export const USER_FAVORITES_ = 'user/favorites';
+export const USER_IS_LOGGING_IN = 'user/is-logging-in';
+export const USER_IS_LOGGED_IN = 'user/is-logged-in';
+export const USER_LOYALTY = 'user/loyalty';
+export const USER_FAVORITES = 'user/favorites';
 export const USER_TOGGLE_FAVORITE = 'user/toggle-favorite';
 export const USER_MUTATION_UPDATE = 'user/update';
 export const USER_ACTION_UPDATE = 'user/update';
@@ -32,10 +32,10 @@ export const USER_MUTATION_INIT_PAGES = 'user/init-pages';
 export const USER_MUTATION_NAVIGATE_PAGE = 'user/navigate-page';
 //endregion
 
-export const PRODUCT_MUTATION_FAVORITE_ADD_ = 'product/add-favorite';
-export const PRODUCT_MUTATION_FAVORITE_REMOVE_ = 'product/remove-favorite';
-export const PRODUCT_ACTION_FAVORITE_FETCH_ = 'product/toggle-fetch';
-export const PRODUCT_ACTION_FAVORITE_TOGGLE_ = 'product/toggle-favorite';
+export const PRODUCT_MUTATION_FAVORITE_ADD = 'product/add-favorite';
+export const PRODUCT_MUTATION_FAVORITE_REMOVE = 'product/remove-favorite';
+export const PRODUCT_ACTION_FAVORITE_FETCH = 'product/toggle-fetch';
+export const PRODUCT_ACTION_FAVORITE_TOGGLE = 'product/toggle-favorite';
 
 //region Module: Flash
 export const FLASH_CONTEXT_SUCCESS = 'success';

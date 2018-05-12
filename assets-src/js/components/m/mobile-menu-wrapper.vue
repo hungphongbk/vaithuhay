@@ -106,7 +106,7 @@
   import {overlayMixin} from '../mixins';
 
   import {mapGetters}            from 'vuex';
-  import {USER_LOGIN_FORM_SHOW_} from "../../store/types";
+  import {USER_LOGIN_FORM_SHOW} from "../../store/types";
 
   export default {
     mixins: [overlayMixin],
@@ -123,7 +123,7 @@
     },
     computed: {
       ...mapGetters({
-        loginForm: USER_LOGIN_FORM_SHOW_
+        loginForm: USER_LOGIN_FORM_SHOW
       })
     },
     watch: {
@@ -146,7 +146,7 @@
     },
     methods: {
       goBack() {
-        this.$vthStore.commit(USER_LOGIN_FORM_SHOW_, false);
+        this.$vthStore.commit(USER_LOGIN_FORM_SHOW, false);
         const mobileMenu = this.$refs.mobileMenu;
         if (mobileMenu && typeof mobileMenu.goBack === 'function')
           mobileMenu.goBack();

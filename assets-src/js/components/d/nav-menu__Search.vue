@@ -1,15 +1,21 @@
-<style lang="scss" scoped>
+<style lang="scss" module>
   @import "../../../sass/inc/inc";
 
-  form {
-    .form-control, .btn {
-      background: #ffe066;
-    }
-    .btn {
-      cursor: default;
-      padding: 6px 12px 7px;
+  .nav-menu-search{
+    :global{
+      form {
+        .form-control, .btn {
+          background: #ffe066;
+        }
+        .btn {
+          cursor: default;
+          padding: 6px 12px 7px;
+        }
+      }
     }
   }
+
+
 
   .search-panel {
     position: absolute;
@@ -22,7 +28,7 @@
     width: 500px;
     background: white;
     box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.35);
-    .btn {
+    :global .btn {
       padding: $line-height-computed*.7 $grid-gutter-width;
     }
   }
@@ -55,7 +61,7 @@
   }
 </style>
 <template lang="pug">
-  div
+  div(:class="$style.navMenuSearch")
     form.navbar-form
       .input-group.add-on
         input.form-control#search(:placeholder="$t('0')", v-model="keyword")
@@ -63,25 +69,25 @@
           .btn
             i.fa.fa-search
     transition(name="vth-fade")
-      div.search-panel(v-if="isOpen_")
+      div(v-if="isOpen_", :class="$style.searchPanel")
         .btn.btn-sm(style="margin-left: 11px;", :class="view==='product'?'btn-dark':'btn-grey'", @click="view='product'") Sản phẩm
         .btn.btn-sm(:class="view==='article'?'btn-dark':'btn-grey'", @click="view='article'") Bài viết
         paginate.mt-1(:for_="view==='product'?searchedProducts:searchedArticles", :perPage="6")
           template(slot-scope="p")
             ul
-              li.search-item(v-for="i in p.list")
+              li(v-for="i in p.list", :class="$style.searchItem")
                 a(:href="i.url")
                   template(v-if="i._type==='product'")
-                    .ratio-1-1.thumb
+                    .ratio-1-1(:class="$style.thumb")
                       .content
                         img(:src="i.thumbnail")
-                    h5.title {{i._title[$i18n.locale]}}
+                    h5(:class="$style.title") {{i._title[$i18n.locale]}}
                     span.regular-price {{i.price.current}}
                   template(v-else)
-                    .ratio-1-1.thumb
+                    .ratio-1-1(:class="$style.thumb")
                       .content
                         img(:src="i.image")
-                    h5.title {{i.title}}
+                    h5(:class="$style.title") {{i.title}}
 </template>
 <script>
   import {Paginate}    from "@/components";
