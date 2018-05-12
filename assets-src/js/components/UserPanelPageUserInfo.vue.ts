@@ -12,7 +12,7 @@ import {DateTimePicker, FlashMessageHub}                                       f
 @Component({
   components: {
     FlashMessageHub,
-    DateTimePicker
+    DateTimePicker,
   },
   data() {
     return {
@@ -24,6 +24,7 @@ import {DateTimePicker, FlashMessageHub}                                       f
 })
 export default class UserPanelPageFavorite extends Vue {
   name: string = '';
+  email: string = '';
   birthday = null;
   gender: number = null;
 
@@ -45,6 +46,7 @@ export default class UserPanelPageFavorite extends Vue {
 
   fetch() {
     this.name = this.customer.name;
+    this.email=this.customer.email;
     this.gender = this.customer.gender;
     this.birthday = this.customer.birthday;
   }

@@ -19,6 +19,10 @@ const corsObj = {
   xhrFields: {
     withCredentials: true,
   },
+  beforeSend: (req) => {
+    if (store.getters[USER_LOGGED_IN_])
+      req.setRequestHeader('X-Connect-Sid', store.state.customer.id);
+  },
 };
 
 export default {

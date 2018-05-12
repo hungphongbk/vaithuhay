@@ -42,6 +42,12 @@
           span Truy cập&nbsp;
             a(href="#", @click="goToPageAddress") Danh sách địa chỉ
       .form-group.row
+        label.col-form-label.col-sm-3 E-mail
+        .col-sm-9
+          input.form-control(type="text" disabled :value="email")
+          //.mt-2
+            a(href="#") Thay đổi E-mail
+      .form-group.row
         label.col-form-label.col-sm-3 Ngày sinh
         .col-sm-9
           date-time-picker(v-model="birthday")
