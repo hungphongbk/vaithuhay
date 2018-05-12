@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, dist),
-    publicPath: isProduction ? 'https://api.v1.hungphongbk.com/vaithuhay/' : 'https://localhost:8080/',
+    publicPath: isProduction ? 'https://server.vaithuhay.com/' : 'https://localhost:8080/',
     filename: '[name].experiment.js' + (isProduction ? '?[chunkhash]' : ''),
     chunkFilename: '[name].bundle.experiment.js?[chunkhash]',
   },

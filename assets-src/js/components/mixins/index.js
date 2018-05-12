@@ -89,7 +89,7 @@ export const loginMixins = {
       FB.login(async ({authResponse}) => {
         console.log(authResponse);
         if (authResponse) {
-          const [email, password] = atob(await $.post('https://api.v1.hungphongbk.com/vaithuhay/b/social/auth/facebook', {access_token: authResponse.accessToken})).split(':');
+          const [email, password] = atob(await $.post('https://server.vaithuhay.com/b/social/auth/facebook', {access_token: authResponse.accessToken})).split(':');
           this.$refs.form.login(email, password);
         }
       }, {scope: 'email'});
@@ -137,7 +137,7 @@ export const orderTrackingMixin = {
   },
   asyncComputed: {
     async searched() {
-      const rs = await $.get('https://api.v1.hungphongbk.com/vaithuhay/b/order-tracking?' + qs.stringify(this.criteria));
+      const rs = await $.get('https://server.vaithuhay.com/b/order-tracking?' + qs.stringify(this.criteria));
       if (rs.length > 0) this.cached_ = rs;
       return this.cached_;
     }

@@ -60,6 +60,7 @@
         else promise = Promise.all(this.label.map(l =>
           promise = this.$vthStore.dispatch(FLASH_ACTION_POP_MESSAGE, l)));
         this.messages = await promise;
+        console.log(`fetch ${this.messages.length} messages`);
       }
     },
     async mounted() {

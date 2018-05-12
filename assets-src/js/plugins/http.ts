@@ -14,10 +14,21 @@ function getUserId() {
   return store.state.customer.id;
 }
 
+const corsObj = {
+  crossDomain: true,
+  xhrFields: {
+    withCredentials: true,
+  },
+};
+
 export default {
   get(url, auth = false): Promise<any> {
     const newUrl = mix(url, auth ? {userId: getUserId()} : {});
-    return $.get(newUrl);
+    return $.ajax({
+      method: 'GET',
+      url: newUrl,
+      ...corsObj,
+    });
   },
   post(url, data = {}, auth = false): Promise<any> {
     const newData = Object.assign({}, data, auth ? {userId: getUserId()} : {});
@@ -26,9 +37,7 @@ export default {
       method: 'POST',
       url,
       data: newData,
-      xhrFields: {
-        withCredentials: true,
-      },
+      ...corsObj,
     });
   },
   put(url, data = {}): Promise<any> {
@@ -36,18 +45,14 @@ export default {
       method: 'PUT',
       url,
       data,
-      xhrFields: {
-        withCredentials: true,
-      },
+      ...corsObj,
     });
   },
   del(url): Promise<any> {
     return $.ajax({
       method: 'DELETE',
       url,
-      xhrFields: {
-        withCredentials: true,
-      },
+      ...corsObj,
     });
   },
 };

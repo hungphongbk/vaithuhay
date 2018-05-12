@@ -128,7 +128,7 @@
         const token = await messaging.getToken();
         console.log(token);
         self.token = token;
-        await post('https://api.v1.hungphongbk.com/vaithuhay/b/noti/register', {token});
+        await post('https://server.vaithuhay.com/b/noti/register', {token});
         window.close();
       } catch (e) {
         alert(e.message);

@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const src = '../assets-src',
   dist = '../assets',
   isProduction = process.env.NODE_ENV === 'production',
-  publicPath = isProduction ? 'https://api.v1.hungphongbk.com/vaithuhay/' : 'https://localhost:8080/';
+  publicPath = isProduction ? 'https://server.vaithuhay.com/' : 'https://localhost:8080/';
 const extractCss = new ExtractTextPlugin({
   filename: "[name].css?[contenthash]"
 });
@@ -148,7 +148,7 @@ module.exports = {
     hot: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
-      Link: '<https://api.v1.hungphongbk.com/vaithuhay/sw.js>; rel="serviceworker"'
+      Link: '<https://server.vaithuhay.com/sw.js>; rel="serviceworker"'
     },
     publicPath: 'https://localhost:8080/'
   }

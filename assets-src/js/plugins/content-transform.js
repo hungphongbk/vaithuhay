@@ -105,7 +105,7 @@ async function productComboEmbed($html) {
     if ($(child).data('type') === 'vaithuhay' && $(child).data('embed-type') === 'wholesale') {
       // console.log($(child).data('embed-data'))
       const {apply, rule: uuid} = $(child).data('embed-data'),
-        [{rules}] = await $.get(`https://api.v1.hungphongbk.com/vaithuhay/b/products/${apply}/wholesale?i=${uuid}`);
+        [{rules}] = await $.get(`https://server.vaithuhay.com/b/products/${apply}/wholesale?i=${uuid}`);
       // console.log(rules);
       $(child).replaceWith(`<product-whole-sale-item class='in-content' :apply='${apply * 1}' :rule=\'${JSON.stringify(rules[0])}\'></product-whole-sale-item>`);
     }

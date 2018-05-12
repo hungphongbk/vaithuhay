@@ -112,7 +112,7 @@
         auth.wrap(async () => {
           const {status} = await $.ajax({
             type: 'POST',
-            url: `https://api.v1.hungphongbk.com/vaithuhay/b/products/${window.product.current.id}/ask`,
+            url: `https://server.vaithuhay.com/b/products/${window.product.current.id}/ask`,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: $.param({
               ask: self.newAsk

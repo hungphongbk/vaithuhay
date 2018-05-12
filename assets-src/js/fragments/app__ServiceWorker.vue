@@ -97,7 +97,7 @@
           .catch(reject);
       } else reject();
     }),
-    registerToken = (token, dev = false) => $.post('https://api.v1.hungphongbk.com/vaithuhay/b/noti/register', {
+    registerToken = (token, dev = false) => $.post('https://server.vaithuhay.com/b/noti/register', {
       token,
       ...(dev ? {topics: '/topics/dev'} : {}),
       refresh: true

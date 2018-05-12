@@ -54,7 +54,7 @@ export default function (mainAssets) {
           newAssets = readCurrent(assetsByChunkName),
           uploadFiles = diff(oldAssets, newAssets);
 
-        axios.post('https://api.v1.hungphongbk.com/vaithuhay/b/meta?key=assetHash', {
+        axios.post('https://server.vaithuhay.com/b/meta?key=assetHash', {
           hash,
           ...zipObject(mainAssets, mainAssets.map(asset => newAssets[asset]))
         }).then(function () {

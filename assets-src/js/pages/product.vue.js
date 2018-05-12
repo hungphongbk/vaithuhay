@@ -189,7 +189,7 @@ export default {
       self.$refs.images.reInit();
     },
     async fetchWholesale() {
-      const data = await $.get('https://api.v1.hungphongbk.com/vaithuhay/b/products/' + current.id + '/wholesale');
+      const data = await $.get('https://server.vaithuhay.com/b/products/' + current.id + '/wholesale');
       if (data.length > 0) {
         this.wholesale = data.map(({rules}, index) => new WholeSale(index + 1, rules[0], this));
       }

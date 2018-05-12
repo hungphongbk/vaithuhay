@@ -139,7 +139,7 @@ exports.default = function (mainAssets) {
                   oldAssets = readOld(), newAssets = readCurrent(assetsByChunkName), uploadFiles = diff(oldAssets, newAssets);
 
 
-                  _axios2.default.post('https://api.v1.hungphongbk.com/vaithuhay/b/meta?key=assetHash', (0, _extends3.default)({
+                  _axios2.default.post('https://server.vaithuhay.com/b/meta?key=assetHash', (0, _extends3.default)({
                     hash: hash
                   }, (0, _zipObject2.default)(mainAssets, mainAssets.map(function (asset) {
                     return newAssets[asset];

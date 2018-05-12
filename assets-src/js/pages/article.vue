@@ -335,9 +335,9 @@
       }
     },
     async mounted() {
-      const {item} = await $.get('https://api.v1.hungphongbk.com/vaithuhay/b/articles/' + id + '/related');
+      const {item} = await $.get('https://server.vaithuhay.com/b/articles/' + id + '/related');
       if (typeof item === 'undefined' || item.length === 0) return;
-      const products = await Promise.all(item.map(i => $.get('https://api.v1.hungphongbk.com/vaithuhay/b/products?id=' + i)));
+      const products = await Promise.all(item.map(i => $.get('https://server.vaithuhay.com/b/products?id=' + i)));
       const relateds = await Promise.all(products.map(({handle}) => new Promise(resolve => {
         $.get('/products/' + handle + '/?view=json')
           .then(rs => {

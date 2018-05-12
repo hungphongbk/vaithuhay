@@ -43,12 +43,8 @@
             a(href="#", @click="goToPageAddress") Danh sách địa chỉ
       .form-group.row
         label.col-form-label.col-sm-3 Ngày sinh
-        .col-sm-3
-          input.form-control(type="text")
-        .col-sm-3
-          input.form-control(type="text")
-        .col-sm-3
-          input.form-control(type="text")
+        .col-sm-9
+          date-time-picker(v-model="birthday")
       .form-group.row
         .col-sm-9.col-sm-offset-3
           btn.btn-theme(@click="update", :icon="faSave") CẬP NHẬT

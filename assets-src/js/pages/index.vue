@@ -39,7 +39,7 @@
       };
     },
     async mounted() {
-      const data = await $.get('https://api.v1.hungphongbk.com/vaithuhay/b/settings/page/index');
+      const data = await $.get('https://server.vaithuhay.com/b/settings/page/index');
       Object.assign(this.data, data);
     }
   };
