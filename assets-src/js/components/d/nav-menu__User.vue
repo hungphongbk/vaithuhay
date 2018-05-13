@@ -3,14 +3,6 @@
 
   $user-panel-width: 25vw;
 
-  form {
-    @extend %box-shadow-2;
-    background: #fbfcfd;
-    color: #222;
-    font-weight: 600;
-    padding: 20px;
-  }
-
   .popover {
     display: block;
     width: $user-panel-width;
@@ -37,16 +29,20 @@
                                          supported by Chrome and Opera */
       }
     }
-    &-user {
-      ul {
-        margin-top: 1.7rem;
-        border-top: 1px solid #ccc;
-      }
-    }
   }
 </style>
 <style lang="scss" module>
   @import "../../../sass/inc/inc";
+
+  .nav-menu-user{
+    form {
+      @extend %box-shadow-2;
+      background: #fbfcfd;
+      color: #222;
+      font-weight: 600;
+      padding: 20px;
+    }
+  }
 
   .loginForm {
     @at-root .isLoggingIn > * {
@@ -54,7 +50,14 @@
     }
   }
 
-  .popoverItem {
+  .popover-user{
+    ul {
+      margin-top: 1.7rem;
+      border-top: 1px solid #ccc;
+    }
+  }
+
+  .popover-item {
     @include font-size-with-line-height($font-size-base*1.1);
     > a {
       @extend %reset-link;
@@ -81,7 +84,7 @@
   }
 </style>
 <template lang="pug">
-  user-button(@click="show=!show")
+  user-button(:class="$style.navMenuUser", @click="show=!show")
     static-overlay(name_="vth-fade-slide-down-bz", @click.self.native="closeForm", v-if="!loggedIn")
       .container
         .row(@click.self="show_=false")
@@ -110,7 +113,7 @@
       transition(name="vth-fade-slide-up")
         .popover.bottom(v-if="show")
           .arrow
-          .popover-content.text-center.popover-user
+          .popover-content.text-center(:class="$style.popoverUser")
             p
               h4 {{$t('hello')}}&nbsp;
                 strong {{user.name}}

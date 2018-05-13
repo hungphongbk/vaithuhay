@@ -11,7 +11,10 @@
       "es7",
       "dom",
       "scripthost",
-      "es2015.promise"
+      "es2015",
+      "es2015.promise",
+      "es2015.symbol",
+      "es2015.symbol.wellknown"
     ],
     "rootDir": "assets-src/",
     "baseUrl": "./assets-src/",
@@ -22,6 +25,9 @@
     },
     "experimentalDecorators": true,
     "allowJs": true,
+    "types": [
+      "node"
+    ],
     "typeRoots": [
       "node_modules/@types"
     ]
@@ -36,6 +42,7 @@
     "assets-src/js/**/*.vue"
   ],
   "files": [
-    "assets-src/js/globals.d.ts"
+    "./typings/index.d.ts",
+    "./assets-src/js/globals.d.ts"
   ]
 }

@@ -19,14 +19,14 @@ const corsObj = {
   xhrFields: {
     withCredentials: true,
   },
-  beforeSend: (req) => {
+  beforeSend(req: JQueryXHR) {
     if (store.getters[USER_LOGGED_IN])
-      req.setRequestHeader('X-Connect-Sid', store.state.customer.id);
+      req.setRequestHeader('X-Connect-Sid', store.state.customer.id as string);
   },
 };
 
 export default {
-  get(url, auth = false): Promise<any> {
+  get(url, auth = false): Promise<any> | JQueryXHR {
     const newUrl = mix(url, auth ? {userId: getUserId()} : {});
     return $.ajax({
       method: 'GET',
@@ -34,7 +34,7 @@ export default {
       ...corsObj,
     });
   },
-  post(url, data = {}, auth = false): Promise<any> {
+  post(url, data = {}, auth = false): Promise<any> | JQueryXHR {
     const newData = Object.assign({}, data, auth ? {userId: getUserId()} : {});
     // return $.post(url, newData);
     return $.ajax({
@@ -44,7 +44,7 @@ export default {
       ...corsObj,
     });
   },
-  put(url, data = {}): Promise<any> {
+  put(url, data = {}): Promise<any> | JQueryXHR {
     return $.ajax({
       method: 'PUT',
       url,
@@ -52,7 +52,7 @@ export default {
       ...corsObj,
     });
   },
-  del(url): Promise<any> {
+  del(url): Promise<any> | JQueryXHR {
     return $.ajax({
       method: 'DELETE',
       url,
