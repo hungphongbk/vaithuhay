@@ -1,0 +1,197 @@
+@import "../../sass/inc/inc";
+
+%fix-backface {
+  -webkit-perspective: 0;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  visibility: visible;
+  backface-visibility: hidden;
+}
+
+$thumbnail-height: 280px;
+$effect-time: .25s;
+.post-item {
+  composes: thumbnail from global;
+  @extend %reset-link;
+  background-color: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 0;
+
+  p {
+    font-size: 0.86 * $font-size-base;
+    color: #888;
+  }
+  :global .thumb {
+    width: 100%;
+  }
+  :global .bottom {
+    padding: 9px {
+      top: 0;
+    }
+  }
+
+  &:hover {
+    h4 {
+      @extend %theme-link;
+    }
+  }
+}
+
+// SALE BADGE
+.sale {
+  composes: content from global;
+  &, & * {
+    @extend %fix-backface;
+  }
+  overflow: visible !important;
+
+  @mixin f($size) {
+    right: $size/10;
+    top: -$size/5;
+
+    height: $size;
+    width: $size;
+    font-size: $size/5;
+
+    .percentage {
+      font-size: ($size/5)*1.15;
+      font-weight: 700;
+    }
+  }
+  > div {
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background-color: $theme-red-color;
+    border-radius: 50%;
+
+    &:before {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 4px);
+      width: calc(100% - 4px);
+      content: '';
+      visibility: visible;
+      border-radius: 50%;
+      border: 1px dashed white;
+    }
+
+    @include f(60px);
+    @include responsive('xs-max') {
+      @include f(50px);
+    }
+  }
+}
+
+// composes with 'content' (global)
+.caption-overlay {
+  composes: content from global;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  &, & * {
+    @extend %fix-backface;
+  }
+}
+
+.prices {
+  composes: text-right from global;
+  > div {
+    display: inline-block;
+    width: auto;
+    @mixin padding($s) {
+      padding: $s*0.7 $s*1.5 {
+        bottom: $s;
+      }
+    }
+    @include padding($thumbnail-caption-padding);
+    @include responsive('xs-max') {
+      @include padding($thumbnail-caption-padding*0.7);
+    }
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+  span {
+    color: white;
+  }
+  &.is-sale .regular-price {
+    font-size: 1.12*$font-size-base;
+    @media screen and (max-width: $screen-xs-max) {
+      font-size: 0.85*$font-size-base;
+    }
+    opacity: 0.65;
+    text-decoration: line-through;
+  }
+  &.is-sale .sale-price, .regular-price {
+    font-size: 1.62*$font-size-base;
+    @media screen and (max-width: $screen-xs-max) {
+      font-size: 1.12*$font-size-base;
+    }
+  }
+}
+
+.description {
+  line-height: $line-height-computed*1.1;
+}
+
+.post-item h4 {
+  font-weight: 700;
+  font-size: $font-size-h4*0.85;
+  @include font-size-with-line-height($font-size-h4*0.85);
+  @media screen and (max-width: $screen-xs-max) {
+    @include font-size-with-line-height($font-size-h4*0.75);
+  }
+}
+
+.category {
+  composes: text-muted from global;
+  @include responsive('xs-max') {
+    @include font-size-with-line-height($font-size-h5*0.9);
+    margin-top: 0;
+  }
+}
+
+// composes with 'fa fa-cart-plus' (global), remove soon for replacement with font-awesome 5
+.add-to-cart-btn {
+  composes: fa fa-cart-plus from global;
+  transition: all $effect-time ease;
+  opacity: 1;
+  &:after {
+    position: absolute;
+    display: block;
+    content: '';
+    top: 50%;
+    left: 50%;
+    height: 1px;
+    width: 1px;
+    border-radius: 50%;
+    z-index: -1;
+    background-color: #009688;
+    transform: scale(0);
+    opacity: 0;
+    transition: all $effect-time ease;
+  }
+  &.pre-added {
+    opacity: 0;
+  }
+  &.added {
+    background-color: #009688 !important;
+    color: white;
+    &:after {
+      transform: scale(400);
+      opacity: .9;
+    }
+  }
+}
+
+.caption {
+  composes: caption from global;
+  height: $line-height-computed*9.5;
+  @include responsive('xs-max') {
+    height: $line-height-computed*6.8;
+  }
+}

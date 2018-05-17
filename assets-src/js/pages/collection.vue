@@ -5,93 +5,11 @@
     text-align: center;
   }
 
-  .vth-wc-archive {
-    @at-root .archive-carousel {
-      @include responsive('md-min') {
-        background-color: #f3f3f3;
-        padding: 90px 0 30px 0;
-        position: relative;
-        .container > div {
-          overflow-x: hidden;
-          padding: 100px 0;
-        }
-        /deep/ {
-          .main, .slick-list {
-            overflow: unset;
-          }
-          .main-outer {
-            position: initial;
-          }
-          .slick-slide {
-            transition: all $animation-time*3 ease;
-            transform: scale(1);
-            will-change: transform;
-          }
-          .slick-center {
-            transform: scale(1.65);
-            z-index: 2;
-            @include _(box-shadow-2);
-          }
-        }
-      }
-
-      @include responsive('sm-max') {
-        .product-loop {
-          margin-bottom: 0 {
-            left: -10px;
-            right: -10px;
-          }
-        }
-      }
-    }
-
-    .archive-list {
-      background-color: $theme-color;
-      padding-bottom: $line-height-computed*2.7;
-    }
-  }
-
-  .title {
-    @extend %center;
-    .page-title {
-      display: inline-block;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: white;
-      @include font-size-with-line-height($font-size-h1*1.15);
-      @include responsive('xs-max') {
-        @include font-size-with-line-height($font-size-h1*0.9);
-      }
-    }
-    .overlay-selector.cat-selector {
-      text-align: center;
-      /deep/ .indicator .fa {
-        font-size: $font-size-h1*1.15;
-        color: white;
-        opacity: 0;
-        transform: translateX(50%);
-        transition: all $animation-time ease;
-      }
-      &:hover /deep/ .indicator .fa {
-        opacity: 1;
-        transform: translateX(0);
-      }
-      a {
-        @extend %reset-link;
-        display: block;
-        text-align: left;
-      }
-    }
-  }
-
   .archive-list {
     position: relative;
-    .title {
-      padding: {
-        top: $line-height-computed;
-        bottom: $line-height-computed;
-      }
-    }
+    background-color: $theme-color;
+    padding-bottom: $line-height-computed*2.7;
+
     .list {
       padding: 0 50px {
         top: 50px;
@@ -122,58 +40,6 @@
     }
   }
 
-  .sort-form {
-    @include responsive('sm-min') {
-      text-align: center;
-    }
-    > div {
-      display: inline-block;
-      font-size: $font-size-base*1.4;
-      @include responsive('xs-max') {
-        font-size: $font-size-base;
-        margin-bottom: $font-size-base*0.7;
-      }
-    }
-    margin-bottom: 40px;
-    @include responsive('xs-max') {
-      margin-bottom: $grid-gutter-width/2;
-    }
-    .overlay-selector.sort-selector {
-      display: inline-block;
-      margin-left: $grid-gutter-width;
-      @include responsive('sm-min') {
-        min-width: 240px;
-      }
-
-      .sort-title {
-        text-align: left;
-      }
-
-      /deep/ .indicator {
-        padding-bottom: 4px;
-        @include responsive('xs-max') {
-          padding-bottom: 2px;
-        }
-        border-bottom: 1px solid;
-      }
-    }
-    .cat {
-      @extend %reset-link;
-      display: inline-block;
-      h2 {
-        color: darken(#fff, 20%);
-        &:hover {
-          color: #fff;
-        }
-      }
-    }
-    @at-root .sort-title {
-      @include responsive('xs-max') {
-        @include font-size-with-line-height($font-size-h5)
-      }
-    }
-  }
-
   @include responsive('xs-max') {
     .select-cat-list {
       margin: {
@@ -192,9 +58,131 @@
     top: -$navbar-height;
   }
 </style>
+<style lang="scss" module>
+  @import "../../sass/inc/inc";
+
+  %center {
+    text-align: center;
+  }
+
+  .vth-wc-archive {
+    composes: vth-wc-archive from global;
+    @at-root .archive-carousel {
+      @include responsive('md-min') {
+        background-color: #f3f3f3;
+        padding: 90px 0 30px 0;
+        position: relative;
+        :global{
+          .container > div {
+            overflow-x: hidden;
+            padding: 100px 0;
+          }
+          .main, .slick-list {
+            overflow: unset;
+          }
+          .main-outer {
+            position: initial;
+          }
+          .slick-slide {
+            transition: all $animation-time*3 ease;
+            transform: scale(1);
+            will-change: transform;
+          }
+          .slick-center {
+            transform: scale(1.65);
+            z-index: 2;
+            @include _(box-shadow-2);
+          }
+        }
+      }
+
+      @include responsive('sm-max') {
+        :global .product-loop {
+          margin-bottom: 0 {
+            left: -10px;
+            right: -10px;
+          }
+        }
+      }
+    }
+  }
+
+  .title {
+    @extend %center;
+    padding: {
+      top: $line-height-computed;
+      bottom: $line-height-computed;
+    }
+    @at-root .page-title {
+      display: inline-block;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: white;
+      @include font-size-with-line-height($font-size-h1*1.15);
+      @include responsive('xs-max') {
+        @include font-size-with-line-height($font-size-h1*0.9);
+      }
+    }
+  }
+
+  .sort-form {
+    @include responsive('sm-min') {
+      text-align: center;
+    }
+    > div {
+      display: inline-block;
+      font-size: $font-size-base*1.4;
+      @include responsive('xs-max') {
+        font-size: $font-size-base;
+        margin-bottom: $font-size-base*0.7;
+      }
+    }
+    margin-bottom: 40px;
+    @include responsive('xs-max') {
+      margin-bottom: $grid-gutter-width/2;
+    }
+
+    :global .overlay-selector.sort-selector {
+      display: inline-block;
+      margin-left: $grid-gutter-width;
+      @include responsive('sm-min') {
+        min-width: 240px;
+      }
+
+      :local .sort-title {
+        text-align: left;
+      }
+
+      /deep/ .indicator {
+        padding-bottom: 4px;
+        @include responsive('xs-max') {
+          padding-bottom: 2px;
+        }
+        border-bottom: 1px solid;
+      }
+    }
+
+    @at-root a.cat {
+      @extend %reset-link;
+      display: inline-block;
+      h2 {
+        color: darken(#fff, 20%);
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+    .sort-title {
+      @include responsive('xs-max') {
+        @include font-size-with-line-height($font-size-h5)
+      }
+    }
+  }
+</style>
 <template lang="pug">
-  .vth-wc-archive
-    .archive-carousel(v-if="slides.length>0")
+  //.vth-wc-archive
+  div(:class="$style.vthWcArchive")
+    div(:class="$style.archiveCarousel", v-if="slides.length>0")
       .container
         product-loop(:slider-opts="carousel_", :list="slides")
           template(slot="item", slot-scope="p")
@@ -203,24 +191,24 @@
     .archive-list
       #main-list
       .container
-        .title
-          h1.page-title {{currentCategory_.title}}
-        .sort-form
+        div(:class="$style.title")
+          h1(:class="$style.pageTitle") {{currentCategory_.title}}
+        div(:class="$style.sortForm")
           div(style="margin-right: 30px")
             span Sản phẩm
             overlay-selector.sort-selector(:list="categories_")
               template(slot="current")
                 span {{currentCategory_.title}}
               template(slot="item", slot-scope="p")
-                a(:href="p.item.url").cat
-                  h2.sort-title {{p.item.title}}
+                a(:class="$style.cat", :href="p.item.url")
+                  h2(:class="$style.sortTitle") {{p.item.title}}
           div
             span Sắp xếp bởi
             overlay-selector.sort-selector(:list="sort_", v-model="currentSort_")
               template(slot="current", slot-scope="p")
                 span {{p.item.title}}
               template(slot="item", slot-scope="p")
-                h2.sort-title {{p.item.title}}
+                h2(:class="$style.sortTitle") {{p.item.title}}
         .list
           product-loop.row.gutter-10.gutter-sm-30(v-if="products.length<20", :list="products")
             template(slot="item", slot-scope="p")
@@ -234,12 +222,12 @@
                   product-item.product-item(:item="item")
 </template>
 <script>
-  import {ItemLoop, OverlaySelector, PageSlider, Paginate}                   from '../components/index';
-  import ProductItem                                                         from '@/components/products';
-  import Slick                                                               from 'vue-slick';
-  import {mapGetters}                                                        from 'vuex';
+  import {ItemLoop, OverlaySelector, PageSlider, Paginate} from '../components/index';
+  import ProductItem from '@/components/products';
+  import Slick from 'vue-slick';
+  import {mapGetters} from 'vuex';
   import {CATEGORIES_LIST_, PRODUCTS_FETCH_, PRODUCTS_LIST_, PRODUCTS_SORT_} from '../store/types';
-  import ProductsModule                                                      from '../store/products';
+  import ProductsModule from '../store/products';
 
   const $ = jQuery;
 
