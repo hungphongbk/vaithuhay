@@ -48,10 +48,11 @@
     "bootstrap-sass": "^3.3.7",
     "bootstrap-select": "^1.13.1",
     "cache-loader": "^1.2.2",
+    "clean-css-loader": "^1.0.1",
     "closure-webpack-plugin": "0.0.24",
     "compression-webpack-plugin": "^1.1.11",
     "cross-env": "^5.1.4",
-    "css-loader": "^0.28.11",
+    "css-loader": "https://github.com/hungphongbk/css-loader#new-cssmodule",
     "detect-browser": "^2.4.0",
     "es6-tween": "^5.2.2",
     "expose-loader": "^0.7.5",
@@ -61,10 +62,12 @@
     "firebase": "^4.13.1",
     "flow-bin": "^0.71.0",
     "font-awesome": "^4.7.0",
+    "generate-json-webpack-plugin": "^0.3.1",
     "group-css-media-queries-loader": "^1.0.4",
     "html-loader": "^0.5.5",
     "html-webpack-inline-source-plugin": "0.0.9",
     "html-webpack-plugin": "^2.30.1",
+    "hungphongbk-webpack-build-utils": "https://github.com/hungphongbk/hungphongbk-webpack-build-utils",
     "i18n-webpack-plugin": "^1.0.0",
     "image-maxsize-webpack-loader": "^1.0.0",
     "image-webpack-loader": "^3.6.0",
@@ -148,6 +151,10 @@
     "webpack-merge": "^4.1.2",
     "webpack-s3-plugin": "latest",
     "workbox-webpack-plugin": "^2.1.3",
-    "yaml-loader": "^0.5.0"
+    "yaml-loader": "^0.5.0",
+    "autoprefixer": "latest"
+  },
+  "dependencies": {
+    "postcss-loader": "^2.1.5"
   }
 }

@@ -1,33 +1,6 @@
 <style lang="scss" scoped="">
   @import "../../sass/inc/inc";
 
-  p {
-    @include font-size-with-line-height(0.87*$font-size-base);
-  }
-
-  .site-footer {
-    padding-bottom: 20px;
-  }
-
-  #contact-info {
-    background: rgba(0, 0, 0, 0) no-repeat no-repeat scroll center center;
-    $icon-size: $line-height-computed*2;
-    .fa {
-      display: inline-block;
-      height: $icon-size;
-      width: $icon-size;
-      line-height: $icon-size;
-      text-align: center;
-      border-radius: 50px;
-      background-color: rgba(#000, .15);
-      margin-right: 1em;
-    }
-    .btn {
-      font-size: $font-size-base;
-      margin-top: 3px;
-    }
-  }
-
   ul.list {
     li > a {
       @extend %reset-link;
@@ -98,6 +71,37 @@
 <style lang="scss" module="">
   @import "../../sass/inc/inc";
 
+  .site-footer-outer{
+    p {
+      @include font-size-with-line-height(0.87*$font-size-base);
+    }
+
+    @at-root .contact-info {
+      background: rgba(0, 0, 0, 0) no-repeat no-repeat scroll center center;
+      $icon-size: $line-height-computed*2;
+      :global{
+        .fa {
+          display: inline-block;
+          height: $icon-size;
+          width: $icon-size;
+          line-height: $icon-size;
+          text-align: center;
+          border-radius: 50px;
+          background-color: rgba(#000, .15);
+          margin-right: 1em;
+        }
+        .btn {
+          font-size: $font-size-base;
+          margin-top: 3px;
+        }
+      }
+    }
+  }
+
+  .site-footer {
+    padding-bottom: 20px;
+  }
+
   .footerWidgetPanel {
     margin: 24px 0;
   }
@@ -122,14 +126,14 @@
   }
 </style>
 <template lang="pug">
-  footer
+  footer(:class="$style.siteFooterOuter")
     .container
       .row.site-info.gutter-30(style="margin-bottom: 20px;")
         .col-sm-5
           footer-widget-panel(:title_="$t('contactInfo')", :class="{'text-center': $mq.phone}")
             a(href="tel:0938228865", target="_top")
               span.btn.btn-theme(style="margin-bottom: 1em") {{$t('call')}}
-            #contact-info.text-left(:style="{'background-image': 'url('+map_img_+')'}")
+            .text-left(:class="$style.contactInfo", :style="{'background-image': 'url('+map_img_+')'}")
               p {{about}}
               p
                 i.fa.fa-map-marker.fa-lg
@@ -151,7 +155,7 @@
                   li(v-for="p in payments")
                     img(style="width:54px", :src="p")
     div(style="background-color: #ececec")
-      .site-footer.container
+      .container(:class="$style.siteFooter")
         .row.site-info.link-list
           .col-sm-4.col-md-3(v-if="!$mq.phone")
             footer-widget-panel(:title_="$t('aboutUs')")

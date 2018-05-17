@@ -17,7 +17,6 @@
       async addToCart_() {
         const {add_, cartItem_} = this;
         this.$emit('cart-adding');
-        console.log(cartItem_);
         try {
           await add_(cartItem_);
           cartItem_.quantity = 1;

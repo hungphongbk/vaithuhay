@@ -16,9 +16,11 @@ export default function (store) {
   });
   store.replaceState(cloneDeep(obj));
 
-  Object.defineProperty(Vue.prototype, '$vthStore', {
-    get() {
-      return store;
+  Object.defineProperties(Vue.prototype, {
+    $vthStore: {
+      get() {
+        return store;
+      }
     }
   });
 }

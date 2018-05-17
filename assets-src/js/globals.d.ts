@@ -14,6 +14,9 @@ import {RootState} from 'js/store/types';
 
 declare module "vue/types/vue" {
   interface Vue {
-    $vthStore?: Store<RootState>;
+    $vthStore?: Store<RootState>
+    $style: {
+      [key: string]: string
+    }
   }
 }
