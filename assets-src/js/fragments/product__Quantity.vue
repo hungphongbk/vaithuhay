@@ -1,47 +1,43 @@
-<style lang="scss" scoped="">
+<style lang="scss" module>
   @import "../../sass/inc/inc";
-
-  .input-group {
+  .product-quantity{
+    composes: input-group from global;
     table-layout: fixed;
     border: 2px solid $theme-color-dark;
     width: 100%;
-    &-addon {
+    :global .input-group-addon{
       background-color: #fff;
       border: none;
     }
-
-    > * {
+    >*{
       width: percentage(1/3);
     }
-  }
+    :global{
+      .btn-theme {
+        background-color: lighten($theme-color, 25);
+        width: 100%;
 
-  .btn-theme {
-    background-color: lighten($theme-color, 25);
-    width: 100%;
-
-    &.minus {
-      border-right: 2px solid $theme-color-dark;
-      margin-right: 0;
-    }
-    &.plus {
-      border-left: 2px solid $theme-color-dark;
-      margin-left: 0;
+        &.minus {
+          border-right: 2px solid $theme-color-dark;
+          margin-right: 0;
+        }
+        &.plus {
+          border-left: 2px solid $theme-color-dark;
+          margin-left: 0;
+        }
+      }
     }
   }
-</style>
-<style lang="scss" module>
-  :global .input-group {
-    :local .quantity_ {
-      height: auto;
-      text-align: center;
-      padding: 6px;
-      background: #fff;
-      border: none;
-    }
+  .quantity_ {
+    height: auto;
+    text-align: center;
+    padding: 6px;
+    background: #fff;
+    border: none;
   }
 </style>
 <template lang="pug">
-  .input-group
+  div(:class="$style.productQuantity")
     span.input-group-btn
       button.btn.btn-theme.minus(type="button", @click="decreaseQuantity_")= '-'
     span.input-group-addon(:class="$style.quantity_", v-if="mode_===0", @click="mode_=1")

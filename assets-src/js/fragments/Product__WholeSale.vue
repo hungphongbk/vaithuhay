@@ -1,7 +1,7 @@
-<style lang="scss" scoped>
+<style lang="scss" module>
   @import "../../sass/inc/inc";
 
-  ul {
+  .wholesale {
     padding-top: 10px;
     @include responsive('sm-min') {
       padding-top: 20px;
@@ -10,7 +10,7 @@
 </style>
 <template lang="pug">
   div
-    ul.wholesale
+    ul(:class="$style.wholesale")
       li(v-for="i in list", :class="{'gift':i.isGift}")
         product-whole-sale-item(:apply="productId", :rule="i")
         //static-overlay-internal(ref="modal", @click.self.native="show$ = false")

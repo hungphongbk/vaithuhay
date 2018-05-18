@@ -2,6 +2,11 @@
   @import "../../sass/inc/inc";
 
   $cart-padding-vertical: (($navbar-height - $font-size-base*2)/2);
+  $thumb-size: 26px;
+  %h {
+    font-weight: 600;
+    color: #666;
+  }
 
   :global .navbar-nav > li > a {
     &:local.cart {
@@ -51,43 +56,47 @@
     }
   }
 
-  .cartItem {
+  .cart-item {
+    composes: media from global;
     padding-bottom: 10px;
     border-bottom: 1px dashed #ccc;
     margin-bottom: 10px !important;
 
-    :global {
-      .media-object {
-        width: 70px;
-      }
-      .media-body {
-        /*width: auto;*/
-      }
-      p {
-        font-size: 0.85em;
-        color: #666;
+    :global .media-object {
+      width: 70px;
+    }
+    :global .media-body {
+      /*width: auto;*/
+    }
+    p {
+      font-size: 0.85em;
+      color: #666;
+    }
+    :global(.media-heading) {
+      @extend %h;
+      :global(.badge) {
+        background-color: $theme-red-color;
+        margin-right: 1.2em;
+        font-size: $font-size-base*1.1;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        line-height: 28px;
+        padding: 0;
+        margin-top: -2px;
+        font-weight: 500;
       }
     }
-  }
-
-  .checkout {
-    text-align: center;
-    :global .fa {
-      margin-right: 0.7em;
-      font-weight: 700;
+    :global .media-middle {
+      @include responsive('sm-max') {
+        vertical-align: top;
+        text-align: left;
+      }
     }
-  }
-</style>
-<style lang="scss" scoped>
-  @import "../../sass/inc/inc";
-
-  $thumb-size: 26px;
-  %h {
-    font-weight: 600;
-    color: #666;
   }
 
   .cart-panel {
+    composes: col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 from global;
     @include responsive('md-min') {
       padding: 20px 40px {
         bottom: 40px;
@@ -99,41 +108,18 @@
         color: #fff;
       }
     }
-  }
 
-  .cart-panel-title {
-    @extend %h;
-    margin-bottom: 30px;
-    @include responsive('sm-max') {
-      text-align: left;
-    }
-  }
-
-  .media-heading {
-    @extend %h;
-    .badge {
-      background-color: $theme-red-color;
-      margin-right: 1.2em;
-      font-size: $font-size-base*1.1;
-      border-radius: 50%;
-      height: 30px;
-      width: 30px;
-      line-height: 28px;
-      padding: 0;
-      margin-top: -2px;
-      font-weight: 500;
-    }
-  }
-
-  .media-middle {
-    @include responsive('sm-max') {
-      vertical-align: top;
-      text-align: left;
+    &-title {
+      @extend %h;
+      margin-bottom: 30px;
+      @include responsive('sm-max') {
+        text-align: left;
+      }
     }
   }
 
   .thumb-items {
-    /*display: inline-block;*/
+    composes: pull-right from global;
     > span {
       text-align: center;
       color: white;
@@ -150,6 +136,23 @@
         background-color: $theme-red-color;
       }
     }
+  }
+
+  .checkout {
+    text-align: center;
+    :global .fa {
+      margin-right: 0.7em;
+      font-weight: 700;
+    }
+  }
+</style>
+<style lang="scss" scoped>
+  @import "../../sass/inc/inc";
+
+
+  %h {
+    font-weight: 600;
+    color: #666;
   }
 
   p {
@@ -187,21 +190,21 @@
       .container
         p(v-if="count_===0", style="color: #888; text-align:center; padding-top: 2em") {{$t('cartEmpty')}}
         .row(v-else, @click.self="show_ = false")
-          .col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1.cart-panel
+          div(:class="$style.cartPanel")
             .text-center
-              h2.cart-panel-title {{$t('cart')}}
+              h2(:class="$style.cartPanelTitle") {{$t('cart')}}
             form(:action="checkOutLink_", method="post")
               ul
                 li(v-for="i in list_")
-                  .media(:class="$style.cartItem")
+                  div(:class="$style.cartItem")
                     .media-left
                       img.media-object(:src="i.thumbnail")
                     .media-body.media-middle
                       h5.media-heading {{i.title}}
-                        .thumb-items.pull-right
+                        div(:class="$style.thumbItems")
                           span.fa.fa-plus(@click="remove_({id: i.variant_id, quantity: i.quantity + 1})")
                           span.fa.fa-minus(@click="remove_({id: i.variant_id, quantity: i.quantity - 1})")
-                          span.fa.fa-times.remove(@click="remove_({id: i.variant_id})")
+                          span.fa.fa-times(:class="$style.remove", @click="remove_({id: i.variant_id})")
                         span.badge.pull-right(v-if="i.quantity>1") {{i.quantity}}
                       <!--span.badge(v-if='i.quantity_>1')= '{{i.quantity_}}'-->
                       p.price(v-if="i.price>0") {{$t('amount')}}: {{i.price | vnd}}
@@ -218,8 +221,8 @@
 </template>
 <script>
   import {CART_ADD_, CART_COUNT_, CART_FETCH_, CART_LIST_, CART_REMOVE_, CART_TOTAL_} from '../store/types';
-  import {overlayMixin}                                                               from './mixins';
-  import {mapActions, mapGetters}                                                     from 'vuex';
+  import {overlayMixin} from './mixins';
+  import {mapActions, mapGetters} from 'vuex';
 
   const $ = jQuery;
 

@@ -1,20 +1,12 @@
-<style lang="scss" scoped="">
+<style lang="scss" module>
   @import "../../../sass/inc/inc";
 
-  .headline {
+  /*.headline {
     color: $theme-red-color;
     line-height: 35px;
     display: inline-block;
     margin-right: 20px;
-  }
-
-  hr {
-    border-color: $theme-red-color;
-    width: 65%;
-    margin-left: 0;
-    margin-top: $font-size-base;
-    margin-bottom: $font-size-base;
-  }
+  }*/
 
   .cat {
     @extend %reset-link;
@@ -27,7 +19,7 @@
     padding-left: $grid-gutter-width / 2;
     padding-right: $grid-gutter-width / 2;
     margin-bottom: 30px;
-    .inner {
+    @at-root .inner {
       /*padding-bottom: 20px;*/
       border-bottom: 1px dashed #ccc;
     }
@@ -47,7 +39,12 @@
     transition: all $animation-time ease;
   }
 
-  .discover {
+  .not-show {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+
+  /*.discover {
     position: fixed;
     top: $navbar-height;
     bottom: 0;
@@ -57,13 +54,7 @@
     padding-top: 40px;
     font-size: $font-size-base;
     color: white;
-    /*display: none;*/
-  }
-
-  .not-show {
-    opacity: 0;
-    transform: translateY(-5%);
-  }
+  }*/
 
   .see-more {
     position: absolute;
@@ -78,7 +69,8 @@
     }
   }
 
-  .row {
+  .items{
+    composes: row from global;
     padding: {
       left: 80px;
       right: 80px;
@@ -88,20 +80,20 @@
 <template lang="pug">
   static-overlay(:enter_="enter_", :leave_="leave_", @click.self.native="show_ = false")
     .container
-      .row
-        a.cat.not-show(v-for="cat in categories", :href="cat.url", ref="elem")
-          .inner
+      div(:class="$style.item")
+        a(:class="[$style.cat, $style.notShow]", v-for="cat in categories", :href="cat.url", ref="elem")
+          div(:class="$style.inner")
             thumbnail(:url_="cat.image", ratio_="3-2")
-            h5.title {{cat.title}}
-    a.see-more(:href="all.url")
-      h2.text {{$t('0')}}
+            h5(:class="$style.title") {{cat.title}}
+    a(:class="$style.seeMore", :href="all.url")
+      h2(:class="$style.text", ref="seeMore") {{$t('0')}}
 </template>
 <script>
-  import {mapGetters}                        from 'vuex';
+  import {mapGetters} from 'vuex';
   import {CATEGORIES_ALL_, CATEGORIES_LIST_} from "../../store/types";
-  import StaticOverlay                       from '../static-overlay.vue';
-  import {overlayMixin}                      from '../mixins';
-  import {delay}                             from '../helpers';
+  import StaticOverlay from '../static-overlay.vue';
+  import {overlayMixin} from '../mixins';
+  import {delay} from '../helpers';
 
   const $ = jQuery;
 
@@ -132,17 +124,19 @@
     },
     methods: {
       async enter_(el) {
+        const self = this;
+        console.log('???');
         await delay(100);
-        for (const elem of this.$refs.elem) {
+        for (const elem of self.$refs.elem) {
           await delay(60);
-          $(elem).removeClass('not-show');
+          $(elem).removeClass(self.$style.notShow);
         }
         await delay(200);
-        $(el).find('.see-more .text').animateCss('rubberBand');
+        $(self.$refs.seeMore).animateCss('rubberBand');
       },
       async leave_(el, done) {
         for (const elem of this.$refs.elem) {
-          $(elem).addClass('not-show');
+          $(elem).addClass(self.$style.notShow);
         }
         await delay(100);
       }

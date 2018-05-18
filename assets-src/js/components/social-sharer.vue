@@ -1,10 +1,10 @@
-<style lang="scss" scoped>
+<style lang="scss" module>
   @import "../../sass/inc/inc";
 
   @mixin size($s) {
     height: $s;
     width: $s;
-    @at-root {
+    :global {
       .fa {
         line-height: $s;
         font-size: $s/2;
@@ -18,7 +18,7 @@
         transform: translateY(-$s/10);
       }
     }
-    &:hover {
+    &:hover :global {
       .fa, img {
         opacity: 1;
       }
@@ -32,9 +32,11 @@
   }
 
   .share {
-    .fa, img {
-      transition: all $animation-time*1.5 ease;
-      opacity: .75;
+    :global{
+      .fa, img {
+        transition: all $animation-time*1.5 ease;
+        opacity: .75;
+      }
     }
 
     display: inline-block;
@@ -56,21 +58,26 @@
     }
 
     &-fb {
+      composes: share;
       color: #3b5998;
     }
+    &-messenger{
+      composes: share;
+    }
     &-google {
+      composes: share;
       color: #ea4335;
     }
   }
 </style>
 <template lang="pug">
-  .social-share.clearfix
+  .clearfix
     .pull-right
-      .share.share-fb(@click="shareFb")
+      div(:class="$style.shareFb", @click="shareFb")
         i.fa.fa-facebook
-      .share.share-messenger(@click="shareMessenger")
+      div(:class="$style.shareMessenger", @click="shareMessenger")
         img(src="../../img/icons8-facebook-messenger.svg")
-      .share.share-google
+      div(:class="$style.shareGoogle")
         i.fa.fa-google-plus
 </template>
 <script>
