@@ -4,7 +4,8 @@
     div(style='position: relative')
       thumbnail(:url_='thumbnail', :alt_="title", ratio_='1-1', :thumbnailSize_="defaultThumbnailSize_", :lazy_="false")
         template(v-if="!$mq.tablet", slot="overlay")
-          span.fa.fa-cart-plus(:class="$style.addToCartBtn", @click.stop.prevent="add_($event, variants[0].id)")
+          span(:class="$style.addToCartBtn", @click.stop.prevent="add_($event, variants[0].id)")
+            fa-icon(:icon="icon")
         // sale composes: content
         div(:class="$style.sale", v-if="isSale")
           .flex-center
@@ -29,9 +30,11 @@
       //product-rating.large(:rating="rating")
 </template>
 <script>
-  import {CART_ADD_}  from '../store/types';
+  import {CART_ADD_} from '../store/types';
   import {mapActions} from 'vuex';
-  import {delay}      from './helpers';
+  import {delay} from './helpers';
+  import faCart from '@fortawesome/fontawesome-free-solid/faCartPlus'
+  import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
   // import {ProductRating} from "../components";
 
   const $ = jQuery;
@@ -43,16 +46,14 @@
       thumbnailSize_: String
     },
     data() {
-      return this.item;
+      return Object.assign({}, this.item, {
+        CART_ITEM_ADDED: false
+      });
     },
     computed: {
-      routerLink() {
-        return {
-          name: 'product',
-          params: {
-            product: this.handle
-          }
-        };
+      icon() {
+        const self = this;
+        return self.CART_ITEM_ADDED ? faCheck : faCart;
       },
       defaultThumbnailSize_() {
         if (this.thumbnailSize_) return this.thumbnailSize_;
@@ -70,17 +71,19 @@
         addToCart_: CART_ADD_
       }),
       async add_({target: btn}, id) {
-        const $style=this.$style;
+        const $style = this.$style;
 
         await this.addToCart_({id});
         const $btn = $(btn);
         $btn.addClass($style.preAdded);
         await delay(250);
-        $btn.addClass(`${$style.added} fa-check`).removeClass(`${$style.preAdded} fa-cart-plus`);
+        $btn.addClass($style.added).removeClass($style.preAdded);
+        this.CART_ITEM_ADDED = true;
         await delay(2400);
         $btn.addClass($style.preAdded).removeClass($style.added);
         await delay(250);
-        $btn.removeClass(`${$style.preAdded} fa-check`).addClass('fa-cart-plus');
+        $btn.removeClass($style.preAdded);
+        this.CART_ITEM_ADDED = false;
       }
     }
   };

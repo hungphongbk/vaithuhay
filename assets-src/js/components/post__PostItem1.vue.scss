@@ -157,7 +157,6 @@ $effect-time: .25s;
 
 // composes with 'fa fa-cart-plus' (global), remove soon for replacement with font-awesome 5
 .add-to-cart-btn {
-  composes: fa fa-cart-plus from global;
   transition: all $effect-time ease;
   opacity: 1;
   &:after {

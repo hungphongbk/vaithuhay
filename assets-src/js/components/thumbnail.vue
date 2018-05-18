@@ -1,24 +1,22 @@
-<style lang="scss" scoped="">
+<style lang="scss" module>
   @import "../../sass/inc/inc";
+  $thumb-size: 60px;
+  .thumbnail{
+    composes: vth-thumb thumb from global;
 
-  .thumb {
-  }
-
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    will-change: transform;
-    transition: transform $animation-time ease-in;
-    transform: scale(1);
-    .thumb:not(.no-effect):hover & {
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+      transition: transform $animation-time ease-in;
+      transform: scale(1);
+    }
+    &:not(:global(.no-effect)):hover img {
       transform: scale(1.12);
     }
   }
-
   .overlay {
-    $thumb-size: 60px;
-
     background-color: rgba(0, 0, 0, 0.65);
     display: flex;
     align-items: center;
@@ -28,42 +26,41 @@
     @extend %abs-full;
     transition: opacity $animation-time ease-in;
     opacity: 0;
-
-    .thumb-items {
-      > span {
-        color: white;
-        background-color: rgba(255, 255, 255, 0.31);
-        font-size: $thumb-size/2.4;
-        width: $thumb-size;
-        height: $thumb-size;
-        line-height: $thumb-size;
-        border-radius: 50%;
-        &:not(last-child) {
-          margin-right: 5px;
-        }
+  }
+  .thumb-items {
+    display: inherit;
+    > span {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.31);
+      font-size: $thumb-size/2.4;
+      width: $thumb-size;
+      height: $thumb-size;
+      line-height: $thumb-size;
+      border-radius: 50%;
+      &:not(last-child) {
+        margin-right: 5px;
       }
-
-      transition: transform $animation-time ease-out;
-      transform: scale(1.3);
     }
 
-    .thumb:hover & {
-      opacity: 1;
-      .thumb-items {
-        transform: scale(1);
-      }
+    transition: transform $animation-time ease-out;
+    transform: scale(1.3);
+  }
+  .thumbnail:hover .overlay {
+    opacity: 1;
+    .thumb-items {
+      transform: scale(1);
     }
   }
 </style>
 <template lang="pug">
-  .vth-thumb.thumb(:class="ratio_?`ratio-${ratio_}`:''")
+  .vth-thumb.thumb(:class="[ $style.thumbnail, ratio_?`ratio-${ratio_}`:'' ]")
     wrapper
       img(v-if="url_ && slickLazy_", :data-lazy="url_", :alt="alt_")
       img.lazy(v-else-if="url_ && lazy_", v-lazy="lazyUrl_", :alt="alt_")
       img(v-else-if="url_", :src="lazyUrl_", :alt="alt_")
       img(v-else, :src="demo_")
-      .overlay(v-if="overlay_")
-        .thumb-items
+      div(:class="$style.overlay", v-if="overlay_")
+        div(:class="$style.thumbItems")
           slot(name="overlay")
             //span.fa.fa-search
     slot
