@@ -205,6 +205,9 @@
     }
     margin-right: .3rem;
     color: $theme-color-dark-2;
+    &.added{
+      color: darken($theme-red-color, 5%);
+    }
   }
 
   .readmore {

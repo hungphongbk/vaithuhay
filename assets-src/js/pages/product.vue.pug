@@ -25,7 +25,7 @@
                 fa-icon(:icon="faCartPlus")
                 | {{$t('buyNow')}}
               div(@click="addToFavorite", style="padding-top: .4rem; padding-bottom: .4rem")
-                fa-icon(:class="$style.favorite", :icon="favorite ? faHeartSolid : faHeart", size="2x")
+                fa-icon(:class="{ [$style.favorite]:true, [$style.added]:favorite }", :icon="favorite ? faHeartSolid : faHeart", size="2x")
           hr
           social-sharer(:url="url")
   .product-body
