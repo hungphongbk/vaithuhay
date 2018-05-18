@@ -42,12 +42,12 @@
     },
     data() {
       return {
-        state: 'default'
+        ASYNC_BUTTON_STATE: 'default'
       };
     },
     computed: {
       iconCls() {
-        switch (this.state) {
+        switch (this.ASYNC_BUTTON_STATE) {
           case 'default':
             return this.icon;
           case 'ing':
@@ -61,11 +61,11 @@
     methods: {
       async doFn() {
         const {fn, successDelay} = this;
-        this.state = 'ing';
+        this.ASYNC_BUTTON_STATE = 'ing';
         await fn();
-        this.state = 'ed';
+        this.ASYNC_BUTTON_STATE = 'ed';
         await delay(successDelay);
-        this.state = 'default';
+        this.ASYNC_BUTTON_STATE = 'default';
       }
     }
   };

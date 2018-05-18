@@ -1,39 +1,3 @@
-<style lang="scss" scoped>
-  @import "../../sass/inc/inc";
-
-  h3 {
-    font-weight: 700;
-    line-height: 1.4;
-    color: #444;
-    cursor: pointer;
-    margin-top: 7px;
-  }
-
-  .fa {
-    margin-right: .4em;
-    margin-left: .05em;
-    color: #888;
-    opacity: 0.7;
-    transition: all $animation-time ease;
-    h3:hover & {
-      opacity: 1;
-    }
-  }
-
-  .product-expandable {
-    margin: 6px {
-      bottom: $line-height-computed
-    }
-    padding: 10px 15px;
-    @extend %box-shadow-2;
-    border-radius: 15px;
-    border: 1px solid #ddd;
-  }
-
-  .inner {
-    padding-bottom: $line-height-computed
-  }
-</style>
 <style lang="scss">
   @import "../../sass/inc/inc";
 
@@ -48,13 +12,51 @@
     }
   }
 </style>
+<style lang="scss" module>
+  @import "../../sass/inc/inc";
+
+  .expandable {
+    margin: 6px {
+      bottom: $line-height-computed
+    }
+    padding: 10px 15px;
+    @extend %box-shadow-2;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+  }
+
+  .title {
+    font-weight: 700;
+    line-height: 1.4;
+    color: #444;
+    cursor: pointer;
+    margin-top: 7px;
+  }
+
+  .icon {
+    composes: fa fa-lg fa-arrow-circle-up from global;
+    margin-right: .4em;
+    margin-left: .05em;
+    color: #888;
+    opacity: 0.7;
+    transition: all $animation-time ease;
+  }
+
+  .title:hover .icon {
+    opacity: 1;
+  }
+
+  .inner {
+    padding-bottom: $line-height-computed
+  }
+</style>
 <template lang="pug">
-  .product-expandable
-    h3(@click="expanded_ = !expanded_")
-      i.fa.fa-lg.fa-arrow-circle-up(:class="[expanded_?'fa-rotate-180':'']")
+  div(:class="$style.expandable")
+    h3(:class="$style.title", @click="IS_EXPANDED = !IS_EXPANDED")
+      i(:class="[$style.icon, IS_EXPANDED?'fa-rotate-180':'']")
       | {{title}}
     transition(name="slide")
-      .inner(v-if="expanded_")
+      div(:class="$style.inner", v-if="IS_EXPANDED")
         slot
 </template>
 <script>
@@ -67,7 +69,7 @@
     },
     data() {
       return {
-        expanded_: false
+        IS_EXPANDED: false
       };
     }
   };

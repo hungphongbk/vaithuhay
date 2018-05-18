@@ -1,20 +1,19 @@
-<style lang="scss" scoped>
+<style lang="scss" module>
   @import "../../sass/inc/inc";
 
   .tab-pane {
+    composes: tab-pane from global;
     padding: 10px 0;
     @include responsive('sm-min') {
       padding: 30px 0;
     }
-    /deep/ {
-      img {
-        width: 100%;
-      }
+    img {
+      width: 100%;
     }
   }
 </style>
 <template lang="pug">
-  div.tab-pane.fade(:class="{'in active':active_}")
+  .fade(:class="{ [$style.tabPane]:true, 'in active':active_}")
     slot
 </template>
 <script>

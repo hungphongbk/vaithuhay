@@ -1,53 +1,6 @@
 <style lang="scss" scoped>
   @import "../../sass/inc/inc";
 
-  .product-tabs {
-    margin-top: $line-height-computed*2+$font-size-h3*$line-height-base;
-    margin-right: 20px;
-    @include responsive('xs-max') {
-      margin-top: 0;
-      margin-right: 0;
-      .container {
-        padding: {
-          left: 0;
-          right: 0;
-        }
-      }
-    }
-  }
-
-  .tabs {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    > div {
-      border-bottom: 1px solid #bfbfbf;
-      background: white;
-    }
-    @at-root {
-      ul {
-        display: table;
-      }
-
-      li {
-        display: table-cell;
-        @include responsive('xs-max') {
-          width: 1%;
-        }
-      }
-    }
-  }
-
-  .tab-content {
-    border: none;
-    @include responsive('xs-max') {
-      border: none {
-        top: none;
-      }
-    }
-  }
-
   @include responsive('xs-max') {
     .nav-tabs {
       display: flex;
@@ -60,13 +13,58 @@
         flex: 1;
       }
     }
-    .tab-content {
-      margin-top: $line-height-computed*2+$font-size-h3*$line-height-base;
-    }
   }
 </style>
 <style lang="scss" module>
   @import "../../sass/inc/inc";
+
+  .product-tabs {
+    margin-top: $line-height-computed*2+$font-size-h3*$line-height-base;
+    margin-right: 20px;
+    @include responsive('xs-max') {
+      margin-top: 0;
+      margin-right: 0;
+      :global .container {
+        padding: {
+          left: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  .tabs {
+    composes: tabs from global;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    > div {
+      border-bottom: 1px solid #bfbfbf;
+      background: white;
+    }
+    .ul {
+      display: table;
+    }
+
+    .li {
+      display: table-cell;
+      @include responsive('xs-max') {
+        width: 1%;
+      }
+    }
+  }
+
+  .tab-content {
+    composes: tab-content from global;
+    border: none;
+    @include responsive('xs-max') {
+      margin-top: $line-height-computed*2+$font-size-h3*$line-height-base;
+      border: none {
+        top: none;
+      }
+    }
+  }
 
   .title {
     @extend %reset-link;
@@ -119,15 +117,15 @@
   }
 </style>
 <template lang="pug">
-  div.product-tabs
-    .tabs
+  div(:class="$style.productTabs")
+    div(:class="$style.tabs")
       div
         .container
-          ul(role="tablist", ref="tab")
-            li(v-for="tab in tabs_", :class="{'active':active_===tab.hash}", @click="active_ = tab.hash")
+          ul(:class="$style.ul", role="tablist", ref="tab")
+            li(v-for="tab in tabs_", :class="{ [$style.li]:true, 'active':active_===tab.hash}", @click="active_ = tab.hash")
               a(:class="$style.title") {{tab.title}}
                 span(v-if="tab.badge!==null", :class="[$style.badge, tab.badge===0?$style.zero:'']") {{tab.badge}}
-    .tab-content
+    div(:class="$style.tabContent")
       slot
 </template>
 <script>

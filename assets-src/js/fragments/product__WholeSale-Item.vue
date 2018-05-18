@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss" module>
   @import "../../sass/inc/inc";
 
   $color: lighten($theme-red-color, 50%);
@@ -20,7 +20,7 @@
       font-size: 1.7em;
       margin-top: 0;
     }
-    .btn {
+    :global .btn {
       margin: 10px 0;
       padding: {
         left: 1em;
@@ -37,7 +37,7 @@
   }
 
   //TODO: styling when embedding in product content or article content
-  .in-content {
+  .wholesale-item:global(.in-content) {
     @extend %clearfix;
     .gift-img {
       float: left;
@@ -47,6 +47,7 @@
   }
 
   .discount-badge {
+    composes: text-center from global;
     position: absolute;
     top: -25px;
     right: -15px;
@@ -58,21 +59,21 @@
     font-size: $font-size-h4;
     font-weight: 700;
     padding-top: 20px;
-    .fa {
+    :global(.fa) {
       line-height: .8em;
     }
   }
 </style>
 <template lang="pug">
-  .wholesale-item
-    thumbnail.no-effect.gift-img(v-if="rule$.isBuyOneGetOne", ratio_="1-1", :url_="rule$.giftAvatar", :overlay_="false")
+  div(:class="$style.wholesaleItem")
+    thumbnail.no-effect(:class="$style.giftImg", v-if="rule$.isBuyOneGetOne", ratio_="1-1", :url_="rule$.giftAvatar", :overlay_="false")
     h4.count.text-theme-red {{rule$.title[$i18n.locale]}}
     h3.amount(v-if="!(rule$.isGift)")
       small.text-muted
         s {{rule$.currentPrice}}
       | &nbsp;&nbsp;{{rule$.discountPrice}}
     p.text-muted {{rule$.description[$i18n.locale]}}
-    span.discount-badge.text-center
+    span(:class="$style.discountBadge")
       template(v-if="!rule$.isGift")
         | -{{rule$.amount$}}
       i.fa.fa-gift.fa-2x(v-else)

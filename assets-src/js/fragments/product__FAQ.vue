@@ -1,10 +1,19 @@
-<style lang="scss" scoped>
+<style lang="scss" module>
   @import "../../sass/inc/inc";
 
   .faq {
     padding: {
       left: 0;
       right: 0;
+    }
+
+    h5 {
+      font-weight: 700;
+    }
+
+    :global .form-control {
+      border: 1px solid #f0f0f0;
+      margin-bottom: 10px;
     }
   }
 
@@ -17,7 +26,7 @@
 
     margin-bottom: $line-height-computed*1/2;
 
-    @at-root {
+    :global {
       p, .fa {
         color: lighten($text-color, 25%);
       }
@@ -31,19 +40,13 @@
         padding-left: 1.7em;
       }
     }
-    &.open .fa {
+    &.open :global(.fa) {
       transform: rotate(90deg)
     }
   }
-
-  h5 {
-    font-weight: 700;
-  }
-
-  .form-control {
-    border: 1px solid #f0f0f0;
-    margin-bottom: 10px;
-  }
+</style>
+<style lang="scss" scoped>
+  @import "../../sass/inc/inc";
 
   .faq-anim {
     &-enter-active, &-leave-active {
@@ -59,15 +62,10 @@
     }
   }
 </style>
-<style lang="scss">
-  @import "../../sass/inc/inc";
-
-
-</style>
 <template lang="pug">
-  .faq
+  div(:class="$style.faq")
     ul
-      li.item(v-for="(item, index) in list$", :class="{'open': toggle[index]}", @click="toggles(index)")
+      li(v-for="(item, index) in list$", :class="{ [$style.item]:true, [$style.open]: toggle[index]}", @click="toggles(index)")
         h5
           i.fa.fa-chevron-right
           | {{item.ask}}

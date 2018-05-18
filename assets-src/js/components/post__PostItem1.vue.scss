@@ -135,6 +135,7 @@ $effect-time: .25s;
 }
 
 .description {
+  composes: description from global;
   line-height: $line-height-computed*1.1;
 }
 
