@@ -192,19 +192,19 @@
       #main-list
       .container
         div(:class="$style.title")
-          h1(:class="$style.pageTitle") {{currentCategory_.title}}
+          h1(:class="$style.pageTitle") {{CURRENT_CATEGORY.title}}
         div(:class="$style.sortForm")
           div(style="margin-right: 30px")
             span Sản phẩm
-            overlay-selector.sort-selector(:list="categories_")
+            overlay-selector.sort-selector(:list="CATEGORIES_LIST")
               template(slot="current")
-                span {{currentCategory_.title}}
+                span {{CURRENT_CATEGORY.title}}
               template(slot="item", slot-scope="p")
                 a(:class="$style.cat", :href="p.item.url")
                   h2(:class="$style.sortTitle") {{p.item.title}}
           div
             span Sắp xếp bởi
-            overlay-selector.sort-selector(:list="sort_", v-model="currentSort_")
+            overlay-selector.sort-selector(:list="sort_", v-model="CURRENT_SORT")
               template(slot="current", slot-scope="p")
                 span {{p.item.title}}
               template(slot="item", slot-scope="p")
@@ -252,7 +252,7 @@
       return {
         title_: window.products.title,
         sort_,
-        currentSort_: sort_[0]
+        CURRENT_SORT: sort_[0]
       };
     },
     computed: {
@@ -261,10 +261,10 @@
       },
       ...mapGetters({
         products: PRODUCTS_LIST_,
-        categories_: CATEGORIES_LIST_
+        CATEGORIES_LIST: CATEGORIES_LIST_
       }),
-      currentCategory_() {
-        return this.categories_.find(cat => cat.id === window.products.categoryId);
+      CURRENT_CATEGORY() {
+        return this.CATEGORIES_LIST.find(cat => cat.id === window.products.categoryId);
       },
       carousel_() {
         return this.$mq.tablet ? {
@@ -281,7 +281,7 @@
       }
     },
     watch: {
-      currentSort_({id}) {
+      CURRENT_SORT({id}) {
         this.$vthStore.commit(PRODUCTS_SORT_, id);
       }
     },

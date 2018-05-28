@@ -121,22 +121,22 @@
     template(v-if="slickOpts")
       .main-outer
         slick.main(ref='slide', :options="slickOpts", :class="uniqId_", @afterChange="change_")
-          div.row-wrap(v-for="chunk in chunkedList_")
+          div.row-wrap(v-for="chunk in CHUNKED_LIST")
             slot(v-for="item in chunk", name="item", :item="item")
         template
           .carousel-button.carousel-button-next(:class="uniqId_")
-            i.fa(:class="rightIcon_")
+            i.fa(:class="RIGHT_ICON")
           .carousel-button.carousel-button-prev(:class="uniqId_")
-            i.fa(:class="leftIcon_")
-        div(v-if="labelIndicator_ && !$mq.phone", :class="$style.indicator") Ảnh thứ {{indicator_}}
+            i.fa(:class="LEFT_ICON")
+        div(v-if="labelIndicator_ && !$mq.phone", :class="$style.indicator") Ảnh thứ {{SLICK_INDICATOR}}
         div(v-if="fullScreen_", :class="$style.fullScreen", @click="$emit('full-screen')")
           i.fa.fa-expand
       .nav-outer(v-if="slickOpts.nav")
         slick.nav(ref='sub', :options="slickSlide_", :class="uniqId_")
-          .row-wrap(v-for="chunk in chunkedList_")
+          .row-wrap(v-for="chunk in CHUNKED_LIST")
             slot(v-for="item in chunk", name="thumb", :item="item")
     template(v-else)
-      slot(v-for="item in chunkedList_", name="item", :item="item")
+      slot(v-for="item in CHUNKED_LIST", name="item", :item="item")
 </template>
 <script>
   import Slick from 'vue-slick';
@@ -175,7 +175,7 @@
           centerMode: true,
           arrows: false
         },
-        current_: 0
+        CURRENT_SLIDE: 0
       };
     },
     computed: {
@@ -191,16 +191,16 @@
         }
         return opts;
       },
-      indicator_() {
-        return `${this.current_ + 1} / ${this.list.length}`;
+      SLICK_INDICATOR() {
+        return `${this.CURRENT_SLIDE + 1} / ${this.list.length}`;
       },
-      leftIcon_() {
+      LEFT_ICON() {
         return this.$mq.tablet ? 'fa-caret-left' : 'fa-chevron-left';
       },
-      rightIcon_() {
+      RIGHT_ICON() {
         return this.$mq.tablet ? 'fa-caret-right' : 'fa-chevron-right';
       },
-      chunkedList_() {
+      CHUNKED_LIST() {
         const {list, slickOpts} = this;
         if (!slickOpts) return list;
         return chunk(list, this.rows_);
@@ -222,7 +222,7 @@
         });
       },
       change_({}, {currentSlide}) {
-        this.current_ = currentSlide;
+        this.CURRENT_SLIDE = currentSlide;
       }
     }
   };

@@ -139,12 +139,11 @@
 <script>
   import Slick    from 'vue-slick';
   import 'slick-carousel/slick/slick.scss';
-  import Parallax from 'vue-parallaxy';
 
   const $ = jQuery;
 
   export default {
-    components: {Slick, Parallax},
+    components: {Slick},
     data() {
       const self = this,
         responsive = (breakpoint, settings) => ({breakpoint, settings});
