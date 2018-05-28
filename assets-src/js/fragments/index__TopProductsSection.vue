@@ -26,7 +26,7 @@
 </style>
 <template lang="pug">
   index-section(:title="$t('top')", titleForeground="#e02417", background="#ececec")
-    product-loop.pt(:slider-opts="slickOptions_", :list="products")
+    product-loop.pt(:slider-opts="slickOptions_", :list="products", :rows_="2")
       template(slot="item", slot-scope="p")
         div(:class="slide.swiperSlide")
           product-item(:item="p.item")

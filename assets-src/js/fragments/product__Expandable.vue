@@ -1,17 +1,3 @@
-<style lang="scss">
-  @import "../../sass/inc/inc";
-
-  .slide- {
-    &enter-active, &leave-active {
-
-      transition: all $animation-time*2 ease
-    }
-    &enter, &leave-to {
-      opacity: 0;
-      max-height: 0;
-    }
-  }
-</style>
 <style lang="scss" module>
   @import "../../sass/inc/inc";
 
@@ -54,18 +40,24 @@
   div(:class="$style.expandable")
     h3(:class="$style.title", @click="IS_EXPANDED = !IS_EXPANDED")
       i(:class="[$style.icon, IS_EXPANDED?'fa-rotate-180':'']")
-      | {{title}}
-    transition(name="slide")
-      div(:class="$style.inner", v-if="IS_EXPANDED")
+      | {{title | escaped}}
+    dropdown(:is-open="IS_EXPANDED")
+      div(:class="$style.inner")
         slot
 </template>
 <script>
+  import Dropdown from 'my-vue-utils/dist/components/dropdown';
+
   export default {
+    components: {Dropdown},
     props: {
       title: {
         type: String,
         required: true
       }
+    },
+    filters: {
+      escaped: str => str.replace(/&nbsp;/gi, ' ')
     },
     data() {
       return {

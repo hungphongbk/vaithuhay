@@ -121,7 +121,7 @@
     "vi": {
       "homepage": "Trang chủ",
       "discover": "Khám phá",
-      "news": "Tin tức",
+      "news": "Ý tưởng hay",
       "intro": "Giới thiệu"
     }
   }

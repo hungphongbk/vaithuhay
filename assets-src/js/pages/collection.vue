@@ -153,7 +153,7 @@
         text-align: left;
       }
 
-      /deep/ .indicator {
+      .indicator {
         padding-bottom: 4px;
         @include responsive('xs-max') {
           padding-bottom: 2px;

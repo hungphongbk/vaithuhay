@@ -68,7 +68,7 @@
     data() {
       const {links} = vth.footer;
       return {
-        logo_: require('../../img/logo.png'),
+        logo_: require('../../img/vaithuhay-dark-bg.svg'),
         socials_: [
           ['fa-facebook', '#455796', links.socials.fb],
           ['fa-google-plus', '#c14d3e', links.socials.google],

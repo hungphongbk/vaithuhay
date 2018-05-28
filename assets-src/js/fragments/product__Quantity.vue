@@ -39,15 +39,15 @@
 <template lang="pug">
   div(:class="$style.productQuantity")
     span.input-group-btn
-      button.btn.btn-theme.minus(type="button", @click="decreaseQuantity_")= '-'
+      button.btn.btn-theme.minus(type="button", @click="DECREASE_QUANTITY")= '-'
     span.input-group-addon(:class="$style.quantity_", v-if="mode_===0", @click="mode_=1")
-      span(ref="anim_", style="display:inline-block; font-weight: 700; font-size: 1.1em")= '{{animatedQuantity_}}'
+      span(ref="anim_", style="display:inline-block; font-weight: 700; font-size: 1.1em")= '{{ANIMATED_QUANTITY}}'
     input.form-control(:class="$style.quantity_", v-else, type="tel", :value="quantity_", @input="quantity_=$event.target.value", @focusout="mode_=0")
     span.input-group-btn
       button.btn.btn-theme.plus(type="button", @click="++quantity_")= '+'
 </template>
 <script>
-  import TWEEN from "tween.js";
+  import TWEEN from "@tweenjs/tween.js";
 
   const $ = jQuery;
   export default {
@@ -63,22 +63,22 @@
     },
     data() {
       return {
-        animatedQuantity_: this.quantity_,
+        ANIMATED_QUANTITY: this.quantity_,
         mode_: 0
       };
     },
     watch: {
       quantity_(newValue, oldValue) {
         this.$emit('change', newValue);
-        this.animateQuantity_(oldValue, newValue);
+        this.ANIMATE_QUANTITY(oldValue, newValue);
       }
     },
     methods: {
-      decreaseQuantity_() {
+      DECREASE_QUANTITY() {
         if (this.quantity_ > 1)
           this.quantity_--;
       },
-      animateQuantity_(oldValue, newValue) {
+      ANIMATE_QUANTITY(oldValue, newValue) {
         let self = this,
           animFrame,
           animate = (time) => {
@@ -102,7 +102,7 @@
         const twIn = new TWEEN.Tween({opacity_: 0, translateY_: isInMode ? translateOffset : -translateOffset})
           .to({opacity_: 1.0, translateY_: 0}, 120)
           .onStart(function () {
-            self.animatedQuantity_ = newValue;
+            self.ANIMATED_QUANTITY = newValue;
           })
           .onUpdate(updateStyle);
         twOut.chain(twIn)

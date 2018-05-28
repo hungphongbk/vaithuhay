@@ -26,6 +26,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     text-align: center;
+    background-color: $theme-color;
     p {
       display: inline-block;
       max-width: 80%;
@@ -71,7 +72,7 @@
 <style lang="scss" module="">
   @import "../../sass/inc/inc";
 
-  .site-footer-outer{
+  .site-footer-outer {
     p {
       @include font-size-with-line-height(0.87*$font-size-base);
     }
@@ -79,7 +80,7 @@
     @at-root .contact-info {
       background: rgba(0, 0, 0, 0) no-repeat no-repeat scroll center center;
       $icon-size: $line-height-computed*2;
-      :global{
+      :global {
         .fa {
           display: inline-block;
           height: $icon-size;
@@ -102,6 +103,7 @@
     padding-bottom: 20px;
   }
 
+  // region Panel
   .footerWidgetPanel {
     margin: 24px 0;
   }
@@ -109,6 +111,19 @@
   h3.footerWidgetPanel {
     @include font-size-with-line-height($font-size-h3*0.86);
     font-weight: 700;
+    position: relative;
+    /*display: inline-block;*/
+    margin-bottom: 3.2rem;
+    &:after {
+      visibility: visible;
+      content: '';
+      position: absolute;
+      bottom: -1.5rem;
+      left: 0;
+      height: 3px;
+      width: 8rem;
+      background-color: $theme-color;
+    }
   }
 
   .payments :global {
@@ -124,56 +139,93 @@
       }
     }
   }
+
+  .panel-outer {
+    color: white;
+  }
+
+  .top {
+    composes: panel-outer;
+    background-color: #444548;
+  }
+
+  .next {
+    composes: panel-outer;
+    background-color: #5c5c5f;
+  }
+
+  // endregion
+
+  .logo {
+    width: 60%;
+    margin: 0 20%;
+  }
+
+  .social-icon {
+    flex: 0 0 80px;
+    width: 80px;
+  }
 </style>
 <template lang="pug">
   footer(:class="$style.siteFooterOuter")
-    .container
-      .row.site-info.gutter-30(style="margin-bottom: 20px;")
-        .col-sm-5
-          footer-widget-panel(:title_="$t('contactInfo')", :class="{'text-center': $mq.phone}")
-            a(href="tel:0938228865", target="_top")
-              span.btn.btn-theme(style="margin-bottom: 1em") {{$t('call')}}
-            .text-left(:class="$style.contactInfo", :style="{'background-image': 'url('+map_img_+')'}")
-              p {{about}}
-              p
-                i.fa.fa-map-marker.fa-lg
-                | {{address}}
-              p
-                i.fa.fa-phone.fa-lg
-                | {{hotline}}
-              p
-                i.fa.fa-envelope-o.fa-lg
-                | {{email}}
-        .col-sm-7
-          .row.gutter-30
-            .col-md-6
-              footer-widget-panel(style="text-align: center")
-                .fb-page(:data-href="fanpage", data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
-            .col-md-6
-              footer-widget-panel.text-center(:title_="$t('paymentMethod')", :class="$style.payments")
-                ul
-                  li(v-for="p in payments")
-                    img(style="width:54px", :src="p")
-    div(style="background-color: #ececec")
-      .container(:class="$style.siteFooter")
+    div(:class="$style.top")
+      .container.pb-5.pt-1
         .row.site-info.link-list
-          .col-sm-4.col-md-3(v-if="!$mq.phone")
-            footer-widget-panel(:title_="$t('aboutUs')")
-              ul.list
-                li(v-for="i in aboutLinks$[$i18n.locale]")
-                  a(:href="i.url") {{i.title}}
-              contact-detail(v-if="tabletOnly", style="margin-top: 2.5rem;padding-top: 2rem;border-top: 1px solid #ccc")
-          .col-sm-4.col-md-3(v-if="!$mq.phone")
-            footer-widget-panel(:title_="$t('policy')")
-              ul.list
-                li(v-for="i in policyLinks$[$i18n.locale]")
-                  a(:href="i.url") {{i.title}}
-          .col-sm-4.col-md-3(v-if="!$mq.phone")
-            footer-widget-panel(:title_="$t('cat')")
-              ul.list
-                li(v-for="cat in categories")
-                  a(:href="cat.url") {{cat.title}}
-          .col-sm-4.col-md-3(v-if="!tabletOnly")
+          .col-sm-8
+            .row
+              .col-sm-4(v-if="!$mq.phone")
+                footer-widget-panel(:title_="$t('aboutUs')")
+                  ul.list
+                    li(v-for="i in aboutLinks$[$i18n.locale]")
+                      a(:href="i.url") {{i.title}}
+                  contact-detail(v-if="tabletOnly", style="margin-top: 2.5rem;padding-top: 2rem;border-top: 1px solid #ccc")
+              .col-sm-4(v-if="!$mq.phone")
+                footer-widget-panel(:title_="$t('policy')")
+                  ul.list
+                    li(v-for="i in policyLinks$[$i18n.locale]")
+                      a(:href="i.url") {{i.title}}
+              .col-sm-4(v-if="!$mq.phone")
+                footer-widget-panel(:title_="$t('cat')")
+                  ul.list
+                    li(v-for="cat in categories")
+                      a(:href="cat.url") {{cat.title}}
+          .col-sm-4
+            footer-widget-panel(style="text-align: center")
+              .fb-page(:data-href="fanpage", data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
+    div(:class="$style.next")
+      .container(:class="$style.siteFooter")
+        .row.site-info.gutter-30(style="margin-bottom: 20px;")
+          .col-sm-5
+            .mt-5
+              img(:class="$style.logo", src="../../img/vaithuhay-dark-bg.svg")
+            p.mt-5.text-justify {{about}}
+            .mt-5.d-flex.justify-content-center
+              .px-3(v-for="icon in socialIcons", :class="$style.socialIcon")
+                img.img-fluid(:src="icon")
+          .col-sm-7
+          //.col-sm-5
+            footer-widget-panel(:title_="$t('contactInfo')", :class="{'text-center': $mq.phone}")
+              a(href="tel:0938228865", target="_top")
+                span.btn.btn-theme(style="margin-bottom: 1em") {{$t('call')}}
+              .text-left(:class="$style.contactInfo", :style="{'background-image': 'url('+map_img_+')'}")
+                p {{about}}
+                p
+                  i.fa.fa-map-marker.fa-lg
+                  | {{address}}
+                p
+                  i.fa.fa-phone.fa-lg
+                  | {{hotline}}
+                p
+                  i.fa.fa-envelope-o.fa-lg
+                  | {{email}}
+          //.col-sm-7
+            .row.gutter-30
+              .col-md-6
+                footer-widget-panel.text-center(:title_="$t('paymentMethod')", :class="$style.payments")
+                  ul
+                    li(v-for="p in payments")
+                      img(style="width:54px", :src="p")
+          //.col-sm-4.col-md-3(v-if="!tabletOnly")
             footer-widget-panel
               contact-detail
     .copyright
@@ -183,16 +235,16 @@
             strong {{$t('copyright1')}}
           br
           p.addr {{$t('copyright2')}}
-        //a.cert(href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=39330", target="_blank")
+        a.cert(href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=43886", target="_blank")
           img(src="../../img/dathongbao.png")
         a.dmca-badge(:href="`//www.dmca.com/Protection/Status.aspx?ID=6487aabe-fe28-4e39-8b1b-8764143a0aaa&refurl=${location}`", title='DMCA.com Protection Status')
           img(src='//images.dmca.com/Badges/dmca-badge-w150-5x1-03.png?ID=6487aabe-fe28-4e39-8b1b-8764143a0aaa', alt='DMCA.com Protection Status')
 
 </template>
 <script>
-  import {mapGetters}       from 'vuex';
+  import {mapGetters} from 'vuex';
   import {CATEGORIES_LIST_} from '../store/types';
-  import ContactDetail      from './footer__ContactDetail.vue';
+  import ContactDetail from './footer__ContactDetail.vue';
 
   const $ = jQuery;
 
@@ -225,6 +277,12 @@
           require('../../img/ic-cash.svg'),
           require('../../img/ic-internet-banking.svg'),
           require('../../img/PayPal2007.svg?size=54')
+        ],
+        socialIcons: [
+          require('../../img/facebook-icon.svg'),
+          require('../../img/google-icon.svg'),
+          require('../../img/insta-icon.svg'),
+          require('../../img/youtube-icon.svg')
         ],
         aboutLinks$: links.about,
         policyLinks$: links.policy,
