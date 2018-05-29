@@ -41,7 +41,7 @@
     span.input-group-btn
       button.btn.btn-theme.minus(type="button", @click="DECREASE_QUANTITY")= '-'
     span.input-group-addon(:class="$style.quantity_", v-if="mode_===0", @click="mode_=1")
-      span(ref="anim_", style="display:inline-block; font-weight: 700; font-size: 1.1em")= '{{ANIMATED_QUANTITY}}'
+      span(ref="anim_", style="display:inline-block; font-weight: 700; font-size: 1.1em") {{ANIMATED_QUANTITY}}
     input.form-control(:class="$style.quantity_", v-else, type="tel", :value="quantity_", @input="quantity_=$event.target.value", @focusout="mode_=0")
     span.input-group-btn
       button.btn.btn-theme.plus(type="button", @click="++quantity_")= '+'
@@ -89,18 +89,19 @@
           isInMode = oldValue < newValue,
           translateOffset = 70;
 
-        function updateStyle() {
+        function updateStyle(obj) {
+          // debugger;
           $(animThumb).css({
-            opacity: this.opacity_,
-            transform: `translateY(${this.translateY_}%)`
+            opacity: obj.Q_OPACITY,
+            transform: `translateY(${obj.Q_TRANSLATE_Y}%)`
           });
         }
 
-        const twOut = new TWEEN.Tween({opacity_: 1.0, translateY_: 0})
-          .to({opacity_: 0, translateY_: isInMode ? -translateOffset : translateOffset}, 120)
+        const twOut = new TWEEN.Tween({Q_OPACITY: 1.0, Q_TRANSLATE_Y: 0})
+          .to({Q_OPACITY: 0, Q_TRANSLATE_Y: isInMode ? -translateOffset : translateOffset}, 120)
           .onUpdate(updateStyle);
-        const twIn = new TWEEN.Tween({opacity_: 0, translateY_: isInMode ? translateOffset : -translateOffset})
-          .to({opacity_: 1.0, translateY_: 0}, 120)
+        const twIn = new TWEEN.Tween({Q_OPACITY: 0, Q_TRANSLATE_Y: isInMode ? translateOffset : -translateOffset})
+          .to({Q_OPACITY: 1.0, Q_TRANSLATE_Y: 0}, 120)
           .onStart(function () {
             self.ANIMATED_QUANTITY = newValue;
           })

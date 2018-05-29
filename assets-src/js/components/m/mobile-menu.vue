@@ -158,8 +158,8 @@
       },
       currentSearch() {
         return this.searchType === 'product' ?
-          this.searchedProducts :
-          this.searchedArticles;
+          this.SEARCHED_PRODUCTS :
+          this.SEARCHED_ARTICLES;
       }
     },
     watch: {

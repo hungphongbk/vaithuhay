@@ -72,7 +72,7 @@
       div(v-if="isOpen_", :class="$style.searchPanel")
         .btn.btn-sm(style="margin-left: 11px;", :class="view==='product'?'btn-dark':'btn-grey'", @click="view='product'") Sản phẩm
         .btn.btn-sm(:class="view==='article'?'btn-dark':'btn-grey'", @click="view='article'") Bài viết
-        paginate.mt-1(:for_="view==='product'?searchedProducts:searchedArticles", :perPage="6")
+        paginate.mt-1(:for_="view==='product'?SEARCHED_PRODUCTS:SEARCHED_ARTICLES", :perPage="6")
           template(slot-scope="p")
             ul
               li(v-for="i in p.list", :class="$style.searchItem")

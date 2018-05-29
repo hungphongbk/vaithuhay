@@ -9,10 +9,10 @@ export default {
     };
   },
   computed: {
-    searchedProducts() {
+    SEARCHED_PRODUCTS() {
       return this.searched.filter(({_type}) => _type === 'product');
     },
-    searchedArticles() {
+    SEARCHED_ARTICLES() {
       return this.searched.filter(({_type}) => _type === 'article');
     }
   },
