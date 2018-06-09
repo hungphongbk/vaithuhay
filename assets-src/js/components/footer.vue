@@ -157,13 +157,43 @@
   // endregion
 
   .logo {
-    width: 60%;
-    margin: 0 20%;
+    width: 50%;
+    margin: 0 25%;
   }
 
   .social-icon {
-    flex: 0 0 80px;
-    width: 80px;
+    flex: 0 0 60px;
+    width: 60px;
+  }
+
+  .profile-list {
+    @include responsive('sm-max'){
+      width: 100%;
+    }
+    @include responsive('sm-min') {
+      align-items: center !important;
+      display: flex !important;
+    }
+  }
+
+  .profile-item {
+    display: flex;
+    align-items: center;
+    img {
+      flex-basis: 35px;
+      width: 35px;
+    }
+    p {
+      flex-grow: 1;
+    }
+    flex-direction: row;
+    @include responsive('sm-max') {
+      flex-direction: column;
+      margin-top: 1.5rem;
+      img{
+        margin-bottom: .3rem;
+      }
+    }
   }
 </style>
 <template lang="pug">
@@ -177,57 +207,49 @@
                 footer-widget-panel(:title_="$t('aboutUs')")
                   ul.list
                     li(v-for="i in aboutLinks$[$i18n.locale]")
-                      a(:href="i.url") {{i.title}}
+                      a(:href="i.url") > {{i.title}}
                   contact-detail(v-if="tabletOnly", style="margin-top: 2.5rem;padding-top: 2rem;border-top: 1px solid #ccc")
               .col-sm-4(v-if="!$mq.phone")
                 footer-widget-panel(:title_="$t('policy')")
                   ul.list
                     li(v-for="i in policyLinks$[$i18n.locale]")
-                      a(:href="i.url") {{i.title}}
+                      a(:href="i.url") > {{i.title}}
               .col-sm-4(v-if="!$mq.phone")
                 footer-widget-panel(:title_="$t('cat')")
                   ul.list
                     li(v-for="cat in categories")
-                      a(:href="cat.url") {{cat.title}}
+                      a(:href="cat.url") > {{cat.title}}
           .col-sm-4
             footer-widget-panel(style="text-align: center")
               .fb-page(:data-href="fanpage", data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
     div(:class="$style.next")
       .container(:class="$style.siteFooter")
-        .row.site-info.gutter-30(style="margin-bottom: 20px;")
-          .col-sm-5
+        .row.site-info.gutter-30.d-flex.flex-wrap(style="margin-bottom: 20px;")
+          .col-sm-4
             .mt-5
               img(:class="$style.logo", src="../../img/vaithuhay-dark-bg.svg")
             p.mt-5.text-justify {{about}}
             .mt-5.d-flex.justify-content-center
               .px-3(v-for="icon in socialIcons", :class="$style.socialIcon")
                 img.img-fluid(:src="icon")
-          .col-sm-7
-          //.col-sm-5
-            footer-widget-panel(:title_="$t('contactInfo')", :class="{'text-center': $mq.phone}")
-              a(href="tel:0938228865", target="_top")
-                span.btn.btn-theme(style="margin-bottom: 1em") {{$t('call')}}
-              .text-left(:class="$style.contactInfo", :style="{'background-image': 'url('+map_img_+')'}")
-                p {{about}}
-                p
-                  i.fa.fa-map-marker.fa-lg
-                  | {{address}}
-                p
-                  i.fa.fa-phone.fa-lg
-                  | {{hotline}}
-                p
-                  i.fa.fa-envelope-o.fa-lg
-                  | {{email}}
-          //.col-sm-7
-            .row.gutter-30
-              .col-md-6
-                footer-widget-panel.text-center(:title_="$t('paymentMethod')", :class="$style.payments")
-                  ul
-                    li(v-for="p in payments")
-                      img(style="width:54px", :src="p")
-          //.col-sm-4.col-md-3(v-if="!tabletOnly")
-            footer-widget-panel
-              contact-detail
+          .col-sm-8(:class="$style.profileList")
+            .row.ml-sm-5
+              .col-sm-6
+                div(:class="$style.profileItem")
+                  img.mr-sm-2(src="../../img/footer-icon-01.svg")
+                  p.mb-0 Số 26, Đường C12, Phường 13, Q.Tân Bình, TP.HCM
+                .mt-4(:class="$style.profileItem")
+                  img.mr-sm-2(src="../../img/footer-icon-02.svg")
+                  p.mb-0 Email: support@vaithuhay.com
+              .col-sm-6
+                div(:class="$style.profileItem")
+                  img.mr-sm-2(src="../../img/footer-icon-04.svg")
+                  p.mb-0 0938.228.865
+                .mt-4(:class="$style.profileItem")
+                  img.mr-sm-2(src="../../img/footer-icon-03.svg")
+                  p.mb-0 Giờ làm việc: <strong>8:00 A.M</strong> : <strong>22:00 P.M</strong>
+              .col-sm-12.mt-5
+                img(style="width: 100%", src="../../img/footer-icon-trust.svg")
     .copyright
       .container.clearfix
         .copyright-text

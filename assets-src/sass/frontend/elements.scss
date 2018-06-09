@@ -202,7 +202,7 @@ $gutters: 10 20 30 40 50;
     margin-right: -$g2*1px;
     margin-left: -$g2*1px;
   }
-  .#{$pf}-#{$g} > [class^="col-"] {
+  .#{$pf}-#{$g} > [class*="col-"] {
     padding-right: $g2*1px;
     padding-left: $g2*1px;
   }
@@ -226,11 +226,11 @@ img.lazy[lazy="loading"] {
 
 }
 
-$directions: l left, r right, t top, b bottom;
-@each $d in $directions {
-  @for $i from 1 through 4 {
-    .m#{nth($d,1)}-#{$i} {
-      margin-#{nth($d,2)}: ($i/4)*$line-height-computed
-    }
-  }
-}
+//$directions: l left, r right, t top, b bottom;
+//@each $d in $directions {
+//  @for $i from 1 through 4 {
+//    .m#{nth($d,1)}-#{$i} {
+//      margin-#{nth($d,2)}: ($i/4)*$line-height-computed
+//    }
+//  }
+//}
