@@ -249,30 +249,26 @@
     div(:class="$style.next")
       .container(:class="$style.siteFooter")
         .row.site-info.gutter-30.d-flex.flex-wrap(style="margin-bottom: 20px;")
-          .col-sm-4
+          .col-sm-5.pr-5
             .mt-5
               img(:class="$style.logo", src="../../img/vaithuhay-dark-bg.svg")
             p.mt-5.text-justify {{about}}
             .mt-5.d-flex.justify-content-center
               .px-3(v-for="icon in SOCIAL_ICONS", :class="$style.socialIcon")
                 img.img-fluid(:src="icon[0]")
-          .col-sm-8(:class="$style.profileList")
-            .row.ml-sm-5
-              .col-sm-6
+          .col-sm-7(:class="$style.profileList")
+            .col-sm-12
+              .d-flex.justify-content-between.align-items-center
                 a(:class="$style.profileItem", href="https://www.google.com/maps/place/Vaithuhay/@10.8069623,106.635887,17z/data=!3m1!4b1!4m5!3m4!1s0x3175295b0841c3b1:0xe0131fddd4f59bfd!8m2!3d10.806957!4d106.638081")
                   img.mr-sm-2(src="../../img/footer-icon-01.svg")
                   p.mb-0 Số 26, Đường C12, Phường 13, Q.Tân Bình, TP.HCM
-                a.mt-4(:class="$style.profileItem", href="mailto:support@vaithuhay.com")
+                a(:class="$style.profileItem", href="mailto:support@vaithuhay.com")
                   img.mr-sm-2(src="../../img/footer-icon-02.svg")
                   p.mb-0 Email: support@vaithuhay.com
-              .col-sm-6
                 a(:class="$style.profileItem", href="tel:+84938228865")
                   img.mr-sm-2(src="../../img/footer-icon-04.svg")
                   p.mb-0 0938.228.865
-                a.mt-4(:class="$style.profileItem")
-                  img.mr-sm-2(src="../../img/footer-icon-03.svg")
-                  p.mb-0 Giờ làm việc: <strong>8:00 A.M</strong> : <strong>22:00 P.M</strong>
-              .col-sm-12.mt-5
+              .mt-5
                 img(style="width: 100%", src="../../img/footer-icon-trust.svg")
     .copyright
       .container.clearfix

@@ -4,7 +4,7 @@ import ProductTabs                                                     from '../
 import ProductTab                                                      from '../fragments/product__Tab.vue';
 import ProductFaq                                                      from '../fragments/product__FAQ.vue';
 import ProductExpandable                                               from '../fragments/product__Expandable.vue';
-import ProductWholeSale                                                from '../fragments/product__Wholesale.vue';
+import ProductWholeSale                                                from '../fragments/product__WholeSale.vue';
 import {AddToCartWrapper, ItemLoop, ProductRating}                     from '../components/index';
 import ProductItem                                                     from '@/components/products';
 import ProductWholeSaleItem                                            from '../fragments/product__WholeSale-Item.vue';

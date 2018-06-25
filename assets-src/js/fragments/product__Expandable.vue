@@ -41,15 +41,16 @@
     h3(:class="$style.title", @click="IS_EXPANDED = !IS_EXPANDED")
       i(:class="[$style.icon, IS_EXPANDED?'fa-rotate-180':'']")
       | {{title | escaped}}
-    dropdown(:is-open="IS_EXPANDED")
+    //dropdown(:is-open="IS_EXPANDED")
       div(:class="$style.inner")
         slot
 </template>
 <script>
-  import Dropdown from 'my-vue-utils/dist/components/dropdown';
+  // TODO: waiting for new repo
+  //import Dropdown from 'my-vue-utils/dist/components/dropdown';
 
   export default {
-    components: {Dropdown},
+    //components: {Dropdown},
     props: {
       title: {
         type: String,
