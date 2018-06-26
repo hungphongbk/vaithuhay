@@ -102,6 +102,12 @@
 
   .site-footer {
     padding-bottom: 20px;
+    @include responsive('sm-max') {
+      :global(.col) {
+        flex-basis: 0;
+        flex-grow: 1;
+      }
+    }
   }
 
   // region Panel
@@ -165,19 +171,20 @@
   .social-icon {
     flex: 0 0 60px;
     width: 60px;
-    img{
+    img {
       @extend %box-shadow-2;
       border-radius: 6px;
     }
   }
 
   .profile-list {
-    @include responsive('sm-max'){
+    @include responsive('sm-max') {
       width: 100%;
+      flex-direction: column;
     }
     @include responsive('sm-min') {
       align-items: center !important;
-      display: flex !important;
+      justify-content: space-between;
     }
   }
 
@@ -195,16 +202,22 @@
       flex-grow: 1;
     }
     flex-direction: row;
+
     @include responsive('sm-max') {
       flex-direction: column;
       margin-top: 1.5rem;
-      img{
+      img {
         margin-bottom: .3rem;
+      }
+    }
+    @include responsive('sm-min'){
+      &:not(:last-child) {
+        margin-right: 1.7rem;
       }
     }
   }
 
-  .copyright{
+  .copyright {
     font-size: 1.1rem;
     display: inline-block;
     height: 49px;
@@ -212,9 +225,9 @@
     float: right;
     text-align: right;
 
-    &-title{
+    &-title {
       @include font-size-with-line-height(1.05rem);
-      @include responsive('sm-min'){
+      @include responsive('sm-min') {
         @include font-size-with-line-height(1.54rem);
       }
     }
@@ -249,27 +262,26 @@
     div(:class="$style.next")
       .container(:class="$style.siteFooter")
         .row.site-info.gutter-30.d-flex.flex-wrap(style="margin-bottom: 20px;")
-          .col-sm-5.pr-5
+          .col.col-sm-5.pr-sm-5
             .mt-5
               img(:class="$style.logo", src="../../img/vaithuhay-dark-bg.svg")
             p.mt-5.text-justify {{about}}
             .mt-5.d-flex.justify-content-center
-              .px-3(v-for="icon in SOCIAL_ICONS", :class="$style.socialIcon")
+              a.px-3.d-inline-block(v-for="icon in SOCIAL_ICONS", :class="$style.socialIcon" :href="icon[1]" target="_blank")
                 img.img-fluid(:src="icon[0]")
-          .col-sm-7(:class="$style.profileList")
-            .col-sm-12
-              .d-flex.justify-content-between.align-items-center
-                a(:class="$style.profileItem", href="https://www.google.com/maps/place/Vaithuhay/@10.8069623,106.635887,17z/data=!3m1!4b1!4m5!3m4!1s0x3175295b0841c3b1:0xe0131fddd4f59bfd!8m2!3d10.806957!4d106.638081")
-                  img.mr-sm-2(src="../../img/footer-icon-01.svg")
-                  p.mb-0 Số 26, Đường C12, Phường 13, Q.Tân Bình, TP.HCM
-                a(:class="$style.profileItem", href="mailto:support@vaithuhay.com")
-                  img.mr-sm-2(src="../../img/footer-icon-02.svg")
-                  p.mb-0 Email: support@vaithuhay.com
-                a(:class="$style.profileItem", href="tel:+84938228865")
-                  img.mr-sm-2(src="../../img/footer-icon-04.svg")
-                  p.mb-0 0938.228.865
-              .mt-5
-                img(style="width: 100%", src="../../img/footer-icon-trust.svg")
+          .col.col-sm-7.d-flex.justify-content-center(style="flex-direction: column")
+            .d-flex(:class="$style.profileList")
+              a(:class="$style.profileItem" target="_blank" href="https://www.google.com/maps/place/Vaithuhay/@10.8069623,106.635887,17z/data=!3m1!4b1!4m5!3m4!1s0x3175295b0841c3b1:0xe0131fddd4f59bfd!8m2!3d10.806957!4d106.638081")
+                img.mr-sm-3(src="../../img/footer-icon-01.svg")
+                p.mb-0 Số 26, Đường C12, Phường 13, Q.Tân Bình, TP.HCM
+              a(:class="$style.profileItem", href="mailto:support@vaithuhay.com")
+                img.mr-sm-3(src="../../img/footer-icon-02.svg")
+                p.mb-0 Email: support@vaithuhay.com
+              a(:class="$style.profileItem", href="tel:+84938228865")
+                img.mr-sm-3(src="../../img/footer-icon-04.svg")
+                p.mb-0 0938.228.865
+            .mt-5
+              img(style="width: 100%", src="../../img/footer-icon-trust.svg")
     .copyright
       .container.clearfix
         .copyright-text
@@ -322,10 +334,10 @@
           require('../../img/PayPal2007.svg?size=54')
         ],
         SOCIAL_ICONS: [
-          [require('../../img/facebook-icon.svg'),'https://www.facebook.com/vaithuhayofficial'],
-          [require('../../img/google-icon.svg'),''],
-          [require('../../img/insta-icon.svg'),''],
-          [require('../../img/youtube-icon.svg'),'']
+          [require('../../img/facebook-icon.svg'), 'https://www.facebook.com/vaithuhayofficial'],
+          [require('../../img/google-icon.svg'), 'https://plus.google.com/102534166977272914863'],
+          [require('../../img/insta-icon.svg'), 'https://www.instagram.com/vaithuhay/'],
+          [require('../../img/youtube-icon.svg'), 'https://www.youtube.com/channel/UC_3z0L6fVXkEruAoXjMEWqw']
         ],
         aboutLinks$: links.about,
         policyLinks$: links.policy,

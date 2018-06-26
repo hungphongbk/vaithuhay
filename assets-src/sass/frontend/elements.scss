@@ -222,15 +222,6 @@ img.lazy[lazy="loading"] {
   }
 }
 
-.row.row-masonry {
+.row.d-flex > [class*="col-"] {
 
 }
-
-//$directions: l left, r right, t top, b bottom;
-//@each $d in $directions {
-//  @for $i from 1 through 4 {
-//    .m#{nth($d,1)}-#{$i} {
-//      margin-#{nth($d,2)}: ($i/4)*$line-height-computed
-//    }
-//  }
-//}
