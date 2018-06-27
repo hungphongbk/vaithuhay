@@ -1,25 +1,8 @@
 <style lang="scss" scoped="">
   @import "../../sass/inc/inc";
 
-  ul.list {
-    li > a {
-      @extend %reset-link;
-      display: inline-block;
-      margin: {
-        top: .45em;
-        bottom: .45em;
-      }
-    }
-  }
-
   .row.site-info {
     margin-top: 10px;
-  }
-
-  .link-list {
-    a {
-      @include font-size-with-line-height(0.9*$font-size-base);
-    }
   }
 
   .copyright {
@@ -116,7 +99,10 @@
   }
 
   h3.footerWidgetPanel {
-    @include font-size-with-line-height($font-size-h3*0.86);
+    @include font-size-with-line-height($font-size-h3*0.69);
+    @include responsive('md-min'){
+      @include font-size-with-line-height($font-size-h3*0.86);
+    }
     font-weight: 700;
     position: relative;
     /*display: inline-block;*/
@@ -154,6 +140,21 @@
   .top {
     composes: panel-outer;
     background-color: #444548;
+  }
+
+  .topList{
+    >li>a{
+      @extend %reset-link;
+      display: inline-block;
+      margin: {
+        top: .45em;
+        bottom: .45em;
+      }
+      @include font-size-with-line-height(0.78*$font-size-base);
+      @include responsive('sm-min'){
+        @include font-size-with-line-height(0.9*$font-size-base);
+      }
+    }
   }
 
   .next {
@@ -212,9 +213,9 @@
       }
     }
     @include responsive('sm-min'){
-      &:not(:last-child) {
-        margin-right: 1.7rem;
-      }
+      /*&:not(:last-child) {*/
+        /*margin-right: 1.7rem;*/
+      /*}*/
     }
   }
 
@@ -238,26 +239,26 @@
   footer(:class="$style.siteFooterOuter")
     div(:class="$style.top")
       .container.pb-5.pt-1
-        .row.site-info.link-list
-          .col-12.col-sm-8
+        .row.site-info
+          .col-12.col-md-8
             .row
-              .col-sm-4(v-if="!$mq.phone")
+              .col-sm-4
                 footer-widget-panel(:title_="$t('aboutUs')")
-                  ul.list
+                  ul(:class="$style.topList")
                     li(v-for="i in aboutLinks$[$i18n.locale]")
                       a(:href="i.url") > {{i.title}}
-                  contact-detail(v-if="tabletOnly", style="margin-top: 2.5rem;padding-top: 2rem;border-top: 1px solid #ccc")
-              .col-sm-4(v-if="!$mq.phone")
+                  //contact-detail(v-if="$mq.desktop", style="margin-top: 2.5rem;padding-top: 2rem;border-top: 1px solid #ccc")
+              .col-sm-4
                 footer-widget-panel(:title_="$t('policy')")
-                  ul.list
+                  ul(:class="$style.topList")
                     li(v-for="i in policyLinks$[$i18n.locale]")
                       a(:href="i.url") > {{i.title}}
-              .col-sm-4(v-if="!$mq.phone")
+              .col-sm-4
                 footer-widget-panel(:title_="$t('cat')")
-                  ul.list
+                  ul(:class="$style.topList")
                     li(v-for="cat in categories")
                       a(:href="cat.url") > {{cat.title}}
-          .col-sm-4(v-if="!$mq.phone")
+          .col-md-4(v-if="$mq.desktop")
             footer-widget-panel(style="text-align: center")
               .fb-page(:data-href="fanpage", data-small-header='false', data-adapt-container-width='true', data-hide-cover='false', data-show-facepile='true')
     div(:class="$style.next")
