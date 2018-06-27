@@ -11,6 +11,13 @@
 
   .modal-header {
     border-bottom: none;
+
+    .close{
+      transform: scale(1.5);
+      transform-origin: 50% 25%;
+      padding-right: .15rem;
+      padding-left: .3rem;
+    }
   }
 
   .modal-title {
