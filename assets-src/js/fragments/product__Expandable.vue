@@ -20,12 +20,14 @@
   }
 
   .icon {
-    composes: fa fa-lg fa-arrow-circle-up from global;
     margin-right: .4em;
     margin-left: .05em;
     color: #888;
     opacity: 0.7;
     transition: all $animation-time ease;
+    &.open{
+      transform: rotate(180deg);
+    }
   }
 
   .title:hover .icon {
@@ -39,18 +41,18 @@
 <template lang="pug">
   div(:class="$style.expandable")
     h3(:class="$style.title", @click="IS_EXPANDED = !IS_EXPANDED")
-      i(:class="[$style.icon, IS_EXPANDED?'fa-rotate-180':'']")
+      fa-icon(:icon="FA_CIRCLE_UP" size="lg" :class="[$style.icon, IS_EXPANDED?$style.open:'']")
       | {{title | escaped}}
-    //dropdown(:is-open="IS_EXPANDED")
+    dropdown(:is-open="IS_EXPANDED")
       div(:class="$style.inner")
         slot
 </template>
 <script>
-  // TODO: waiting for new repo
-  //import Dropdown from 'my-vue-utils/dist/components/dropdown';
+  import Dropdown from 'my-vue-utils/dist/components/dropdown';
+  import FA_CIRCLE_UP from '@fortawesome/fontawesome-free-solid/faArrowCircleUp'
 
   export default {
-    //components: {Dropdown},
+    components: {Dropdown},
     props: {
       title: {
         type: String,
@@ -62,7 +64,8 @@
     },
     data() {
       return {
-        IS_EXPANDED: false
+        IS_EXPANDED: false,
+        FA_CIRCLE_UP
       };
     }
   };

@@ -94,31 +94,6 @@
   }
 
   // region Panel
-  .footerWidgetPanel {
-    margin: 24px 0;
-  }
-
-  h3.footerWidgetPanel {
-    @include font-size-with-line-height($font-size-h3*0.69);
-    @include responsive('md-min'){
-      @include font-size-with-line-height($font-size-h3*0.86);
-    }
-    font-weight: 700;
-    position: relative;
-    /*display: inline-block;*/
-    margin-bottom: 3.2rem;
-    &:after {
-      visibility: visible;
-      content: '';
-      position: absolute;
-      bottom: -1.5rem;
-      left: 0;
-      height: 3px;
-      width: 8rem;
-      background-color: $theme-color;
-    }
-  }
-
   .payments :global {
     ul {
       display: inline-block;
@@ -140,6 +115,9 @@
   .top {
     composes: panel-outer;
     background-color: #444548;
+    background-image: url(../../img/footer-overlay-mobile.png);
+    background-size: cover;
+    filter: contrast(135%) brightness(125%);
   }
 
   .topList{
@@ -161,7 +139,6 @@
     composes: panel-outer;
     background-color: #5c5c5f;
   }
-
   // endregion
 
   .logo {
@@ -307,23 +284,13 @@
   import {mapGetters} from 'vuex';
   import {CATEGORIES_LIST_} from '../store/types';
   import ContactDetail from './footer__ContactDetail.vue';
+  import FooterWidgetPanel from './footer__WidgetPanel';
+  import Dropdown from 'my-vue-utils/dist/components/dropdown';
 
-  const $ = jQuery;
 
   export default {
     components: {
-      'footer-widget-panel': {
-        render(createElement) {
-          const children = this.$slots.default,
-            parentStyle = this.$parent.$style;
-          if (this.title_)
-            children.unshift(createElement('h3', {class: parentStyle.footerWidgetPanel}, this.title_.toUpperCase()));
-          return createElement('div', {class: parentStyle.footerWidgetPanel}, children);
-        },
-        props: {
-          title_: String
-        }
-      },
+      FooterWidgetPanel,
       ContactDetail
     },
     data() {
