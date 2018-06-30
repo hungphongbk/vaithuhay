@@ -195,7 +195,7 @@ label {
   @include aspect-ratio(5, 2);
 }
 
-$gutters: 10 20 30 40 50;
+$gutters: 5 10 20 30 40 50;
 @mixin pf($pf, $g) {
   $g2: $g/2;
   .#{$pf}-#{$g}.row {

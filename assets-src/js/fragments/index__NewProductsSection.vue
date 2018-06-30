@@ -23,15 +23,36 @@
     }
   }
 </style>
+<style lang="scss" module>
+  @import "../../sass/inc/inc";
+  .slide{
+    @include responsive('xs-max'){
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+  }
+  .list{
+    padding-top: 1.6rem;
+    //@include responsive('md-min'){
+    //  padding-top: 1.6rem;
+    //}
+  }
+  .bottom{
+    margin-top: 1rem;
+    @include responsive('md-min'){
+      margin-top: 2rem;
+    }
+  }
+</style>
 <template lang="pug">
   index-section(:title="currentCol.title", titleForeground="#fff", background="#fc0")
-    product-loop.pt(:list="collections" slider="flickity" @select="index => current = index")
+    product-loop.pt(:class="$style.slide" :list="collections" slider="flickity" @select="index => current = index")
       template(slot="item", slot-scope="p")
-        .row.gutter-10.pt-3
+        .row.gutter-5.gutter-sm-10(:class="$style.list")
           .col-xs-6.col-sm-3(v-for="product in pick(p.item.list, 4)")
             product-item.mb-2(:item="product")
-    .text-center.mt-4
-      a(href="https://vaithuhay.com/collections/san-pham-moi")
+    .text-center(:class="$style.bottom")
+      a(:href="currentCol.url")
         .btn.btn-white KHÁM PHÁ THÊM
 </template>
 <script>
