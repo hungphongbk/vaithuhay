@@ -10,6 +10,11 @@
     padding-bottom: 20px;
     text-align: center;
     background-color: $theme-color;
+    @include responsive('sm-max'){
+      /*background-image: url(../../img/footer-overlay-mobile.png);*/
+      /*background-size: cover;*/
+      /*filter: contrast(25%) brightness(125%);*/
+    }
     p {
       display: inline-block;
       max-width: 80%;
@@ -112,12 +117,27 @@
     color: white;
   }
 
+  //noinspection ALL
   .top {
     composes: panel-outer;
-    background-color: #444548;
-    background-image: url(../../img/footer-overlay-mobile.png);
-    background-size: cover;
-    filter: contrast(135%) brightness(125%);
+    position: relative;
+    &:before{
+      content: '';
+      visibility: visible;
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+
+      background-color: #444548;
+      background-image: url(../../img/footer-overlay-mobile.png);
+      background-size: cover;
+      filter: contrast(135%) brightness(125%);
+      @include responsive('md-min'){
+        background-image: url(../../img/footer-overlay-desktop.png);
+      }
+    }
   }
 
   .topList{
@@ -128,7 +148,7 @@
         top: .45em;
         bottom: .45em;
       }
-      @include font-size-with-line-height(0.78*$font-size-base);
+      @include font-size-with-line-height(0.85*$font-size-base);
       @include responsive('sm-min'){
         @include font-size-with-line-height(0.9*$font-size-base);
       }
@@ -197,12 +217,21 @@
   }
 
   .copyright {
-    font-size: 1.1rem;
     display: inline-block;
-    height: 49px;
-    line-height: 49px;
-    float: right;
-    text-align: right;
+
+    text-align: center;
+    @include font-size-with-line-height(0.77*$font-size-base);
+    @include responsive('sm-max'){
+      margin-top: $line-height-computed*0.7;
+      font-style: italic;
+    }
+    @include responsive('sm-min'){
+      @include font-size-with-line-height(1.1*$font-size-base);
+      float: right;
+      text-align: right;
+      height: 49px;
+      line-height: 49px;
+    }
 
     &-title {
       @include font-size-with-line-height(1.05rem);

@@ -30,15 +30,22 @@
       height: 3px;
       width: 8rem;
       background-color: $theme-color;
+      @include responsive('sm-max'){
+        left: 50%;
+        margin-left: -4rem;
+      }
     }
   }
 </style>
 <template lang="pug">
   div(:class="$style.container")
-    h3(v-if="title_" :class="$style.container") {{title_}}
-      fa-icon.ml-3(v-if="!$mq.desktop" :icon="FA_CARET_DOWN" size="lg")
-    //div(:class="$style.content")
+    h3(v-if="title_" :class="$style.container" @click="IS_EXPANDED = !IS_EXPANDED") {{title_}}
+      fa-icon.ml-3(v-if="$mq.phone" :icon="FA_CARET_DOWN" size="lg")
+    div(:class="$style.content" v-if="!$mq.phone")
       slot
+    dropdown(v-else :is-open="IS_EXPANDED")
+      div(:class="$style.content")
+        slot
 </template>
 <script>
   import FA_CARET_DOWN from '@fortawesome/fontawesome-free-solid/faCaretDown'

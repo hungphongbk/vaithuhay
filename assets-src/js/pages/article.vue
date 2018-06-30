@@ -103,6 +103,25 @@
       }
     }
   }
+  .related-articles-bottom{
+    .item {
+      @extend %no-focus;
+      padding: 0 5px;
+      @include responsive('sm-min') {
+        padding: 0 15px;
+      }
+      .title {
+        $font: $font-size-h4;
+        @include font-size-with-line-height($font*0.95);
+        text-transform: uppercase;
+        font-weight: 700;
+        @include responsive('xs-max') {
+          @include font-size-with-line-height($font*0.75);
+          margin-bottom: .3rem;
+        }
+      }
+    }
+  }
 
   .article-main-content /deep/ {
     h1, h1 > span {
@@ -222,13 +241,13 @@
               p(v-if="status") {{status}}
             .btn.btn-grey(@click="sendComment") {{$t('send')}}
         .col-sm-4.related-articles
-          h3.title CÁC BÀI VIẾT LIÊN QUAN
-          ul
+          //h3.title CÁC BÀI VIẾT LIÊN QUAN
+          //ul
             li(v-for="rel in relateds")
               a.inner(:href="rel.url")
                 thumbnail(:url_="rel.image", ratio_="1-1", :overlay_="false")
                 h5.title {{rel.title}}
-          div(style="height:1rem")
+          //div(style="height:1rem")
           template(v-if="relatedProducts.length>0")
             h3.title CÁC SẢN PHẨM LIÊN QUAN
             ul
@@ -236,11 +255,25 @@
                 a.inner(:href="rel.current.url")
                   thumbnail(:url_="rel.images[0].small", ratio_="1-1", :overlay_="false")
                   h5.title {{rel.current._title[$i18n.locale]}}
+    .container.related-articles-bottom
+      item-loop.pt(:slider-opts="slickOptions_", :list="relateds")
+        template(slot="item", slot-scope="p")
+          .item
+            thumbnail(ratio_="1-1", :overlay_="false", :url_="p.item.image", :lazy_="false")
+            .ratio-6-5
+              .content
+                a(:href="p.item.url")
+                  h4.title {{p.item.title}}
+                p(v-if="!$mq.tablet") {{p.item.excerpt}}
+                a.see-more(:href="p.item.url") {{$t('seemore')}}
+                  i.fa.fa-chevron-right
 </template>
 <script>
-  import transform            from '../plugins/content-transform';
-  import {delay}              from '../components/helpers';
+  import transform from '../plugins/content-transform';
+  import {delay} from '../components/helpers';
   import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue';
+  import {ItemLoop} from "@/components";
+  import {slickOptions_} from "@/components/helpers";
 
   const $ = jQuery,
     urlConcat = (base, append) => {
@@ -252,6 +285,7 @@
 
   const {id, title, url, author, excerpt, content, created, relateds, comments} = window.article;
   export default {
+    components: {ItemLoop},
     data() {
       return {
         title,
@@ -269,7 +303,8 @@
           email: '',
           content: ''
         },
-        status: null
+        status: null,
+        slickOptions_
       };
     },
     computed: {
@@ -357,17 +392,17 @@
 </script>
 <i18n>
   {
-    "en": {
-      "content": "Content",
-      "comments": "Comments",
-      "q": "Your comment",
-      "send": "Send comment"
-    },
-    "vi": {
-      "content": "Bài viết",
-      "comments": "Bình luận",
-      "q": "Bạn nghĩ gì về bài viết này?",
-      "send": "Gửi bình luận"
-    }
+  "en": {
+  "content": "Content",
+  "comments": "Comments",
+  "q": "Your comment",
+  "send": "Send comment"
+  },
+  "vi": {
+  "content": "Bài viết",
+  "comments": "Bình luận",
+  "q": "Bạn nghĩ gì về bài viết này?",
+  "send": "Gửi bình luận"
+  }
   }
 </i18n>

@@ -107,7 +107,7 @@
 
   .top-products {
     background-color: #ececec;
-    margin-top: 20px;
+    padding-top: 20px;
     .title {
       margin-bottom: 1em;
       font-weight: 700;
@@ -205,7 +205,7 @@
     }
     margin-right: .3rem;
     color: $theme-color-dark-2;
-    &.added{
+    &.added {
       color: darken($theme-red-color, 5%);
     }
   }
@@ -216,36 +216,60 @@
       display: inline-block;
     }
   }
+
+  .relatedArticle {
+    @extend %reset-link;
+    display: block;
+    padding: {
+      left: 1rem;
+      right: 1rem;
+    }
+    &Wrapper{
+      background: #444548;
+      color: white;
+      padding-top: 20px;
+    }
+    &Title {
+      $font: $font-size-h4;
+      @include font-size-with-line-height($font*0.95);
+      text-transform: uppercase;
+      font-weight: 700;
+      @include responsive('xs-max') {
+        @include font-size-with-line-height($font*0.75);
+        margin-bottom: .3rem;
+      }
+    }
+  }
 </style>
 <template lang="pug" src="./product.vue.pug"></template>
 <script src="./product.vue.js"></script>
 <i18n>
   {
-    "en": {
-      "buyNow": "Buy now",
-      "info": "Information",
-      "comment": "Comments",
-      "related": "RELATED PRODUCTS",
-      "seeMore": "See more...",
-      "collapse": "Collapse",
-      "top": "TOP PRODUCTS",
-      "sale": "ON-SALE PRODUCTS",
-      "combo": {
-        "label": "RECOMMEND COMBOS"
-      }
-    },
-    "vi": {
-      "buyNow": "Mua ngay",
-      "info": "Thông tin",
-      "comment": "Bình luận",
-      "related": "SẢN PHẨM LIÊN QUAN",
-      "seeMore": "Xem thêm...",
-      "collapse": "Thu gọn",
-      "top": "SẢN PHẨM ĐƯỢC XEM NHIỀU",
-      "sale": "SẢN PHẨM ĐANG KHUYẾN MÃI",
-      "combo": {
-        "label": "COMBO HẤP DẪN"
-      }
-    }
+  "en": {
+  "buyNow": "Buy now",
+  "info": "Information",
+  "comment": "Comments",
+  "related": "RELATED PRODUCTS",
+  "seeMore": "See more...",
+  "collapse": "Collapse",
+  "top": "TOP PRODUCTS",
+  "sale": "ON-SALE PRODUCTS",
+  "combo": {
+  "label": "RECOMMEND COMBOS"
+  }
+  },
+  "vi": {
+  "buyNow": "Mua ngay",
+  "info": "Thông tin",
+  "comment": "Bình luận",
+  "related": "SẢN PHẨM LIÊN QUAN",
+  "seeMore": "Xem thêm...",
+  "collapse": "Thu gọn",
+  "top": "SẢN PHẨM ĐƯỢC XEM NHIỀU",
+  "sale": "SẢN PHẨM ĐANG KHUYẾN MÃI",
+  "combo": {
+  "label": "COMBO HẤP DẪN"
+  }
+  }
   }
 </i18n>

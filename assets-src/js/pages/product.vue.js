@@ -25,6 +25,7 @@ import faHeartSolid
 import faCartPlus
                                                                        from '@fortawesome/fontawesome-free-solid/faCartPlus';
 import {PRODUCT_ACTION_FAVORITE_FETCH, PRODUCT_ACTION_FAVORITE_TOGGLE} from "@/store/types";
+import ProductRelatedArticles from '../fragments/product__RelatedArticles.vue'
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -80,7 +81,8 @@ export default {
     ProductItem,
     ProductFaq,
     ProductWholeSale,
-    ProductSmallItem
+    ProductSmallItem,
+    ProductRelatedArticles
   },
   data() {
     // const {current, images, variants, relateds, tops, topPromos, faq} = this.$vthStore.state.product
@@ -116,7 +118,8 @@ export default {
       faq: (faq && faq.faq) ? faq.faq : [],
       commentCount: null,
       giftAvatars: [''],
-      giftVariants: ['']
+      giftVariants: [''],
+      relatedArticles:[]
     };
   },
   computed: {
@@ -193,6 +196,9 @@ export default {
         this.wholesale = data.map(({rules}, index) => new WholeSale(index + 1, rules[0], this));
       }
     },
+    async fetchRelatedArticles(){
+      this.relatedArticles = await $.get('https://server.vaithuhay.com/b/products/' + current.id + '/relatedArticles');
+    },
     async fetchCommentCount() {
       const {share} = await $.get(`https://graph.facebook.com/v2.8/?fields=share%7Bcomment_count%7D&id=http://vaithuhay.com${this.url}`);
       this.commentCount = share.comment_count;
@@ -205,7 +211,11 @@ export default {
     this.$vthStore.registerModule('product', ProductModule, {preserveState: true});
   },
   async mounted() {
-    await Promise.all([this.fetchWholesale(), this.fetchCommentCount()]);
+    await Promise.all([
+      this.fetchWholesale(),
+      this.fetchCommentCount(),
+      this.fetchRelatedArticles()
+    ]);
     this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_FETCH);
   },
   destroyed() {
