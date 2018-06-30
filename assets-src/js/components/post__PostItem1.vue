@@ -23,7 +23,7 @@
                 span(:class="$style.regularPrice") {{price.old}}
               span.regular-price(v-else) {{price.current}}
     div(:class="$style.caption")
-      h5(:class="$style.category") {{type}}
+      h5(v-if="!$mq.phone" :class="$style.category") {{type}}
       h4 {{title}}
       p(:class="$style.description", v-if="!$mq.tablet", v-html="description")
     .bottom

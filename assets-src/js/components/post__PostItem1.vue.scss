@@ -144,7 +144,8 @@ $effect-time: .25s;
   font-size: $font-size-h4*0.85;
   @include font-size-with-line-height($font-size-h4*0.85);
   @media screen and (max-width: $screen-xs-max) {
-    @include font-size-with-line-height($font-size-h4*0.75);
+    margin-top: 0;
+    @include font-size-with-line-height($font-size-h4*0.67);
   }
 }
 
@@ -192,6 +193,6 @@ $effect-time: .25s;
   composes: caption from global;
   height: $line-height-computed*9.5;
   @include responsive('xs-max') {
-    height: $line-height-computed*6.8;
+    height: $line-height-computed*3.4;
   }
 }
