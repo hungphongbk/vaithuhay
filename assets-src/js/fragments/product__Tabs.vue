@@ -129,8 +129,6 @@
       slot
 </template>
 <script>
-  import 'jquery-sticky';
-
   const $ = jQuery;
   export default {
     data() {

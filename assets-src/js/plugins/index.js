@@ -1,15 +1,16 @@
 import './responsive';
 import './animateCss';
-import Vue             from 'vue';
-import AsyncComputed   from 'vue-async-computed';
+import Vue from 'vue';
+import AsyncComputed from 'vue-async-computed';
 import VueLocalStorage from 'vue-localstorage';
-import VueLazyload     from 'vue-lazyload';
-import {delay}         from '../components/helpers';
+import VueLazyload from 'vue-lazyload';
+import {delay} from '../components/helpers';
 import './observe-visibility';
-import {detect}        from 'detect-browser';
+import {detect} from 'detect-browser';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import './cookie';
-import i18n            from './i18n';
+import i18n from './i18n';
+import Sticky from 'vue-sticky-directive';
 //
 // import 'vue-carousel'
 
@@ -65,3 +66,5 @@ window.fbAsyncInit = function () {
 
 Vue.component('fa-icon', FontAwesomeIcon);
 export {default as ModalManager} from './ModalManager';
+
+Vue.use(Sticky);

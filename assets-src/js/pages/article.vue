@@ -2,6 +2,7 @@
   @import "../../sass/inc/inc";
 
   .article-main {
+    padding-top:100px;
     &-title {
       font-weight: 700;
       display: inline-block;
@@ -213,7 +214,7 @@
             a.link(:class="{'disabled': !comments.enabled, 'active':tab==='comment'}", @click="comments.enabled && (tab='comment')") {{$t('comments')}}
               span.number(v-if="comments.enabled", :class="{'zero':commentCount_===0}") {{commentCount_}}
     .container
-      .row.gutter-40
+      .row.gutter-40(sticky-container)
         .col-sm-8
           div.article-main-content(v-show="tab==='content'")
             component(:is="body")
@@ -243,14 +244,7 @@
               p(v-if="status") {{status}}
             .btn.btn-grey(@click="sendComment") {{$t('send')}}
         .col-sm-4.related-articles
-          //h3.title CÁC BÀI VIẾT LIÊN QUAN
-          //ul
-            li(v-for="rel in relateds")
-              a.inner(:href="rel.url")
-                thumbnail(:url_="rel.image", ratio_="1-1", :overlay_="false")
-                h5.title {{rel.title}}
-          //div(style="height:1rem")
-          template(v-if="relatedProducts.length>0")
+          div(v-if="relatedProducts.length>0" v-sticky sticky-offset="offset")
             h3.title CÁC SẢN PHẨM LIÊN QUAN
             ul
               li(v-for="rel in relatedProducts")
@@ -276,7 +270,8 @@
   import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue';
   import {ItemLoop} from "@/components";
   import {slickOptions_} from "@/components/helpers";
-  import {darkPanel} from "../plugins/directives";
+  import {DarkPanel} from "../plugins/directives";
+
 
   const $ = jQuery,
     urlConcat = (base, append) => {
@@ -289,7 +284,7 @@
   const {id, title, url, author, excerpt, content, created, relateds, comments} = window.article;
   export default {
     components: {ItemLoop},
-    directives: {darkPanel},
+    directives: {DarkPanel},
     data() {
       return {
         title,
@@ -308,7 +303,11 @@
           content: ''
         },
         status: null,
-        slickOptions_
+        slickOptions_,
+        offset:{
+          top:80,
+          bottom:40
+        }
       };
     },
     computed: {

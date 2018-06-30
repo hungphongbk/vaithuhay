@@ -293,14 +293,14 @@
   import ContactDetail from './footer__ContactDetail.vue';
   import FooterWidgetPanel from './footer__WidgetPanel';
   import Dropdown from 'my-vue-utils/dist/components/dropdown';
-  import {darkPanel} from "../plugins/directives";
+  import {DarkPanel} from "../plugins/directives";
 
   export default {
     components: {
       FooterWidgetPanel,
       ContactDetail
     },
-    directives: {darkPanel},
+    directives: {DarkPanel},
     data() {
       const {about, address, hotline, email, links} = vth.footer;
       return {
