@@ -18,7 +18,7 @@
     margin-bottom: 1.5rem;
   }
 
-  .content {
+  .titled .content {
     position: relative;
     padding-top: 1.5rem;
     &:before {
@@ -38,7 +38,7 @@
   }
 </style>
 <template lang="pug">
-  div(:class="$style.container")
+  div(:class="[$style.container, title_?$style.titled:null]")
     h3(v-if="title_" :class="$style.container" @click="IS_EXPANDED = !IS_EXPANDED") {{title_}}
       fa-icon.ml-3(v-if="$mq.phone" :icon="FA_CARET_DOWN" size="lg")
     div(:class="$style.content" v-if="!$mq.phone")

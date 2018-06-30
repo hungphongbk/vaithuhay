@@ -10,7 +10,7 @@
     padding-bottom: 20px;
     text-align: center;
     background-color: $theme-color;
-    @include responsive('sm-max'){
+    @include responsive('sm-max') {
       /*background-image: url(../../img/footer-overlay-mobile.png);*/
       /*background-size: cover;*/
       /*filter: contrast(25%) brightness(125%);*/
@@ -117,31 +117,8 @@
     color: white;
   }
 
-  //noinspection ALL
-  .top {
-    composes: panel-outer;
-    position: relative;
-    &:before{
-      content: '';
-      visibility: visible;
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-
-      background-color: #444548;
-      background-image: url(../../img/footer-overlay-mobile.png);
-      background-size: cover;
-      filter: contrast(135%) brightness(125%);
-      @include responsive('md-min'){
-        background-image: url(../../img/footer-overlay-desktop.png);
-      }
-    }
-  }
-
-  .topList{
-    >li>a{
+  .topList {
+    > li > a {
       @extend %reset-link;
       display: inline-block;
       margin: {
@@ -149,7 +126,7 @@
         bottom: .45em;
       }
       @include font-size-with-line-height(0.85*$font-size-base);
-      @include responsive('sm-min'){
+      @include responsive('sm-min') {
         @include font-size-with-line-height(0.9*$font-size-base);
       }
     }
@@ -159,6 +136,7 @@
     composes: panel-outer;
     background-color: #5c5c5f;
   }
+
   // endregion
 
   .logo {
@@ -209,9 +187,9 @@
         margin-bottom: .3rem;
       }
     }
-    @include responsive('sm-min'){
+    @include responsive('sm-min') {
       /*&:not(:last-child) {*/
-        /*margin-right: 1.7rem;*/
+      /*margin-right: 1.7rem;*/
       /*}*/
     }
   }
@@ -221,11 +199,11 @@
 
     text-align: center;
     @include font-size-with-line-height(0.77*$font-size-base);
-    @include responsive('sm-max'){
+    @include responsive('sm-max') {
       margin-top: $line-height-computed*0.7;
       font-style: italic;
     }
-    @include responsive('sm-min'){
+    @include responsive('sm-min') {
       @include font-size-with-line-height(1.1*$font-size-base);
       float: right;
       text-align: right;
@@ -243,7 +221,7 @@
 </style>
 <template lang="pug">
   footer(:class="$style.siteFooterOuter")
-    div(:class="$style.top")
+    div(v-dark-panel.overlay="")
       .container.pb-5.pt-1
         .row.site-info
           .col-12.col-md-8
@@ -315,13 +293,14 @@
   import ContactDetail from './footer__ContactDetail.vue';
   import FooterWidgetPanel from './footer__WidgetPanel';
   import Dropdown from 'my-vue-utils/dist/components/dropdown';
-
+  import {darkPanel} from "../plugins/directives";
 
   export default {
     components: {
       FooterWidgetPanel,
       ContactDetail
     },
+    directives: {darkPanel},
     data() {
       const {about, address, hotline, email, links} = vth.footer;
       return {
