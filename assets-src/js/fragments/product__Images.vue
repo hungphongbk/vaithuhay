@@ -135,9 +135,9 @@
   .product-images
     image-loop.images(ref="loop", :slider-opts="slick_", :list="images_", :labelIndicator_="labelIndicator_", :fullScreen_="fullScreen_", @full-screen="show_ = true")
       template(slot="item", slot-scope="p")
-        .ratio-5-4.big(v-if="p.item.isVideo")
+        .ratio-1-1.big(v-if="p.item.isVideo")
           .content(v-html="p.item.original")
-        thumbnail.big.no-effect(v-else, :url_="p.item.original", :lazy_="false", :overlay_="false", ratio_="5-4")
+        thumbnail.big.no-effect(v-else, :url_="p.item.original", :lazy_="false", :overlay_="false", ratio_="1-1")
           .content.vignette
       template(slot="thumb", slot-scope="p")
         .ratio-3-2.small

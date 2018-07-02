@@ -63,16 +63,16 @@
               ul.products-sidebar
                 li(v-for="rel in top6")
                   product-small-item.item(:product="rel")
-    div(:class="$style.relatedArticleWrapper" v-if="relatedArticles.length>0")
+    div(:class="$style.relatedArticleWrapper" v-if="relatedArticles.length>0" v-dark-panel.overlay="")
       .container
         .text-center
           h3.title CÁC BÀI VIẾT LIÊN QUAN
-        item-loop.pt(:slider-opts="slickOptions_" :list="relatedArticles")
+        item-loop.pt(:slider-opts="slickOptions_" :list="relatedArticles" :is-light="true")
           template(slot="item" slot-scope="p")
             .swiper-slide
               a(:class="$style.relatedArticle" :href="`/blogs/news/${p.item.handle}`")
                 thumbnail(ratio_="1-1", :overlay_="false", :url_="p.item.image.src", :lazy_="false")
-                .ratio-4-3
+                .ratio-2-1
                   .content
                     h4(:class="$style.relatedArticleTitle") {{p.item.title}}
     .top-products

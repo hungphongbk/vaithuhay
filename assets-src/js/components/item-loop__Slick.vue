@@ -115,18 +115,32 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  .navNext, .navPrev{
+    .isLight & {
+      opacity: .85;
+      :global(.fa) {
+        color: $theme-color;
+        opacity: .65;
+      }
+
+      &:hover :global(.fa){
+        opacity: 1;
+      }
+    }
+  }
 </style>
 <template lang="pug">
-  .product-loop
+  .product-loop(:class="{ [$style.isLight]: isLight }")
     template(v-if="slickOpts")
       .main-outer
         slick.main(ref='slide', :options="slickOpts", :class="uniqId_", @afterChange="change_")
           div.row-wrap(v-for="chunk in CHUNKED_LIST")
             slot(v-for="item in chunk", name="item", :item="item")
         template
-          .carousel-button.carousel-button-next(:class="uniqId_")
+          .carousel-button.carousel-button-next(:class="[uniqId_, $style.navNext]")
             i.fa(:class="RIGHT_ICON")
-          .carousel-button.carousel-button-prev(:class="uniqId_")
+          .carousel-button.carousel-button-prev(:class="[uniqId_, $style.navPrev]")
             i.fa(:class="LEFT_ICON")
         div(v-if="labelIndicator_ && !$mq.phone", :class="$style.indicator") Ảnh thứ {{SLICK_INDICATOR}}
         div(v-if="fullScreen_", :class="$style.fullScreen", @click="$emit('full-screen')")
@@ -163,6 +177,10 @@
       rows_: {
         type: Number,
         default: 1
+      },
+      isLight: {
+        type: Boolean,
+        default: false
       }
     },
     data() {

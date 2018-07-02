@@ -2,7 +2,7 @@
   @import "../../sass/inc/inc";
 
   .article-main {
-    padding-top:100px;
+    padding-top: 100px;
     &-title {
       font-weight: 700;
       display: inline-block;
@@ -253,14 +253,14 @@
                   h5.title {{rel.current._title[$i18n.locale]}}
     .pt-5(v-dark-panel)
       .container.related-articles-bottom
-        item-loop.pt(:slider-opts="slickOptions_", :list="relateds")
+        item-loop.pt(:slider-opts="slickOptions_", :list="relateds" :is-light="true")
           template(slot="item", slot-scope="p")
             a.item(:href="p.item.url")
               thumbnail(ratio_="1-1", :overlay_="false", :url_="p.item.image", :lazy_="false")
-              .ratio-6-5
+              .ratio-3-2
                 .content
                   h4.title {{p.item.title}}
-                  p(v-if="!$mq.tablet") {{p.item.excerpt}}
+                  //p(v-if="!$mq.tablet") {{p.item.excerpt}}
                   p {{$t('seemore')}}
                     i.fa.fa-chevron-right.ml-1
 </template>
@@ -304,9 +304,9 @@
         },
         status: null,
         slickOptions_,
-        offset:{
-          top:80,
-          bottom:40
+        offset: {
+          top: 80,
+          bottom: 40
         }
       };
     },

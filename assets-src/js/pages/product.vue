@@ -230,8 +230,9 @@
       padding-top: 20px;
     }
     &Title {
+      margin-top: 1.7rem;
       $font: $font-size-h4;
-      @include font-size-with-line-height($font*0.95);
+      @include font-size-with-line-height($font*0.78);
       text-transform: uppercase;
       font-weight: 700;
       @include responsive('xs-max') {

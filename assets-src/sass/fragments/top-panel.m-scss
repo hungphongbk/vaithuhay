@@ -3,6 +3,7 @@
 .dark {
   color: white;
   position: relative;
+  z-index: 0;
   &:before{
     content: '';
     visibility: visible;
@@ -13,6 +14,7 @@
     height:100%;
 
     background-color: #444548;
+    z-index: -1;
   }
   &.overlay{
     //noinspection ALL

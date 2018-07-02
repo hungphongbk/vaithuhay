@@ -26,6 +26,7 @@ import faCartPlus
                                                                        from '@fortawesome/fontawesome-free-solid/faCartPlus';
 import {PRODUCT_ACTION_FAVORITE_FETCH, PRODUCT_ACTION_FAVORITE_TOGGLE} from "@/store/types";
 import ProductRelatedArticles from '../fragments/product__RelatedArticles.vue'
+import {DarkPanel} from "@/plugins/directives";
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -67,7 +68,8 @@ export default {
   mixins: [addToCartMixin],
   directives: {
     ripple: (el) =>
-      $(el).addClass('btn-ripple').click(e => ripple(e))
+      $(el).addClass('btn-ripple').click(e => ripple(e)),
+    DarkPanel
   },
   components: {
     ProductImages,
