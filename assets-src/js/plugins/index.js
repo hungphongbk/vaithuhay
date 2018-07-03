@@ -11,6 +11,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import './cookie';
 import i18n from './i18n';
 import Sticky from 'vue-sticky-directive';
+import VueScroll from 'vue-scroll';
 //
 // import 'vue-carousel'
 
@@ -68,3 +69,4 @@ Vue.component('fa-icon', FontAwesomeIcon);
 export {default as ModalManager} from './ModalManager';
 
 Vue.use(Sticky);
+Vue.use(VueScroll);

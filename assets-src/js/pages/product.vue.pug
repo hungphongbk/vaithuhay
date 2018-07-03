@@ -3,7 +3,7 @@
     .container
       .row.gutter-sm-50
         .col-sm-6
-          product-images.images(ref="images", :images_="images", :fullScreen_="true")
+          product-images.images(ref="images", :images_="images", :fullScreen_="true" @change="selectImageUpdateVariant")
         .col-sm-6
           h2(:class="$style.entryTitle") {{title$i18n}}
           .clearfix

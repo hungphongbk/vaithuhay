@@ -5,11 +5,17 @@
     font-weight: 700;
   }
 
+  ul{
+    margin-right: -.4rem;
+  }
   li {
-    display: inline-block;
-    &:not(:last-child) {
-      margin-right: .4em;
-    }
+    display: block;
+    //&:not(:last-child) {
+    padding-right: .4rem;
+    padding-bottom: .4rem;
+    width: percentage(1/6);
+    flex-basis: percentage(1/6);
+    //}
     &.selected:not(.disabled) .vth-thumb {
       border: 2px solid $theme-red-color;
     }
@@ -20,16 +26,16 @@
 
   .vth-thumb {
     cursor: pointer;
-    width: 60px;
+    width: 100%;
   }
 </style>
 <template lang="pug">
   div.product-variants
     p
       span.text-theme-red {{value.title}}
-    ul
+    ul.d-flex.flex-wrap
       li(v-for="item in list", :class="{'selected': item===value, 'disabled': !item.available}", @click="$emit('input', item)")
-        thumbnail.no-effect.ratio-1-1(:url_="item.image", :overlay_="false", v-tooltip.top="item.title",:lazy_="false")
+        thumbnail.no-effect.ratio-1-1(:url_="item.image", :overlay_="false", v-tooltip.top="item.title")
 </template>
 <script>
   import {tooltip} from '../plugins/index';

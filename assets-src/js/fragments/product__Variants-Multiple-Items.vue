@@ -2,8 +2,6 @@
   @import "../../sass/inc/inc";
 
   li {
-    display: block;
-    float: left;
     &:not(:last-child) {
       margin-right: .4em;
       margin-bottom: .4em;
@@ -31,7 +29,7 @@
 </style>
 <template lang="pug">
   div
-    ul.clearfix(:class="hasImage?'image':'text'")
+    ul.d-flex.flex-wrap(:class="hasImage?'image':'text'")
       li(v-for="item in items", :class="{'btn btn-variant':!hasImage, 'selected': item.title===value.title}", @click="$emit('input', item)")
         thumbnail.no-effect.ratio-1-1(v-if="hasImage", :url_="item.image", :overlay_="false", v-tooltip.top="item.title", :lazy_="false")
         span(v-else) {{item.title}}

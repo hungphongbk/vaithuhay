@@ -133,7 +133,10 @@
 </style>
 <template lang="pug">
   .product-images
-    image-loop.images(ref="loop", :slider-opts="slick_", :list="images_", :labelIndicator_="labelIndicator_", :fullScreen_="fullScreen_", @full-screen="show_ = true")
+    image-loop.images(ref="loop", :slider-opts="slick_",
+    :list="images_", :labelIndicator_="labelIndicator_",
+    :fullScreen_="fullScreen_", @full-screen="show_ = true"
+    @change="index => $emit('change', images_[index].small)")
       template(slot="item", slot-scope="p")
         .ratio-1-1.big(v-if="p.item.isVideo")
           .content(v-html="p.item.original")
@@ -197,13 +200,12 @@
         this.$refs.loop.goTo(index);
       },
       reInit() {
-        console.log('ahihi');
         this.$refs.loop.reInit();
       },
-      exp(el, brightness) {
-        if (brightness >= 70) $(el).addClass('light');
-        else $(el).addClass('dark');
-      }
+      // exp(el, brightness) {
+      //   if (brightness >= 70) $(el).addClass('light');
+      //   else $(el).addClass('dark');
+      // }
     }
   };
 </script>

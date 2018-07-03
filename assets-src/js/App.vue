@@ -57,7 +57,7 @@
   }
 </style>
 <template lang="pug">
-  #app.hfeed.site
+  #app.hfeed.site(v-scroll="onScroll")
     nav-menu
     #primary
       main#main(role="main")
@@ -118,6 +118,9 @@
         $modalEvent.$on(SYSTEM_MODAL_HIDE, () => {
           this.systemModal = null;
         });
+      },
+      onScroll(){
+
       }
     },
     async created() {

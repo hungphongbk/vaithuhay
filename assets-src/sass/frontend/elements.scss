@@ -12,6 +12,11 @@
   font-weight: normal;
 }
 
+html, body {
+  height: 100%;
+  overflow: scroll;
+}
+
 //region Buttons
 %btn-vth {
   border: none;
@@ -23,8 +28,8 @@
   padding: 8px 17px;
   position: relative;
   box-shadow: 0 1px 6px -3px rgba(0, 0, 0, 0.65);
-  @include responsive('md-min'){
-    &:hover{
+  @include responsive('md-min') {
+    &:hover {
       box-shadow: 0 2px 8px -3px rgba(0, 0, 0, 0.65);
     }
   }
@@ -49,9 +54,9 @@
       margin-right: .7em;
       font-weight: 700;
     }
-    .svg-inline--fa{
+    .svg-inline--fa {
       margin-right: .7em;
-      @include responsive('xs-max'){
+      @include responsive('xs-max') {
         margin-right: .5em;
       }
     }
@@ -77,7 +82,7 @@
   color: $theme-red-color
 }
 
-.btn-vth-effect{
+.btn-vth-effect {
 
 }
 
@@ -128,6 +133,7 @@
   background-color: lighten(#fff, 20%);
   @extend %btn-vth;
 }
+
 //endregion
 
 .vth-section {
@@ -229,6 +235,7 @@ $gutters: 5 10 20 30 40 50;
     padding-left: $g2*1px;
   }
 }
+
 @each $g in $gutters {
   @include pf('gutter', $g);
   @include responsive('sm-min') {

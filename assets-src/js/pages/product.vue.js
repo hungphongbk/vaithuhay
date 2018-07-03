@@ -1,31 +1,28 @@
-import ProductImages                                                   from '../fragments/product__Images.vue';
-import ProductQuantity                                                 from '../fragments/product__Quantity.vue';
-import ProductTabs                                                     from '../fragments/product__Tabs.vue';
-import ProductTab                                                      from '../fragments/product__Tab.vue';
-import ProductFaq                                                      from '../fragments/product__FAQ.vue';
-import ProductExpandable                                               from '../fragments/product__Expandable.vue';
-import ProductWholeSale                                                from '../fragments/product__WholeSale.vue';
-import {AddToCartWrapper, ItemLoop, ProductRating}                     from '../components/index';
-import ProductItem                                                     from '@/components/products';
-import ProductWholeSaleItem                                            from '../fragments/product__WholeSale-Item.vue';
-import ProductSmallItem                                                from '../components/app__ProductSmallItem';
+import ProductImages from '../fragments/product__Images.vue';
+import ProductQuantity from '../fragments/product__Quantity.vue';
+import ProductTabs from '../fragments/product__Tabs.vue';
+import ProductTab from '../fragments/product__Tab.vue';
+import ProductFaq from '../fragments/product__FAQ.vue';
+import ProductExpandable from '../fragments/product__Expandable.vue';
+import ProductWholeSale from '../fragments/product__WholeSale.vue';
+import {AddToCartWrapper, ItemLoop, ProductRating} from '../components/index';
+import ProductItem from '@/components/products';
+import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue';
+import ProductSmallItem from '../components/app__ProductSmallItem';
 // mixins & helpers
-import {addToCartMixin}                                                from '../components/mixins';
-import {ProductItem_, WholeSale}                                       from '../components/classes';
-import {delay}                                                         from '../components/helpers';
-import transform                                                       from '../plugins/content-transform';
-import ripple                                                          from 'js-effect-ripple';
-import ProductModule                                                   from '../store/product';
-import {mapState}                                                      from 'vuex';
+import {addToCartMixin} from '../components/mixins';
+import {ProductItem_, WholeSale} from '../components/classes';
+import {delay} from '../components/helpers';
+import transform from '../plugins/content-transform';
+import ripple from 'js-effect-ripple';
+import ProductModule from '../store/product';
+import {mapState} from 'vuex';
 //    import {i18nFields} from '../plugins/i18n'
-import faHeart
-                                                                       from '@fortawesome/fontawesome-free-regular/faHeart';
-import faHeartSolid
-                                                                       from '@fortawesome/fontawesome-free-solid/faHeart';
-import faCartPlus
-                                                                       from '@fortawesome/fontawesome-free-solid/faCartPlus';
+import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
+import faHeartSolid from '@fortawesome/fontawesome-free-solid/faHeart';
+import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus';
 import {PRODUCT_ACTION_FAVORITE_FETCH, PRODUCT_ACTION_FAVORITE_TOGGLE} from "@/store/types";
-import ProductRelatedArticles from '../fragments/product__RelatedArticles.vue'
+import ProductRelatedArticles from '../fragments/product__RelatedArticles.vue';
 import {DarkPanel} from "@/plugins/directives";
 
 const $ = jQuery,
@@ -121,7 +118,7 @@ export default {
       commentCount: null,
       giftAvatars: [''],
       giftVariants: [''],
-      relatedArticles:[]
+      relatedArticles: []
     };
   },
   computed: {
@@ -198,7 +195,7 @@ export default {
         this.wholesale = data.map(({rules}, index) => new WholeSale(index + 1, rules[0], this));
       }
     },
-    async fetchRelatedArticles(){
+    async fetchRelatedArticles() {
       this.relatedArticles = await $.get('https://server.vaithuhay.com/b/products/' + current.id + '/relatedArticles');
     },
     async fetchCommentCount() {
@@ -207,6 +204,11 @@ export default {
     },
     addToFavorite() {
       return this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_TOGGLE);
+    },
+    selectImageUpdateVariant(image) {
+      const variant = this.variants.find(v => v.image === image);
+      if (variant)
+        this.variantSelected = variant;
     }
   },
   beforeMount() {

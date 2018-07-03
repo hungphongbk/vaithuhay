@@ -116,7 +116,7 @@
     transform: translateX(-50%);
   }
 
-  .navNext, .navPrev{
+  .navNext, .navPrev {
     .isLight & {
       opacity: .85;
       :global(.fa) {
@@ -124,7 +124,7 @@
         opacity: .65;
       }
 
-      &:hover :global(.fa){
+      &:hover :global(.fa) {
         opacity: 1;
       }
     }
@@ -224,6 +224,11 @@
         return chunk(list, this.rows_);
       }
     },
+    watch:{
+      CURRENT_SLIDE(value){
+        this.$emit('change',value);
+      }
+    },
     methods: {
       goTo(index) {
         this.$refs.slide.goTo(index);
@@ -240,7 +245,9 @@
         });
       },
       change_({}, {currentSlide}) {
-        this.CURRENT_SLIDE = currentSlide;
+        this.$nextTick(() => {
+          this.CURRENT_SLIDE = currentSlide;
+        })
       }
     }
   };
