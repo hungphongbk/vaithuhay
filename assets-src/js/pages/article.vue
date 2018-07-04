@@ -70,11 +70,16 @@
   }
 
   .related-articles {
-    > .title {
-      height: 50px;
-      margin: 0;
+    h3.title {
+      margin: 0 {
+        bottom: 1rem;
+      }
       font-weight: 700;
-      color: #444;
+      color: $theme-color;
+      @include font-size-with-line-height($font-size-h4*1.2);
+      padding: 2rem {
+        top: 2.2rem;
+      }
     }
     li {
       .inner {
@@ -200,6 +205,19 @@
     }
   }
 </style>
+<style lang="scss" module>
+  @import "../../sass/inc/inc";
+  .price {
+    .current {
+      color: $theme-red-color;
+      font-weight: 600;
+    }
+    .old {
+      color: #aaa;
+      text-decoration: line-through $theme-red-color;
+    }
+  }
+</style>
 <template lang="pug">
   .article-main
     .container
@@ -245,12 +263,15 @@
             .btn.btn-grey(@click="sendComment") {{$t('send')}}
         .col-sm-4.related-articles
           div(v-if="relatedProducts.length>0" v-sticky sticky-offset="offset")
-            h3.title CÁC SẢN PHẨM LIÊN QUAN
+            h3.title(v-dark-panel.overlay="") CÁC SẢN PHẨM LIÊN QUAN
             ul
               li(v-for="rel in relatedProducts")
                 a.inner(:href="rel.current.url")
                   thumbnail(:url_="rel.images[0].small", ratio_="1-1", :overlay_="false")
                   h5.title {{rel.current._title[$i18n.locale]}}
+                  p(:class="$style.price")
+                    span(:class="$style.current") {{rel.variants[0].price.current}}&nbsp;
+                    span(v-if="rel.variants[0].price.old", :class="$style.old") {{rel.variants[0].price.old}}
     .pt-5(v-dark-panel)
       .container.related-articles-bottom
         item-loop.pt(:slider-opts="slickOptions_", :list="relateds" :is-light="true")
@@ -271,7 +292,7 @@
   import {ItemLoop} from "@/components";
   import {slickOptions_} from "@/components/helpers";
   import {DarkPanel} from "../plugins/directives";
-
+  import ProductSmallItem from '../components/app__ProductSmallItem';
 
   const $ = jQuery,
     urlConcat = (base, append) => {
@@ -283,7 +304,7 @@
 
   const {id, title, url, author, excerpt, content, created, relateds, comments} = window.article;
   export default {
-    components: {ItemLoop},
+    components: {ItemLoop, ProductSmallItem},
     directives: {DarkPanel},
     data() {
       return {
@@ -305,7 +326,7 @@
         status: null,
         slickOptions_,
         offset: {
-          top: 80,
+          top: 60,
           bottom: 40
         }
       };

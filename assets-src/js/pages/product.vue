@@ -30,13 +30,6 @@
       position: unset;
     }
   }
-
-  .swiper-slide /deep/ .caption {
-    height: 6*$line-height-computed;
-    .description {
-      display: none;
-    }
-  }
 </style>
 <style lang="scss">
   @import "../../sass/inc/inc";
@@ -116,18 +109,13 @@
       @extend %no-focus;
       margin-bottom: 20px;
       height: auto;
-      padding: 0 $grid-gutter-width*2/3;
+      padding: 0 .3rem;
+      @include responsive('md-min'){
+        padding: 0 $grid-gutter-width*1/3;
+      }
       .thumbnail {
         height: 100%;
         @extend %box-shadow-1;
-        .caption {
-          h4 {
-            @include font-size-with-line-height($font-size-h4*0.75);
-          }
-          h5 {
-            @include font-size-with-line-height($font-size-h5*0.85);
-          }
-        }
       }
     }
   }
@@ -228,6 +216,33 @@
       background: #444548;
       color: white;
       padding-top: 20px;
+
+      :global{
+        ul.slick-dots{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          li:not(:last-child){
+            margin-right: 1.7rem;
+          }
+          li>button{
+            -webkit-appearance: none;
+            width: 1rem;
+            height: 1rem;
+            overflow: hidden;
+            display: block;
+            border-radius: 50%;
+            background: #aaa;
+            color: #aaa;
+            border: none;
+          }
+          li.slick-active>button{
+            background: $theme-color;
+            color: $theme-color;
+          }
+        }
+      }
     }
     &Title {
       margin-top: 1.7rem;

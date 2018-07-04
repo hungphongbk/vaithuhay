@@ -2,9 +2,9 @@
   .vth-product-summary
     .container
       .row.gutter-sm-50
-        .col-sm-6
+        .col-sm-5
           product-images.images(ref="images", :images_="images", :fullScreen_="true" @change="selectImageUpdateVariant")
-        .col-sm-6
+        .col-sm-7
           h2(:class="$style.entryTitle") {{title$i18n}}
           .clearfix
             template(v-if="price.current!=='-1'")
@@ -64,15 +64,15 @@
                 li(v-for="rel in top6")
                   product-small-item.item(:product="rel")
     div(:class="$style.relatedArticleWrapper" v-if="relatedArticles.length>0" v-dark-panel.overlay="")
-      .container
+      .container.pb-4
         .text-center
           h3.title CÁC BÀI VIẾT LIÊN QUAN
-        item-loop.pt(:slider-opts="slickOptions_" :list="relatedArticles" :is-light="true")
+        item-loop.pt(:slider-opts="slickOptionsWithDot" :list="relatedArticles" :is-light="true")
           template(slot="item" slot-scope="p")
             .swiper-slide
               a(:class="$style.relatedArticle" :href="`/blogs/news/${p.item.handle}`")
                 thumbnail(ratio_="1-1", :overlay_="false", :url_="p.item.image.src", :lazy_="false")
-                .ratio-2-1
+                .ratio-3-1
                   .content
                     h4(:class="$style.relatedArticleTitle") {{p.item.title}}
     .top-products

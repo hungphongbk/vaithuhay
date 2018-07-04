@@ -30,7 +30,7 @@ const $ = jQuery,
   responsive = (breakpoint, settings) => ({breakpoint, settings}),
   slickOptions_ = {
     infinite: false,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 3,
     responsive: [
       responsive(1111, {
@@ -52,6 +52,10 @@ const $ = jQuery,
         autoplaySpeed: 3000
       })
     ]
+  },
+  slickOptionsWithDot = {
+    ...slickOptions_,
+    dots:true
   },
   convertToNumber = ({current, old}) => {
     const convert = str => str ? str.replace(/,|₫/g, '') * 1.0 : Number.MIN_SAFE_INTEGER;
@@ -112,6 +116,7 @@ export default {
       tops: tops.filter(i => i !== null).slice(0, 4).map(ProductItem_),
       topPromos: topPromos.filter(i => i !== null).map(ProductItem_),
       slickOptions_,
+      slickOptionsWithDot,
       contentCollapse: true,
       wholesale: [],
       faq: (faq && faq.faq) ? faq.faq : [],
