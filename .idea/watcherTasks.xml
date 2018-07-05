@@ -21,7 +21,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="false">
+    <TaskOptions isEnabled="true">
       <option name="arguments" value="$FileName$ -m -o $FileNameWithoutExtension$.min.js" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
@@ -34,9 +34,9 @@
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="program" value="$USER_HOME$/.npm-global/bin/uglifyjs" />
+      <option name="program" value="$USER_HOME$/.yarn/bin/uglifyjs" />
       <option name="runOnExternalChanges" value="true" />
-      <option name="scopeName" value="JS snippets" />
+      <option name="scopeName" value="Snippet" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$FileDir$" />
       <envs />

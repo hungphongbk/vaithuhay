@@ -17,7 +17,7 @@
     font-weight: bold;
     text-transform: uppercase;
     @include responsive('xs-max') {
-      /*margin-bottom: 10px;*/
+      @include font-size-with-line-height(20px);
     }
   }
 

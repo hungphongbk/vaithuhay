@@ -72,7 +72,7 @@
             .swiper-slide
               a(:class="$style.relatedArticle" :href="`/blogs/news/${p.item.handle}`")
                 thumbnail(ratio_="1-1", :overlay_="false", :url_="p.item.image.src", :lazy_="false")
-                .ratio-3-1
+                .ratio-3-2.ratio-sm-3-1
                   .content
                     h4(:class="$style.relatedArticleTitle") {{p.item.title}}
     .top-products

@@ -1,0 +1,1 @@
+{ "current": {{ product.price | money | json }} {% if product.compare_at_price > product.price %} ,"old": {{ product.compare_at_price | money | json }} {% endif %}}

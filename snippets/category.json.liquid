@@ -1,0 +1,1 @@
+{ "title": {{ collection.title | json }}, "url": {{ collection.url |json }}, "count": {{ collection.all_products_count }}, "image": {% if collection.image %} {{ collection.image.src | collection_img_url: 'large' | json }} {% else %} {{ collection.products.first.featured_image | product_img_url: 'large' | json }} {% endif %}}

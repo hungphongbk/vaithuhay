@@ -1,0 +1,1 @@
+{id: {{ product.id }},title: {{ product.title | json }},description:{{ product.description | strip_html | truncatewords: 20 | json }},url: {{ product.url | json }},type: {{ product.type | json }},thumbnail: {{ product.featured_image | product_img_url : 'master' | json }},images:[{% for img in product.images %}{{ img.src | json }},{% endfor %}]}

@@ -11,14 +11,19 @@
     padding-top: ($height / $width) * 100%;
   }
   > .content {
-    @extend %abs-full;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
 }
 
-@mixin font-size-with-line-height($font-size) {
-  font-size: $font-size;
-  line-height: $font-size*$line-height-base;
+@mixin font-size-with-line-height($font-size, $is-important: false) {
+  $i: unquote(if($is-important, ' !important', ''));
+  font-size: $font-size $i;
+  line-height: $font-size*$line-height-base $i;
 }
 
 @mixin outline-effect($color, $size: 4px) {

@@ -79,12 +79,12 @@
         padding: 0 15px;
       }
       .title {
-        $font: $font-size-h4;
-        @include font-size-with-line-height($font*0.95);
+        $font: $font-size-h5;
+        @include font-size-with-line-height($font*1.05);
         text-transform: uppercase;
         font-weight: 700;
         @include responsive('xs-max') {
-          @include font-size-with-line-height($font*0.75);
+          @include font-size-with-line-height($font*0.85);
           margin-bottom: .3rem;
         }
       }
@@ -119,6 +119,15 @@
       width: calc(100% - 8px);
       @include responsive('sm-min') {
         width: 80%;
+      }
+    }
+
+    @include responsive('xs-max'){
+      p[data-node-type="SPAN"],
+      ol[data-node-type="OL"] {
+        span {
+          @include font-size-with-line-height(1.05rem, true);
+        }
       }
     }
   }
@@ -326,12 +335,15 @@
           template(slot="item", slot-scope="p")
             a.item(:href="p.item.url")
               thumbnail(ratio_="1-1", :overlay_="false", :url_="p.item.image", :lazy_="false")
-              .ratio-3-2
+              .ratio-3-2.ratio-sm-5-2
                 .content
-                  h4.title {{p.item.title}}
+                  h5.title {{p.item.title}}
                   //p(v-if="!$mq.tablet") {{p.item.excerpt}}
                   p {{$t('seemore')}}
                     i.fa.fa-chevron-right.ml-1
+        .text-center.mb-3.mb-sm-4
+          a.d-inline-block.mb-4(href="https://vaithuhay.com/blogs/news")
+            .btn.btn-white KHÁM PHÁ THÊM
 </template>
 <script>
   import transform from '../plugins/content-transform';

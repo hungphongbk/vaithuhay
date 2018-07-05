@@ -15,6 +15,10 @@
     padding-bottom: .4rem;
     width: percentage(1/6);
     flex-basis: percentage(1/6);
+    @include responsive('md-min'){
+      width: percentage(1/8);
+      flex-basis: percentage(1/8);
+    }
     //}
     &.selected:not(.disabled) .vth-thumb {
       border: 2px solid $theme-red-color;

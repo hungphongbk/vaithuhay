@@ -226,6 +226,18 @@ $ratioList: (
     @include aspect-ratio($h, $w)
   }
 }
+@include responsive('sm-min'){
+  @each $ratio in $ratioList {
+    $w: nth($ratio, 1);
+    $h: nth($ratio, 2);
+    .ratio-sm-#{$w}-#{$h} {
+      @include aspect-ratio($w, $h)
+    }
+    .ratio-sm-#{$h}-#{$w} {
+      @include aspect-ratio($h, $w)
+    }
+  }
+}
 
 $gutters: 5 10 20 30 40 50;
 @mixin pf($pf, $g) {

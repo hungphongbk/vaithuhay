@@ -115,4 +115,5 @@ fabric.properties
 .idea/httpRequests
 /.cache-loader/
 /assets/
+/assets-dist/
 assets-src/html/

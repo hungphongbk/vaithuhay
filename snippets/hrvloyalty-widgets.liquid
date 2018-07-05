@@ -1,0 +1,22 @@
+{% if shop.metafields['hrvloyalty'].account_is_live == 1 %}
+    {% if customer %}
+    {% assign digest = customer.id | append: shop.metafields['hrvloyalty'].api_secret | md5 %}
+    {% assign customerId = customer.id %}
+  {% endif %}
+
+  <div class="sweettooth-widget"
+    data-widget-type="tab"
+    data-channel-key="{{ shop.metafields['hrvloyalty'].api_key }}"
+    data-channel-customer-id="{{ customerId }}"
+    data-digest="{{ digest }}"
+  ></div>
+<script>
+if(typeof Haravan == undefined) {
+Haravan = {};
+}
+{% if product %}
+Haravan.ProductURL = '{{ shop.url }}{{ product.url }}';
+Haravan.ProductId = '{{ product.id }}';
+{% endif %}
+</script>
+{% endif %}

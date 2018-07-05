@@ -11,7 +11,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 global.getLocalIdent = _.getLocalIdent;
 
 const src = './assets-src',
-  dist = './assets',
+  dist = './assets-dist',
   isProduction = process.env.NODE_ENV === 'production',
   publicPath = isProduction ? 'https://static.vaithuhay.com/' : 'https://localhost:8080/',
   localIdentName = '[hash:base64:6]',

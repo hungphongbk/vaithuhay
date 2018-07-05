@@ -209,8 +209,14 @@
     @extend %reset-link;
     display: block;
     padding: {
-      left: 1rem;
-      right: 1rem;
+      left: .3rem;
+      right: .3rem;
+    }
+    @include responsive('md-min'){
+      padding: {
+        left: 1rem;
+        right: 1rem;
+      }
     }
     &Wrapper{
       background: #444548;
@@ -228,14 +234,16 @@
           }
           li>button{
             -webkit-appearance: none;
-            width: 1rem;
-            height: 1rem;
+            width: 1rem !important;
+            height: 1rem !important;
             overflow: hidden;
             display: block;
             border-radius: 50%;
             background: #aaa;
             color: #aaa;
             border: none;
+            padding: 0 !important;
+            box-sizing: border-box;
           }
           li.slick-active>button{
             background: $theme-color;
@@ -251,8 +259,11 @@
       text-transform: uppercase;
       font-weight: 700;
       @include responsive('xs-max') {
-        @include font-size-with-line-height($font*0.75);
-        margin-bottom: .3rem;
+        @include font-size-with-line-height($font*0.68);
+        margin: {
+          top: .7rem;
+          bottom: .3rem
+        };
       }
     }
   }
