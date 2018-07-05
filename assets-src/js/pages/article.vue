@@ -69,46 +69,6 @@
     }
   }
 
-  .related-articles {
-    h3.title {
-      margin: 0 {
-        bottom: 1rem;
-      }
-      font-weight: 700;
-      color: $theme-color;
-      @include font-size-with-line-height($font-size-h4*1.2);
-      padding: 2rem {
-        top: 2.2rem;
-      }
-    }
-    li {
-      .inner {
-        @extend %reset-link;
-        @extend %clearfix;
-        display: block;
-      }
-      &:not(:last-child) .inner {
-        padding-bottom: 12px;
-        border-bottom: 1px dashed #ccc;
-        margin-bottom: 12px;
-      }
-      .vth-thumb {
-        width: 80px;
-        float: left;
-        margin-right: 15px;
-      }
-      .title {
-        margin-top: 0;
-        color: #666;
-        font-size: $font-size-h5*1.1;
-        line-height: $font-size-h5*1.55;
-      }
-      &:hover .title {
-        color: #444;
-      }
-    }
-  }
-
   .related-articles-bottom {
     .item {
       @extend %reset-link;
@@ -207,7 +167,91 @@
 </style>
 <style lang="scss" module>
   @import "../../sass/inc/inc";
+
+  .related-products {
+    :global h3.title {
+      margin: 0;
+      font-weight: 700;
+      color: $theme-color;
+      @include font-size-with-line-height($font-size-h5*1.25);
+      padding: 2rem {
+        top: 2.5rem;
+        left: 2rem;
+      }
+
+      position: relative;
+      &,&>span{
+        transition: all $animation-time ease-in-out;
+      }
+      >span{
+        position: absolute;
+        top:50%;
+        left: 1.5rem;
+        height:2.5rem;
+        width:2.5rem;
+        margin-top:-1.5rem;
+        background: url(../../img/pin.png);
+        background-size: cover;
+        transform-origin: bottom right;
+
+        transform: scale(1.5);
+        opacity: 0;
+      }
+
+    }
+    :global(.top-sticky h3.title) {
+      padding-left: 5rem;
+      > span{
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    li {
+      position: relative;
+      margin-bottom: -1px;
+      z-index: 0;
+      &::before {
+        z-index: -1;
+        position: absolute;
+        content: '';
+        visibility: visible;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 1px dashed rgba(#000, .12);
+        transition: border-color $animation-time/2 ease;
+      }
+      &:hover:before {
+        border-color: $theme-red-color;
+      }
+      .inner {
+        @extend %reset-link;
+        @extend %clearfix;
+        display: block;
+        padding: 18px 12px;
+      }
+      .thumbnail {
+        width: 70px;
+        float: left;
+        margin-right: 15px;
+      }
+      .title {
+        margin-top: 0;
+        color: #666;
+        @include font-size-with-line-height($font-size-h5)
+      }
+      &:hover .title {
+        color: #444;
+      }
+      .buy-now {
+        margin-top: -0.5rem;
+      }
+    }
+  }
+
   .price {
+    align-self: end;
     .current {
       color: $theme-red-color;
       font-weight: 600;
@@ -261,17 +305,21 @@
             transition(name="vth-fade")
               p(v-if="status") {{status}}
             .btn.btn-grey(@click="sendComment") {{$t('send')}}
-        .col-sm-4.related-articles
+        .col-sm-4(:class="$style.relatedProducts")
           div(v-if="relatedProducts.length>0" v-sticky sticky-offset="offset")
             h3.title(v-dark-panel.overlay="") CÁC SẢN PHẨM LIÊN QUAN
+              span
             ul
               li(v-for="rel in relatedProducts")
-                a.inner(:href="rel.current.url")
-                  thumbnail(:url_="rel.images[0].small", ratio_="1-1", :overlay_="false")
-                  h5.title {{rel.current._title[$i18n.locale]}}
-                  p(:class="$style.price")
-                    span(:class="$style.current") {{rel.variants[0].price.current}}&nbsp;
-                    span(v-if="rel.variants[0].price.old", :class="$style.old") {{rel.variants[0].price.old}}
+                a(:class="$style.inner" :href="rel.current.url")
+                  thumbnail(:class="$style.thumbnail" :url_="rel.images[0].small", ratio_="1-1", :overlay_="false")
+                  .d-flex.flex-column.justify-content-between(style="height: 70px")
+                    h5(:class="$style.title") {{rel.current._title[$i18n.locale]}}
+                    .d-flex.justify-content-between.align-items-end
+                      p.mb-0(:class="$style.price")
+                        span(:class="$style.current") {{rel.variants[0].price.current}}&nbsp;
+                        span(v-if="rel.variants[0].price.old", :class="$style.old") {{rel.variants[0].price.old}}
+                      .btn.btn-sm.btn-theme(:class="$style.buyNow") MUA NGAY
     .pt-5(v-dark-panel)
       .container.related-articles-bottom
         item-loop.pt(:slider-opts="slickOptions_", :list="relateds" :is-light="true")
