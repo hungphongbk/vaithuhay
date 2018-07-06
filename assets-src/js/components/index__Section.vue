@@ -30,7 +30,7 @@
     .container
       .row
         .col-sm-12
-          h1.vth-section-title(:style="{color: titleForeground}") {{title}}
+          h1.vth-section-title(:style="{color: titleForeground}") <span>{{title}}</span>
           slot
 </template>
 <script>
