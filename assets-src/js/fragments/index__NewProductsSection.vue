@@ -112,9 +112,9 @@
   }
 </style>
 <template lang="pug">
-  index-section(:class="$style.container" :title="currentCol.title", titleForeground="#fff", background="#fc0")
+  index-section(:class="$style.container" :title="currentCol.title", titleForeground="#fff", background="#fc0" :title-animatable="titleAnimate")
     div(:class="$style.indicator" v-if="!$mq.phone")
-      div(:class="{ [$style.indicatorItem]:true, [$style.current]:col===currentCol }" v-for="(col,index) in collections" @click="current = index")
+      div(:class="{ [$style.indicatorItem]:true, [$style.current]:col===currentCol }" v-for="(col,index) in collections" @click="goTo(index)")
     div(:class="$style.phoneNavigator" v-else)
       div(:class="$style.prev" @click="prev")
         fa-icon(:icon="faChevronLeft" size="2x")
@@ -154,7 +154,8 @@
           pageDots: false
         },
         faChevronLeft,
-        faChevronRight
+        faChevronRight,
+        titleAnimate: 'vth-fade-slide-right-to-left'
       };
     },
     computed: {
@@ -175,6 +176,7 @@
           .all(categoryUrls.map(url =>
             jQuery.get(url + '?view=json').then(rs => {
               const obj = JSON.parse(rs);
+              console.log(obj);
               obj.url = url;
               obj.list = obj.list.map(ProductItem_);
               return obj;
@@ -184,13 +186,24 @@
           })
       },
       next() {
-        this.current = (this.current + 1) % this.collections.length;
+        this.$nextTick(() => {
+          this.titleAnimate = 'vth-fade-slide-right-to-left';
+          this.current = (this.current + 1) % this.collections.length;
+        })
       },
       prev() {
-        let current = this.current;
-        current--;
-        if (current < 0) current += this.collections.length;
-        this.current = current;
+        this.$nextTick(() => {
+          this.titleAnimate = 'vth-fade-slide-left-to-right';
+          let current = this.current;
+          current--;
+          if (current < 0) current += this.collections.length;
+          this.current = current;
+        })
+      },
+      goTo(index) {
+        if (index === this.current) return;
+        this.titleAnimate = (index > this.current) ? 'vth-fade-slide-right-to-left' : 'vth-fade-slide-left-to-right';
+        this.current = index;
       }
     },
     mounted() {

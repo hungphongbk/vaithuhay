@@ -30,7 +30,11 @@
     .container
       .row
         .col-sm-12
-          h1.vth-section-title(:style="{color: titleForeground}") <span>{{title}}</span>
+          template(v-if="titleAnimatable.length===0")
+            h1.vth-section-title(:style="{color: titleForeground}") <span>{{title}}</span>
+          template(v-else)
+            transition(:name="titleAnimatable" mode="out-in")
+              h1.vth-section-title(:style="{color: titleForeground}" :key="title") <span>{{title}}</span>
           slot
 </template>
 <script>
@@ -43,6 +47,10 @@
       title: {
         type: String,
         default: '[vth-object]',
+      },
+      titleAnimatable: {
+        type: String,
+        default: ''
       },
       titleForeground: {
         type: String,

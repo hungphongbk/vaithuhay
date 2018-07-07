@@ -33,6 +33,7 @@
     transform: translateY(50%);
   }
 }
+
 .vth-fade-slide-down- {
   @include default;
   &enter, &leave-to {
@@ -60,6 +61,35 @@
     transform: translateX(-50%);
   }
 }
+
+.vth-fade-slide-left-to-right- {
+  &enter-active, &leave-active {
+    transition: all $animation-time*2 ease
+  }
+  &enter {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  &leave-to {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+}
+
+.vth-fade-slide-right-to-left- {
+  &enter-active, &leave-active {
+    transition: all $animation-time*2 ease
+  }
+  &enter {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  &leave-to {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+}
+
 .vth-fade-slide-right-2x- {
   &enter-active, &leave-active {
     transition: all $animation-time*4 ease
@@ -101,8 +131,8 @@
 .vth-fade-ripple-top-left- {
 }
 
-.slide-list-{
-  &enter-active, &leave-active{
+.slide-list- {
+  &enter-active, &leave-active {
     transition: all $animation-time*2 ease;
   }
 

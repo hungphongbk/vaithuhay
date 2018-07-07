@@ -20,8 +20,8 @@ $effect-time: .25s;
   margin-bottom: 0;
 
   p {
-    font-size: 0.86 * $font-size-base;
-    color: #888;
+    @include font-size-with-line-height(1rem);
+    color: #757575;
   }
   :global .thumb {
     width: 100%;
@@ -44,6 +44,7 @@ $effect-time: .25s;
   composes: content from global;
   &, & * {
     @extend %fix-backface;
+    line-height: 1.4142;
   }
   overflow: visible !important;
 

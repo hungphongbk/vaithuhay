@@ -4,8 +4,7 @@ html, body {
   width: 100%;
   overflow-x: hidden;
   @include responsive('xs-max'){
-    font-size: 13px;
-    line-height: $line-height-base*13px;
+    @include font-size-with-line-height(12px);
   }
 }
 

@@ -125,9 +125,9 @@
         top: .45em;
         bottom: .45em;
       }
-      @include font-size-with-line-height(0.85*$font-size-base);
+      @include font-size-with-line-height(0.9rem);
       @include responsive('sm-min') {
-        @include font-size-with-line-height(0.9*$font-size-base);
+        @include font-size-with-line-height(1rem);
       }
     }
   }

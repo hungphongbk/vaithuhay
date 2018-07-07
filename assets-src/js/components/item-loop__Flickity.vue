@@ -100,11 +100,14 @@
       list() {
         this.$nextTick(() => {
           this.$refs.flkty.rerender();
-          this.$refs.flkty.reloadCells();
-          console.log('changed');
-          this.$refs.flkty.on('select', (index) => {
-            // console.log(index);
-            this.$emit('select', index)
+          this.$nextTick(()=>{
+            this.$refs.flkty.reloadCells();
+            // this.$refs.flkty.rerender();
+            console.log('changed');
+            this.$refs.flkty.on('select', (index) => {
+              // console.log(index);
+              this.$emit('select', index)
+            })
           })
         })
       }
