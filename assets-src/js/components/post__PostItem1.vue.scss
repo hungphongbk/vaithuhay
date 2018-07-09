@@ -20,8 +20,8 @@ $effect-time: .25s;
   margin-bottom: 0;
 
   p {
-    @include font-size-with-line-height(1rem);
-    color: #757575;
+    @include font-size-with-line-height(.95rem);
+    color: #575757;
   }
   :global .thumb {
     width: 100%;

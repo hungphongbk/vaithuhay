@@ -4,8 +4,11 @@
   .nav-menu-search{
     :global{
       form {
+        padding:0;
+        @include outline-effect(lighten(#ffe066, 20%));
+        background: #ffe066;
         .form-control, .btn {
-          background: #ffe066;
+          background: transparent;
         }
         .btn {
           cursor: default;

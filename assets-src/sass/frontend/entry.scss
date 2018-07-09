@@ -3,8 +3,9 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
+  font-size: 12.5px;
   @include responsive('xs-max'){
-    @include font-size-with-line-height(12px);
+    font-size: 12px;
   }
 }
 
