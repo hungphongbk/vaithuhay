@@ -70,7 +70,9 @@
         input.form-control#search(:placeholder="$t('0')", v-model="keyword")
         .input-group-btn
           .btn
-            i.fa.fa-search
+            transition(name="vth-fade" mode="out-in")
+              fa-icon(v-if="searching" :icon="FaSpinner" pulse)
+              fa-icon(v-else :icon="FaSearch")
     transition(name="vth-fade")
       div(v-if="isOpen_", :class="$style.searchPanel")
         .btn.btn-sm(style="margin-left: 11px;", :class="view==='product'?'btn-dark':'btn-grey'", @click="view='product'") Sản phẩm
@@ -95,6 +97,8 @@
 <script>
   import {Paginate}    from "@/components";
   import {searchMixin} from "@/components/mixins";
+  import FaSearch from '@fortawesome/fontawesome-free-solid/faSearch'
+  import FaSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
 
   const $ = jQuery;
 
@@ -103,7 +107,9 @@
     components: {Paginate},
     data() {
       return {
-        view: 'product'
+        view: 'product',
+        FaSearch,
+        FaSpinner
       };
     },
     computed: {

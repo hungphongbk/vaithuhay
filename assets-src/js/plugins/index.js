@@ -18,7 +18,9 @@ import VueScroll from 'vue-scroll';
 
 // Vue.use(VeeValidate);
 Vue.use(AsyncComputed);
-Vue.use(VueLocalStorage);
+Vue.use(VueLocalStorage, {
+  name: 'ls'
+});
 Vue.use(VueLazyload, {});
 Vue.filter('vnd', function (value) {
   return Math.round(value / 100).toLocaleString("vi-VN") + '₫';

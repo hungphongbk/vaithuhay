@@ -72,19 +72,65 @@
   .indicator {
     composes: d-flex justify-content-center from global;
     padding: 0 10%;
+
+    $dot-size: 1.6rem;
+
     @include responsive('md-min') {
-      padding: 0 25%;
+      padding: 0 30%;
     }
     &-item {
-      composes: flex-fill from global;
-      margin: 0 .25rem;
-      height: 1rem;
-      border-radius: .5rem;
-      background: rgba(#000, .09);
-      cursor: pointer;
-      transition: background $animation-time/3 ease-in-out;
-      &.current {
-        background: rgba(#000, .36);
+      composes: d-flex justify-content-center from global;
+      flex-basis: percentage(1/8);
+      height: $dot-size;
+      position: relative;
+      &:before {
+        position: absolute;
+        height: $dot-size*1.6;
+        width: $dot-size*1.6;
+        top: -$dot-size*0.3;
+        left: calc(50% - #{$dot-size*1.6/2});
+        content: '';
+        visibility: hidden;
+        border-radius: 50%;
+        border: 2px solid darken($theme-color, 25%);
+      }
+      > span {
+        display: inline-block;
+        height: $dot-size;
+        width: $dot-size;
+        border-radius: 50%;
+        background: darken($theme-color, 7%);
+        cursor: pointer;
+        /*transform: scale(1);*/
+
+        &:before, &:after {
+          content: '';
+          visibility: visible;
+          position: absolute;
+          height: 2px;
+          top: 50%;
+          width: 50%;
+          background: inherit;
+        }
+        &:before {
+          left: 0;
+        }
+        &:after {
+          right: 0;
+        }
+      }
+      &:first-child > span:before {
+        visibility: hidden;
+      }
+      &:last-child > span:after {
+        visibility: hidden;
+      }
+      &.current:before {
+        visibility: visible;
+      }
+      &.current > span {
+        background: darken($theme-color, 25%);
+        /*transform: scale(1.2);*/
       }
     }
   }
@@ -115,6 +161,7 @@
   index-section(:class="$style.container" :title="currentCol.title", titleForeground="#fff", background="#fc0" :title-animatable="titleAnimate")
     div(:class="$style.indicator" v-if="!$mq.phone")
       div(:class="{ [$style.indicatorItem]:true, [$style.current]:col===currentCol }" v-for="(col,index) in collections" @click="goTo(index)")
+        span
     div(:class="$style.phoneNavigator" v-else)
       div(:class="$style.prev" @click="prev")
         fa-icon(:icon="faChevronLeft" size="2x")
@@ -158,6 +205,15 @@
         titleAnimate: 'vth-fade-slide-right-to-left'
       };
     },
+    ls: {
+      lastRandomNewProduct: {
+        type: Object,
+        default: {
+          ts: Date.now(),
+          step: 4
+        }
+      }
+    },
     computed: {
       currentCol() {
         if (this.collections.length === 0) {
@@ -179,6 +235,29 @@
               console.log(obj);
               obj.url = url;
               obj.list = obj.list.map(ProductItem_);
+
+              if (/san-pham-moi/.test(obj.url)) {
+                //randomly San-Pham-Moi - swap last 4 elements
+                let lsValue = this.$ls.get('lastRandomNewProduct', {
+                    ts: Date.now(),
+                    step: 4
+                  }),
+                  times = lsValue.step,
+                  compareDiff = Date.now() - lsValue.ts,
+                  diff = window.vth.settings.autoUpdateNewProducts * 1000;
+                if (compareDiff > diff) {
+                  console.log('do swap');
+                  while (times--) {
+                    const tmp = obj.list.pop();
+                    obj.list.unshift(tmp);
+                  }
+                  this.$ls.set('lastRandomNewProduct', {
+                    ts: Date.now(),
+                    step: lsValue.step += 4
+                  })
+                }
+              }
+
               return obj;
             })))
           .then(rs => {

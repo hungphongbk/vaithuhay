@@ -19,11 +19,7 @@
       display: inline-block;
       max-width: 80%;
       text-align: center;
-      @include font-size-with-line-height($font-size-base*0.95*0.85);
       margin-bottom: 5px;
-      &.addr {
-        @include font-size-with-line-height($font-size-base*0.8*0.85)
-      }
     }
     .cert {
       float: unset;
@@ -213,8 +209,19 @@
 
     &-title {
       @include font-size-with-line-height(1.05rem);
+      //@include responsive('sm-min') {
+      //  @include font-size-with-line-height(1.14rem);
+      //}
+    }
+    &-address i{
       @include responsive('sm-min') {
-        @include font-size-with-line-height(1.54rem);
+        @include font-size-with-line-height(.65rem);
+      }
+    }
+    &-text{
+      @include responsive('sm-min') {
+        @include font-size-with-line-height(.85rem);
+        margin-left: 1rem;
       }
     }
   }
@@ -279,12 +286,12 @@
           p
             strong(:class="$style.copyrightTitle") {{$t('copyright1')}}
           br
-          p.addr <i>{{$t('copyright2')}}</i>
+          p.addr(:class="$style.copyrightAddress") <i>{{$t('copyright2')}}</i>
         a.cert(href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=43886", target="_blank")
           img(src="../../img/dathongbao.png")
         a.dmca-badge(:href="`//www.dmca.com/Protection/Status.aspx?ID=6487aabe-fe28-4e39-8b1b-8764143a0aaa&refurl=${location}`", title='DMCA.com Protection Status')
           img(src='//images.dmca.com/Badges/dmca-badge-w150-5x1-03.png?ID=6487aabe-fe28-4e39-8b1b-8764143a0aaa', alt='DMCA.com Protection Status')
-        span(:class="$style.copyright") @2017 Vaithuhay.com. All right reserved.
+        span(:class="$style.copyrightText") @2017 Vaithuhay.com. All right reserved.
 
 </template>
 <script>
