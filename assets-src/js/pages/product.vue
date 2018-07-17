@@ -101,16 +101,12 @@
   .top-products {
     background-color: #ececec;
     padding-top: 20px;
-    .title {
-      margin-bottom: 1em;
-      font-weight: 700;
-    }
     .swiper-slide {
       @extend %no-focus;
       margin-bottom: 20px;
       height: auto;
       padding: 0 .3rem;
-      @include responsive('md-min'){
+      @include responsive('md-min') {
         padding: 0 $grid-gutter-width*1/3;
       }
       .thumbnail {
@@ -212,27 +208,27 @@
       left: .3rem;
       right: .3rem;
     }
-    @include responsive('md-min'){
+    @include responsive('md-min') {
       padding: {
         left: 1rem;
         right: 1rem;
       }
     }
-    &Wrapper{
+    &Wrapper {
       background: #444548;
       color: white;
       padding-top: 20px;
 
-      :global{
-        ul.slick-dots{
+      :global {
+        ul.slick-dots {
           display: flex;
           align-items: center;
           justify-content: center;
 
-          li:not(:last-child){
+          li:not(:last-child) {
             margin-right: 1.7rem;
           }
-          li>button{
+          li > button {
             -webkit-appearance: none;
             width: 1rem !important;
             height: 1rem !important;
@@ -245,7 +241,7 @@
             padding: 0 !important;
             box-sizing: border-box;
           }
-          li.slick-active>button{
+          li.slick-active > button {
             background: $theme-color;
             color: $theme-color;
           }
@@ -263,8 +259,21 @@
         margin: {
           top: .7rem;
           bottom: .3rem
-        };
+        }
+      ;
       }
+    }
+  }
+
+  .section-title{
+    margin-bottom: 1em;
+    font-weight: 700;
+    @include responsive('xs-max'){
+      margin:{
+        top: .7rem;
+        bottom: .6rem;
+      }
+      @include font-size-with-line-height(1.7rem);
     }
   }
 </style>
@@ -272,31 +281,31 @@
 <script src="./product.vue.js"></script>
 <i18n>
   {
-  "en": {
-  "buyNow": "Buy now",
-  "info": "Information",
-  "comment": "Comments",
-  "related": "RELATED PRODUCTS",
-  "seeMore": "See more...",
-  "collapse": "Collapse",
-  "top": "TOP PRODUCTS",
-  "sale": "ON-SALE PRODUCTS",
-  "combo": {
-  "label": "RECOMMEND COMBOS"
-  }
-  },
-  "vi": {
-  "buyNow": "Mua ngay",
-  "info": "Thông tin",
-  "comment": "Bình luận",
-  "related": "SẢN PHẨM LIÊN QUAN",
-  "seeMore": "Xem thêm...",
-  "collapse": "Thu gọn",
-  "top": "SẢN PHẨM ĐƯỢC XEM NHIỀU",
-  "sale": "SẢN PHẨM ĐANG KHUYẾN MÃI",
-  "combo": {
-  "label": "COMBO HẤP DẪN"
-  }
-  }
+    "en": {
+      "buyNow": "Buy now",
+      "info": "Information",
+      "comment": "Comments",
+      "related": "RELATED PRODUCTS",
+      "seeMore": "See more...",
+      "collapse": "Collapse",
+      "top": "TOP PRODUCTS",
+      "sale": "ON-SALE PRODUCTS",
+      "combo": {
+        "label": "RECOMMEND COMBOS"
+      }
+    },
+    "vi": {
+      "buyNow": "Mua ngay",
+      "info": "Thông tin",
+      "comment": "Bình luận",
+      "related": "SẢN PHẨM LIÊN QUAN",
+      "seeMore": "Xem thêm...",
+      "collapse": "Thu gọn",
+      "top": "SẢN PHẨM ĐƯỢC XEM NHIỀU",
+      "sale": "SẢN PHẨM ĐANG KHUYẾN MÃI",
+      "combo": {
+        "label": "COMBO HẤP DẪN"
+      }
+    }
   }
 </i18n>

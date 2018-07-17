@@ -1,12 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ClosureCompilerPlugin = require('webpack-closure-compiler');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
   regexCombiner = require('regex-combiner'),
-  _ = require('hungphongbk-webpack-build-utils'),
-  GenerateJSONPlugin = require('generate-json-webpack-plugin');
+  _ = require('hungphongbk-webpack-build-utils');
 
 global.getLocalIdent = _.getLocalIdent;
 

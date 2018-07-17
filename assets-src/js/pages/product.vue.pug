@@ -66,7 +66,7 @@
     div(:class="$style.relatedArticleWrapper" v-if="relatedArticles.length>0" v-dark-panel.overlay="")
       .container.pb-4
         .text-center
-          h3.title CÁC BÀI VIẾT LIÊN QUAN
+          h3.title(:class="$style.sectionTitle") CÁC BÀI VIẾT LIÊN QUAN
         item-loop.pt(:slider-opts="slickOptionsWithDot" :list="relatedArticles" :is-light="true")
           template(slot="item" slot-scope="p")
             .swiper-slide
@@ -80,7 +80,7 @@
         .row
           .col-sm-12
             .text-center
-              h3.title {{$t('sale')}}
+              h3.title(:class="$style.sectionTitle") {{$t('sale')}}
             item-loop.pt(:slider-opts="slickOptions_", :list="topPromos")
               template(slot="item", slot-scope="p")
                 .swiper-slide

@@ -12,7 +12,7 @@ export default {
     [PRODUCTS_LIST_]: ({list, sort}) => sortBy(list.map(ProductItem_), [o => {
       switch (sort) {
         case 'new':
-          return o.id;
+          return -(o.id*1);
         case 'name':
           return o.title;
         case 'sale':
