@@ -1,7 +1,23 @@
 <style lang="scss" scoped>
   @import "../../../sass/inc/inc";
 
-  .navbar-brand {
+  .mobile .cart {
+    float: right;
+  }
+</style>
+<style lang="scss" module="">
+  @import "../../../sass/inc/inc";
+
+  .navigation-menu {
+    position: relative;
+  }
+
+  .header{
+    composes: navbar-header mobile from global;
+  }
+
+  .brand{
+    composes: navbar-brand from global;
     display: block;
     padding: {
       top: $navbar-height*0.35;
@@ -76,36 +92,29 @@
       }
     }
   }
-
-  .mobile-panel {
-
-  }
-
-  .mobile .cart {
-    float: right;
-  }
 </style>
 <template lang="pug">
-  div
-    .navbar-header.mobile
-      .mobile-open(:class="{'open': show_}", @click="goBack")
-        span.cls
-        span
-        span.cls
-      a.navbar-brand(:href="home_")
-        img(:src="logo_")
-      cart-button.cart(@click.native="showCart")
-    static-overlay.mobile-panel(name_="vth-fade-slide-right")
-      .container(style="height: 100%")
-        mobile-menu-panel(ref="mobileMenu")
+  nav#site-navigation.navbar.main-navigation.navbar-fixed-top.navbar-left(role="navigation" :style="navbarHeaderStyle")
+    div(:class="$style.navigationMenu")
+      div(:class="$style.header")
+        div(:class="{ [$style.mobileOpen]:true, 'open': show_}", @click="goBack")
+          span.cls
+          span
+          span.cls
+        a(:class="$style.brand" :href="home_")
+          img(:src="logo_")
+        cart-button.cart(@click.native="showCart")
+      static-overlay.mobile-panel(name_="vth-fade-slide-right")
+        .container(style="height: 100%")
+          mobile-menu-panel(ref="mobileMenu")
 </template>
 <script>
   import MobileMenuPanel from './mobile-menu.vue';
 
-  import CartButton     from './cart__MenuButton.vue';
+  import CartButton from './cart__MenuButton.vue';
   import {overlayMixin} from '../mixins';
 
-  import {mapGetters}            from 'vuex';
+  import {mapGetters} from 'vuex';
   import {USER_LOGIN_FORM_SHOW} from "../../store/types";
 
   export default {
@@ -124,7 +133,18 @@
     computed: {
       ...mapGetters({
         loginForm: USER_LOGIN_FORM_SHOW
-      })
+      }),
+      scrollTop() {
+        return this.$root.system.scrollTop;
+      },
+      navbarHeaderStyle(){
+        let scrollTop = this.$root.system.scrollTop;
+        if(scrollTop>200) scrollTop=200;
+        const translateY = `translateY(-${scrollTop/10}px)`;
+        return {
+          'transform':translateY
+        }
+      }
     },
     watch: {
       loginForm(value) {

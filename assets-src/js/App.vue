@@ -73,12 +73,12 @@
     system-modal(v-if="systemModal !== null", :title="systemModal.title", :content="systemModal.content", :commands="systemModal.commands", :options="systemModal.options")
 </template>
 <script>
-  import {Event}                                from './components/index';
-  import AppOfflineMode                         from './fragments/app__OfflineMode';
-  import {tooltip}                              from '@/plugins';
-  import {USER_MUTATION_LOGIN}                 from "@/store/types";
-  import {$modalEvent, SystemModal}             from "@/plugins/ModalManager";
-  import {SYSTEM_MODAL_HIDE, SYSTEM_MODAL_SHOW} from "@/types";
+  import {Event} from './components';
+  import AppOfflineMode from './fragments/app__OfflineMode';
+  import {tooltip} from '@/plugins';
+  import {USER_MUTATION_LOGIN} from "@/store/types";
+  import {$modalEvent, SystemModal} from "@/plugins/ModalManager";
+  import {SYSTEM_MODAL_HIDE, SYSTEM_MODAL_SHOW, SYSTEM_ON_SCROLL} from "@/types";
 
   const $ = jQuery;
 
@@ -119,8 +119,8 @@
           this.systemModal = null;
         });
       },
-      onScroll(e,{scrollTop}){
-        console.log(scrollTop);
+      onScroll(e, {scrollTop}) {
+        Event.$emit(SYSTEM_ON_SCROLL, scrollTop);
       }
     },
     async created() {

@@ -55,34 +55,36 @@
   }
 </style>
 <template lang="pug">
-  .collapse.navbar-collapse.vth-menu
-    .container
-      .row
-        .col-sm-5
-          ul.nav.navbar-nav
-            li.top
-              a(target="_self", :href="home_") {{$t('homepage')}}
-            li.top.dropdown
-              a.dropdown-toggle(href="#", @click="discover_ = !discover_") {{$t('discover')}}
-                i.fa.fa-lg.fa-angle-down
-            li.top
-              a(target="_self", :href="`${home_}/blogs/news`") {{$t('news')}}
-            li.top
-              a(target="_self", :href="`${home_}/pages/vaithuhay`") {{$t('intro')}}
-        a.col-sm-2.navbar-brand(:href="home_")
-          img(:src="logo_")
-        .col-sm-5
-          ul.nav.navbar-nav.navbar-right
-            li
-              search
-            li
-              cart
-            li
-              user
-            li
-              lang
-        .col-sm-12
-          discover#menu-discover(:isShow_="discover_")
+  nav#site-navigation.navbar.main-navigation.navbar-fixed-top.navbar-left(role="navigation")
+    div
+      .collapse.navbar-collapse.vth-menu
+        .container
+          .row
+            .col-sm-5
+              ul.nav.navbar-nav
+                li.top
+                  a(target="_self", :href="home_") {{$t('homepage')}}
+                li.top.dropdown
+                  a.dropdown-toggle(href="#", @click="discover_ = !discover_") {{$t('discover')}}
+                    i.fa.fa-lg.fa-angle-down
+                li.top
+                  a(target="_self", :href="`${home_}/blogs/news`") {{$t('news')}}
+                li.top
+                  a(target="_self", :href="`${home_}/pages/vaithuhay`") {{$t('intro')}}
+            a.col-sm-2.navbar-brand(:href="home_")
+              img(:src="logo_")
+            .col-sm-5
+              ul.nav.navbar-nav.navbar-right
+                li
+                  search
+                li
+                  cart
+                li
+                  user
+                li
+                  lang
+            .col-sm-12
+              discover#menu-discover(:isShow_="discover_")
 </template>
 <script>
   import User       from "./nav-menu__User.vue";
