@@ -26,3 +26,8 @@ export const slickOptions_ = {
     })
   ]
 };
+
+export const createTransform = transforms =>
+  Object.entries(transforms)
+    .map(([k, v]) => `${k}(${v})`)
+    .join(' ');

@@ -2,7 +2,6 @@
   @import "../../../sass/inc/inc";
 
   .mobile .cart {
-    float: right;
   }
 </style>
 <style lang="scss" module="">
@@ -12,11 +11,11 @@
     position: relative;
   }
 
-  .header{
-    composes: navbar-header mobile from global;
+  .header {
+    composes: mobile d-flex justify-content-between align-items-center from global;
   }
 
-  .brand{
+  .brand {
     composes: navbar-brand from global;
     display: block;
     padding: {
@@ -26,14 +25,14 @@
     img {
       height: $navbar-height*0.4;
     }
-    @include _(abs-center);
     float: none;
+
+    transform-origin: bottom center;
   }
 
   .mobile-open {
     $s: $navbar-height;
 
-    float: left;
     display: inline-block;
     position: relative;
     height: $s;
@@ -101,7 +100,7 @@
           span.cls
           span
           span.cls
-        a(:class="$style.brand" :href="home_")
+        a(:class="$style.brand" :href="home_" :style="navbarBrandStyle")
           img(:src="logo_")
         cart-button.cart(@click.native="showCart")
       static-overlay.mobile-panel(name_="vth-fade-slide-right")
@@ -112,13 +111,19 @@
   import MobileMenuPanel from './mobile-menu.vue';
 
   import CartButton from './cart__MenuButton.vue';
-  import {overlayMixin} from '../mixins';
+  import {overlayMixin, scrollEffectMixin} from '../mixins';
 
   import {mapGetters} from 'vuex';
   import {USER_LOGIN_FORM_SHOW} from "../../store/types";
 
+  const createDynamicTransform = transform => ({
+    'transform': transform,
+    '-webkit-transform': transform,
+    '-moz-transform': transform
+  });
+
   export default {
-    mixins: [overlayMixin],
+    mixins: [overlayMixin, scrollEffectMixin],
     components: {
       MobileMenuPanel,
       CartButton
@@ -134,16 +139,13 @@
       ...mapGetters({
         loginForm: USER_LOGIN_FORM_SHOW
       }),
-      scrollTop() {
-        return this.$root.system.scrollTop;
+      navbarHeaderStyle() {
+        if(this.show_) return {};
+        const translateY = `translateY(-${this.scrollTopThreshold * 100}%)`;
+        return createDynamicTransform(translateY);
       },
-      navbarHeaderStyle(){
-        let scrollTop = this.$root.system.scrollTop;
-        if(scrollTop>200) scrollTop=200;
-        const translateY = `translateY(-${scrollTop/10}px)`;
-        return {
-          'transform':translateY
-        }
+      navbarBrandStyle() {
+        return createDynamicTransform(`scale(${1 - this.scrollTopThreshold})`)
       }
     },
     watch: {

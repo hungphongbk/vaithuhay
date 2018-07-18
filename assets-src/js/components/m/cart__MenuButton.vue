@@ -55,22 +55,44 @@
 
       }
     }
+    img {
+      transform-origin: bottom left;
+    }
   }
 </style>
 <template lang="pug">
   a(:class="$style.cart")
-    img(ref="cartCount", src="../../../img/cart.svg")
-    span(:class="$style.count")= '{{count_}}'
+    img(ref="cartCount", src="../../../img/cart.svg" :style="cartImageStyle")
+    span(:class="$style.count" :style="cartCountStyle")= '{{count_}}'
 </template>
 <script>
   import {CART_COUNT_, CART_FETCH_} from '../../store/types';
-  import {mapActions, mapGetters}   from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
+  import {scrollEffectMixin} from "@/components/mixins";
+  import {createTransform} from "@/components/helpers";
 
   export default {
+    mixins: [scrollEffectMixin],
     computed: {
       ...mapGetters({
         count_: CART_COUNT_
-      })
+      }),
+      cartImageStyle() {
+        return {
+          'transform': createTransform({
+            scale: 1 - this.scrollTopThreshold,
+            translateY: `${this.scrollTopThreshold * 50}%`
+          })
+        }
+      },
+      cartCountStyle() {
+        return {
+          'transform': createTransform({
+            translateX:`-${this.scrollTopThreshold * 50}%`,
+            translateY:`${this.scrollTopThreshold * 250}%`
+          })
+        }
+      }
     },
     methods: {
       ...mapActions({

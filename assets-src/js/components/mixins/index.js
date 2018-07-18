@@ -150,3 +150,5 @@ export const orderTrackingMixin = {
 };
 
 export {default as searchMixin} from './search';
+
+export {default as scrollEffectMixin} from './scrollEffect'
