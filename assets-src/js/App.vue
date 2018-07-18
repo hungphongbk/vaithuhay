@@ -119,8 +119,8 @@
           this.systemModal = null;
         });
       },
-      onScroll(){
-
+      onScroll(e,{scrollTop}){
+        console.log(scrollTop);
       }
     },
     async created() {

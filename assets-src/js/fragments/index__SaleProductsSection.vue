@@ -21,11 +21,22 @@
     @extend %reset-link;
     display: block;
     transition: all $animation-time ease;
-    @extend %box-shadow-1;
-    margin-bottom: $line-height-computed;
+    box-shadow: 0 2px 6px -3px rgba(0, 0, 0, 0.65);
+    margin-bottom: 1rem;
+    border-radius: .7rem;
+    overflow: hidden;
     @at-root img {
       width: 100%;
       height: 100%;
+    }
+    @include responsive('xs-max') {
+      .homepage-promo .col-sm-6:last-child & {
+        margin-bottom: 0;
+      }
+    }
+    @include responsive('sm-min') {
+      margin-bottom: 1.7rem;
+      border-radius: 1rem;
     }
   }
 
@@ -43,8 +54,8 @@
 </template>
 <script>
   import {IndexSection} from '../components/index';
-  import {PROMO_LIST_}  from '../store/types';
-  import {mapGetters}   from 'vuex';
+  import {PROMO_LIST_} from '../store/types';
+  import {mapGetters} from 'vuex';
 
   const $ = jQuery;
   export default {

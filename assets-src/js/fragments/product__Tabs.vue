@@ -37,8 +37,11 @@
     composes: tabs from global;
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 0 !important;
+    width: 100% !important;
+    :global(.container) {
+      padding: 0;
+    }
     > div {
       border-bottom: 1px solid #bfbfbf;
       background: white;
@@ -51,6 +54,9 @@
       display: table-cell;
       @include responsive('xs-max') {
         width: 1%;
+      }
+      &.active {
+        border-bottom: 2px solid $theme-red-color;
       }
     }
   }
@@ -72,7 +78,7 @@
     font-weight: 700;
     text-transform: uppercase;
     font-size: $font-size-h3;
-    padding: $line-height-computed $grid-gutter-width*1.5;
+    padding: $line-height-computed*4/3 $grid-gutter-width*1.5 $line-height-computed*2/3;
     display: inline-block;
 
     /*normal*/
@@ -118,11 +124,11 @@
 </style>
 <template lang="pug">
   div(:class="$style.productTabs")
-    div(:class="$style.tabs")
+    div(:class="$style.tabs" v-sticky sticky-offset="offset")
       div
         .container
           ul(:class="$style.ul", role="tablist", ref="tab")
-            li(v-for="tab in tabs_", :class="{ [$style.li]:true, 'active':active_===tab.hash}", @click="active_ = tab.hash")
+            li(v-for="tab in tabs_", :class="{ [$style.li]:true, [$style.active]:active_===tab.hash}", @click="active_ = tab.hash")
               a(:class="$style.title") {{tab.title}}
                 span(v-if="tab.badge!==null", :class="[$style.badge, tab.badge===0?$style.zero:'']") {{tab.badge}}
     div(:class="$style.tabContent")
@@ -134,7 +140,11 @@
     data() {
       return {
         tabs_: [],
-        active_: -1
+        active_: -1,
+        offset: {
+          top: 60,
+          bottom: 40
+        }
       };
     },
     provide() {
