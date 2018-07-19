@@ -12,7 +12,7 @@ import '@/pages';
 import App from './App.vue';
 import mq from './store/mq';
 import polyfill from './store/polyfill';
-import {SYSTEM_ON_SCROLL} from "@/types";
+import {SYSTEM_ON_SCROLL, SYSTEM_ON_SCROLL_RESET} from "@/types";
 // import router from './router'
 // import {sync} from 'vuex-router-sync'
 
@@ -44,11 +44,29 @@ window.vm = new Vue({
   },
   data: {
     system: {
-      scrollTop: 0
+      scrollThreshold: 160,
+      scrollTop: 0,
+      scrollDirection: 'down',
+      scrollChange: 0
     }
   },
   mounted() {
-    components.Event.$on(SYSTEM_ON_SCROLL, value => this.system.scrollTop = value);
+    components.Event.$on(SYSTEM_ON_SCROLL, value => {
+      this.system.scrollDirection = (value > this.system.scrollTop) ? 'down' : 'up';
+      const diff = value - this.system.scrollTop;
+      this.system.scrollTop = value;
+
+      //update scrollChange
+      let scrollChange = this.system.scrollChange;
+      scrollChange += diff;
+      if (scrollChange > this.system.scrollThreshold)
+        scrollChange = this.system.scrollThreshold;
+      if (scrollChange < 0) scrollChange = 0;
+      this.system.scrollChange = scrollChange;
+    });
+    components.Event.$on(SYSTEM_ON_SCROLL_RESET, () => {
+      this.system.scrollChange = 0;
+    });
   }
 });
 polyfill(store);

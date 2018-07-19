@@ -81,7 +81,8 @@
         return {
           'transform': createTransform({
             scale: 1 - this.scrollTopThreshold,
-            translateY: `${this.scrollTopThreshold * 50}%`
+            translateY: `${this.scrollTopThreshold * 50}%`,
+            translateX:`-${this.scrollTopThreshold * 60}%`
           })
         }
       },

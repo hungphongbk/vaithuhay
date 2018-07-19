@@ -31,6 +31,7 @@
   }
 
   .mobile-open {
+    transform-origin: bottom left;
     $s: $navbar-height;
 
     display: inline-block;
@@ -96,7 +97,7 @@
   nav#site-navigation.navbar.main-navigation.navbar-fixed-top.navbar-left(role="navigation" :style="navbarHeaderStyle")
     div(:class="$style.navigationMenu")
       div(:class="$style.header")
-        div(:class="{ [$style.mobileOpen]:true, 'open': show_}", @click="goBack")
+        div(:class="{ [$style.mobileOpen]:true, 'open': show_}" :style="mobileOpenStyle" @click="goBack")
           span.cls
           span
           span.cls
@@ -115,6 +116,9 @@
 
   import {mapGetters} from 'vuex';
   import {USER_LOGIN_FORM_SHOW} from "../../store/types";
+  import {Event} from "@/components/index";
+  import {SYSTEM_ON_SCROLL_RESET} from "@/types";
+  import {createTransform} from "@/components/helpers";
 
   const createDynamicTransform = transform => ({
     'transform': transform,
@@ -140,12 +144,19 @@
         loginForm: USER_LOGIN_FORM_SHOW
       }),
       navbarHeaderStyle() {
-        if(this.show_) return {};
+        if (this.show_) return {};
         const translateY = `translateY(-${this.scrollTopThreshold * 100}%)`;
         return createDynamicTransform(translateY);
       },
       navbarBrandStyle() {
         return createDynamicTransform(`scale(${1 - this.scrollTopThreshold})`)
+      },
+      mobileOpenStyle() {
+        return {
+          'transform': createTransform({
+            scale: 1 - this.scrollTopThreshold * 0.8
+          })
+        }
       }
     },
     watch: {
@@ -163,6 +174,11 @@
           // Tat luon menu
 
           self.show_ = false;
+        }
+      },
+      show_(value) {
+        if (value) {
+          Event.$emit(SYSTEM_ON_SCROLL_RESET)
         }
       }
     },
