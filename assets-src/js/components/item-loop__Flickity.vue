@@ -12,26 +12,26 @@
           top: -25px;
         }
       }
-      .flickity-prev-next-button{
+      .flickity-prev-next-button {
         width: $button-size;
         height: $button-size;
         background: transparent !important;
         font: normal normal normal 14px/1 FontAwesome;
         font-size: 59.5px;
         opacity: .35;
-        &:hover{
+        &:hover {
           opacity: .65;
         }
-        >svg{
+        > svg {
           display: none;
         }
-        &.next{
+        &.next {
           right: -$button-size*5/4;
           &:before {
             content: "\F054"
           }
         }
-        &.previous{
+        &.previous {
           left: -$button-size*5/4;
           &:before {
             content: "\F053";
@@ -40,21 +40,22 @@
       }
     }
   }
-  .item{
-    &:global(.rows-4){
+
+  .item {
+    &:global(.rows-4) {
       width: percentage(1/4)
     }
-    &:global(.rows-3){
+    &:global(.rows-3) {
       width: percentage(1/3)
     }
-    &:global(.rows-2){
+    &:global(.rows-2) {
       width: percentage(1/2)
     }
   }
 </style>
 <template lang="pug">
   flickity(:class="$style.container" :options="flickityOpts" ref="flkty")
-    div(:class="[$style.item, `rows-${rows}`]" v-for="item in list")
+    div(:class="[$style.item, `rows-${rows}`]" v-for="item in list_")
       slot(name="item" :item="item")
 </template>
 <script>
@@ -71,9 +72,9 @@
         type: Object,
         default: () => ({})
       },
-      rows:{
-        type:Number,
-        default:1
+      rows: {
+        type: Number,
+        default: 1
       }
     },
     data() {
@@ -88,29 +89,37 @@
           autoPlay: 1500,
           cellAlign: 'left'
           // any options from Flickity can be used
-        }
+        },
+        list_: []
       }
     },
-    computed:{
-      flickityOpts(){
-        return Object.assign({},this.flickityOptions, this.sliderOpts)
+    computed: {
+      flickityOpts() {
+        return Object.assign({}, this.flickityOptions, this.sliderOpts)
       }
     },
     watch: {
-      list() {
+      list(value) {
+        this.list_ = [];
+        this.$nextTick(() => {
+          this.list_ = value;
+        })
+      },
+      list_() {
         this.$nextTick(() => {
           this.$refs.flkty.rerender();
-          this.$nextTick(()=>{
-            this.$refs.flkty.reloadCells();
-            // this.$refs.flkty.rerender();
-            console.log('changed');
-            this.$refs.flkty.on('select', (index) => {
-              // console.log(index);
-              this.$emit('select', index)
-            })
+          this.$refs.flkty.reloadCells();
+          // this.$refs.flkty.rerender();
+          console.log('changed');
+          this.$refs.flkty.on('select', (index) => {
+            // console.log(index);
+            this.$emit('select', index)
           })
         })
       }
+    },
+    mounted() {
+      this.list_ = this.list;
     }
   }
 </script>

@@ -4,9 +4,9 @@
   transition(name="vth-fade")
     div
       slider-section
-      new-products
-      sale-products
       top-products
+      sale-products
+      new-products
       discover
       service(:content="data.commit")
       news

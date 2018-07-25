@@ -227,7 +227,9 @@
     methods: {
       fetch() {
         const categoryUrls = this.$store.state.categories.list.map(i => i.url)
-          .filter(url => !url.includes('tatcasanpham'));
+          .filter(url => !(url.includes('tatcasanpham')
+            || url.includes('san-pham-moi')
+            || url.includes('onsale')));
         Promise
           .all(categoryUrls.map(url =>
             jQuery.get(url + '?view=json').then(rs => {
@@ -235,28 +237,6 @@
               console.log(obj);
               obj.url = url;
               obj.list = obj.list.map(ProductItem_);
-
-              if (/san-pham-moi/.test(obj.url)) {
-                //randomly San-Pham-Moi - swap last 4 elements
-                let lsValue = this.$ls.get('lastRandomNewProduct', {
-                    ts: Date.now(),
-                    step: 4
-                  }),
-                  times = lsValue.step,
-                  compareDiff = Date.now() - lsValue.ts,
-                  diff = window.vth.settings.autoUpdateNewProducts * 1000;
-                if (compareDiff > diff) {
-                  console.log('do swap');
-                  while (times--) {
-                    const tmp = obj.list.pop();
-                    obj.list.unshift(tmp);
-                  }
-                  this.$ls.set('lastRandomNewProduct', {
-                    ts: Date.now(),
-                    step: lsValue.step += 4
-                  })
-                }
-              }
 
               return obj;
             })))
@@ -290,13 +270,3 @@
     }
   };
 </script>
-<i18n>
-  {
-    "en": {
-      "title": "top new products"
-    },
-    "vi": {
-      "title": "sản phẩm mới"
-    }
-  }
-</i18n>
