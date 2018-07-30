@@ -14,7 +14,7 @@ export default {
         case 'new':
           return -(o.id*1);
         case 'name':
-          return o.title;
+          return o._title.vi.toLowerCase();
         case 'sale':
           return -o.sale;
         case 'pricelow':
@@ -29,7 +29,6 @@ export default {
   mutations: {
     [PRODUCTS_FETCH_]: (state, data) => {
       const {list, slides} = data;
-      console.log(slides);
       state.list = list;
       state.slides = (Object.keys(slides).length === 0) ? [] : slides.list;
     },

@@ -56,7 +56,7 @@ module.exports = {
         test: /sw\.js$/,
         loader: "service-worker-loader",
         options: {
-          publicPath: 'https://vaithuhay.com/'
+          publicPath: 'https://vaithuhay.com/workers/'
         }
       },
       {

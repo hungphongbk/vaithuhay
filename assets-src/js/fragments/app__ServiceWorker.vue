@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss" module>
   @import "../../sass/inc/inc";
 
   .toast {
@@ -16,7 +16,7 @@
     p {
       text-align: justify;
     }
-    .fa-inverse {
+    :global(.fa-inverse) {
       color: $theme-red-color;
     }
     &-body {
@@ -58,22 +58,22 @@
 <template lang="pug">
   div
     transition(name="vth-fade-slide-up")
-      .toast(v-if="showRegister", ref="reg", @mouseover="splash($event)")
-        .toast-body
+      div(:class="$style.toast" v-if="showRegister", ref="reg", @mouseover="splash($event)")
+        div(:class="$style.toastBody")
           span.fa-stack.fa-2x.pull-left.mr-2
             i.fa.fa-circle.fa-stack-2x
             i.fa.fa-bell-o.fa-stack-1x.fa-inverse
           p Hãy nhấn "Theo dõi" để không bỏ lỡ những sản phẩm, tin tức mới từ Vaithuhay.com!
           .clearfix
-        .toast-btn-wrapper
-          .toast-btn(@click="getPermission") Theo dõi
-          .toast-btn(@click="showRegister=false") Bỏ qua
+        div(:class="$style.toastBtnWrapper")
+          div(:class="$style.toastBtn" @click="getPermission") Theo dõi
+          div(:class="$style.toastBtn" @click="showRegister=false") Bỏ qua
 </template>
 <script>
   import firebase from 'firebase/app';
   import 'firebase/auth';
   import 'firebase/messaging';
-  import sw       from '@/modules/iframe/sw';
+  import sw from '@/modules/iframe/sw';
 
   firebase.initializeApp({
     apiKey: FIREBASE_API_KEY,
@@ -89,7 +89,7 @@
 
   const app = new Promise((resolve, reject) => {
       if ('serviceWorker' in navigator) {
-        sw({scope: '/'})
+        sw({scope: '/workers/'})
           .then(registration => {
             _message.useServiceWorker(registration);
             resolve(_message);
@@ -97,7 +97,7 @@
           .catch(reject);
       } else reject();
     }),
-    registerToken = (token, dev = false) => $.post('https://server.vaithuhay.com/b/noti/register', {
+    registerToken = (dev = false, token) => $.post(SERVER_URL + 'noti/register', {
       token,
       ...(dev ? {topics: '/topics/dev'} : {}),
       refresh: true
@@ -119,12 +119,11 @@
     },
     methods: {
       async doToken() {
-        const self = this,
-          token = self.token;
-        if ((!token) || token.length === 0) {
-          self.showRegister = self.$localStorage.get('show', true);
+        const self = this;
+        if ((!self.token) || self.token.length === 0) {
+          self.showRegister = self.$ls.get('show', true);
         } else {
-          await registerToken(self.$isExperiment, token);
+          await registerToken(self.$isExperiment, self.token);
           const message = await app;
           message.onTokenRefresh(async () => {
             self.token = await message.getToken();
@@ -144,7 +143,7 @@
       },
       ignore() {
         this.showRegister = false;
-        this.$localStorage.set('show', false);
+        this.$ls.set('show', false);
       }
     },
     async mounted() {
@@ -154,6 +153,7 @@
         this.token = await message.getToken();
         this.doToken();
       } catch (e) {
+        console.error(e);
         //do nothing
       }
     }

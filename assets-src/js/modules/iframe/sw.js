@@ -1,6 +1,6 @@
 // importScripts('/local-sw-analytics.js');
 import sendPushNotificationAnalyticsEvent from './local-sw-analytics';
-import './local-sw-cache';
+// import './local-sw-cache';
 import firebase                           from 'firebase/app';
 import 'firebase/messaging';
 

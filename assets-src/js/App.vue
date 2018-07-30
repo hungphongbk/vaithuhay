@@ -68,7 +68,7 @@
     transition(name="vth-fade-slide-up")
       div(v-if="isScrollToTop", :class="$style.scrollToTop", v-tooltip.left="'Trở về đầu trang'", @click="scrollToTop_")
         i.fa.fa-chevron-up
-    //app-service-worker
+    app-service-worker
     app-offline-mode
     system-modal(v-if="systemModal !== null", :title="systemModal.title", :content="systemModal.content", :commands="systemModal.commands", :options="systemModal.options")
 </template>
@@ -85,7 +85,7 @@
   export default {
     directives: {tooltip},
     components: {
-      //'app-service-worker': () => import(/* webpackChunkName: "vaithuhay-sw" */ './fragments/app__ServiceWorker'),
+      'app-service-worker': () => import(/* webpackChunkName: "vaithuhay-sw" */ './fragments/app__ServiceWorker'),
       AppOfflineMode,
       SystemModal
     },

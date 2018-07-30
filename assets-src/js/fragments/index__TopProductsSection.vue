@@ -183,8 +183,6 @@
   import slide from './index__slide.m-scss';
   import faChevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft'
   import faChevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight'
-
-  const $ = jQuery;
   export default {
     components: {
       ProductLoop: ItemLoop,
