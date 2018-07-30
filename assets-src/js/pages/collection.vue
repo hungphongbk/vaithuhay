@@ -120,7 +120,7 @@
       color: white;
       @include font-size-with-line-height($font-size-h1*1.15);
       @include responsive('xs-max') {
-        @include font-size-with-line-height($font-size-h1*0.9);
+        @include font-size-with-line-height(2rem);
       }
     }
   }
@@ -128,6 +128,8 @@
   .sort-form {
     @include responsive('sm-min') {
       text-align: center;
+      display: flex;
+      justify-content: center;
     }
     > div {
       display: inline-block;
@@ -135,6 +137,10 @@
       @include responsive('xs-max') {
         font-size: $font-size-base;
         margin-bottom: $font-size-base*0.7;
+      }
+      @include responsive('sm-min'){
+        display: flex;
+        align-items: center;
       }
     }
     margin-bottom: 40px;
@@ -161,22 +167,13 @@
         border-bottom: 1px solid;
       }
     }
+  }
 
-    @at-root a.cat {
-      @extend %reset-link;
-      display: inline-block;
-      h2 {
-        color: darken(#fff, 20%);
-        &:hover {
-          color: #fff;
-        }
-      }
+  .collectionSelector{
+    @include responsive('sm-min'){
+      min-width: 318px;
     }
-    .sort-title {
-      @include responsive('xs-max') {
-        @include font-size-with-line-height($font-size-h5)
-      }
-    }
+    height:40px;
   }
 </style>
 <template lang="pug">
@@ -194,21 +191,14 @@
         div(:class="$style.title")
           h1(:class="$style.pageTitle") {{CURRENT_CATEGORY.title}}
         div(:class="$style.sortForm")
-          div(style="margin-right: 30px")
-            span Sản phẩm
-            overlay-selector.sort-selector(:list="CATEGORIES_LIST")
+          .mr-4
+            span.mr-3 Sản phẩm
+            sort-selector.sort-selector(:list="CATEGORIES_LIST" v-model="CURRENT_CATEGORY" :class="$style.collectionSelector")
               template(slot="current")
                 span {{CURRENT_CATEGORY.title}}
-              template(slot="item", slot-scope="p")
-                a(:class="$style.cat", :href="p.item.url")
-                  h2(:class="$style.sortTitle") {{p.item.title}}
           div
-            span Sắp xếp bởi
-            overlay-selector.sort-selector(:list="sort_", v-model="CURRENT_SORT")
-              template(slot="current", slot-scope="p")
-                span {{p.item.title}}
-              template(slot="item", slot-scope="p")
-                h2(:class="$style.sortTitle") {{p.item.title}}
+            span.mr-3 Sắp xếp bởi
+            sort-selector.sort-selector(:list="sort_", v-model="CURRENT_SORT" style="min-width: 180px;height:40px")
         .list
           product-loop.row.gutter-10.gutter-sm-30(v-if="products.length<20", :list="products")
             template(slot="item", slot-scope="p")
@@ -228,6 +218,7 @@
   import {mapGetters} from 'vuex';
   import {CATEGORIES_LIST_, PRODUCTS_FETCH_, PRODUCTS_LIST_, PRODUCTS_SORT_} from '../store/types';
   import ProductsModule from '../store/products';
+  import SortSelector from '../fragments/collection__SortSelector';
 
   const $ = jQuery;
 
@@ -238,7 +229,8 @@
       ProductItem,
       Slick,
       OverlaySelector,
-      PageSlider
+      PageSlider,
+      SortSelector
     },
     data() {
       const f = (id, title) => ({id, title}),
