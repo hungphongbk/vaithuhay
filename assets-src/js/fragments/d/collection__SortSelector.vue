@@ -69,7 +69,7 @@
   }
 </style>
 <template lang="pug">
-  div(:class="$style.container")
+  div(:class="$style.container" v-click-outside="collapse")
     .overlay-selector(:class="$style.menu" ref="menu")
       div(:class="$style.menuContents" ref="menuContent")
         ul(:class="$style.items")
@@ -77,7 +77,10 @@
             p.d-inline-block.mb-0.py-3 {{item.title}}
 </template>
 <script>
+  import ClickOutside from 'vue-click-outside'
+
   export default {
+    directives: {ClickOutside},
     props: {
       list: {
         type: Array,

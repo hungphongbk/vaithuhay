@@ -158,6 +158,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
     "postcss-loader": "^2.1.5",
+    "vue-click-outside": "^1.0.7",
     "vue-flickity": "^1.1.2",
     "vue-scroll": "^2.1.7"
   },

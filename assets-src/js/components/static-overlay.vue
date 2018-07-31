@@ -16,7 +16,7 @@
       position: fixed;
       top: 0;
       padding-top: $navbar-height*1.3 !important;
-      background-color: #263238;
+      background-color: #263238eb;
       /deep/ .container {
         padding: {
           left: 20px;
