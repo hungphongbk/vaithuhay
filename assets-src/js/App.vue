@@ -78,7 +78,13 @@
   import {tooltip} from '@/plugins';
   import {USER_MUTATION_LOGIN} from "@/store/types";
   import {$modalEvent, SystemModal} from "@/plugins/ModalManager";
-  import {SYSTEM_MODAL_HIDE, SYSTEM_MODAL_SHOW, SYSTEM_ON_SCROLL} from "@/types";
+  import {
+    SYSTEM_MODAL_HIDE,
+    SYSTEM_MODAL_SHOW,
+    SYSTEM_ON_SCROLL,
+    SYSTEM_ON__MOBILE_HEADER_CONTENT,
+    SYSTEM_MOBILE_HEADER_CONTENT
+  } from "@/types";
 
   const $ = jQuery;
 
@@ -95,8 +101,19 @@
         scrollTop: 0,
         screenHeight: $(window).height(),
         iframeUrl: 'server.vaithuhay.com',
-        systemModal: null
+        systemModal: null,
+        mobileHeaderContent: null
       };
+    },
+    provide() {
+      const app = {}, self=this;
+      Object.defineProperty(app, 'mobileHeaderContent', {
+        enumerable: true,
+        get(){
+          return self.mobileHeaderContent
+        }
+      });
+      return {app}
     },
     computed: {
       isScrollToTop() {
@@ -121,6 +138,11 @@
       },
       onScroll(e, {scrollTop}) {
         Event.$emit(SYSTEM_ON_SCROLL, scrollTop);
+      },
+      initMobileHeaderContent() {
+        Event.$on(SYSTEM_ON__MOBILE_HEADER_CONTENT, component => {
+          this.mobileHeaderContent = component;
+        })
       }
     },
     async created() {
@@ -133,6 +155,7 @@
         self.scrollTop = $(window).scrollTop();
       });
       this.initSystemModal();
+      this.initMobileHeaderContent();
     }
   };
 </script>

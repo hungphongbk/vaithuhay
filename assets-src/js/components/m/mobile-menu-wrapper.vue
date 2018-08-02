@@ -16,18 +16,26 @@
   }
 
   .brand {
+    flex-grow: 1;
     composes: navbar-brand from global;
-    display: block;
-    padding: {
-      top: $navbar-height*0.35;
-      bottom: $navbar-height*0.25;
-    }
-    img {
-      height: $navbar-height*0.4;
-    }
+    display: flex;
+    justify-content: center;
     float: none;
-
     transform-origin: bottom center;
+
+    position: relative;
+    > * {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      height: 80%;
+      width: auto;
+    }
+    > img {
+      height: $navbar-height*0.43;
+    }
   }
 
   .mobile-open {
@@ -92,6 +100,10 @@
       }
     }
   }
+
+  .header-content{
+    width: 130%;
+  }
 </style>
 <template lang="pug">
   nav#site-navigation.navbar.main-navigation.navbar-fixed-top.navbar-left(role="navigation" :style="navbarHeaderStyle")
@@ -102,7 +114,11 @@
           span
           span.cls
         a(:class="$style.brand" :href="home_" :style="navbarBrandStyle")
-          img(:src="logo_")
+          img(v-if="!app.mobileHeaderContent" :src="logo_")
+          template(v-else)
+            img(:src="logo_" :style="logoStyle")
+            .d-flex.align-items-center(:style="headerContentStyle" :class="$style.headerContent")
+              component(:is="app.mobileHeaderContent")
         cart-button.cart(@click.native="showCart")
       static-overlay.mobile-panel(name_="vth-fade-slide-right")
         .container(style="height: 100%")
@@ -117,7 +133,7 @@
   import {mapGetters} from 'vuex';
   import {USER_LOGIN_FORM_SHOW} from "../../store/types";
   import {Event} from "@/components/index";
-  import {SYSTEM_ON_SCROLL_RESET} from "@/types";
+  import {SYSTEM_ON_SCROLL_RESET, SYSTEM_MOBILE_HEADER_CONTENT} from "@/types";
   import {createTransform} from "@/components/helpers";
 
   const createDynamicTransform = transform => ({
@@ -132,6 +148,7 @@
       MobileMenuPanel,
       CartButton
     },
+    inject: ['app'],
     data() {
       return {
         logo_: require('../../../img/logo.png'),
@@ -155,6 +172,19 @@
         return {
           'transform': createTransform({
             scale: 1 - this.scrollTopThreshold * 0.8
+          })
+        }
+      },
+      logoStyle() {
+        return {
+          'opacity': 1 - this.scrollTopPercentage / 100
+        }
+      },
+      headerContentStyle() {
+        return {
+          'opacity': this.scrollTopPercentage / 100,
+          'transform':createTransform({
+            translate:`calc(-50% - ${this.scrollTopPercentage / 100}rem), -50%`
           })
         }
       }

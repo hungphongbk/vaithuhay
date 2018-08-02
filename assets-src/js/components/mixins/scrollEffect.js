@@ -10,6 +10,10 @@ export default {
 
       return scrollTop / navbarHeight;
 
+    },
+    scrollTopPercentage() {
+      const {scrollThreshold, scrollChange} = this.$root.system;
+      return (scrollChange * 100 / scrollThreshold);
     }
   }
 };

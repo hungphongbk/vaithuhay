@@ -1,7 +1,8 @@
 <style lang="scss" module>
   @import "../../sass/inc/inc";
+
   $thumb-size: 60px;
-  .thumbnail{
+  .thumbnail {
     composes: vth-thumb thumb from global;
 
     img {
@@ -16,6 +17,7 @@
       transform: scale(1.12);
     }
   }
+
   .overlay {
     background-color: rgba(0, 0, 0, 0.65);
     display: flex;
@@ -27,6 +29,7 @@
     transition: opacity $animation-time ease-in;
     opacity: 0;
   }
+
   .thumb-items {
     display: inherit;
     > span {
@@ -45,16 +48,30 @@
     transition: transform $animation-time ease-out;
     transform: scale(1.3);
   }
+
   .thumbnail:hover .overlay {
     opacity: 1;
     .thumb-items {
       transform: scale(1);
     }
   }
+
+  .zoomer {
+    height:100%;
+    :global(.img-wrap) {
+      width: 100%;
+      height: 100%;
+      /*img {*/
+        /*height: 100%;*/
+        /*width: auto;*/
+      /*}*/
+    }
+  }
 </style>
 <template lang="pug">
   .vth-thumb.thumb(:class="[ $style.thumbnail, ratio_?`ratio-${ratio_}`:'' ]")
     wrapper
+      image-zoomer(v-if="useZoomer" :class="$style.zoomer" :src="url_")
       img(v-if="url_ && slickLazy_", :data-lazy="url_", :alt="alt_")
       img.lazy(v-else-if="url_ && lazy_", v-lazy="lazyUrl_", :alt="alt_")
       img(v-else-if="url_", :src="lazyUrl_", :alt="alt_")
@@ -66,6 +83,8 @@
     slot
 </template>
 <script>
+  import ImageZoomer from '@/components/image-zoomer'
+
   export default {
     components: {
       Wrapper: {
@@ -77,7 +96,8 @@
           // if (notHasRatio) return children;
           return (<div class="content">{children}</div>);
         }
-      }
+      },
+      ImageZoomer
     },
     props: {
       url_: String,
@@ -99,6 +119,10 @@
       type: {
         type: String,
         default: 'haravan'
+      },
+      useZoomer: {
+        type: Boolean,
+        default: false
       }
     },
     data() {

@@ -135,13 +135,11 @@
   .product-images
     image-loop.images(ref="loop", :slider-opts="slick_",
     :list="images_", :labelIndicator_="labelIndicator_",
-    :fullScreen_="fullScreen_", @full-screen="show_ = true"
     @change="index => $emit('change', images_[index].small)")
       template(slot="item", slot-scope="p")
         .ratio-1-1.big(v-if="p.item.isVideo")
           .content(v-html="p.item.original")
-        thumbnail.big.no-effect(v-else, :url_="p.item.original", :lazy_="false", :overlay_="false", ratio_="1-1")
-          .content.vignette
+        thumbnail.big.no-effect(v-else, :url_="p.item.original", :lazy_="false", :overlay_="false", ratio_="1-1" :use-zoomer="true")
       template(slot="thumb", slot-scope="p")
         .ratio-3-2.small
           .content
@@ -160,9 +158,6 @@
 <script>
   import {ItemLoop}     from '../components/index';
   import {overlayMixin} from '../components/mixins';
-  // import exposure from '../plugins/image-exposure'
-
-  const $ = jQuery;
 
   export default {
     name: 'product-images',

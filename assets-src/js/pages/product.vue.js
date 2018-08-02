@@ -5,7 +5,7 @@ import ProductTab from '../fragments/product__Tab.vue';
 import ProductFaq from '../fragments/product__FAQ.vue';
 import ProductExpandable from '../fragments/product__Expandable.vue';
 import ProductWholeSale from '../fragments/product__WholeSale.vue';
-import {AddToCartWrapper, ItemLoop, ProductRating} from '../components/index';
+import {AddToCartWrapper, Event, ItemLoop, ProductRating} from '../components/index';
 import ProductItem from '@/components/products';
 import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue';
 import ProductSmallItem from '../components/app__ProductSmallItem';
@@ -24,6 +24,8 @@ import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus';
 import {PRODUCT_ACTION_FAVORITE_FETCH, PRODUCT_ACTION_FAVORITE_TOGGLE} from "@/store/types";
 import ProductRelatedArticles from '../fragments/product__RelatedArticles.vue';
 import {DarkPanel} from "@/plugins/directives";
+import {SYSTEM_ON__MOBILE_HEADER_CONTENT} from "@/types";
+import mobileHeader from '@/fragments/m/product__MobileHeader'
 
 const $ = jQuery,
   {current, images, variants, relateds, tops, topPromos, faq} = window.product,
@@ -55,7 +57,7 @@ const $ = jQuery,
   },
   slickOptionsWithDot = {
     ...slickOptions_,
-    dots:true
+    dots: true
   },
   convertToNumber = ({current, old}) => {
     const convert = str => str ? str.replace(/,|₫/g, '') * 1.0 : Number.MIN_SAFE_INTEGER;
@@ -88,8 +90,6 @@ export default {
     ProductRelatedArticles
   },
   data() {
-    // const {current, images, variants, relateds, tops, topPromos, faq} = this.$vthStore.state.product
-    // console.log(current)
     return {
       faHeart,
       faHeartSolid,
@@ -123,7 +123,8 @@ export default {
       commentCount: null,
       giftAvatars: [''],
       giftVariants: [''],
-      relatedArticles: []
+      relatedArticles: [],
+      mobileHeader
     };
   },
   computed: {
@@ -215,6 +216,9 @@ export default {
       if (variant)
         this.variantSelected = variant;
     }
+  },
+  created() {
+    Event.$emit(SYSTEM_ON__MOBILE_HEADER_CONTENT, this.mobileHeader);
   },
   beforeMount() {
     this.$vthStore.registerModule('product', ProductModule, {preserveState: true});
