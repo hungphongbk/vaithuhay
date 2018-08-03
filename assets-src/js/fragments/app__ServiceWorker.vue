@@ -70,29 +70,24 @@
           div(:class="$style.toastBtn" @click="showRegister=false") Bỏ qua
 </template>
 <script>
-  import firebase from 'firebase/app';
-  import 'firebase/auth';
-  import 'firebase/messaging';
+  // import firebase from '@/plugins/firebase.js';
   import sw from '@/modules/iframe/sw';
 
-  firebase.initializeApp({
-    apiKey: FIREBASE_API_KEY,
-    authDomain: "hungphongbk-1812.firebaseapp.com",
-    databaseURL: "https://hungphongbk-1812.firebaseio.com",
-    projectId: "hungphongbk-1812",
-    storageBucket: "hungphongbk-1812.appspot.com",
-    messagingSenderId: "1926697148"
-  });
+  const firebasePromise = () => import(/* webpackChunkName: "firebase" */ '@/plugins/firebase');
 
   const $ = jQuery,
-    _message = firebase.messaging();
+    _message = firebasePromise()
+      .then(firebase => {
+        return firebase.default.messaging()
+      });
 
   const app = new Promise((resolve, reject) => {
       if ('serviceWorker' in navigator) {
         sw({scope: '/workers/'})
-          .then(registration => {
-            _message.useServiceWorker(registration);
-            resolve(_message);
+          .then(async registration => {
+            const msg = await _message;
+            msg.useServiceWorker(registration);
+            resolve(msg);
           })
           .catch(reject);
       } else reject();

@@ -159,6 +159,7 @@
   .add-to-cart-favorite-group {
     display: flex;
     align-items: center;
+    flex-grow: 1;
   }
 
   .add-to-cart {
@@ -166,10 +167,10 @@
     text-transform: uppercase;
     font-weight: 700;
     border: 2px solid $theme-red-color;
-    padding: {
-      left: 2em;
-      right: 2em;
+    padding: .3em 2em {
+      top: .4em;
     }
+    line-height: 1;
     svg {
       margin-right: 0.5em;
     }
@@ -179,6 +180,24 @@
         right: 0;
       }
       width: 100%;
+    }
+  }
+
+  .add-to-cart-wrapper{
+    @include responsive('xs-max'){
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: auto;
+      padding: .7rem {
+        left: 1rem;
+        right:25%;
+      }
+      z-index: 10;
+      background-color: white;
+      //@include lbn-box-shadow(-2px);
+      box-shadow: 0 -2px 10px -6px black;
     }
   }
 

@@ -106,7 +106,7 @@
                     i.fa.fa-facebook
                     | facebook
                 .col-xs-6
-                  .btn.btn-google
+                  .btn.btn-google(@click="googleLogin")
                     i.fa.fa-google
                     | google
     div(v-else)

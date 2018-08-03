@@ -5,6 +5,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
   regexCombiner = require('regex-combiner'),
   _ = require('hungphongbk-webpack-build-utils');
 
+//ok
+
 global.getLocalIdent = _.getLocalIdent;
 
 const src = './assets-src',

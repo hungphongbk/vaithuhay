@@ -1,10 +1,7 @@
-import StaticOverlay                        from '@/components/static-overlay.vue';
-import AppLoginWrapper                      from '@/components/app__LoginWrapper';
+import StaticOverlay from '@/components/static-overlay.vue';
 import {USER_IS_LOGGING_IN, USER_LOGGED_IN} from "@/store/types";
-import debounce                             from 'lodash/debounce';
-import qs                                   from 'query-string';
-import faFacebook                           from '@fortawesome/fontawesome-free-brands/faFacebookF';
-import faGoogle                             from '@fortawesome/fontawesome-free-brands/faGoogle';
+import debounce from 'lodash/debounce';
+import qs from 'query-string';
 
 const $ = jQuery;
 
@@ -69,39 +66,7 @@ export const addToCartMixin = {
   }
 };
 
-export const loginMixins = {
-  components: {
-    AppLoginWrapper
-  },
-  data() {
-    return {
-      customer: {
-        email: '',
-        password: ''
-      },
-      faFacebook,
-      faGoogle
-    };
-  },
-  methods: {
-    facebookLogin() {
-      this.$vthStore.commit(USER_IS_LOGGING_IN);
-      FB.login(async ({authResponse}) => {
-        console.log(authResponse);
-        if (authResponse) {
-          const [email, password] = atob(await $.post('https://server.vaithuhay.com/b/social/auth/facebook', {access_token: authResponse.accessToken})).split(':');
-          this.$refs.form.login(email, password);
-        }
-      }, {scope: 'email'});
-    },
-    googleLogin() {
-
-    }
-  },
-  beforeCreate() {
-    $.cachedScript('https://apis.google.com/js/client.js');
-  }
-};
+export {default as loginMixins} from './login';
 
 export const orderTrackingMixin = {
   data() {
@@ -151,4 +116,4 @@ export const orderTrackingMixin = {
 
 export {default as searchMixin} from './search';
 
-export {default as scrollEffectMixin} from './scrollEffect'
+export {default as scrollEffectMixin} from './scrollEffect';
