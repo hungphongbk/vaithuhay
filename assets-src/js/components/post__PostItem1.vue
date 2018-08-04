@@ -2,7 +2,7 @@
 <template lang="pug">
   a(:class="$style.postItem", :href="url")
     div(style='position: relative')
-      thumbnail(:url_='thumbnail', :alt_="title", ratio_='1-1', :thumbnailSize_="defaultThumbnailSize_", :lazy_="false")
+      thumbnail(:url_='thumbnail', :alt_="title", ratio_='1-1', :thumbnailSize_="defaultThumbnailSize_", :slick-lazy_="true")
         template(v-if="!$mq.tablet", slot="overlay")
           span(:class="$style.addToCartBtn", @click.stop.prevent="add_($event, variants[0].id)")
             fa-icon(:icon="icon")

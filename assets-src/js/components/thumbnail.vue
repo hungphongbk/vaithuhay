@@ -67,12 +67,22 @@
       /*}*/
     }
   }
+
+  .flickity-lazy{
+    &:not(:global(.flickity-lazyloaded)){
+      background: {
+        image: url(../../img/icon-loading.svg);
+        repeat: no-repeat;
+        position: center;
+      }
+    }
+  }
 </style>
 <template lang="pug">
   .vth-thumb.thumb(:class="[ $style.thumbnail, ratio_?`ratio-${ratio_}`:'' ]")
     wrapper
       image-zoomer(v-if="useZoomer" :class="$style.zoomer" :src="url_")
-      img(v-if="url_ && slickLazy_", :data-lazy="url_", :alt="alt_")
+      img(v-if="url_ && slickLazy_" :class="$style.flickityLazy" :data-lazy="lazyUrl_" :data-flickity-lazyload="lazyUrl_" :alt="alt_")
       img.lazy(v-else-if="url_ && lazy_", v-lazy="lazyUrl_", :alt="alt_")
       img(v-else-if="url_", :src="lazyUrl_", :alt="alt_")
       img(v-else, :src="demo_")
@@ -84,6 +94,7 @@
 </template>
 <script>
   import ImageZoomer from '@/components/image-zoomer'
+  import loading from '../../img/icon-loading.svg'
 
   export default {
     components: {
@@ -127,7 +138,8 @@
     },
     data() {
       return {
-        demo_: require('../../img/promo-5.png')
+        demo_: require('../../img/promo-5.png'),
+        loading
       };
     },
     computed: {

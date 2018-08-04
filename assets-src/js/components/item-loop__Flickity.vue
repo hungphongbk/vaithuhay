@@ -87,7 +87,8 @@
           wrapAround: true,
           cellSelector: '.' + this.$style.item,
           autoPlay: 1500,
-          cellAlign: 'left'
+          cellAlign: 'left',
+          lazyLoad: this.$mq.phone ? 2 : 4
           // any options from Flickity can be used
         },
         list_: []
