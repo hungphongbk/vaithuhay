@@ -7,6 +7,10 @@
 <style lang="scss" module="">
   @import "../../../sass/inc/inc";
 
+  .container.closed{
+    will-change: transform;
+  }
+
   .navigation-menu {
     position: relative;
   }
@@ -106,7 +110,7 @@
   }
 </style>
 <template lang="pug">
-  nav#site-navigation.navbar.main-navigation.navbar-fixed-top.navbar-left(role="navigation" :style="navbarHeaderStyle")
+  nav#site-navigation.navbar.main-navigation.navbar-fixed-top.navbar-left(role="navigation" :style="navbarHeaderStyle" :class="{[$style.container]:true, [$style.closed]:!show_}")
     div(:class="$style.navigationMenu")
       div(:class="$style.header")
         div(:class="{ [$style.mobileOpen]:true, 'open': show_}" :style="mobileOpenStyle" @click="goBack")

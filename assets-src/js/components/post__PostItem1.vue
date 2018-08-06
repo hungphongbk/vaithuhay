@@ -2,7 +2,7 @@
 <template lang="pug">
   a(:class="$style.postItem", :href="url")
     div(style='position: relative')
-      thumbnail(:url_='thumbnail', :alt_="title", ratio_='1-1', :thumbnailSize_="defaultThumbnailSize_", :slick-lazy_="true")
+      thumbnail(:url_='thumbnail', :alt_="title", ratio_='1-1', :thumbnailSize_="defaultThumbnailSize_", :slick-lazy_="slickLazy_")
         template(v-if="!$mq.tablet", slot="overlay")
           span(:class="$style.addToCartBtn", @click.stop.prevent="add_($event, variants[0].id)")
             fa-icon(:icon="icon")
@@ -41,13 +41,15 @@
 
   export default {
     // components: {ProductRating},
+    inject:['slickLazy'],
     props: {
       item: Object,
       thumbnailSize_: String
     },
     data() {
       return Object.assign({}, this.item, {
-        CART_ITEM_ADDED: false
+        CART_ITEM_ADDED: false,
+        slickLazy_: this.slickLazy || false
       });
     },
     computed: {
