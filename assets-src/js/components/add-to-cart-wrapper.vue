@@ -1,14 +1,16 @@
 <style lang="scss">
 </style>
 <template lang="pug">
-  div(@click.stop.prevent="addToCart_")
+  async-button(:fn="addToCart_" icon="fa-cart-plus")
     slot
 </template>
 <script>
-  import {CART_ADD_}  from '../store/types';
+  import {CART_ADD_} from '../store/types';
   import {mapActions} from 'vuex';
+  import AsyncButton from '@/components/async-button'
 
   export default {
+    components: {AsyncButton},
     inject: ['cartItem_'],
     methods: {
       ...mapActions({

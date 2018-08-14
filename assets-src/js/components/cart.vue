@@ -149,7 +149,6 @@
 <style lang="scss" scoped>
   @import "../../sass/inc/inc";
 
-
   %h {
     font-weight: 600;
     color: #666;
@@ -221,6 +220,8 @@
 </template>
 <script>
   import {CART_ADD_, CART_COUNT_, CART_FETCH_, CART_LIST_, CART_REMOVE_, CART_TOTAL_} from '../store/types';
+  import {SYSTEM_CART_OPEN} from "@/types";
+  import {Event} from "@/components/index";
   import {overlayMixin} from './mixins';
   import {mapActions, mapGetters} from 'vuex';
 
@@ -258,6 +259,9 @@
     async mounted() {
 //            this.show_ = true;
       await this.fetch_();
+      Event.$on(SYSTEM_CART_OPEN, () => {
+        this.show_ = true;
+      })
     }
   };
 </script>

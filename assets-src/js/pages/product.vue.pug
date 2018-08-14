@@ -22,9 +22,7 @@
               div.mr-2(v-if="!$mq.phone")
                 product-quantity(v-model="quantity")
               div(:class="$style.addToCartFavoriteGroup")
-                add-to-cart-wrapper.btn.btn-theme-red(:class="$style.addToCart", v-ripple='', @cart-failed="error")
-                  fa-icon(:icon="faCartPlus")
-                  | {{$t('buyNow')}}
+                add-to-cart-wrapper.btn-theme-red(:class="$style.addToCart", v-ripple='', @cart-failed="error") {{$t('buyNow')}}
                 div(@click="addToFavorite", style="padding-top: .4rem; padding-bottom: .4rem")
                   fa-icon(:class="{ [$style.favorite]:true, [$style.added]:favorite }", :icon="favorite ? faHeartSolid : faHeart", size="2x")
           hr

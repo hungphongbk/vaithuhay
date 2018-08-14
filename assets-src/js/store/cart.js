@@ -1,5 +1,7 @@
 import {CART_ADD_, CART_COUNT_, CART_FETCH_, CART_HAS_PRODUCT_, CART_LIST_, CART_REMOVE_, CART_TOTAL_} from "./types";
-import {CartItem}                                                                                      from "../components/classes";
+import {CartItem} from "../components/classes";
+import {SYSTEM_CART_OPEN} from "@/types";
+import {Event} from "@/components";
 
 const $ = jQuery,
   {list: listUrl, add: addUrl, change: changeUrl} = vth.links.cart;
@@ -45,6 +47,7 @@ export default {
           data: {id, quantity}
         });
         await dispatch(CART_FETCH_);
+        Event.$emit(SYSTEM_CART_OPEN);
       } catch (e) {
 
       }

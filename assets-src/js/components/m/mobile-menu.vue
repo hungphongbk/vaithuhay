@@ -111,22 +111,23 @@
 </style>
 <template lang="pug" src="./mobile-menu.vue.pug"></template>
 <script>
-  import debounce                                                   from 'lodash/debounce';
-  import Paginate                                                   from '../paginate.vue';
-  import Lang                                                       from '../d/nav-menu__Lang.vue';
-  import CartPanel                                                  from './cart__Panel.vue';
-  import LoginPanel                                                 from './app__Login.vue';
-  import {UserButton}                                               from "../index";
-  import {mapGetters}                                               from 'vuex';
+  import debounce from 'lodash/debounce';
+  import Paginate from '../paginate.vue';
+  import Lang from '../d/nav-menu__Lang.vue';
+  import CartPanel from './cart__Panel.vue';
+  import LoginPanel from './app__Login.vue';
+  import {UserButton} from "../index";
+  import {mapGetters} from 'vuex';
   import {CATEGORIES_ALL_, CATEGORIES_LIST_, USER_LOGIN_FORM_SHOW} from "../../store/types";
-  import {searchMixin}                                              from "@/components/mixins";
-  import faTimes                                                    from '@fortawesome/fontawesome-free-solid/faTimes';
+  import {searchMixin} from "@/components/mixins";
+  import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
   import faSignOut
-                                                                    from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
+    from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
   import faUserCircle
-                                                                    from '@fortawesome/fontawesome-free-solid/faUserCircle';
+    from '@fortawesome/fontawesome-free-solid/faUserCircle';
   import faAngleRight
-                                                                    from '@fortawesome/fontawesome-free-solid/faAngleRight';
+    from '@fortawesome/fontawesome-free-solid/faAngleRight';
+
 
   export default {
     mixins: [searchMixin],

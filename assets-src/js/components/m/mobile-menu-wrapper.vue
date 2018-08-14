@@ -137,7 +137,7 @@
   import {mapGetters} from 'vuex';
   import {USER_LOGIN_FORM_SHOW} from "../../store/types";
   import {Event} from "@/components/index";
-  import {SYSTEM_ON_SCROLL_RESET, SYSTEM_MOBILE_HEADER_CONTENT} from "@/types";
+  import {SYSTEM_ON_SCROLL_RESET, SYSTEM_MOBILE_HEADER_CONTENT, SYSTEM_CART_OPEN} from "@/types";
   import {createTransform} from "@/components/helpers";
 
   const createDynamicTransform = transform => ({
@@ -231,6 +231,11 @@
           self.$set(self.$refs.mobileMenu, 'mode', 'cart');
         });
       }
+    },
+    created() {
+      Event.$on(SYSTEM_CART_OPEN, () => {
+        this.showCart();
+      })
     }
   };
 </script>

@@ -5,7 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
   regexCombiner = require('regex-combiner'),
   _ = require('hungphongbk-webpack-build-utils');
 
-//ok ok
+//ok ok ok
 
 global.getLocalIdent = _.getLocalIdent;
 
