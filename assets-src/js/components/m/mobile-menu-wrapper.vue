@@ -7,7 +7,7 @@
 <style lang="scss" module="">
   @import "../../../sass/inc/inc";
 
-  .container.closed{
+  .container.closed {
     will-change: transform;
   }
 
@@ -105,7 +105,7 @@
     }
   }
 
-  .header-content{
+  .header-content {
     width: 130%;
   }
 </style>
@@ -125,8 +125,7 @@
               component(:is="app.mobileHeaderContent")
         cart-button.cart(@click.native="showCart")
       static-overlay.mobile-panel(name_="vth-fade-slide-right")
-        .container(style="height: 100%")
-          mobile-menu-panel(ref="mobileMenu")
+        mobile-menu-panel(ref="mobileMenu")
 </template>
 <script>
   import MobileMenuPanel from './mobile-menu.vue';
@@ -137,7 +136,7 @@
   import {mapGetters} from 'vuex';
   import {USER_LOGIN_FORM_SHOW} from "../../store/types";
   import {Event} from "@/components/index";
-  import {SYSTEM_ON_SCROLL_RESET, SYSTEM_MOBILE_HEADER_CONTENT, SYSTEM_CART_OPEN} from "@/types";
+  import {SYSTEM_ON_SCROLL_RESET, SYSTEM_MOBILE_HEADER_CONTENT, SYSTEM_CART_OPEN, SYSTEM_CART_CLOSE} from "@/types";
   import {createTransform} from "@/components/helpers";
 
   const createDynamicTransform = transform => ({
@@ -187,8 +186,8 @@
       headerContentStyle() {
         return {
           'opacity': this.scrollTopPercentage / 100,
-          'transform':createTransform({
-            translate:`calc(-50% - ${this.scrollTopPercentage / 100}rem), -50%`
+          'transform': createTransform({
+            translate: `calc(-50% - ${this.scrollTopPercentage / 100}rem), -50%`
           })
         }
       }
@@ -233,8 +232,17 @@
       }
     },
     created() {
+      const self = this;
       Event.$on(SYSTEM_CART_OPEN, () => {
-        this.showCart();
+        self.showCart();
+      });
+      Event.$on(SYSTEM_CART_CLOSE, () => {
+        if (self.show_) {
+          self.show_ = false;
+          self.$nextTick(() => {
+            self.$set(self.$refs.mobileMenu, 'mode', 'dashboard');
+          });
+        }
       })
     }
   };

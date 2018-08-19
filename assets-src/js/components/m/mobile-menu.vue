@@ -127,6 +127,8 @@
     from '@fortawesome/fontawesome-free-solid/faUserCircle';
   import faAngleRight
     from '@fortawesome/fontawesome-free-solid/faAngleRight';
+  import {Event} from "@/components/index";
+  import {SYSTEM_CART_CLOSE} from "@/types";
 
 
   export default {
@@ -179,6 +181,10 @@
       },
       signOut() {
 
+      },
+      forceClose() {
+        if (this.mode === 'cart')
+          Event.$emit(SYSTEM_CART_CLOSE);
       }
     }
   };

@@ -12,6 +12,7 @@
     font-size: $font-size-base;
     color: white;
     background-color: rgba(0, 0, 0, .85);
+    will-change: transform;
     @include responsive('md-max') {
       position: fixed;
       top: 0;
