@@ -48,7 +48,7 @@
         .col-sm-6(v-for="cat in promo")
           a.item.ratio-5-2(:href="cat.url")
             .content
-              img(:src="cat.img$.thumbnails[$mq.desktop?'600w':'400w']")
+              img(v-lazy="cat.img$.thumbnails[$mq.desktop?'600w':'400w']")
     .text-center
       a.btn.btn-theme(href="https://vaithuhay.com/collections/onsale") KHÁM PHÁ THÊM
 </template>

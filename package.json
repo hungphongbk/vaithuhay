@@ -157,6 +157,8 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
+    "fizzy-ui-utils": "^2.0.7",
+    "flickity": "latest",
     "postcss-loader": "^2.1.5",
     "vue-click-outside": "^1.0.7",
     "vue-content-placeholders": "^0.2.1",

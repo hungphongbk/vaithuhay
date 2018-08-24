@@ -75,5 +75,7 @@ Vue.use(Sticky);
 Vue.use(VueScroll);
 VueTouch.config.swipe = {
   threshold: 200
-}
+};
 Vue.use(VueTouch, {name: 'v-touch'});
+
+import './flickity-patch';

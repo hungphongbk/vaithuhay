@@ -179,13 +179,19 @@
         }
       },
       logoStyle() {
+        let p = this.scrollTopPercentage, f;
+        if (p >= 50) f = 0;
+        else f = 1 - p / 50;
         return {
-          'opacity': 1 - this.scrollTopPercentage / 100
+          'opacity': f
         }
       },
       headerContentStyle() {
+        let p = this.scrollTopPercentage, f;
+        if (p <= 50) f = 0;
+        else f = p / 50 - 1;
         return {
-          'opacity': this.scrollTopPercentage / 100,
+          'opacity': f,
           'transform': createTransform({
             translate: `calc(-50% - ${this.scrollTopPercentage / 100}rem), -50%`
           })

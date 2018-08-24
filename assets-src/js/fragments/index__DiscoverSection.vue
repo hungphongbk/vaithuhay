@@ -87,7 +87,7 @@
         .col-sm-6(v-for="cat in categories")
           a(:class="$style.item", :href="cat.url")
             div(:class="$style.right")
-              img(:src="cat.image")
+              img(v-lazy="cat.image")
               .flex-center.text-center(:class="$style.content")
                 h3(:class="$style.title") {{cat.title}}
 </template>

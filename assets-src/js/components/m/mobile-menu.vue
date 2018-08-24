@@ -183,8 +183,8 @@
 
       },
       forceClose() {
-        if (this.mode === 'cart')
-          Event.$emit(SYSTEM_CART_CLOSE);
+        // if (this.mode === 'cart')
+        Event.$emit(SYSTEM_CART_CLOSE);
       }
     }
   };
