@@ -5,7 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
   regexCombiner = require('regex-combiner'),
   _ = require('hungphongbk-webpack-build-utils');
 
-//ok ok
+//ok
 
 global.getLocalIdent = _.getLocalIdent;
 
@@ -58,7 +58,7 @@ module.exports = {
         test: /sw\.js$/,
         loader: "service-worker-loader",
         options: {
-          publicPath: 'https://vaithuhay.com/workers/'
+          publicPath: 'https://vaithuhay.com/'
         }
       },
       {
@@ -267,7 +267,7 @@ if (process.env.NODE_ENV === 'production') {
       DEBUG: 'true',
       PUBLIC_PATH: JSON.stringify(publicPath),
       SERVER_URL: '"https://localhost:8089/"',
-      FIREBASE_API_KEY: '"AIzaSyDu888R1nyP_W_xFX7aATSB0U5irf79lrM"'
+      FIREBASE_API_KEY: '"AIzaSyCUs1xIIz3keb9CAcdG8Aj0CRQuLNUHrtM"'
     })
   ]);
 }

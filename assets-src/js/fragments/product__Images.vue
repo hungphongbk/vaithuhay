@@ -139,7 +139,7 @@
       template(slot="item", slot-scope="p")
         .ratio-1-1.big(v-if="p.item.isVideo")
           .content(v-html="p.item.original")
-        thumbnail.big.no-effect(v-else, :url_="p.item.original", :lazy_="false", :overlay_="false", ratio_="1-1" :use-zoomer="true")
+        thumbnail.big.no-effect(v-else, :url_="p.item.original", :lazy_="false", :overlay_="false", ratio_="1-1" :use-zoomer="false")
       template(slot="thumb", slot-scope="p")
         .ratio-3-2.small
           .content

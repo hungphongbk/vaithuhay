@@ -83,12 +83,12 @@
 
   const app = new Promise((resolve, reject) => {
       if ('serviceWorker' in navigator) {
-        sw({scope: '/workers/'})
+        sw({scope: '/'})
           .then(async registration => {
             const msg = await _message;
             msg.useServiceWorker(registration);
             resolve(msg);
-          })
+          }, reject)
           .catch(reject);
       } else reject();
     }),
@@ -145,6 +145,7 @@
       if (this.$browser !== 'chrome') return;
       try {
         const message = await app;
+        debugger;
         this.token = await message.getToken();
         this.doToken();
       } catch (e) {

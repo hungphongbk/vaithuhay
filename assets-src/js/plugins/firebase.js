@@ -4,11 +4,11 @@ import 'firebase/messaging';
 
 firebase.initializeApp({
   apiKey: FIREBASE_API_KEY,
-  authDomain: "hungphongbk-1812.firebaseapp.com",
-  databaseURL: "https://hungphongbk-1812.firebaseio.com",
-  projectId: "hungphongbk-1812",
-  storageBucket: "hungphongbk-1812.appspot.com",
-  messagingSenderId: "1926697148"
+  authDomain: "website-for-brand.firebaseapp.com",
+  databaseURL: "https://website-for-brand.firebaseio.com",
+  projectId: "website-for-brand",
+  storageBucket: "website-for-brand.appspot.com",
+  messagingSenderId: "764771183033"
 });
 
 export default firebase;
