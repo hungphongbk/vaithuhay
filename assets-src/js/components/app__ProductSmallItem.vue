@@ -35,7 +35,7 @@
   }
 </style>
 <template lang="pug">
-  a(:class="$style.item", :href="product.url")
+  a(:class="$style.item", :href="product.url", target="_blank")
     thumbnail(:url_="product.thumbnail", thumbnailSize_="small", ratio_="1-1", :overlay_="false")
     h5(:class="$style.title") {{product._title[$i18n.locale]}}
     p(:class="$style.price")

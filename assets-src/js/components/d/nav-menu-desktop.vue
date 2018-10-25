@@ -71,7 +71,7 @@
                   a(target="_self", :href="`${home_}/blogs/news`") {{$t('news')}}
                 li.top
                   a(target="_self", :href="`${home_}/pages/vaithuhay`") {{$t('intro')}}
-            a.col-sm-2.navbar-brand(:href="home_")
+            a.col-sm-2.navbar-brand(:href="home_" target="_blank")
               img(:src="logo_")
             .col-sm-5
               ul.nav.navbar-nav.navbar-right

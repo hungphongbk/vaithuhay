@@ -1,6 +1,6 @@
 <style lang="scss" module src="./post__PostItem1.vue.scss"></style>
 <template lang="pug">
-  a(:class="$style.postItem", :href="url")
+  a(:class="$style.postItem", :href="url", target="_blank")
     div(style='position: relative')
       thumbnail(:url_='thumbnail', :alt_="title", ratio_='1-1', :thumbnailSize_="defaultThumbnailSize_", :slick-lazy_="slickLazy_")
         template(v-if="!$mq.tablet", slot="overlay")

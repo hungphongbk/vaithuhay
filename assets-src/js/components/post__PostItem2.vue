@@ -62,10 +62,10 @@
 </style>
 <template lang="pug">
   div(:class="$style.postItem")
-    a(:href="url", :class="$style.postThumbnail")
+    a(:href="url", :class="$style.postThumbnail" target="_blank")
       thumbnail(:url_='thumbnail', ratio_='1-1', :thumbnailSize_="defaultThumbnailSize_", :lazy_="false", :overlay_="false")
     div(:class="$style.postDetail")
-      a(:href="url", :class="$style.postTitle")
+      a(:href="url", :class="$style.postTitle" target="_blank")
         h5 {{item.title}}
       p(:class="$style.postDesc") {{item.desc | i18n}}
     div(:class="$style.postPrice")
