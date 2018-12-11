@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 
 class Product {
   variants;
@@ -23,10 +23,10 @@ export default class WholeSale {
   type;
 
   constructor(id, rule, product = null) {
-    Object.assign(this, rule, {__wholesale: false});
+    Object.assign(this, rule, { __wholesale: false });
     this.id = id;
     this.product = product;
-    this.giftAvatar = '';
+    this.giftAvatar = "";
     this.giftVariants = [];
     this.giftVariantOptions = [];
     this.additionalProductObj = null;
@@ -40,25 +40,22 @@ export default class WholeSale {
 
   get discountPrice() {
     const number = Number(this.currentPrice.replace(/[^0-9\.-]+/g, ""));
-    if (this.unit === 'percentage')
-      return Math.round(number * (100 - this.amount) / 100) + '₫';
-    else
-      return (number - this.amount) + '₫';
+    if (this.unit === "percentage")
+      return Math.round((number * (100 - this.amount)) / 100) + "₫";
+    else return number - this.amount + "₫";
   }
 
   get amount$() {
-    if (this.unit === 'percentage')
-      return Math.round(this.amount) + '%';
-    else
-      return Math.round(this.amount / 1000) + 'K';
+    if (this.unit === "percentage") return Math.round(this.amount) + "%";
+    else return Math.round(this.amount / 1000) + "K";
   }
 
   get isBuyOneGetOne() {
-    return this.type !== 'wholesale';
+    return this.type !== "wholesale";
   }
 
   get isGift() {
-    return this.isBuyOneGetOne && this.unit === 'gift';
+    return this.isBuyOneGetOne && this.unit === "gift";
   }
 
   init() {
@@ -66,28 +63,33 @@ export default class WholeSale {
       promises = [];
     if (!self.product) {
       // Download product data
-      promises.push($.get(vth.links.url(`products/${self.applyToProduct}?view=json`))
-        .then(response => {
-          const product = JSON.parse(response),
-            {variants} = product;
-          product.variantSelected = variants[0];
-          Vue.set(self, 'product', product);
-          Vue.set(self, 'variants', variants);
-        }));
+      promises.push(
+        $.get(vth.links.url(`products/${self.applyToProduct}?view=json`)).then(
+          response => {
+            const product = JSON.parse(response),
+              { variants } = product;
+            product.variantSelected = variants[0];
+            Vue.set(self, "product", product);
+            Vue.set(self, "variants", variants);
+          }
+        )
+      );
     }
 
     //Download gift product data, if has
     if (self.isBuyOneGetOne)
-      promises.push($.get(vth.links.url(`products/${self.additionalProduct}?view=json`))
-        .then(response => {
+      promises.push(
+        $.get(
+          vth.links.url(`products/${self.additionalProduct}?view=json`)
+        ).then(response => {
           const product = JSON.parse(response),
-            {thumbnail, variants} = product;
+            { thumbnail, variants } = product;
           // Vue.set(self, 'giftAvatar', thumbnail)
           self.additionalProductObj = new Product(product);
           self.giftAvatar = thumbnail;
           self.giftVariants = variants;
-        }));
-    Promise.all(promises)
-      .then(() => Vue.set(self, '__wholesale', true));
+        })
+      );
+    Promise.all(promises).then(() => Vue.set(self, "__wholesale", true));
   }
 }

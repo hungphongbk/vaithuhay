@@ -1,35 +1,51 @@
-import ProductImages from '../fragments/product__Images.vue';
-import ProductQuantity from '../fragments/product__Quantity.vue';
-import ProductTabs from '../fragments/product__Tabs.vue';
-import ProductTab from '../fragments/product__Tab.vue';
-import ProductFaq from '../fragments/product__FAQ.vue';
-import ProductExpandable from '../fragments/product__Expandable.vue';
-import ProductWholeSale from '../fragments/product__WholeSale.vue';
-import {AddToCartWrapper, Event, ItemLoop, ProductRating} from '../components/index';
-import ProductItem from '@/components/products';
-import ProductWholeSaleItem from '../fragments/product__WholeSale-Item.vue';
-import ProductSmallItem from '../components/app__ProductSmallItem';
+import ProductImages from "../fragments/product__Images.vue";
+import ProductQuantity from "../fragments/product__Quantity.vue";
+import ProductTabs from "../fragments/product__Tabs.vue";
+import ProductTab from "../fragments/product__Tab.vue";
+import ProductFaq from "../fragments/product__FAQ.vue";
+import ProductExpandable from "../fragments/product__Expandable.vue";
+import ProductWholeSale from "../fragments/product__WholeSale.vue";
+import {
+  AddToCartWrapper,
+  Event,
+  ItemLoop,
+  ProductRating
+} from "../components/index";
+import ProductItem from "@/components/products";
+import ProductWholeSaleItem from "../fragments/product__WholeSale-Item.vue";
+import ProductSmallItem from "../components/app__ProductSmallItem";
 // mixins & helpers
-import {addToCartMixin} from '../components/mixins';
-import {ProductItem_, WholeSale} from '../components/classes';
-import {delay} from '../components/helpers';
-import transform from '../plugins/content-transform';
-import ripple from 'js-effect-ripple';
-import ProductModule from '../store/product';
-import {mapState} from 'vuex';
+import { addToCartMixin } from "../components/mixins";
+import { ProductItem_, WholeSale } from "../components/classes";
+import { delay } from "../components/helpers";
+import transform from "../plugins/content-transform";
+import ripple from "js-effect-ripple";
+import ProductModule from "../store/product";
+import { mapState } from "vuex";
 //    import {i18nFields} from '../plugins/i18n'
-import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
-import faHeartSolid from '@fortawesome/fontawesome-free-solid/faHeart';
-import faCartPlus from '@fortawesome/fontawesome-free-solid/faCartPlus';
-import {PRODUCT_ACTION_FAVORITE_FETCH, PRODUCT_ACTION_FAVORITE_TOGGLE} from "@/store/types";
-import ProductRelatedArticles from '../fragments/product__RelatedArticles.vue';
-import {DarkPanel} from "@/plugins/directives";
-import {SYSTEM_ON__MOBILE_HEADER_CONTENT} from "@/types";
-import mobileHeader from '@/fragments/m/product__MobileHeader'
+import faHeart from "@fortawesome/fontawesome-free-regular/faHeart";
+import faHeartSolid from "@fortawesome/fontawesome-free-solid/faHeart";
+import faCartPlus from "@fortawesome/fontawesome-free-solid/faCartPlus";
+import {
+  PRODUCT_ACTION_FAVORITE_FETCH,
+  PRODUCT_ACTION_FAVORITE_TOGGLE
+} from "@/store/types";
+import ProductRelatedArticles from "../fragments/product__RelatedArticles.vue";
+import { DarkPanel } from "@/plugins/directives";
+import { SYSTEM_ON__MOBILE_HEADER_CONTENT } from "@/types";
+import mobileHeader from "@/fragments/m/product__MobileHeader";
 
 const $ = jQuery,
-  {current, images, variants, relateds, tops, topPromos, faq} = window.product,
-  responsive = (breakpoint, settings) => ({breakpoint, settings}),
+  {
+    current,
+    images,
+    variants,
+    relateds,
+    tops,
+    topPromos,
+    faq
+  } = window.product,
+  responsive = (breakpoint, settings) => ({ breakpoint, settings }),
   slickOptions_ = {
     infinite: false,
     slidesToShow: 4,
@@ -38,13 +54,13 @@ const $ = jQuery,
       responsive(1111, {
         slidesToShow: 4,
         slidesToScroll: 3,
-        infinite: false,
+        infinite: false
       }),
       responsive(768, {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: false,
-        arrow: false,
+        arrow: false
       }),
       responsive(426, {
         slidesToShow: 2,
@@ -59,8 +75,9 @@ const $ = jQuery,
     ...slickOptions_,
     dots: true
   },
-  convertToNumber = ({current, old}) => {
-    const convert = str => str ? str.replace(/,|₫/g, '') * 1.0 : Number.MIN_SAFE_INTEGER;
+  convertToNumber = ({ current, old }) => {
+    const convert = str =>
+      str ? str.replace(/,|₫/g, "") * 1.0 : Number.MIN_SAFE_INTEGER;
     return {
       current: convert(current),
       old: convert(old)
@@ -70,8 +87,10 @@ const $ = jQuery,
 export default {
   mixins: [addToCartMixin],
   directives: {
-    ripple: (el) =>
-      $(el).addClass('btn-ripple').click(e => ripple(e)),
+    ripple: el =>
+      $(el)
+        .addClass("btn-ripple")
+        .click(e => ripple(e)),
     DarkPanel
   },
   components: {
@@ -79,7 +98,8 @@ export default {
     ProductQuantity,
     ProductTabs,
     ProductTab,
-    'product-variants': () => import(/* webpackChunkName: "product-variant" */ '../fragments/product__Variants'),
+    "product-variants": () =>
+      import(/* webpackChunkName: "product-variant" */ "../fragments/product__Variants"),
     ProductRating,
     AddToCartWrapper,
     ItemLoop,
@@ -106,23 +126,32 @@ export default {
       variantOptions: current.options,
       variantSelected: {
         id: -1,
-        title: '',
+        title: "",
         price: {
-          current: "-1",
+          current: "-1"
         }
       },
-      relateds: relateds.filter(i => i !== null).slice(0, 4).map(ProductItem_),
-      sales: relateds.filter(i => i !== null).slice(0, 8).map(ProductItem_),
-      tops: tops.filter(i => i !== null).slice(0, 4).map(ProductItem_),
+      relateds: relateds
+        .filter(i => i !== null)
+        .slice(0, 4)
+        .map(ProductItem_),
+      sales: relateds
+        .filter(i => i !== null)
+        .slice(0, 8)
+        .map(ProductItem_),
+      tops: tops
+        .filter(i => i !== null)
+        .slice(0, 4)
+        .map(ProductItem_),
       topPromos: topPromos.filter(i => i !== null).map(ProductItem_),
       slickOptions_,
       slickOptionsWithDot,
       contentCollapse: true,
       wholesale: [],
-      faq: (faq && faq.faq) ? faq.faq : [],
+      faq: faq && faq.faq ? faq.faq : [],
       commentCount: null,
-      giftAvatars: [''],
-      giftVariants: [''],
+      giftAvatars: [""],
+      giftVariants: [""],
       relatedArticles: [],
       mobileHeader
     };
@@ -160,15 +189,21 @@ export default {
   asyncComputed: {
     async body() {
       await delay(100);
-      const res = await transform([
-        'responsiveFrame',
-        'markupTable',
-        ['makeGallery', {
-          imgCount_: 9
-        }],
-        'makeExpandable',
-        'lazyloadImg'
-      ], this);
+      const res = await transform(
+        [
+          "responsiveFrame",
+          "markupTable",
+          [
+            "makeGallery",
+            {
+              imgCount_: 9
+            }
+          ],
+          "makeExpandable",
+          "lazyloadImg"
+        ],
+        this
+      );
       res.components = {
         ProductImages,
         ProductExpandable,
@@ -182,10 +217,10 @@ export default {
       console.log(e);
     },
     injectVideo_($videoFrame) {
-      $videoFrame.attr('width', '100%');
-      $videoFrame.attr('height', '100%');
+      $videoFrame.attr("width", "100%");
+      $videoFrame.attr("height", "100%");
       const self = this,
-        src = $videoFrame.attr('src'),
+        src = $videoFrame.attr("src"),
         [, id] = /embed\/([^\/]+)/.exec(src) || [],
         small = `http://img.youtube.com/vi/${id}/0.jpg`;
       self.images.unshift({
@@ -196,16 +231,28 @@ export default {
       self.$refs.images.reInit();
     },
     async fetchWholesale() {
-      const data = await $.get('https://server.vaithuhay.com/b/products/' + current.id + '/wholesale');
+      const data = await $.get(
+        "https://server.vaithuhay.com/b/products/" + current.id + "/wholesale"
+      );
       if (data.length > 0) {
-        this.wholesale = data.map(({rules}, index) => new WholeSale(index + 1, rules[0], this));
+        this.wholesale = data.map(
+          ({ rules }, index) => new WholeSale(index + 1, rules[0], this)
+        );
       }
     },
     async fetchRelatedArticles() {
-      this.relatedArticles = await $.get('https://server.vaithuhay.com/b/products/' + current.id + '/relatedArticles');
+      this.relatedArticles = await $.get(
+        "https://server.vaithuhay.com/b/products/" +
+          current.id +
+          "/relatedArticles"
+      );
     },
     async fetchCommentCount() {
-      const {share} = await $.get(`https://graph.facebook.com/v2.8/?fields=share%7Bcomment_count%7D&id=http://vaithuhay.com${this.url}`);
+      const { share } = await $.get(
+        `https://graph.facebook.com/v2.8/?fields=share%7Bcomment_count%7D&id=http://vaithuhay.com${
+          this.url
+        }`
+      );
       this.commentCount = share.comment_count;
     },
     addToFavorite() {
@@ -213,15 +260,29 @@ export default {
     },
     selectImageUpdateVariant(image) {
       const variant = this.variants.find(v => v.image === image);
-      if (variant)
-        this.variantSelected = variant;
+      if (variant) this.variantSelected = variant;
     }
   },
   created() {
     Event.$emit(SYSTEM_ON__MOBILE_HEADER_CONTENT, this.mobileHeader);
   },
-  beforeMount() {
-    this.$vthStore.registerModule('product', ProductModule, {preserveState: true});
+  async beforeMount() {
+    this.$vthStore.registerModule("product", ProductModule, {
+      preserveState: true
+    });
+    const patch = await $.get(
+      "https://server.vaithuhay.com/b/products/" +
+        current.id +
+        "/patch-variants"
+    );
+    for (const v of this.variants) {
+      const vPatch = patch.find(p => p.id * 1 === v.id);
+      v.price.old =
+        Math.round(vPatch.compare_at_price)
+          .toLocaleString("vi-VN")
+          .replace(/\./g, ",") + "₫";
+    }
+    console.log(this.variants);
   },
   async mounted() {
     await Promise.all([
@@ -232,6 +293,6 @@ export default {
     this.$vthStore.dispatch(PRODUCT_ACTION_FAVORITE_FETCH);
   },
   destroyed() {
-    this.$vthStore.unregisterModule('product');
+    this.$vthStore.unregisterModule("product");
   }
 };

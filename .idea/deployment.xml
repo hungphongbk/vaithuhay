@@ -5,8 +5,7 @@
       <paths name="api.hungphongbk.com">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$/assets" web="/" />
-            <mapping deploy="/" local="$PROJECT_DIR$/static" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

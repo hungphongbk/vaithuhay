@@ -1,54 +1,54 @@
 <style lang="scss" scoped>
-  @import "../../../sass/inc/inc";
+@import "../../../sass/inc/inc";
 
-  a {
-    cursor: pointer;
-  }
+a {
+  cursor: pointer;
+}
 
-  .order-detail {
-    padding: {
-      top: .3rem;
-      bottom: .3rem;
+.order-detail {
+  padding: {
+    top: 0.3rem;
+    bottom: 0.3rem;
+  }
+  &-date {
+    color: lighten($text-color, 5%);
+    @include font-size-with-line-height($font-size-base * 0.8);
+  }
+  &-products {
+    .vth-thumb {
+      display: block;
+      border-radius: 2px;
+      border: 2px solid $theme-color-dark;
+      /deep/ img {
+        height: unset;
+      }
     }
-    &-date {
-      color: lighten($text-color, 5%);
-      @include font-size-with-line-height($font-size-base*0.8)
+    > div {
+      position: relative;
+      float: left;
+      width: 60px;
+      margin-right: 1.3rem;
     }
-    &-products {
-      .vth-thumb {
-        display: block;
-        border-radius: 2px;
-        border: 2px solid $theme-color-dark;
-        /deep/ img {
-          height: unset;
-        }
-      }
-      > div {
-        position: relative;
-        float: left;
-        width: 60px;
-        margin-right: 1.3rem;
-      }
-      .count {
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: inline-block;
-        text-align: center;
-        $f: $font-size-base*0.9;
-        $s: $f*1.45;
-        font-size: $f;
-        height: $s;
-        width: $s;
-        line-height: $s;
-        margin-top: -$s/2.5;
-        margin-right: -$s/2.5;
-        border-radius: 50%;
-        color: white;
-        background: $theme-red-color;
-      }
+    .count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: inline-block;
+      text-align: center;
+      $f: $font-size-base * 0.9;
+      $s: $f * 1.45;
+      font-size: $f;
+      height: $s;
+      width: $s;
+      line-height: $s;
+      margin-top: -$s/2.5;
+      margin-right: -$s/2.5;
+      border-radius: 50%;
+      color: white;
+      background: $theme-red-color;
     }
   }
+}
 </style>
 <template lang="pug">
   div
@@ -81,15 +81,15 @@
                       span.count {{line_item.quantity}}
 </template>
 <script>
-  import {orderTrackingMixin} from "../mixins";
-  import {Paginate}           from "../../components";
+import { orderTrackingMixin } from "../mixins";
+import { Paginate } from "../../components";
 
-  export default {
-    mixins: [orderTrackingMixin],
-    components: {Paginate},
-    data() {
-      return {};
-    },
-    computed: {}
-  };
+export default {
+  mixins: [orderTrackingMixin],
+  components: { Paginate },
+  data() {
+    return {};
+  },
+  computed: {}
+};
 </script>

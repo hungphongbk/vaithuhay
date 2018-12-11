@@ -1,29 +1,29 @@
 <style lang="scss" module>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .favorite-item {
-    &-wrapper {
-      padding: .7rem;
-      border-radius: .3rem;
-      background: white;
-      margin-bottom: .2rem;
-    }
-    &-remove {
-      display: block;
-      margin-top: 1.3rem;
-      color: #888;
-    }
+.favorite-item {
+  &-wrapper {
+    padding: 0.7rem;
+    border-radius: 0.3rem;
+    background: white;
+    margin-bottom: 0.2rem;
   }
+  &-remove {
+    display: block;
+    margin-top: 1.3rem;
+    color: #888;
+  }
+}
 
-  .favorite-empty {
-    padding: 0 20%;
-    p {
-      margin-top: 1.5rem;
-    }
-    :global(.svg-inline--fa) {
-      color: $theme-red-color;
-    }
+.favorite-empty {
+  padding: 0 20%;
+  p {
+    margin-top: 1.5rem;
   }
+  :global(.svg-inline--fa) {
+    color: $theme-red-color;
+  }
+}
 </style>
 <template lang="pug">
   div

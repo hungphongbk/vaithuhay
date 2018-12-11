@@ -1,28 +1,29 @@
 <style lang="scss" scoped>
-  @import "../../../sass/inc/inc";
+@import "../../../sass/inc/inc";
 
-  .btn {
-    color: $text-color;
-    text-transform: uppercase;
-    display: inline-block;
-    width: 100%;
-  }
+.btn {
+  color: $text-color;
+  text-transform: uppercase;
+  display: inline-block;
+  width: 100%;
+}
 
-  hr, p {
-    color: darken(white, 20%);
-  }
+hr,
+p {
+  color: darken(white, 20%);
+}
 </style>
 <style lang="scss" module>
-  @import "../../../sass/inc/inc";
+@import "../../../sass/inc/inc";
 
-  .login-text {
-    display: inline-block;
-    text-transform: uppercase;
-  }
+.login-text {
+  display: inline-block;
+  text-transform: uppercase;
+}
 
-  .login {
-    width: 50%;
-  }
+.login {
+  width: 50%;
+}
 </style>
 <template lang="pug">
   app-login-wrapper(ref="form", :customer="customer")
@@ -47,13 +48,13 @@
           | google
 </template>
 <script>
-  import {loginMixins} from '../mixins';
+import { loginMixins } from "../mixins";
 
-  const $ = jQuery;
+const $ = jQuery;
 
-  export default {
-    mixins: [loginMixins]
-  };
+export default {
+  mixins: [loginMixins]
+};
 </script>
 <i18n>
   {

@@ -1,87 +1,87 @@
 <style lang="scss" scoped>
-  @import "../../../sass/inc/inc";
+@import "../../../sass/inc/inc";
 
-  $user-panel-width: 25vw;
+$user-panel-width: 25vw;
 
-  .popover {
-    display: block;
-    width: $user-panel-width;
-    max-width: $user-panel-width;
-    top: $navbar-height - 3px;
-    right: 0;
+.popover {
+  display: block;
+  width: $user-panel-width;
+  max-width: $user-panel-width;
+  top: $navbar-height - 3px;
+  right: 0;
+  left: unset;
+  border-radius: 0;
+  margin-top: 0;
+  //@extend %box-shadow-2;
+  .arrow {
     left: unset;
-    border-radius: 0;
-    margin-top: 0;
-    //@extend %box-shadow-2;
-    .arrow {
-      left: unset;
-      right: 20px;
-    }
-    &-content {
-      padding: 0;
-      > * {
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none;
-        /* Non-prefixed version, currently
+    right: 20px;
+  }
+  &-content {
+    padding: 0;
+    > * {
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none;
+      /* Non-prefixed version, currently
                                          supported by Chrome and Opera */
-      }
     }
   }
+}
 </style>
 <style lang="scss" module>
-  @import "../../../sass/inc/inc";
+@import "../../../sass/inc/inc";
 
-  .nav-menu-user{
-    form {
-      @extend %box-shadow-2;
-      background: #fbfcfd;
-      color: #222;
-      font-weight: 600;
-      padding: 20px;
+.nav-menu-user {
+  form {
+    @extend %box-shadow-2;
+    background: #fbfcfd;
+    color: #222;
+    font-weight: 600;
+    padding: 20px;
+  }
+}
+
+.loginForm {
+  @at-root .isLoggingIn > * {
+    opacity: 0.45;
+  }
+}
+
+.popover-user {
+  ul {
+    margin-top: 1.7rem;
+    border-top: 1px solid #ccc;
+  }
+}
+
+.popover-item {
+  @include font-size-with-line-height($font-size-base * 1.1);
+  > a {
+    @extend %reset-link;
+    display: inline-block;
+    width: 100%;
+    //@include font-size-with-line-height($font-size-base*1.25);
+    padding: {
+      top: 1rem;
+      bottom: 1rem;
+    }
+    color: #444;
+    &:hover {
+      background: #f0f0f0;
+      color: #333;
+    }
+    padding: {
+      left: 1rem;
+      right: 1rem;
     }
   }
-
-  .loginForm {
-    @at-root .isLoggingIn > * {
-      opacity: .45;
-    }
+  &:not(:last-child) > a {
+    border-bottom: 1px solid #ccc;
   }
-
-  .popover-user{
-    ul {
-      margin-top: 1.7rem;
-      border-top: 1px solid #ccc;
-    }
-  }
-
-  .popover-item {
-    @include font-size-with-line-height($font-size-base*1.1);
-    > a {
-      @extend %reset-link;
-      display: inline-block;
-      width: 100%;
-      //@include font-size-with-line-height($font-size-base*1.25);
-      padding: {
-        top: 1rem;
-        bottom: 1rem;
-      }
-      color: #444;
-      &:hover {
-        background: #f0f0f0;
-        color: #333;
-      }
-      padding: {
-        left: 1rem;
-        right: 1rem;
-      }
-    }
-    &:not(:last-child) > a {
-      border-bottom: 1px solid #ccc;
-    }
-  }
+}
 </style>
 <template lang="pug">
   user-button(:class="$style.navMenuUser", @click="show=!show")
@@ -139,70 +139,77 @@
         user-panel
 </template>
 <script>
-  import {loginMixins}                                           from '../mixins';
-  import StaticOverlay                                           from '@/components/static-overlay';
-  import {OrderTracking, UserButton}                             from "../index";
-  import {USER_LOGGED_IN, USER_LOGIN_FORM_SHOW, USER_LOYALTY} from "../../store/types";
-  import {mapGetters}                                            from 'vuex';
-  import Loyalty                                                 from './nav-menu__Loyalty';
-  import ProductItem                                             from '@/components/products';
-  import UserPanel                                               from './UserPanel';
+import { loginMixins } from "../mixins";
+import StaticOverlay from "@/components/static-overlay";
+import { OrderTracking, UserButton } from "../index";
+import {
+  USER_LOGGED_IN,
+  USER_LOGIN_FORM_SHOW,
+  USER_LOYALTY
+} from "../../store/types";
+import { mapGetters } from "vuex";
+import Loyalty from "./nav-menu__Loyalty";
+import ProductItem from "@/components/products";
+import UserPanel from "./UserPanel";
 
-  export default {
-    mixins: [loginMixins],
-    components: {UserButton, OrderTracking, Loyalty, ProductItem, StaticOverlay, UserPanel},
-    data() {
-      return {
-        orderTrackingForm: false,
-        favoriteModal: false,
-        isExperiment: window.o.isExperiment,
-        show: false
-      };
-    },
-    computed: {
-      ...mapGetters({
-        loggedIn: USER_LOGGED_IN,
-        loginForm: USER_LOGIN_FORM_SHOW,
-        loyalty: USER_LOYALTY,
-      }),
-      user() {
-        return this.$vthStore.state.customer;
-      }
-    },
-    provide() {
-      const overlay = {};
-      Object.defineProperty(overlay, 'show_', {
-        get: () => {
-          if (!this.loggedIn)
-            return this.loginForm;
-          return this.show;
-        }
-      });
-      return {overlay};
-    },
-    methods: {
-      closeForm() {
-        if (!this.loggedIn)
-          this.$vthStore.commit(USER_LOGIN_FORM_SHOW, false);
-        this.show = false;
-      },
-      openForm() {
-        if (!this.loggedIn)
-          this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
-        else this.show = true;
-      }
-    },
-    watch: {
-      favoriteModal(value) {
-        if (value)
-          this.show = false;
-      },
-      show(value) {
-        if (value && !this.loggedIn)
-          this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
-      }
+export default {
+  mixins: [loginMixins],
+  components: {
+    UserButton,
+    OrderTracking,
+    Loyalty,
+    ProductItem,
+    StaticOverlay,
+    UserPanel
+  },
+  data() {
+    return {
+      orderTrackingForm: false,
+      favoriteModal: false,
+      isExperiment: window.o.isExperiment,
+      show: false
+    };
+  },
+  computed: {
+    ...mapGetters({
+      loggedIn: USER_LOGGED_IN,
+      loginForm: USER_LOGIN_FORM_SHOW,
+      loyalty: USER_LOYALTY
+    }),
+    user() {
+      return this.$vthStore.state.customer;
     }
-  };
+  },
+  provide() {
+    const overlay = {};
+    Object.defineProperty(overlay, "show_", {
+      get: () => {
+        if (!this.loggedIn) return this.loginForm;
+        return this.show;
+      }
+    });
+    return { overlay };
+  },
+  methods: {
+    closeForm() {
+      if (!this.loggedIn) this.$vthStore.commit(USER_LOGIN_FORM_SHOW, false);
+      this.show = false;
+    },
+    openForm() {
+      if (!this.loggedIn) this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
+      else this.show = true;
+    }
+  },
+  watch: {
+    favoriteModal(value) {
+      if (value) this.show = false;
+    },
+    show(value) {
+      if (value && !this.loggedIn)
+        this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
+    }
+  }
+};
 </script>
 <i18n>
   {

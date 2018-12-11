@@ -1,42 +1,42 @@
 <style lang="scss" module>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .expandable {
-    margin: 6px {
-      bottom: $line-height-computed
-    }
-    padding: 10px 15px;
-    @extend %box-shadow-2;
-    border-radius: 15px;
-    border: 1px solid #ddd;
+.expandable {
+  margin: 6px {
+    bottom: $line-height-computed;
   }
+  padding: 10px 15px;
+  @extend %box-shadow-2;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+}
 
-  .title {
-    font-weight: 700;
-    line-height: 1.4;
-    color: #444;
-    cursor: pointer;
-    margin-top: 7px;
-  }
+.title {
+  font-weight: 700;
+  line-height: 1.4;
+  color: #444;
+  cursor: pointer;
+  margin-top: 7px;
+}
 
-  .icon {
-    margin-right: .4em;
-    margin-left: .05em;
-    color: #888;
-    opacity: 0.7;
-    transition: all $animation-time ease;
-    &.open{
-      transform: rotate(180deg);
-    }
+.icon {
+  margin-right: 0.4em;
+  margin-left: 0.05em;
+  color: #888;
+  opacity: 0.7;
+  transition: all $animation-time ease;
+  &.open {
+    transform: rotate(180deg);
   }
+}
 
-  .title:hover .icon {
-    opacity: 1;
-  }
+.title:hover .icon {
+  opacity: 1;
+}
 
-  .inner {
-    padding-bottom: $line-height-computed
-  }
+.inner {
+  padding-bottom: $line-height-computed;
+}
 </style>
 <template lang="pug">
   div(:class="$style.expandable")
@@ -48,25 +48,25 @@
         slot
 </template>
 <script>
-  import Dropdown from 'my-vue-utils/dist/components/dropdown';
-  import FA_CIRCLE_UP from '@fortawesome/fontawesome-free-solid/faArrowCircleUp'
+import Dropdown from "my-vue-utils/dist/components/dropdown";
+import FA_CIRCLE_UP from "@fortawesome/fontawesome-free-solid/faArrowCircleUp";
 
-  export default {
-    components: {Dropdown},
-    props: {
-      title: {
-        type: String,
-        required: true
-      }
-    },
-    filters: {
-      escaped: str => str.replace(/&nbsp;/gi, ' ')
-    },
-    data() {
-      return {
-        IS_EXPANDED: false,
-        FA_CIRCLE_UP
-      };
+export default {
+  components: { Dropdown },
+  props: {
+    title: {
+      type: String,
+      required: true
     }
-  };
+  },
+  filters: {
+    escaped: str => str.replace(/&nbsp;/gi, " ")
+  },
+  data() {
+    return {
+      IS_EXPANDED: false,
+      FA_CIRCLE_UP
+    };
+  }
+};
 </script>

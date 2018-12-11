@@ -1,29 +1,29 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .overlay-selector {
-    cursor: pointer;
-  }
+.overlay-selector {
+  cursor: pointer;
+}
 
-  .container > ul {
-    display: inline-block;
-    @include responsive('sm-min') {
-      margin-top: 80px;
-    }
+.container > ul {
+  display: inline-block;
+  @include responsive("sm-min") {
+    margin-top: 80px;
   }
+}
 
-  .fa {
-    margin-left: $grid-gutter-width/2;
-  }
+.fa {
+  margin-left: $grid-gutter-width/2;
+}
 
-  .item {
-    transition: all $animation-time*3 ease;
-  }
+.item {
+  transition: all $animation-time * 3 ease;
+}
 
-  .not-show {
-    opacity: 0;
-    transform: translateX(50%);
-  }
+.not-show {
+  opacity: 0;
+  transform: translateX(50%);
+}
 </style>
 <template lang="pug">
   .overlay-selector.text-left
@@ -37,32 +37,32 @@
             slot(name="item", :item="item")
 </template>
 <script>
-  import StaticOverlay  from './static-overlay.vue';
-  import {overlayMixin} from './mixins';
-  import {delay}        from './helpers';
+import StaticOverlay from "./static-overlay.vue";
+import { overlayMixin } from "./mixins";
+import { delay } from "./helpers";
 
-  const $ = jQuery;
+const $ = jQuery;
 
-  export default {
-    props: {
-      list: Array,
-      value: null
-    },
-    mixins: [overlayMixin],
-    components: {
-      StaticOverlay
-    },
-    data() {
-      return {};
-    },
-    methods: {
-      async enter_() {
-        await delay(10);
-        for (const elem of this.$refs.item) {
-          await delay(50);
-          $(elem).removeClass('not-show');
-        }
+export default {
+  props: {
+    list: Array,
+    value: null
+  },
+  mixins: [overlayMixin],
+  components: {
+    StaticOverlay
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    async enter_() {
+      await delay(10);
+      for (const elem of this.$refs.item) {
+        await delay(50);
+        $(elem).removeClass("not-show");
       }
     }
-  };
+  }
+};
 </script>

@@ -1,89 +1,90 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .headlines {
-    padding-top: 2.7em;
-    @include responsive('xs-max') {
-      padding: {
-        top: 0;
-        bottom: 2.7em;
-      }
+.headlines {
+  padding-top: 2.7em;
+  @include responsive("xs-max") {
+    padding: {
+      top: 0;
+      bottom: 2.7em;
     }
   }
+}
 
-  .recruitment {
-    padding: 20px;
-    background-color: darken(#fff, 0%);
-    h3 {
-      font-weight: 700;
-      color: #666;
-      margin-top: 0;
-    }
-    label {
-      width: 100%;
-      border-bottom: 1px solid #ddd;
-    }
-    input, textarea {
-      background-color: transparent;
-    }
+.recruitment {
+  padding: 20px;
+  background-color: darken(#fff, 0%);
+  h3 {
+    font-weight: 700;
+    color: #666;
+    margin-top: 0;
   }
-
-  %h2 {
-    @include font-size-with-line-height($font-size-h2)
+  label {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
   }
+  input,
+  textarea {
+    background-color: transparent;
+  }
+}
 
-  .agency- {
-    &selector {
-      text-align: center;
-      /deep/ .fa {
-        @extend %h2;
-      }
-    }
-    &current {
-      display: inline-block;
+%h2 {
+  @include font-size-with-line-height($font-size-h2);
+}
+
+.agency- {
+  &selector {
+    text-align: center;
+    /deep/ .fa {
       @extend %h2;
     }
-    &title {
+  }
+  &current {
+    display: inline-block;
+    @extend %h2;
+  }
+  &title {
+  }
+}
 
+.sp {
+  margin-right: 2rem;
+}
+
+.agencies /deep/ .vth-section-title {
+  margin-bottom: 1rem;
+}
+
+.vth-section.join {
+  position: relative;
+  overflow: hidden;
+  @include responsive("sm-min") {
+    &:before,
+    &:after {
+      position: absolute;
+      content: "";
+      visibility: visible;
+      height: 1vw;
+      width: 1vw;
+      margin: -0.5vw;
+      transform-origin: center center;
+      top: 0;
+      background-image: url(../../img/rhombus.svg);
+      background-size: cover;
+      transform: scale(200, 20);
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
     }
   }
-
-  .sp {
-    margin-right: 2rem;
+  /deep/ .vth-section-title {
+    margin-top: 120px;
   }
-
-  .agencies /deep/ .vth-section-title {
-    margin-bottom: 1rem;
-  }
-
-  .vth-section.join {
-    position: relative;
-    overflow: hidden;
-    @include responsive('sm-min') {
-      &:before, &:after {
-        position: absolute;
-        content: '';
-        visibility: visible;
-        height: 1vw;
-        width: 1vw;
-        margin: -0.5vw;
-        transform-origin: center center;
-        top: 0;
-        background-image: url(../../img/rhombus.svg);
-        background-size: cover;
-        transform: scale(200, 20);
-      }
-      &:before {
-        left: 0;
-      }
-      &:after {
-        right: 0;
-      }
-    }
-    /deep/ .vth-section-title {
-      margin-top: 120px;
-    }
-  }
+}
 </style>
 <template lang="pug">
   div
@@ -136,56 +137,60 @@
               | {{currentAgency.email}}
 </template>
 <script>
-  import {IndexSection, OverlaySelector} from '../components';
+import { IndexSection, OverlaySelector } from "../components";
 
-  const $ = jQuery;
+const $ = jQuery;
 
-  export default {
-    components: {IndexSection, OverlaySelector},
-    inject: ['section'],
-    data() {
-      return {
-        version: 1.0,
-        currentAgencyIndex: 0,
-        name: '',
-        phone: '',
-        email: '',
-        wish: '',
-        status: null
-      };
+export default {
+  components: { IndexSection, OverlaySelector },
+  inject: ["section"],
+  data() {
+    return {
+      version: 1.0,
+      currentAgencyIndex: 0,
+      name: "",
+      phone: "",
+      email: "",
+      wish: "",
+      status: null
+    };
+  },
+  computed: {
+    content() {
+      return this.section.join[this.$i18n.locale];
     },
-    computed: {
-      content() {
-        return this.section.join[this.$i18n.locale];
-      },
-      agencies() {
-        return this.section.agencies;
-      },
-      currentAgency: {
-        get() {
-          return this.agencies[this.currentAgencyIndex];
-        },
-        set(value) {
-          console.log(value);
-          this.currentAgencyIndex = this.agencies.findIndex(a => a === value);
-        }
-      }
+    agencies() {
+      return this.section.agencies;
     },
-    methods: {
-      async register() {
-        const {name: NAME, phone: PHONE, email: EMAIL, wish: WISH} = this;
-        const {result} = await $.ajax({
-          type: 'POST',
-          url: 'https://vaithuhay.us17.list-manage.com/subscribe/post-json?u=a8c643e31c4f6fe8d2d5ec949&amp;id=a42593d5e8&c=?',
-          data: $.param({
-            NAME, PHONE, EMAIL, WISH
-          }),
-          dataType: 'jsonp'
-        });
-        if (result === 'success') this.status = this.$t('thank');
+    currentAgency: {
+      get() {
+        return this.agencies[this.currentAgencyIndex];
+      },
+      set(value) {
+        console.log(value);
+        this.currentAgencyIndex = this.agencies.findIndex(a => a === value);
       }
     }
-  };
+  },
+  methods: {
+    async register() {
+      const { name: NAME, phone: PHONE, email: EMAIL, wish: WISH } = this;
+      const { result } = await $.ajax({
+        type: "POST",
+        url:
+          "https://vaithuhay.us17.list-manage.com/subscribe/post-json?u=a8c643e31c4f6fe8d2d5ec949&amp;id=a42593d5e8&c=?",
+        data: $.param({
+          NAME,
+          PHONE,
+          EMAIL,
+          WISH
+        }),
+        dataType: "jsonp"
+      });
+      if (result === "success") this.status = this.$t("thank");
+    }
+  }
+};
 </script>
 <i18n>
   {

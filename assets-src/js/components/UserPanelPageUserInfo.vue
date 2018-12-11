@@ -1,23 +1,23 @@
 <style lang="scss" module>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .container {
-    background: white;
-    padding: 1.3rem {
-      top: 2rem;
+.container {
+  background: white;
+  padding: 1.3rem {
+    top: 2rem;
+  }
+  height: 100%;
+  :global {
+    .col-form-label {
+      text-align: left;
     }
-    height: 100%;
-    :global {
-      .col-form-label {
-        text-align: left;
-      }
-      .form-control {
-        border: 1px solid #ccc {
-          radius: .4rem;
-        }
+    .form-control {
+      border: 1px solid #ccc {
+        radius: 0.4rem;
       }
     }
   }
+}
 </style>
 <template lang="pug">
   div(:class="$style.container")

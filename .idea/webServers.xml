@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="d97ead46-e5b3-4c77-8061-8acf9a9c2008" name="api.hungphongbk.com" url="http://hungphongbk.com">
-        <fileTransfer host="hungphongbk.com" port="2234" privateKey="$USER_HOME$/.ssh/id_rsa" rootFolder="/home/phong/api.v1/vaithuhay" accessType="SFTP" keyPair="true">
+      <webServer id="d97ead46-e5b3-4c77-8061-8acf9a9c2008" name="api.hungphongbk.com" url="http://188.166.177.127">
+        <fileTransfer host="188.166.177.127" port="2234" privateKey="$USER_HOME$/.ssh/id_rsa" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

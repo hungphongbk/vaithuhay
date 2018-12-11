@@ -1,12 +1,12 @@
-import qs               from 'query-string';
-import store            from '../store/index';
-import {USER_LOGGED_IN} from "@/store/types";
+import qs from "query-string";
+import store from "../store/index";
+import { USER_LOGGED_IN } from "@/store/types";
 
 const $ = jQuery;
 const mix = (_url, _query) => {
-  const {url, query} = qs.parseUrl(_url),
+  const { url, query } = qs.parseUrl(_url),
     newQuery = Object.assign({}, query, _query);
-  return url + ((newQuery === {}) ? '' : ('?' + qs.stringify(newQuery)));
+  return url + (newQuery === {} ? "" : "?" + qs.stringify(newQuery));
 };
 
 function getUserId() {
@@ -17,46 +17,50 @@ function getUserId() {
 const corsObj = {
   crossDomain: true,
   xhrFields: {
-    withCredentials: true,
+    withCredentials: true
   },
   beforeSend(req: JQueryXHR) {
     if (store.getters[USER_LOGGED_IN])
-      req.setRequestHeader('X-Connect-Sid', store.state.customer.id as string);
-  },
+      req.setRequestHeader("X-Connect-Sid", store.state.customer.id as string);
+  }
 };
 
 export default {
   get(url, auth = false): Promise<any> | JQueryXHR {
-    const newUrl = mix(url, auth ? {userId: getUserId()} : {});
+    const newUrl = mix(url, auth ? { userId: getUserId() } : {});
     return $.ajax({
-      method: 'GET',
+      method: "GET",
       url: newUrl,
-      ...corsObj,
+      ...corsObj
     });
   },
   post(url, data = {}, auth = false): Promise<any> | JQueryXHR {
-    const newData = Object.assign({}, data, auth ? {userId: getUserId()} : {});
+    const newData = Object.assign(
+      {},
+      data,
+      auth ? { userId: getUserId() } : {}
+    );
     // return $.post(url, newData);
     return $.ajax({
-      method: 'POST',
+      method: "POST",
       url,
       data: newData,
-      ...corsObj,
+      ...corsObj
     });
   },
   put(url, data = {}): Promise<any> | JQueryXHR {
     return $.ajax({
-      method: 'PUT',
+      method: "PUT",
       url,
       data,
-      ...corsObj,
+      ...corsObj
     });
   },
   del(url): Promise<any> | JQueryXHR {
     return $.ajax({
-      method: 'DELETE',
+      method: "DELETE",
       url,
-      ...corsObj,
+      ...corsObj
     });
-  },
+  }
 };

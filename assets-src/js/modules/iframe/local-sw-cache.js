@@ -22,19 +22,32 @@ importScripts(
  */
 self.__precacheManifest = [
   {
-    "url": "manifest.json",
-    "revision": "11496d87bfec777f4d5b6ee89646a4e2"
+    url: "manifest.json",
+    revision: "11496d87bfec777f4d5b6ee89646a4e2"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(/^https:\/\/vaithuhay\.com\//, workbox.strategies.networkFirst({
-  networkTimeoutSeconds: 6,
-  cacheName: "doc",
-  plugins: [new workbox.cacheableResponse.Plugin({"statuses": [0, 200], "headers": {"Content-Type": "text/html"}})]
-}), 'GET');
-workbox.routing.registerRoute(/^https:\/\/static\.vaithuhay\.com\//, workbox.strategies.staleWhileRevalidate({
-  cacheName: "resource",
-  plugins: [new workbox.cacheableResponse.Plugin({"statuses": [0, 200]})]
-}), 'GET');
+workbox.routing.registerRoute(
+  /^https:\/\/vaithuhay\.com\//,
+  workbox.strategies.networkFirst({
+    networkTimeoutSeconds: 6,
+    cacheName: "doc",
+    plugins: [
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200],
+        headers: { "Content-Type": "text/html" }
+      })
+    ]
+  }),
+  "GET"
+);
+workbox.routing.registerRoute(
+  /^https:\/\/static\.vaithuhay\.com\//,
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: "resource",
+    plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })]
+  }),
+  "GET"
+);

@@ -1,7 +1,7 @@
-import StaticOverlay from '@/components/static-overlay.vue';
-import {USER_IS_LOGGING_IN, USER_LOGGED_IN} from "@/store/types";
-import debounce from 'lodash/debounce';
-import qs from 'query-string';
+import StaticOverlay from "@/components/static-overlay.vue";
+import { USER_IS_LOGGING_IN, USER_LOGGED_IN } from "@/store/types";
+import debounce from "lodash/debounce";
+import qs from "query-string";
 
 const $ = jQuery;
 
@@ -21,18 +21,16 @@ export const overlayMixin = {
   computed: {
     show$: {
       get() {
-        if (typeof this.overlayKey === 'undefined')
-          return this.show_;
+        if (typeof this.overlayKey === "undefined") return this.show_;
         else {
-          if (typeof this.showArr_[this.overlayKey] === 'undefined') {
+          if (typeof this.showArr_[this.overlayKey] === "undefined") {
             this.showArr_[this.overlayKey] = false;
           }
           return this.showArr_[this.overlayKey];
         }
       },
       set(value) {
-        if (typeof this.overlayKey === 'undefined')
-          this.show_ = value;
+        if (typeof this.overlayKey === "undefined") this.show_ = value;
         else this.showArr_[this.overlayKey] = value;
       }
     }
@@ -44,7 +42,7 @@ export const overlayMixin = {
           return self.show_;
         }
       };
-    return {overlay};
+    return { overlay };
   }
 };
 
@@ -62,19 +60,19 @@ export const addToCartMixin = {
           self.quantity = value;
         }
       };
-    return {cartItem_};
+    return { cartItem_ };
   }
 };
 
-export {default as loginMixins} from './login';
+export { default as loginMixins } from "./login";
 
 export const orderTrackingMixin = {
   data() {
     return {
       manualFind_: false,
       find: {
-        kw: '',
-        kw_: ''
+        kw: "",
+        kw_: ""
       },
       cached_: []
     };
@@ -102,18 +100,21 @@ export const orderTrackingMixin = {
   },
   asyncComputed: {
     async searched() {
-      const rs = await $.get('https://server.vaithuhay.com/b/order-tracking?' + qs.stringify(this.criteria));
+      const rs = await $.get(
+        "https://server.vaithuhay.com/b/order-tracking?" +
+          qs.stringify(this.criteria)
+      );
       if (rs.length > 0) this.cached_ = rs;
       return this.cached_;
     }
   },
   watch: {
-    kw_: debounce(function (value) {
+    kw_: debounce(function(value) {
       this.kw = value;
     }, 200)
   }
 };
 
-export {default as searchMixin} from './search';
+export { default as searchMixin } from "./search";
 
-export {default as scrollEffectMixin} from './scrollEffect';
+export { default as scrollEffectMixin } from "./scrollEffect";

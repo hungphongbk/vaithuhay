@@ -1,69 +1,68 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  $font: $font-size-h4;
+$font: $font-size-h4;
 
-  .homepage-news {
-    margin: 0 -5px;
-    @include responsive('sm-min') {
-      margin: 0 -15px;
-    }
+.homepage-news {
+  margin: 0 -5px;
+  @include responsive("sm-min") {
+    margin: 0 -15px;
   }
+}
 
-  a {
-    @extend %reset-link;
+a {
+  @extend %reset-link;
+}
+
+.item {
+  @extend %no-focus;
+  padding: 0 5px;
+  @include responsive("sm-min") {
+    padding: 0 15px;
   }
-
-  .item {
-    @extend %no-focus;
-    padding: 0 5px;
-    @include responsive('sm-min') {
-      padding: 0 15px;
-    }
-    .title {
-      @include font-size-with-line-height($font*0.95);
-      text-transform: uppercase;
-      font-weight: 700;
-      @include responsive('xs-max') {
-        @include font-size-with-line-height($font*0.75)
-        margin-bottom: .3rem;
-      }
-    }
-  }
-
-  .created {
-    color: #555;
-    font-size: .95em;
-    .fa {
-      margin-right: .3em;
-    }
-  }
-
-  .see-more {
-    @extend %reset-link;
+  .title {
+    @include font-size-with-line-height($font * 0.95);
     text-transform: uppercase;
     font-weight: 700;
-    @include font-size-with-line-height($font*0.9);
-
-    transition: all $animation-time ease;
-    color: #666;
-    &:hover {
-      color: darken($theme-color-dark, 5%)
-    }
-    .fa {
-      //font-size: $font-size-base*0.9;
-      @include font-size-with-line-height($font-size-base*0.75);
-      margin-left: .7rem;
-    }
-
-    @include responsive('xs-max') {
-      @include font-size-with-line-height($font*0.7);
-      .fa {
-        @include font-size-with-line-height($font*0.68);
-        margin-left: .4rem;
-      }
+    @include responsive("xs-max") {
+      @include font-size-with-line-height($font * 0.75) margin-bottom: 0.3rem;
     }
   }
+}
+
+.created {
+  color: #555;
+  font-size: 0.95em;
+  .fa {
+    margin-right: 0.3em;
+  }
+}
+
+.see-more {
+  @extend %reset-link;
+  text-transform: uppercase;
+  font-weight: 700;
+  @include font-size-with-line-height($font * 0.9);
+
+  transition: all $animation-time ease;
+  color: #666;
+  &:hover {
+    color: darken($theme-color-dark, 5%);
+  }
+  .fa {
+    //font-size: $font-size-base*0.9;
+    @include font-size-with-line-height($font-size-base * 0.75);
+    margin-left: 0.7rem;
+  }
+
+  @include responsive("xs-max") {
+    @include font-size-with-line-height($font * 0.7);
+    .fa {
+      @include font-size-with-line-height($font * 0.68);
+      margin-left: 0.4rem;
+    }
+  }
+}
 </style>
 <template lang="pug">
   index-section.vth-post-carousel(:title="$t('0')", titleForeground="#fff", background="#bfbfbf")
@@ -83,18 +82,18 @@
         .btn.btn-white KHÁM PHÁ THÊM
 </template>
 <script>
-  import {IndexSection, ItemLoop} from '../components/index';
-  import {slickOptions_}          from "@/components/helpers";
+import { IndexSection, ItemLoop } from "../components/index";
+import { slickOptions_ } from "@/components/helpers";
 
-  export default {
-    components: {IndexSection, ProductLoop: ItemLoop},
-    data() {
-      return {
-        articles: window.blog,
-        slickOptions_
-      };
-    }
-  };
+export default {
+  components: { IndexSection, ProductLoop: ItemLoop },
+  data() {
+    return {
+      articles: window.blog,
+      slickOptions_
+    };
+  }
+};
 </script>
 <i18n>
   {

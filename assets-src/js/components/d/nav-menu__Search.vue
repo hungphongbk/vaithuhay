@@ -1,67 +1,66 @@
 <style lang="scss" module>
-  @import "../../../sass/inc/inc";
+@import "../../../sass/inc/inc";
 
-  .nav-menu-search{
-    :global{
-      form {
-        padding:0;
-        @include outline-effect(lighten(#ffe066, 20%));
-        background: #ffe066;
-        .form-control, .btn {
-          background: transparent;
-        }
-        .btn {
-          cursor: default;
-          padding: 6px 12px 7px;
-        }
+.nav-menu-search {
+  :global {
+    form {
+      padding: 0;
+      @include outline-effect(lighten(#ffe066, 20%));
+      background: #ffe066;
+      .form-control,
+      .btn {
+        background: transparent;
+      }
+      .btn {
+        cursor: default;
+        padding: 6px 12px 7px;
       }
     }
   }
+}
 
+.search-panel {
+  position: absolute;
+  top: $navbar-height;
+  padding: {
+    top: 8px;
+    bottom: 8px;
+  }
+  right: 0;
+  width: 500px;
+  background: white;
+  box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.35);
+  :global .btn {
+    padding: $line-height-computed * 0.7 $grid-gutter-width;
+  }
+}
 
-
-  .search-panel {
-    position: absolute;
-    top: $navbar-height;
-    padding: {
-      top: 8px;
-      bottom: 8px;
-    }
-    right: 0;
-    width: 500px;
-    background: white;
-    box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.35);
-    :global .btn {
-      padding: $line-height-computed*.7 $grid-gutter-width;
+.search-item {
+  > a {
+    @extend %clearfix;
+    @extend %reset-link;
+    display: block;
+    padding: 6px 8px;
+    border-left: 3px solid transparent;
+    &:hover {
+      background-color: #f0f0f0;
+      border-left-color: $theme-red-color;
     }
   }
-
-  .search-item {
-    > a {
-      @extend %clearfix;
-      @extend %reset-link;
-      display: block;
-      padding: 6px 8px;
-      border-left: 3px solid transparent;
-      &:hover {
-        background-color: #f0f0f0;
-        border-left-color: $theme-red-color;
-      }
-    }
-    img {
-      width: 100%;
-      height: auto;
-    }
-    .thumb {
-      float: left;
-      margin-right: 15px;
-      width: 60px;
-    }
-    .title {
-      font-weight: 700;
-      margin-top: 4px;
-    }
+  img {
+    width: 100%;
+    height: auto;
   }
+  .thumb {
+    float: left;
+    margin-right: 15px;
+    width: 60px;
+  }
+  .title {
+    font-weight: 700;
+    margin-top: 4px;
+  }
+}
 </style>
 <template lang="pug">
   div(:class="$style.navMenuSearch")
@@ -95,29 +94,29 @@
                     h5(:class="$style.title") {{i.title}}
 </template>
 <script>
-  import {Paginate}    from "@/components";
-  import {searchMixin} from "@/components/mixins";
-  import FaSearch from '@fortawesome/fontawesome-free-solid/faSearch'
-  import FaSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
+import { Paginate } from "@/components";
+import { searchMixin } from "@/components/mixins";
+import FaSearch from "@fortawesome/fontawesome-free-solid/faSearch";
+import FaSpinner from "@fortawesome/fontawesome-free-solid/faSpinner";
 
-  const $ = jQuery;
+const $ = jQuery;
 
-  export default {
-    mixins: [searchMixin],
-    components: {Paginate},
-    data() {
-      return {
-        view: 'product',
-        FaSearch,
-        FaSpinner
-      };
-    },
-    computed: {
-      isOpen_() {
-        return this.keyword.length > 0;
-      }
+export default {
+  mixins: [searchMixin],
+  components: { Paginate },
+  data() {
+    return {
+      view: "product",
+      FaSearch,
+      FaSpinner
+    };
+  },
+  computed: {
+    isOpen_() {
+      return this.keyword.length > 0;
     }
-  };
+  }
+};
 </script>
 <i18n>
   {

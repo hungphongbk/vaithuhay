@@ -1,230 +1,230 @@
 <style lang="scss" scoped="">
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .row.site-info {
-    margin-top: 10px;
+.row.site-info {
+  margin-top: 10px;
+}
+
+.copyright {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  background-color: $theme-color;
+  @include responsive("sm-max") {
+    /*background-image: url(../../img/footer-overlay-mobile.png);*/
+    /*background-size: cover;*/
+    /*filter: contrast(25%) brightness(125%);*/
   }
-
-  .copyright {
-    padding-top: 20px;
-    padding-bottom: 20px;
+  p {
+    display: inline-block;
+    max-width: 80%;
     text-align: center;
-    background-color: $theme-color;
-    @include responsive('sm-max') {
-      /*background-image: url(../../img/footer-overlay-mobile.png);*/
-      /*background-size: cover;*/
-      /*filter: contrast(25%) brightness(125%);*/
+    margin-bottom: 5px;
+  }
+  .cert {
+    float: unset;
+    width: 130px;
+    /*display: none;*/
+    display: inline-block;
+    img {
+      width: 100%;
     }
+  }
+  @include responsive("md-min") {
+    text-align: left;
     p {
-      display: inline-block;
-      max-width: 80%;
-      text-align: center;
-      margin-bottom: 5px;
+      max-width: 100%;
+    }
+    &-text {
+      float: left;
+      margin-right: 0.7rem;
+    }
+    .pull-left {
+      margin-right: 20px;
     }
     .cert {
-      float: unset;
-      width: 130px;
-      /*display: none;*/
-      display: inline-block;
-      img {
-        width: 100%;
-      }
-    }
-    @include responsive('md-min') {
-      text-align: left;
-      p {
-        max-width: 100%;
-      }
-      &-text {
-        float: left;
-        margin-right: .7rem;
-      }
-      .pull-left {
-        margin-right: 20px;
-      }
-      .cert {
-        float: left;
-      }
+      float: left;
     }
   }
+}
 
-  .dmca-badge {
-    margin-top: .9rem;
-    margin-left: 1rem;
-    display: inline-block;
-  }
+.dmca-badge {
+  margin-top: 0.9rem;
+  margin-left: 1rem;
+  display: inline-block;
+}
 </style>
 <style lang="scss" module="">
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .site-footer-outer {
-    p {
-      @include font-size-with-line-height(0.87*$font-size-base);
-    }
+.site-footer-outer {
+  p {
+    @include font-size-with-line-height(0.87 * $font-size-base);
+  }
 
-    @at-root .contact-info {
-      background: rgba(0, 0, 0, 0) no-repeat no-repeat scroll center center;
-      $icon-size: $line-height-computed*2;
-      :global {
-        .fa {
-          display: inline-block;
-          height: $icon-size;
-          width: $icon-size;
-          line-height: $icon-size;
-          text-align: center;
-          border-radius: 50px;
-          background-color: rgba(#000, .15);
-          margin-right: 1em;
-        }
-        .btn {
-          font-size: $font-size-base;
-          margin-top: 3px;
-        }
+  @at-root .contact-info {
+    background: rgba(0, 0, 0, 0) no-repeat no-repeat scroll center center;
+    $icon-size: $line-height-computed * 2;
+    :global {
+      .fa {
+        display: inline-block;
+        height: $icon-size;
+        width: $icon-size;
+        line-height: $icon-size;
+        text-align: center;
+        border-radius: 50px;
+        background-color: rgba(#000, 0.15);
+        margin-right: 1em;
+      }
+      .btn {
+        font-size: $font-size-base;
+        margin-top: 3px;
       }
     }
   }
+}
 
-  .site-footer {
-    padding-bottom: 20px;
-    @include responsive('sm-max') {
-      :global(.col) {
-        flex-basis: 0;
-        flex-grow: 1;
-      }
-    }
-  }
-
-  // region Panel
-  .payments :global {
-    ul {
-      display: inline-block;
-    }
-    li {
-      display: block;
-      float: left;
-      margin: 4px 6px;
-      &:nth-child(4) {
-        clear: left;
-      }
-    }
-  }
-
-  .panel-outer {
-    color: white;
-  }
-
-  .topList {
-    > li > a {
-      @extend %reset-link;
-      display: inline-block;
-      margin: {
-        top: .45em;
-        bottom: .45em;
-      }
-      @include font-size-with-line-height(0.9rem);
-      @include responsive('sm-min') {
-        @include font-size-with-line-height(1rem);
-      }
-    }
-  }
-
-  .next {
-    composes: panel-outer;
-    background-color: #5c5c5f;
-  }
-
-  // endregion
-
-  .logo {
-    width: 50%;
-    margin: 0 25%;
-  }
-
-  .social-icon {
-    flex: 0 0 60px;
-    width: 60px;
-    img {
-      @extend %box-shadow-2;
-      border-radius: 6px;
-    }
-  }
-
-  .profile-list {
-    @include responsive('sm-max') {
-      width: 100%;
-      flex-direction: column;
-    }
-    @include responsive('sm-min') {
-      align-items: center !important;
-      justify-content: space-between;
-    }
-  }
-
-  .profile-item {
-    @extend %reset-link;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    img {
-      flex-basis: 35px;
-      width: 35px;
-      @extend %box-shadow-2;
-      border-radius: 50%;
-    }
-    p {
+.site-footer {
+  padding-bottom: 20px;
+  @include responsive("sm-max") {
+    :global(.col) {
+      flex-basis: 0;
       flex-grow: 1;
     }
-    flex-direction: row;
-
-    @include responsive('sm-max') {
-      flex-direction: column;
-      margin-top: 1.5rem;
-      img {
-        margin-bottom: .3rem;
-      }
-    }
-    @include responsive('sm-min') {
-      /*&:not(:last-child) {*/
-      /*margin-right: 1.7rem;*/
-      /*}*/
-    }
   }
+}
 
-  .copyright {
+// region Panel
+.payments :global {
+  ul {
     display: inline-block;
-
-    text-align: center;
-    @include font-size-with-line-height(0.77*$font-size-base);
-    @include responsive('sm-max') {
-      margin-top: $line-height-computed*0.7;
-      font-style: italic;
-    }
-    @include responsive('sm-min') {
-      @include font-size-with-line-height(1.1*$font-size-base);
-      float: right;
-      text-align: right;
-      height: 49px;
-      line-height: 49px;
-    }
-
-    &-title {
-      @include font-size-with-line-height(1.05rem);
-      //@include responsive('sm-min') {
-      //  @include font-size-with-line-height(1.14rem);
-      //}
-    }
-    &-address i{
-      @include responsive('sm-min') {
-        @include font-size-with-line-height(.65rem);
-      }
-    }
-    &-text{
-      @include responsive('sm-min') {
-        @include font-size-with-line-height(.85rem);
-        margin-left: 1rem;
-      }
+  }
+  li {
+    display: block;
+    float: left;
+    margin: 4px 6px;
+    &:nth-child(4) {
+      clear: left;
     }
   }
+}
+
+.panel-outer {
+  color: white;
+}
+
+.topList {
+  > li > a {
+    @extend %reset-link;
+    display: inline-block;
+    margin: {
+      top: 0.45em;
+      bottom: 0.45em;
+    }
+    @include font-size-with-line-height(0.9rem);
+    @include responsive("sm-min") {
+      @include font-size-with-line-height(1rem);
+    }
+  }
+}
+
+.next {
+  composes: panel-outer;
+  background-color: #5c5c5f;
+}
+
+// endregion
+
+.logo {
+  width: 50%;
+  margin: 0 25%;
+}
+
+.social-icon {
+  flex: 0 0 60px;
+  width: 60px;
+  img {
+    @extend %box-shadow-2;
+    border-radius: 6px;
+  }
+}
+
+.profile-list {
+  @include responsive("sm-max") {
+    width: 100%;
+    flex-direction: column;
+  }
+  @include responsive("sm-min") {
+    align-items: center !important;
+    justify-content: space-between;
+  }
+}
+
+.profile-item {
+  @extend %reset-link;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  img {
+    flex-basis: 35px;
+    width: 35px;
+    @extend %box-shadow-2;
+    border-radius: 50%;
+  }
+  p {
+    flex-grow: 1;
+  }
+  flex-direction: row;
+
+  @include responsive("sm-max") {
+    flex-direction: column;
+    margin-top: 1.5rem;
+    img {
+      margin-bottom: 0.3rem;
+    }
+  }
+  @include responsive("sm-min") {
+    /*&:not(:last-child) {*/
+    /*margin-right: 1.7rem;*/
+    /*}*/
+  }
+}
+
+.copyright {
+  display: inline-block;
+
+  text-align: center;
+  @include font-size-with-line-height(0.77 * $font-size-base);
+  @include responsive("sm-max") {
+    margin-top: $line-height-computed * 0.7;
+    font-style: italic;
+  }
+  @include responsive("sm-min") {
+    @include font-size-with-line-height(1.1 * $font-size-base);
+    float: right;
+    text-align: right;
+    height: 49px;
+    line-height: 49px;
+  }
+
+  &-title {
+    @include font-size-with-line-height(1.05rem);
+    //@include responsive('sm-min') {
+    //  @include font-size-with-line-height(1.14rem);
+    //}
+  }
+  &-address i {
+    @include responsive("sm-min") {
+      @include font-size-with-line-height(0.65rem);
+    }
+  }
+  &-text {
+    @include responsive("sm-min") {
+      @include font-size-with-line-height(0.85rem);
+      margin-left: 1rem;
+    }
+  }
+}
 </style>
 <template lang="pug">
   footer(:class="$style.siteFooterOuter")
@@ -295,57 +295,72 @@
 
 </template>
 <script>
-  import {mapGetters} from 'vuex';
-  import {CATEGORIES_LIST_} from '../store/types';
-  import ContactDetail from './footer__ContactDetail.vue';
-  import FooterWidgetPanel from './footer__WidgetPanel';
-  import Dropdown from 'my-vue-utils/dist/components/dropdown';
-  import {DarkPanel} from "../plugins/directives";
+import { mapGetters } from "vuex";
+import { CATEGORIES_LIST_ } from "../store/types";
+import ContactDetail from "./footer__ContactDetail.vue";
+import FooterWidgetPanel from "./footer__WidgetPanel";
+import Dropdown from "my-vue-utils/dist/components/dropdown";
+import { DarkPanel } from "../plugins/directives";
 
-  export default {
-    components: {
-      FooterWidgetPanel,
-      ContactDetail
-    },
-    directives: {DarkPanel},
-    data() {
-      const {about, address, hotline, email, links} = vth.footer;
-      return {
-        about, address, hotline, email,
-        fanpage: vth.homepage.fanpage,
-        map_img_: require('../../img/map.png'),
-        payments: [
-          require('../../img/ic-visa.svg'),
-          require('../../img/ic-mastercard.svg'),
-          require('../../img/ic-jcb.svg'),
-          require('../../img/ic-cash.svg'),
-          require('../../img/ic-internet-banking.svg'),
-          require('../../img/PayPal2007.svg?size=54')
+export default {
+  components: {
+    FooterWidgetPanel,
+    ContactDetail
+  },
+  directives: { DarkPanel },
+  data() {
+    const { about, address, hotline, email, links } = vth.footer;
+    return {
+      about,
+      address,
+      hotline,
+      email,
+      fanpage: vth.homepage.fanpage,
+      map_img_: require("../../img/map.png"),
+      payments: [
+        require("../../img/ic-visa.svg"),
+        require("../../img/ic-mastercard.svg"),
+        require("../../img/ic-jcb.svg"),
+        require("../../img/ic-cash.svg"),
+        require("../../img/ic-internet-banking.svg"),
+        require("../../img/PayPal2007.svg?size=54")
+      ],
+      SOCIAL_ICONS: [
+        [
+          require("../../img/facebook-icon.svg"),
+          "https://www.facebook.com/vaithuhayofficial"
         ],
-        SOCIAL_ICONS: [
-          [require('../../img/facebook-icon.svg'), 'https://www.facebook.com/vaithuhayofficial'],
-          [require('../../img/google-icon.svg'), 'https://plus.google.com/102534166977272914863'],
-          [require('../../img/insta-icon.svg'), 'https://www.instagram.com/vaithuhay/'],
-          [require('../../img/youtube-icon.svg'), 'https://www.youtube.com/channel/UC_3z0L6fVXkEruAoXjMEWqw']
+        [
+          require("../../img/google-icon.svg"),
+          "https://plus.google.com/102534166977272914863"
         ],
-        aboutLinks$: links.about,
-        policyLinks$: links.policy,
-        location: window.document.location
-      };
-    },
-    computed: {
-      ...mapGetters({
-        categories: CATEGORIES_LIST_
-      }),
-      tabletOnly() {
-        const {$mq} = this;
-        return $mq.tablet && !$mq.phone;
-      }
-    },
-    mounted() {
-      // $.cachedScript('//images.dmca.com/Badges/DMCABadgeHelper.min.js')
+        [
+          require("../../img/insta-icon.svg"),
+          "https://www.instagram.com/vaithuhay/"
+        ],
+        [
+          require("../../img/youtube-icon.svg"),
+          "https://www.youtube.com/channel/UC_3z0L6fVXkEruAoXjMEWqw"
+        ]
+      ],
+      aboutLinks$: links.about,
+      policyLinks$: links.policy,
+      location: window.document.location
+    };
+  },
+  computed: {
+    ...mapGetters({
+      categories: CATEGORIES_LIST_
+    }),
+    tabletOnly() {
+      const { $mq } = this;
+      return $mq.tablet && !$mq.phone;
     }
-  };
+  },
+  mounted() {
+    // $.cachedScript('//images.dmca.com/Badges/DMCABadgeHelper.min.js')
+  }
+};
 </script>
 <i18n>
   {

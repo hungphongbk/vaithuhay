@@ -1,15 +1,15 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .offline {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: darken($brand-warning, 20%);
-    padding: 1.7rem 3rem;
-    color: white;
-  }
+.offline {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: darken($brand-warning, 20%);
+  padding: 1.7rem 3rem;
+  color: white;
+}
 </style>
 <template lang="pug">
   div
@@ -19,28 +19,28 @@
         p {{$t('label')}}
 </template>
 <script>
-  import {Offline} from "@/components";
+import { Offline } from "@/components";
 
-  const $ = jQuery;
+const $ = jQuery;
 
-  export default {
-    components: {Offline},
-    data() {
-      return {
-        offline: false
-      };
-    },
-    methods: {
-      detect(online) {
-        console.log(online);
-        this.offline = !online;
-        const $body = $('body');
-        if ((!online) && (!$body.hasClass('site-offline-mode'))) {
-          $body.addClass('site-offline-mode');
-        }
+export default {
+  components: { Offline },
+  data() {
+    return {
+      offline: false
+    };
+  },
+  methods: {
+    detect(online) {
+      console.log(online);
+      this.offline = !online;
+      const $body = $("body");
+      if (!online && !$body.hasClass("site-offline-mode")) {
+        $body.addClass("site-offline-mode");
       }
     }
-  };
+  }
+};
 </script>
 <i18n>
   {

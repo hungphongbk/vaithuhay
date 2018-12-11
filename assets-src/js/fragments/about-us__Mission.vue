@@ -1,14 +1,14 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  h3 {
-    font-weight: 700;
-  }
+h3 {
+  font-weight: 700;
+}
 
-  img {
-    width: 80%;
-    margin-left: 20%;
-  }
+img {
+  width: 80%;
+  margin-left: 20%;
+}
 </style>
 <template lang="pug">
   index-section.vth-post-carousel(:title="$t('0')", titleForeground="#fc0", background="#f0f0f0")
@@ -20,17 +20,17 @@
         img(:src="content.image")
 </template>
 <script>
-  import {IndexSection} from '../components/index';
+import { IndexSection } from "../components/index";
 
-  export default {
-    components: {IndexSection},
-    inject: ['section'],
-    computed: {
-      content() {
-        return this.section.mission[this.$i18n.locale];
-      }
+export default {
+  components: { IndexSection },
+  inject: ["section"],
+  computed: {
+    content() {
+      return this.section.mission[this.$i18n.locale];
     }
-  };
+  }
+};
 </script>
 <i18n>
   {

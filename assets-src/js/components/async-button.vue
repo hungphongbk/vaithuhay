@@ -1,23 +1,26 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .btn {
-    will-change: width;
-  }
+.btn {
+  will-change: width;
+}
 
-  .icon-fade- {
-    &enter-active, &leave-active {
-      transition: all $animation-time ease;
-    }
-    &enter, &leave-to {
-      opacity: 0;
-      max-width: 0;
-    }
-    &enter-to, &leave {
-      opacity: 1;
-      max-width: 40px;
-    }
+.icon-fade- {
+  &enter-active,
+  &leave-active {
+    transition: all $animation-time ease;
   }
+  &enter,
+  &leave-to {
+    opacity: 0;
+    max-width: 0;
+  }
+  &enter-to,
+  &leave {
+    opacity: 1;
+    max-width: 40px;
+  }
+}
 </style>
 <template lang="pug">
   .btn(@click="doFn")
@@ -26,47 +29,46 @@
     slot
 </template>
 <script>
-  import {delay} from "./helpers";
+import { delay } from "./helpers";
 
-  export default {
-    props: {
-      fn: {
-        type: Function,
-        required: true
-      },
-      successDelay: {
-        type: Number,
-        default: 500
-      },
-      icon: String
+export default {
+  props: {
+    fn: {
+      type: Function,
+      required: true
     },
-    data() {
-      return {
-        ASYNC_BUTTON_STATE: 'default'
-      };
+    successDelay: {
+      type: Number,
+      default: 500
     },
-    computed: {
-      iconCls() {
-        switch (this.ASYNC_BUTTON_STATE) {
-          case 'default':
-            return this.icon;
-          case 'ing':
-            return 'fa-spin fa-spinner';
-          case 'ed':
-            return 'fa-check';
-        }
-
-      }
-    },
-    methods: {
-      async doFn() {
-        const {fn, successDelay} = this;
-        this.ASYNC_BUTTON_STATE = 'ing';
-        await fn();
-        this.ASYNC_BUTTON_STATE = 'ed';
-        await delay(successDelay);
-        this.ASYNC_BUTTON_STATE = 'default';
+    icon: String
+  },
+  data() {
+    return {
+      ASYNC_BUTTON_STATE: "default"
+    };
+  },
+  computed: {
+    iconCls() {
+      switch (this.ASYNC_BUTTON_STATE) {
+        case "default":
+          return this.icon;
+        case "ing":
+          return "fa-spin fa-spinner";
+        case "ed":
+          return "fa-check";
       }
     }
-  };
+  },
+  methods: {
+    async doFn() {
+      const { fn, successDelay } = this;
+      this.ASYNC_BUTTON_STATE = "ing";
+      await fn();
+      this.ASYNC_BUTTON_STATE = "ed";
+      await delay(successDelay);
+      this.ASYNC_BUTTON_STATE = "default";
+    }
+  }
+};
 </script>

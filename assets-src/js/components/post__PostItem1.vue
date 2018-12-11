@@ -30,63 +30,63 @@
       //product-rating.large(:rating="rating")
 </template>
 <script>
-  import {CART_ADD_} from '../store/types';
-  import {mapActions} from 'vuex';
-  import {delay} from './helpers';
-  import faCart from '@fortawesome/fontawesome-free-solid/faCartPlus'
-  import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
-  // import {ProductRating} from "../components";
+import { CART_ADD_ } from "../store/types";
+import { mapActions } from "vuex";
+import { delay } from "./helpers";
+import faCart from "@fortawesome/fontawesome-free-solid/faCartPlus";
+import faCheck from "@fortawesome/fontawesome-free-solid/faCheck";
+// import {ProductRating} from "../components";
 
-  const $ = jQuery;
+const $ = jQuery;
 
-  export default {
-    // components: {ProductRating},
-    inject:['slickLazy'],
-    props: {
-      item: Object,
-      thumbnailSize_: String
+export default {
+  // components: {ProductRating},
+  inject: ["slickLazy"],
+  props: {
+    item: Object,
+    thumbnailSize_: String
+  },
+  data() {
+    return Object.assign({}, this.item, {
+      CART_ITEM_ADDED: false,
+      slickLazy_: this.slickLazy || false
+    });
+  },
+  computed: {
+    icon() {
+      const self = this;
+      return self.CART_ITEM_ADDED ? faCheck : faCart;
     },
-    data() {
-      return Object.assign({}, this.item, {
-        CART_ITEM_ADDED: false,
-        slickLazy_: this.slickLazy || false
-      });
+    defaultThumbnailSize_() {
+      if (this.thumbnailSize_) return this.thumbnailSize_;
+      return this.$mq.tablet ? "medium" : "large";
     },
-    computed: {
-      icon() {
-        const self = this;
-        return self.CART_ITEM_ADDED ? faCheck : faCart;
-      },
-      defaultThumbnailSize_() {
-        if (this.thumbnailSize_) return this.thumbnailSize_;
-        return this.$mq.tablet ? 'medium' : 'large';
-      },
-      title() {
-        return this.item._title[this.$i18n.locale];
-      },
-      isSale_() {
-        return this.price.old !== null;
-      }
+    title() {
+      return this.item._title[this.$i18n.locale];
     },
-    methods: {
-      ...mapActions({
-        addToCart_: CART_ADD_
-      }),
-      async add_({target: btn}, id) {
-        const $style = this.$style;
-
-        await this.addToCart_({id});
-        const $btn = $(btn);
-        $btn.addClass($style.preAdded);
-        await delay(250);
-        $btn.addClass($style.added).removeClass($style.preAdded);
-        this.CART_ITEM_ADDED = true;
-        await delay(2400);
-        $btn.addClass($style.preAdded).removeClass($style.added);
-        await delay(250);
-        $btn.removeClass($style.preAdded);
-        this.CART_ITEM_ADDED = false;
-      }
+    isSale_() {
+      return this.price.old !== null;
     }
-  };
+  },
+  methods: {
+    ...mapActions({
+      addToCart_: CART_ADD_
+    }),
+    async add_({ target: btn }, id) {
+      const $style = this.$style;
+
+      await this.addToCart_({ id });
+      const $btn = $(btn);
+      $btn.addClass($style.preAdded);
+      await delay(250);
+      $btn.addClass($style.added).removeClass($style.preAdded);
+      this.CART_ITEM_ADDED = true;
+      await delay(2400);
+      $btn.addClass($style.preAdded).removeClass($style.added);
+      await delay(250);
+      $btn.removeClass($style.preAdded);
+      this.CART_ITEM_ADDED = false;
+    }
+  }
+};
 </script>

@@ -1,31 +1,31 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .modal-backdrop {
-    opacity: 0.5;
+.modal-backdrop {
+  opacity: 0.5;
+}
+
+.modal-dialog {
+  margin-top: $navbar-height + 20px;
+}
+
+.modal-header {
+  border-bottom: none;
+
+  .close {
+    transform: scale(1.5);
+    transform-origin: 50% 25%;
+    padding-right: 0.15rem;
+    padding-left: 0.3rem;
   }
+}
 
-  .modal-dialog {
-    margin-top: $navbar-height+20px;
-  }
-
-  .modal-header {
-    border-bottom: none;
-
-    .close{
-      transform: scale(1.5);
-      transform-origin: 50% 25%;
-      padding-right: .15rem;
-      padding-left: .3rem;
-    }
-  }
-
-  .modal-title {
-    text-transform: uppercase;
-    @include font-size-with-line-height($font-size-h4);
-    font-weight: 700;
-    display: inline-block;
-  }
+.modal-title {
+  text-transform: uppercase;
+  @include font-size-with-line-height($font-size-h4);
+  font-weight: 700;
+  display: inline-block;
+}
 </style>
 <template lang="pug">
   transition(:name="animate")
@@ -42,18 +42,18 @@
             slot
 </template>
 <script>
-  export default {
-    props: {
-      title: String,
-      animate: {
-        type: String,
-        default: 'vth-fade'
-      },
-      size: String,
-      isDismissable: {
-        type: Boolean,
-        default: true
-      }
+export default {
+  props: {
+    title: String,
+    animate: {
+      type: String,
+      default: "vth-fade"
+    },
+    size: String,
+    isDismissable: {
+      type: Boolean,
+      default: true
     }
-  };
+  }
+};
 </script>

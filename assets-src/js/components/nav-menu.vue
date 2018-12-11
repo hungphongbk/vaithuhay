@@ -4,12 +4,15 @@
     desktop-menu(v-else)
 </template>
 <script>
-  const MobileMenu = () => import(/* webpackChunkName: "mobile" */ './m/mobile-menu-wrapper.vue'),
-    DesktopMenu = () => import(/* webpackChunkName: "desktop" */ './d/nav-menu-desktop.vue');
+const MobileMenu = () =>
+    import(/* webpackChunkName: "mobile" */ "./m/mobile-menu-wrapper.vue"),
+  DesktopMenu = () =>
+    import(/* webpackChunkName: "desktop" */ "./d/nav-menu-desktop.vue");
 
-  export default {
-    components: {
-      MobileMenu, DesktopMenu
-    }
-  };
+export default {
+  components: {
+    MobileMenu,
+    DesktopMenu
+  }
+};
 </script>

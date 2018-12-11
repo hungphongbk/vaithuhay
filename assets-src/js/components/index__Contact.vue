@@ -1,78 +1,78 @@
 <style lang="scss" scoped="">
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .vth-contact {
-    margin: {
-      top: 40px;
-      bottom: 20px;
-    }
-    border: 6px solid #bfbfbf;
-    padding: 40px 20px 20px 20px;
-    font-size: $font-size-base;
-    @include responsive('sm-min') {
-      border-width: 10px;
-      padding: 40px 40px 20px 40px;
-      font-size: $font-size-base*1.3;
-    }
-    background: {
-      image: url(../../img/12194.png);
-      size: cover;
+.vth-contact {
+  margin: {
+    top: 40px;
+    bottom: 20px;
+  }
+  border: 6px solid #bfbfbf;
+  padding: 40px 20px 20px 20px;
+  font-size: $font-size-base;
+  @include responsive("sm-min") {
+    border-width: 10px;
+    padding: 40px 40px 20px 40px;
+    font-size: $font-size-base * 1.3;
+  }
+  background: {
+    image: url(../../img/12194.png);
+    size: cover;
+  }
+}
+
+.description {
+  text-align: center;
+  @include responsive("xs-max") {
+    margin-bottom: $line-height-computed;
+  }
+}
+
+.contact-form {
+  @include responsive("sm-min") {
+    width: 60%;
+    margin: 32px (100% - 60%)/2;
+    font-size: $font-size-base * 1.6;
+  }
+  .form-group {
+    @include _(clearfix);
+  }
+  .control-label {
+    float: left;
+    width: 60px;
+    text-align: left;
+    @include responsive("xs-max") {
+      line-height: 34px;
     }
   }
-
-  .description {
-    text-align: center;
-    @include responsive('xs-max') {
-      margin-bottom: $line-height-computed;
-    }
+  #email {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    border-bottom: 1px solid #333;
+    background-color: transparent;
   }
-
-  .contact-form {
-    @include responsive('sm-min') {
-      width: 60%;
-      margin: 32px (100% - 60%)/2;
-      font-size: $font-size-base*1.6;
-    }
-    .form-group {
-      @include _(clearfix);
-    }
+  @include responsive("sm-min") {
     .control-label {
-      float: left;
-      width: 60px;
-      text-align: left;
-      @include responsive('xs-max') {
-        line-height: 34px;
-      }
+      width: 120px;
     }
     #email {
-      margin-left: 60px;
-      width: calc(100% - 60px);
-      border-bottom: 1px solid #333;
-      background-color: transparent;
-    }
-    @include responsive('sm-min') {
-      .control-label {
-        width: 120px;
-      }
-      #email {
-        margin-left: 120px;
-        width: calc(100% - 120px);
-      }
-    }
-    .btn {
-      display: inline-block;
-    }
-    .register {
-      padding-top: 24px;
-      span {
-        font-size: .8em;
-        vertical-align: middle;
-        line-height: 34px;
-        display: inline-block;
-        margin: 0 .7em;
-      }
+      margin-left: 120px;
+      width: calc(100% - 120px);
     }
   }
+  .btn {
+    display: inline-block;
+  }
+  .register {
+    padding-top: 24px;
+    span {
+      font-size: 0.8em;
+      vertical-align: middle;
+      line-height: 34px;
+      display: inline-block;
+      margin: 0 0.7em;
+    }
+  }
+}
 </style>
 <template lang="pug">
   div
@@ -96,42 +96,43 @@
           p.text-success(v-if="status") {{status}}
 </template>
 <script>
-  const $ = jQuery;
-  export default {
-    props: {
-      like_: {
-        type: Boolean,
-        default: false
+const $ = jQuery;
+export default {
+  props: {
+    like_: {
+      type: Boolean,
+      default: false
+    },
+    popupInMobile_: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      fanpage: vth.homepage.fanpage,
+      contactLink:
+        "https://vaithuhay.us17.list-manage.com/subscribe/post-json?u=a8c643e31c4f6fe8d2d5ec949&amp;id=ae079e8ffd&c=?",
+      form: {
+        contact: {}
       },
-      popupInMobile_: {
-        type: Boolean,
-        default: false
-      }
-    },
-    data() {
-      return {
-        fanpage: vth.homepage.fanpage,
-        contactLink: 'https://vaithuhay.us17.list-manage.com/subscribe/post-json?u=a8c643e31c4f6fe8d2d5ec949&amp;id=ae079e8ffd&c=?',
-        form: {
-          contact: {}
-        },
-        status: null
-      };
-    },
-    methods: {
-      async submit({target}) {
-        const {result} = await $.ajax({
-          type: 'POST',
-          url: this.contactLink,
-          data: $(target).serialize(),
-          dataType: 'jsonp'
-        });
-        if (result === 'success') {
-          this.status = this.$t('thank');
-        }
+      status: null
+    };
+  },
+  methods: {
+    async submit({ target }) {
+      const { result } = await $.ajax({
+        type: "POST",
+        url: this.contactLink,
+        data: $(target).serialize(),
+        dataType: "jsonp"
+      });
+      if (result === "success") {
+        this.status = this.$t("thank");
       }
     }
-  };
+  }
+};
 </script>
 <i18n>
   {

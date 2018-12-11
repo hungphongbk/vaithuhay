@@ -1,37 +1,37 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .option {
-    font-weight: 700;
-  }
+.option {
+  font-weight: 700;
+}
 
-  ul{
-    margin-right: -.4rem;
+ul {
+  margin-right: -0.4rem;
+}
+li {
+  display: block;
+  //&:not(:last-child) {
+  padding-right: 0.4rem;
+  padding-bottom: 0.4rem;
+  width: percentage(1/6);
+  flex-basis: percentage(1/6);
+  @include responsive("md-min") {
+    width: percentage(1/8);
+    flex-basis: percentage(1/8);
   }
-  li {
-    display: block;
-    //&:not(:last-child) {
-    padding-right: .4rem;
-    padding-bottom: .4rem;
-    width: percentage(1/6);
-    flex-basis: percentage(1/6);
-    @include responsive('md-min'){
-      width: percentage(1/8);
-      flex-basis: percentage(1/8);
-    }
-    //}
-    &.selected:not(.disabled) .vth-thumb {
-      border: 2px solid $theme-red-color;
-    }
-    &.disabled .vth-thumb {
-      opacity: .7;
-    }
+  //}
+  &.selected:not(.disabled) .vth-thumb {
+    border: 2px solid $theme-red-color;
   }
+  &.disabled .vth-thumb {
+    opacity: 0.7;
+  }
+}
 
-  .vth-thumb {
-    cursor: pointer;
-    width: 100%;
-  }
+.vth-thumb {
+  cursor: pointer;
+  width: 100%;
+}
 </style>
 <template lang="pug">
   div.product-variants
@@ -42,24 +42,24 @@
         thumbnail.no-effect.ratio-1-1(:url_="item.image", :overlay_="false", v-tooltip.top="item.title")
 </template>
 <script>
-  import {tooltip} from '../plugins/index';
+import { tooltip } from "../plugins/index";
 
-  const $ = jQuery;
-  export default {
-    directives: {
-      tooltip
+const $ = jQuery;
+export default {
+  directives: {
+    tooltip
+  },
+  props: {
+    list: {
+      type: Array,
+      default: () => []
     },
-    props: {
-      list: {
-        type: Array,
-        default: () => []
-      },
-      value: null
-    },
-    mounted() {
-      console.log('first variant will be selected');
-      console.log(this.list[0]);
-      this.$emit('input', this.list[0]);
-    }
-  };
+    value: null
+  },
+  mounted() {
+    console.log("first variant will be selected");
+    console.log(this.list[0]);
+    this.$emit("input", this.list[0]);
+  }
+};
 </script>

@@ -1,58 +1,63 @@
 <style lang="scss" scoped>
-  @import "../../../sass/inc/inc";
+@import "../../../sass/inc/inc";
 
-  $menu-hover-border-thickness: 4px;
+$menu-hover-border-thickness: 4px;
 
-  a {
-    display: block;
-    text-decoration: none;
-  }
+a {
+  display: block;
+  text-decoration: none;
+}
 
-  .navbar-collapse {
-    @extend %white-bg;
-  }
+.navbar-collapse {
+  @extend %white-bg;
+}
 
-  ul {
-    display: block;
-    font-weight: 400;
-    font-style: normal;
-    list-style: none;
-    margin: 0;
-    padding-left: 0;
-  }
+ul {
+  display: block;
+  font-weight: 400;
+  font-style: normal;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
 
-  li {
-    position: relative;
-    /deep/ > a {
-      @extend %reset-link;
-      &, &:hover, &:focus, &:visited {
-        background-color: transparent;
-      }
-      border-top: $menu-hover-border-thickness solid #fff;
-      color: #333333;
-      padding-top: ($navbar-padding-vertical - $menu-hover-border-thickness) !important;
-      &:hover {
-        text-decoration: none;
-        background-color: inherit;
-        border-top-color: #bcbcbc;
-      }
-      .fa {
-        margin-left: $padding-base-horizontal/2;
-      }
+li {
+  position: relative;
+  /deep/ > a {
+    @extend %reset-link;
+    &,
+    &:hover,
+    &:focus,
+    &:visited {
+      background-color: transparent;
+    }
+    border-top: $menu-hover-border-thickness solid #fff;
+    color: #333333;
+    padding-top: (
+      $navbar-padding-vertical - $menu-hover-border-thickness
+    ) !important;
+    &:hover {
+      text-decoration: none;
+      background-color: inherit;
+      border-top-color: #bcbcbc;
+    }
+    .fa {
+      margin-left: $padding-base-horizontal/2;
     }
   }
+}
 
-  .navbar-toggle {
-    float: left;
-  }
+.navbar-toggle {
+  float: left;
+}
 
-  .navbar-brand {
-    display: block;
-    padding: $navbar-height*0.25 0;
-    img {
-      height: 100%;
-    }
+.navbar-brand {
+  display: block;
+  padding: $navbar-height * 0.25 0;
+  img {
+    height: 100%;
   }
+}
 </style>
 <template lang="pug">
   nav#site-navigation.navbar.main-navigation.navbar-fixed-top.navbar-left(role="navigation")
@@ -87,30 +92,34 @@
               discover#menu-discover(:isShow_="discover_")
 </template>
 <script>
-  import User       from "./nav-menu__User.vue";
-  import Cart       from "../cart.vue";
-  import Search     from './nav-menu__Search.vue';
-  import Lang       from './nav-menu__Lang.vue';
-  import LoginPanel from '../app__Login';
-  import Discover   from './nav-menu__Discover';
+import User from "./nav-menu__User.vue";
+import Cart from "../cart.vue";
+import Search from "./nav-menu__Search.vue";
+import Lang from "./nav-menu__Lang.vue";
+import LoginPanel from "../app__Login";
+import Discover from "./nav-menu__Discover";
 
-  import {overlayMixin} from '../mixins';
+import { overlayMixin } from "../mixins";
 
-  const $ = jQuery;
-  export default {
-    mixins: [overlayMixin],
-    components: {
-      User, Cart, Discover, Search, Lang,
-      LoginPanel
-    },
-    data() {
-      return {
-        logo_: require('../../../img/logo.png'),
-        home_: vth.links.home,
-        discover_: false
-      };
-    }
-  };
+const $ = jQuery;
+export default {
+  mixins: [overlayMixin],
+  components: {
+    User,
+    Cart,
+    Discover,
+    Search,
+    Lang,
+    LoginPanel
+  },
+  data() {
+    return {
+      logo_: require("../../../img/logo.png"),
+      home_: vth.links.home,
+      discover_: false
+    };
+  }
+};
 </script>
 <i18n>
   {

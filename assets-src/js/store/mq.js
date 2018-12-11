@@ -1,8 +1,8 @@
-import {Store} from 'vuex';
+import { Store } from "vuex";
 
-export default ({$mq}, store: Store) => {
-  store.registerModule('mq', {
+export default ({ $mq }, store: Store) => {
+  store.registerModule("mq", {
     namespaced: true,
     state: () => $mq
   });
-}
+};

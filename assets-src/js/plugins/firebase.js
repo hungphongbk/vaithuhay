@@ -1,6 +1,6 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/messaging';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/messaging";
 
 firebase.initializeApp({
   apiKey: FIREBASE_API_KEY,

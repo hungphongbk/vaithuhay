@@ -1,74 +1,75 @@
 <style lang="scss" module>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .container {
-    min-height: 100%;
-  }
+.container {
+  min-height: 100%;
+}
 
-  .item {
-    padding: .3rem 1.3rem;
-    border-radius: 4px;
-    background: white;
-    margin-bottom: .7rem;
+.item {
+  padding: 0.3rem 1.3rem;
+  border-radius: 4px;
+  background: white;
+  margin-bottom: 0.7rem;
 
-    .item-inner {
-      display: flex;
-    }
-    &:hover, &.edit-mode {
-      background: #f3f3f3;
-    }
-  }
-
-  .info {
-    flex-grow: 1;
-    h5 {
-      display: inline-block;
-      text-transform: uppercase;
-    }
-    @at-root .default {
-      margin-left: 2rem;
-    }
-  }
-
-  .actions {
+  .item-inner {
     display: flex;
-    flex-direction: column;
   }
+  &:hover,
+  &.edit-mode {
+    background: #f3f3f3;
+  }
+}
 
-  .action {
-    cursor: pointer;
-    padding: 5px 6px;
-    margin-top: 2px;
-    border-radius: 4px;
-    transition: background-color $animation-time ease;
-    background-color: rgba(#000, 0);
-    &:hover {
-      background-color: rgba(#000, .07);
-    }
-    &.edit {
-      color: $brand-primary;
-    }
-    &.remove {
-      color: $brand-danger;
-    }
+.info {
+  flex-grow: 1;
+  h5 {
+    display: inline-block;
+    text-transform: uppercase;
   }
+  @at-root .default {
+    margin-left: 2rem;
+  }
+}
 
-  .edit-panel {
-    display: block;
-    :global {
-      .form-group {
-        margin-bottom: 7px;
-      }
-      .col-form-label {
-        text-align: left;
-      }
-      .form-control {
-        border: 1px solid #ccc {
-          radius: .4rem;
-        }
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.action {
+  cursor: pointer;
+  padding: 5px 6px;
+  margin-top: 2px;
+  border-radius: 4px;
+  transition: background-color $animation-time ease;
+  background-color: rgba(#000, 0);
+  &:hover {
+    background-color: rgba(#000, 0.07);
+  }
+  &.edit {
+    color: $brand-primary;
+  }
+  &.remove {
+    color: $brand-danger;
+  }
+}
+
+.edit-panel {
+  display: block;
+  :global {
+    .form-group {
+      margin-bottom: 7px;
+    }
+    .col-form-label {
+      text-align: left;
+    }
+    .form-control {
+      border: 1px solid #ccc {
+        radius: 0.4rem;
       }
     }
   }
+}
 </style>
 <template lang="pug">
   div(:class="$style.container")

@@ -1,35 +1,35 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .headlines {
-    padding-top: 2.7em;
-    @include responsive('xs-max') {
-      padding: {
-        top: 0;
-        bottom: 2.7em;
-      }
+.headlines {
+  padding-top: 2.7em;
+  @include responsive("xs-max") {
+    padding: {
+      top: 0;
+      bottom: 2.7em;
     }
   }
+}
 
-  .vth-section {
-    padding-bottom: 0 !important;
-    margin-top: -30px;
-    /deep/ .vth-section-title {
-      margin-bottom: 0;
-      @include font-size-with-line-height($font-size-h1*0.8)
-    }
+.vth-section {
+  padding-bottom: 0 !important;
+  margin-top: -30px;
+  /deep/ .vth-section-title {
+    margin-bottom: 0;
+    @include font-size-with-line-height($font-size-h1 * 0.8);
   }
+}
 
-  img {
-    width: 70%;
-    margin: 0 15%;
-    height: auto;
-    filter: grayscale(100%) opacity(50%);
-    transition: filter $animation-time ease;
-    &:hover {
-      filter: unset;
-    }
+img {
+  width: 70%;
+  margin: 0 15%;
+  height: auto;
+  filter: grayscale(100%) opacity(50%);
+  transition: filter $animation-time ease;
+  &:hover {
+    filter: unset;
   }
+}
 </style>
 <template lang="pug">
   index-section.vth-post-carousel(:title="$t('title')", titleForeground="#fc0", background="#fff")
@@ -41,17 +41,17 @@
               img(:src="item.image")
 </template>
 <script>
-  import {IndexSection} from '../components/index';
+import { IndexSection } from "../components/index";
 
-  export default {
-    components: {IndexSection},
-    inject: ['section'],
-    computed: {
-      content() {
-        return this.section.clients;
-      }
+export default {
+  components: { IndexSection },
+  inject: ["section"],
+  computed: {
+    content() {
+      return this.section.clients;
     }
-  };
+  }
+};
 </script>
 <i18n>
   {

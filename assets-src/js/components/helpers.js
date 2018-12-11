@@ -1,6 +1,7 @@
-export const delay = timeout => new Promise(resolve => setTimeout(resolve, timeout));
+export const delay = timeout =>
+  new Promise(resolve => setTimeout(resolve, timeout));
 
-const responsive = (breakpoint, settings) => ({breakpoint, settings});
+const responsive = (breakpoint, settings) => ({ breakpoint, settings });
 export const slickOptions_ = {
   infinite: false,
   slidesToShow: 4,
@@ -9,13 +10,13 @@ export const slickOptions_ = {
     responsive(1111, {
       slidesToShow: 3,
       slidesToScroll: 3,
-      infinite: false,
+      infinite: false
     }),
     responsive(768, {
       slidesToShow: 3,
       slidesToScroll: 3,
       infinite: false,
-      arrow: false,
+      arrow: false
     }),
     responsive(426, {
       slidesToShow: 2.33,
@@ -30,4 +31,4 @@ export const slickOptions_ = {
 export const createTransform = transforms =>
   Object.entries(transforms)
     .map(([k, v]) => `${k}(${v})`)
-    .join(' ');
+    .join(" ");

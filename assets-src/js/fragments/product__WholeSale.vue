@@ -1,12 +1,12 @@
 <style lang="scss" module>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  .wholesale {
-    padding-top: 10px;
-    @include responsive('sm-min') {
-      padding-top: 20px;
-    }
+.wholesale {
+  padding-top: 10px;
+  @include responsive("sm-min") {
+    padding-top: 20px;
   }
+}
 </style>
 <template lang="pug">
   div
@@ -17,18 +17,16 @@
         //    variants(:options_="i.giftVariantOptions", :list="giftVariants")
 </template>
 <script>
+import { overlayMixin } from "../components/mixins";
+import Variants from "./product__Variants-Single.vue";
+import ProductWholeSaleItem from "./product__WholeSale-Item";
 
-  import {overlayMixin}       from '../components/mixins';
-  import Variants             from "./product__Variants-Single.vue";
-  import ProductWholeSaleItem from './product__WholeSale-Item';
-
-  export default {
-    props: {
-      list: Array,
-      productId: Number
-    },
-    mixins: [overlayMixin],
-    components: {Variants, ProductWholeSaleItem},
-
-  };
+export default {
+  props: {
+    list: Array,
+    productId: Number
+  },
+  mixins: [overlayMixin],
+  components: { Variants, ProductWholeSaleItem }
+};
 </script>

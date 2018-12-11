@@ -1,10 +1,7 @@
-<style lang="scss" module>
-
-</style>
+<style lang="scss" module></style>
 <template lang="pug">
 
 </template>
 <script>
-export default {
-}
+export default {};
 </script>

@@ -1,30 +1,31 @@
-import Component                                                               from 'vue-class-component';
-import Vue                                                                    from 'vue';
-import faTimesCircle
-                                                                              from '@fortawesome/fontawesome-free-solid/faTimesCircle';
-import faHeart
-                                                                              from '@fortawesome/fontawesome-free-solid/faHeart';
-import faSave
-                                                                              from '@fortawesome/fontawesome-free-regular/faSave';
-import {USER_ACTION_UPDATE, USER_MUTATION_LOGIN, USER_MUTATION_NAVIGATE_PAGE} from "@/store/types";
-import {DateTimePicker, FlashMessageHub}                                      from '@/components';
+import Component from "vue-class-component";
+import Vue from "vue";
+import faTimesCircle from "@fortawesome/fontawesome-free-solid/faTimesCircle";
+import faHeart from "@fortawesome/fontawesome-free-solid/faHeart";
+import faSave from "@fortawesome/fontawesome-free-regular/faSave";
+import {
+  USER_ACTION_UPDATE,
+  USER_MUTATION_LOGIN,
+  USER_MUTATION_NAVIGATE_PAGE
+} from "@/store/types";
+import { DateTimePicker, FlashMessageHub } from "@/components";
 
 @Component({
   components: {
     FlashMessageHub,
-    DateTimePicker,
+    DateTimePicker
   },
   data() {
     return {
       faTimesCircle,
       faHeart,
-      faSave,
+      faSave
     };
-  },
+  }
 })
 export default class UserPanelPageFavorite extends Vue {
-  name: string = '';
-  email: string = '';
+  name: string = "";
+  email: string = "";
   birthday = null;
   gender: number = null;
 
@@ -33,20 +34,26 @@ export default class UserPanelPageFavorite extends Vue {
   }
 
   get wholeInfo() {
-    const {name, gender, birthday} = this,
-      first_name = name.split(' ').slice(0, -1).join(' '),
-      last_name = name.split(' ').slice(-1).join(' ');
+    const { name, gender, birthday } = this,
+      first_name = name
+        .split(" ")
+        .slice(0, -1)
+        .join(" "),
+      last_name = name
+        .split(" ")
+        .slice(-1)
+        .join(" ");
     return {
       first_name,
       last_name,
       gender,
-      birthday,
+      birthday
     };
   }
 
   fetch() {
     this.name = this.customer.name;
-    this.email=this.customer.email;
+    this.email = this.customer.email;
     this.gender = this.customer.gender;
     this.birthday = this.customer.birthday;
   }
@@ -70,4 +77,6 @@ export default class UserPanelPageFavorite extends Vue {
   }
 }
 
-export {default as PageUserInfoIcon} from '@fortawesome/fontawesome-free-solid/faUser';
+export {
+  default as PageUserInfoIcon
+} from "@fortawesome/fontawesome-free-solid/faUser";

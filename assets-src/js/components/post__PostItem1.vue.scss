@@ -9,7 +9,7 @@
 }
 
 $thumbnail-height: 280px;
-$effect-time: .25s;
+$effect-time: 0.25s;
 .post-item {
   composes: thumbnail from global;
   @extend %reset-link;
@@ -20,7 +20,7 @@ $effect-time: .25s;
   margin-bottom: 0;
 
   p {
-    @include font-size-with-line-height(.95rem);
+    @include font-size-with-line-height(0.95rem);
     color: #575757;
   }
   :global .thumb {
@@ -42,7 +42,8 @@ $effect-time: .25s;
 // SALE BADGE
 .sale {
   composes: content from global;
-  &, & * {
+  &,
+  & * {
     @extend %fix-backface;
     line-height: 1.4142;
   }
@@ -57,7 +58,7 @@ $effect-time: .25s;
     font-size: $size/5;
 
     .percentage {
-      font-size: ($size/5)*1.15;
+      font-size: ($size/5) * 1.15;
       font-weight: 700;
     }
   }
@@ -75,14 +76,14 @@ $effect-time: .25s;
       left: 2px;
       height: calc(100% - 4px);
       width: calc(100% - 4px);
-      content: '';
+      content: "";
       visibility: visible;
       border-radius: 50%;
       border: 1px dashed white;
     }
 
     @include f(60px);
-    @include responsive('xs-max') {
+    @include responsive("xs-max") {
       @include f(50px);
     }
   }
@@ -95,7 +96,8 @@ $effect-time: .25s;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  &, & * {
+  &,
+  & * {
     @extend %fix-backface;
   }
 }
@@ -106,13 +108,13 @@ $effect-time: .25s;
     display: inline-block;
     width: auto;
     @mixin padding($s) {
-      padding: $s*0.7 $s*1.5 {
+      padding: $s * 0.7 $s * 1.5 {
         bottom: $s;
       }
     }
     @include padding($thumbnail-caption-padding);
-    @include responsive('xs-max') {
-      @include padding($thumbnail-caption-padding*0.7);
+    @include responsive("xs-max") {
+      @include padding($thumbnail-caption-padding * 0.7);
     }
     background-color: rgba(0, 0, 0, 0.65);
   }
@@ -120,40 +122,41 @@ $effect-time: .25s;
     color: white;
   }
   &.is-sale .regular-price {
-    font-size: 1.12*$font-size-base;
+    font-size: 1.12 * $font-size-base;
     @media screen and (max-width: $screen-xs-max) {
-      font-size: 0.85*$font-size-base;
+      font-size: 0.85 * $font-size-base;
     }
     opacity: 0.65;
     text-decoration: line-through;
   }
-  &.is-sale .sale-price, .regular-price {
-    font-size: 1.62*$font-size-base;
+  &.is-sale .sale-price,
+  .regular-price {
+    font-size: 1.62 * $font-size-base;
     @media screen and (max-width: $screen-xs-max) {
-      font-size: 1.12*$font-size-base;
+      font-size: 1.12 * $font-size-base;
     }
   }
 }
 
 .description {
   composes: description from global;
-  line-height: $line-height-computed*1.1;
+  line-height: $line-height-computed * 1.1;
 }
 
 .post-item h4 {
   font-weight: 700;
-  font-size: $font-size-h4*0.85;
-  @include font-size-with-line-height($font-size-h4*0.85);
+  font-size: $font-size-h4 * 0.85;
+  @include font-size-with-line-height($font-size-h4 * 0.85);
   @media screen and (max-width: $screen-xs-max) {
     margin-top: 0;
-    @include font-size-with-line-height($font-size-h4*0.67);
+    @include font-size-with-line-height($font-size-h4 * 0.67);
   }
 }
 
 .category {
   composes: text-muted from global;
-  @include responsive('xs-max') {
-    @include font-size-with-line-height($font-size-h5*0.9);
+  @include responsive("xs-max") {
+    @include font-size-with-line-height($font-size-h5 * 0.9);
     margin-top: 0;
   }
 }
@@ -165,7 +168,7 @@ $effect-time: .25s;
   &:after {
     position: absolute;
     display: block;
-    content: '';
+    content: "";
     top: 50%;
     left: 50%;
     height: 1px;
@@ -185,15 +188,15 @@ $effect-time: .25s;
     color: white;
     &:after {
       transform: scale(400);
-      opacity: .9;
+      opacity: 0.9;
     }
   }
 }
 
 .caption {
   composes: caption from global;
-  height: $line-height-computed*9.5;
-  @include responsive('xs-max') {
-    height: $line-height-computed*3.4;
+  height: $line-height-computed * 9.5;
+  @include responsive("xs-max") {
+    height: $line-height-computed * 3.4;
   }
 }

@@ -1,134 +1,135 @@
 <style lang="scss" scoped>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  $button-size: 70px;
-  .product-loop {
-    margin-bottom: 20px;
-    /deep/ .slick-dots {
-
+$button-size: 70px;
+.product-loop {
+  margin-bottom: 20px;
+  /deep/ .slick-dots {
+  }
+  &.pt /deep/ {
+    .slick-list {
+      padding-top: 20px;
     }
-    &.pt /deep/ {
-      .slick-list {
-        padding-top: 20px;
+  }
+}
+
+.nav {
+  overflow: hidden;
+}
+
+.main-outer {
+  position: relative;
+  margin-bottom: -3px;
+  .pt & {
+    .carousel-button- {
+      &prev {
+        left: -$button-size;
+      }
+      &next {
+        right: -$button-size;
       }
     }
   }
+}
 
-  .nav {
-    overflow: hidden;
-  }
+.main {
+  overflow: hidden;
+}
 
-  .main-outer {
-    position: relative;
-    margin-bottom: -3px;
-    .pt & {
-      .carousel-button- {
-        &prev {
-          left: -$button-size;
-        }
-        &next {
-          right: -$button-size;
-        }
-      }
-    }
-  }
-
-  .main {
-    overflow: hidden;
-  }
-
-  .row-wrap {
-    display: flex;
-    flex-direction: column;
-  }
+.row-wrap {
+  display: flex;
+  flex-direction: column;
+}
 </style>
 <style lang="scss">
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  $button-size: 70px;
-  .carousel-button- {
-    /*<!--$icon-margin: $button-size/4;-->*/
-    $icon-margin: 0;
+$button-size: 70px;
+.carousel-button- {
+  /*<!--$icon-margin: $button-size/4;-->*/
+  $icon-margin: 0;
 
-    &prev, &next {
-      position: absolute;
-      top: 50%;
-      width: $button-size;
-      height: $button-size;
-      margin-top: -$button-size/2;
-      z-index: 10;
-      cursor: pointer;
-      opacity: .65;
+  &prev,
+  &next {
+    position: absolute;
+    top: 50%;
+    width: $button-size;
+    height: $button-size;
+    margin-top: -$button-size/2;
+    z-index: 10;
+    cursor: pointer;
+    opacity: 0.65;
 
-      /*border-radius: 50%;*/
-      /*background-color: rgba(255, 255, 255, 0.9);*/
+    /*border-radius: 50%;*/
+    /*background-color: rgba(255, 255, 255, 0.9);*/
 
-      .fa {
-        font-size: $button-size*0.85;
-        line-height: $button-size;
-        color: #333;
-        opacity: .35;
+    .fa {
+      font-size: $button-size * 0.85;
+      line-height: $button-size;
+      color: #333;
+      opacity: 0.35;
 
-        transition: opacity $animation-time ease;
-      }
-      &:hover .fa {
-        opacity: 1;
-      }
+      transition: opacity $animation-time ease;
     }
-    &prev {
-      left: $button-size/2;
-      text-align: left;
-    }
-    &next {
-      right: $button-size/2;
-      text-align: right;
+    &:hover .fa {
+      opacity: 1;
     }
   }
+  &prev {
+    left: $button-size/2;
+    text-align: left;
+  }
+  &next {
+    right: $button-size/2;
+    text-align: right;
+  }
+}
 </style>
 <style lang="scss" module>
-  @import "../../sass/inc/inc";
+@import "../../sass/inc/inc";
 
-  %cls {
-    background-color: white;
-    color: #555;
-    border-radius: 6px;
-    padding: $line-height-computed*0.7 $grid-gutter-width;
+%cls {
+  background-color: white;
+  color: #555;
+  border-radius: 6px;
+  padding: $line-height-computed * 0.7 $grid-gutter-width;
 
-    position: absolute;
+  position: absolute;
 
-    display: inline-block;
-    z-index: 999;
-    opacity: .95;
-    @extend %box-shadow-1;
-  }
+  display: inline-block;
+  z-index: 999;
+  opacity: 0.95;
+  @extend %box-shadow-1;
+}
 
-  .fullScreen {
-    @extend %cls;
-    cursor: pointer;
-    top: 20px;
-    right: 20px;
-  }
+.fullScreen {
+  @extend %cls;
+  cursor: pointer;
+  top: 20px;
+  right: 20px;
+}
 
-  .indicator {
-    @extend %cls;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.indicator {
+  @extend %cls;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
-  .navNext, .navPrev {
-    .isLight & {
-      opacity: .85;
-      :global(.fa) {
-        color: $theme-color;
-        opacity: .65;
-      }
+.navNext,
+.navPrev {
+  .isLight & {
+    opacity: 0.85;
+    :global(.fa) {
+      color: $theme-color;
+      opacity: 0.65;
+    }
 
-      &:hover :global(.fa) {
-        opacity: 1;
-      }
+    &:hover :global(.fa) {
+      opacity: 1;
     }
   }
+}
 </style>
 <template lang="pug">
   .product-loop(:class="{ [$style.isLight]: isLight }")
@@ -153,102 +154,106 @@
       slot(v-for="item in CHUNKED_LIST", name="item", :item="item")
 </template>
 <script>
-  import Slick from 'vue-slick';
-  import chunk from 'lodash/chunk';
+import Slick from "vue-slick";
+import chunk from "lodash/chunk";
 
-  const responsive = (breakpoint, settings) => ({breakpoint, settings});
-  const $ = jQuery;
-  export default {
-    components: {Slick},
-    props: {
-      list: {
-        type: Array,
-        default: () => []
-      },
-      sliderOpts: Object,
-      labelIndicator_: {
-        type: Boolean,
-        default: false
-      },
-      fullScreen_: {
-        type: Boolean,
-        default: false
-      },
-      rows_: {
-        type: Number,
-        default: 1
-      },
-      isLight: {
-        type: Boolean,
-        default: false
-      }
+const responsive = (breakpoint, settings) => ({ breakpoint, settings });
+const $ = jQuery;
+export default {
+  components: { Slick },
+  props: {
+    list: {
+      type: Array,
+      default: () => []
     },
-    data() {
-      const {slick, uniqId_} = this;
-      return {
-        slickSlide_: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          asNavFor: `.main.${uniqId_}`,
-          centerMode: true,
-          arrows: false
-        },
-        CURRENT_SLIDE: 0
-      };
+    sliderOpts: Object,
+    labelIndicator_: {
+      type: Boolean,
+      default: false
     },
-    computed: {
-      slickOpts() {
-        const {sliderOpts, uniqId_} = this;
-        if (!sliderOpts) return null;
-        const opts = Object.assign({}, {
-          prevArrow: `.carousel-button-prev.${uniqId_}`,
-          nextArrow: `.carousel-button-next.${uniqId_}`,
-        }, sliderOpts);
-        if (sliderOpts.nav) {
-          opts.asNavFor = `.nav.${uniqId_}`;
-        }
-        return opts;
-      },
-      SLICK_INDICATOR() {
-        return `${this.CURRENT_SLIDE + 1} / ${this.list.length}`;
-      },
-      LEFT_ICON() {
-        return this.$mq.tablet ? 'fa-caret-left' : 'fa-chevron-left';
-      },
-      RIGHT_ICON() {
-        return this.$mq.tablet ? 'fa-caret-right' : 'fa-chevron-right';
-      },
-      CHUNKED_LIST() {
-        const {list, slickOpts} = this;
-        if (!slickOpts) return list;
-        return chunk(list, this.rows_);
-      }
+    fullScreen_: {
+      type: Boolean,
+      default: false
     },
-    watch:{
-      CURRENT_SLIDE(value){
-        this.$emit('change',value);
-      }
+    rows_: {
+      type: Number,
+      default: 1
     },
-    methods: {
-      goTo(index) {
-        this.$refs.slide.goTo(index);
-      },
-      reInit() {
-        // Helpful if you have to deal with v-for to update dynamic lists
-        const self = this;
-        self.$nextTick(() => {
-          self.$refs.slide.reSlick();
-          if (self.slickOpts.nav) {
-            self.$refs.sub.reSlick();
-            self.$refs.sub.next();
-          }
-        });
-      },
-      change_({}, {currentSlide}) {
-        this.$nextTick(() => {
-          this.CURRENT_SLIDE = currentSlide;
-        })
-      }
+    isLight: {
+      type: Boolean,
+      default: false
     }
-  };
+  },
+  data() {
+    const { slick, uniqId_ } = this;
+    return {
+      slickSlide_: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: `.main.${uniqId_}`,
+        centerMode: true,
+        arrows: false
+      },
+      CURRENT_SLIDE: 0
+    };
+  },
+  computed: {
+    slickOpts() {
+      const { sliderOpts, uniqId_ } = this;
+      if (!sliderOpts) return null;
+      const opts = Object.assign(
+        {},
+        {
+          prevArrow: `.carousel-button-prev.${uniqId_}`,
+          nextArrow: `.carousel-button-next.${uniqId_}`
+        },
+        sliderOpts
+      );
+      if (sliderOpts.nav) {
+        opts.asNavFor = `.nav.${uniqId_}`;
+      }
+      return opts;
+    },
+    SLICK_INDICATOR() {
+      return `${this.CURRENT_SLIDE + 1} / ${this.list.length}`;
+    },
+    LEFT_ICON() {
+      return this.$mq.tablet ? "fa-caret-left" : "fa-chevron-left";
+    },
+    RIGHT_ICON() {
+      return this.$mq.tablet ? "fa-caret-right" : "fa-chevron-right";
+    },
+    CHUNKED_LIST() {
+      const { list, slickOpts } = this;
+      if (!slickOpts) return list;
+      return chunk(list, this.rows_);
+    }
+  },
+  watch: {
+    CURRENT_SLIDE(value) {
+      this.$emit("change", value);
+    }
+  },
+  methods: {
+    goTo(index) {
+      this.$refs.slide.goTo(index);
+    },
+    reInit() {
+      // Helpful if you have to deal with v-for to update dynamic lists
+      const self = this;
+      self.$nextTick(() => {
+        self.$refs.slide.reSlick();
+        if (self.slickOpts.nav) {
+          self.$refs.sub.reSlick();
+          self.$refs.sub.next();
+        }
+      });
+    },
+    change_({}, { currentSlide }) {
+      this.$nextTick(() => {
+        this.CURRENT_SLIDE = currentSlide;
+      });
+    }
+  }
+};
 </script>

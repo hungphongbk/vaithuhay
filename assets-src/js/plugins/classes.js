@@ -1,6 +1,8 @@
 class Middleware {
   use(fn) {
-    this.go = ((stack) => (next) => stack(() => fn.call(this, next.bind(this))))(this.go);
+    this.go = (stack => next => stack(() => fn.call(this, next.bind(this))))(
+      this.go
+    );
   }
 
   go(next) {
@@ -12,4 +14,4 @@ class Middleware {
   }
 }
 
-export {Middleware};
+export { Middleware };
