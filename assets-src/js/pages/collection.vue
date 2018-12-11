@@ -294,7 +294,8 @@ export default {
   },
   methods: {
     navigated() {
-      $.scrollTo("#main-list");
+      if (this.$mq.phone) $("#app").scrollTo("#main-list");
+      else $.scrollTo("#main-list");
     }
   },
   beforeMount() {

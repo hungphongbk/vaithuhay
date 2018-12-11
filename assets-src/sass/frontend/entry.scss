@@ -3,7 +3,10 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
-  font-size: 12.5px;
+  font-size: 11px;
+  @include responsive('lg-min'){
+    font-size: 12.5px;
+  }
   //@include responsive('xs-max'){
   //  font-size: 12px;
   //}
