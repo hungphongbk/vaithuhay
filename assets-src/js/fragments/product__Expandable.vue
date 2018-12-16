@@ -48,10 +48,10 @@
         slot
 </template>
 <script>
-import Dropdown from "my-vue-utils/dist/components/dropdown";
+import Dropdown from "my-vue-utils/src/components/dropdown.vue";
 import FA_CIRCLE_UP from "@fortawesome/fontawesome-free-solid/faArrowCircleUp";
 
-export default {
+const ProductExpandable = {
   components: { Dropdown },
   props: {
     title: {
@@ -69,4 +69,11 @@ export default {
     };
   }
 };
+if (process.env.NODE_ENV !== "production") {
+  ProductExpandable.mounted = function() {
+    console.log(this);
+  };
+}
+
+export default ProductExpandable;
 </script>

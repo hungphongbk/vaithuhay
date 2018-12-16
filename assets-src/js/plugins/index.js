@@ -80,3 +80,7 @@ VueTouch.config.swipe = {
 Vue.use(VueTouch, { name: "v-touch" });
 
 import "./flickity-patch";
+
+import VueContentPlaceholders from "vue-content-placeholders";
+
+Vue.use(VueContentPlaceholders);

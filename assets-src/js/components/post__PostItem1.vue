@@ -23,8 +23,8 @@
                 span(:class="$style.regularPrice") {{price.old}}
               span.regular-price(v-else) {{price.current}}
     div(:class="$style.caption")
-      h5(v-if="!$mq.phone" :class="$style.category") {{type}}
-      h4 {{title}}
+      h5(v-if="!$mq.phone && displayCategory" :class="$style.category") {{type}}
+      h4 {{titleI18n}}
       p(:class="$style.description", v-if="!$mq.tablet", v-html="description")
     .bottom
       //product-rating.large(:rating="rating")
@@ -44,7 +44,11 @@ export default {
   inject: ["slickLazy"],
   props: {
     item: Object,
-    thumbnailSize_: String
+    thumbnailSize_: String,
+    displayCategory: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return Object.assign({}, this.item, {
@@ -61,8 +65,8 @@ export default {
       if (this.thumbnailSize_) return this.thumbnailSize_;
       return this.$mq.tablet ? "medium" : "large";
     },
-    title() {
-      return this.item._title[this.$i18n.locale];
+    titleI18n() {
+      return (this.item._title || this.item.title)[this.$i18n.locale];
     },
     isSale_() {
       return this.price.old !== null;

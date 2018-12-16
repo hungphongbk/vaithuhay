@@ -1,23 +1,15 @@
-<style lang="scss"></style>
-<template lang="pug">
-  transition(name="vth-fade")
-    div
-      slider-section
-      top-products
-      sale-products
-      new-products
-      discover
-      service(:content="data.commit")
-      news
-</template>
-<script>
 import SliderSection from "../fragments/index__SliderSection.vue";
 import NewProducts from "../fragments/index__NewProductsSection.vue";
-import SaleProducts from "../fragments/index__SaleProductsSection.vue";
+import SaleProducts from "../fragments/index__PromotionsSection.vue";
 import TopProducts from "../fragments/index__TopProductsSection.vue";
 import Discover from "../fragments/index__DiscoverSection.vue";
 import Service from "../fragments/index__Service.vue";
 import News from "../fragments/index__News.vue";
+
+const mapTypeToComponent = {
+  CollectionSlider: TopProducts,
+  Promotions: SaleProducts
+};
 
 export default {
   components: {
@@ -37,6 +29,31 @@ export default {
       }
     };
   },
+  render(h) {
+    const body = layoutJSON.map(layout => {
+      const component = {
+        CollectionSlider: () => (
+          <TopProducts
+            collections={layout.collections.filter(
+              c => c.products && c.products.length > 0
+            )}
+          />
+        ),
+        Promotions: () => <SaleProducts />
+      }[layout.type];
+
+      return component();
+    });
+    return (
+      <div>
+        <SliderSection />
+        {body}
+        <Discover />
+        <Service content={this.data.commit} />
+        <News />
+      </div>
+    );
+  },
   async mounted() {
     const data = await $.get(
       "https://server.vaithuhay.com/b/settings/page/index"
@@ -44,4 +61,3 @@ export default {
     Object.assign(this.data, data);
   }
 };
-</script>

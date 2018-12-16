@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-const Index = () => import(/* webpackChunkName: "index" */ "./index.vue"),
+const Index = () => import(/* webpackChunkName: "index" */ "./index-page.js"),
   Collection = () =>
     import(/* webpackChunkName: "collection" */ "./collection.vue"),
   Blog = () => import(/* webpackChunkName: "blog" */ "./blog.vue"),

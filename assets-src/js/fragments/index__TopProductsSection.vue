@@ -136,6 +136,23 @@
   }
 }
 
+.placeholder :global {
+  .vue-content-placeholders-img,
+  .vue-content-placeholders-text__line,
+  .vue-content-placeholders-heading__title,
+  .vue-content-placeholders-heading__subtitle {
+    background-color: darken($theme-color, 15%);
+    &:before {
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        darken($theme-color, 5%) 15%,
+        transparent 30%
+      );
+    }
+  }
+}
+
 @include responsive("xs-max") {
   .phone-navigator {
     position: absolute;
@@ -169,10 +186,11 @@
         fa-icon(:icon="faChevronLeft" size="2x")
       div(:class="$style.next" @click="next")
         fa-icon(:icon="faChevronRight" size="2x")
-    product-loop.pt.mt-0.mt-sm-5(:class="$style.slide" :list="currentCol.list" slider="flickity" :rows="$mq.phone?2:4")
-      template(slot="item", slot-scope="p")
-        .pl-1.pr-1.pl-sm-2.pr-sm-2.mt-4.mb-3
-          product-item.mb-2(:class="$style.slideItem" :item="p.item")
+    template
+      product-loop.pt.mt-0.mt-sm-5(:class="$style.slide" :list="currentCol.products" slider="flickity" :rows="$mq.phone?2:4")
+        template(slot="item", slot-scope="p")
+          .pl-1.pr-1.pl-sm-2.pr-sm-2.mt-4.mb-3
+            product-item.mb-2(:class="$style.slideItem" :item="p.item" :displayCategory="displayCategory")
     .text-center(:class="$style.bottom")
       a(:href="currentCol.url")
         .btn.btn-white KHÁM PHÁ THÊM
@@ -195,9 +213,18 @@ export default {
     IndexSection,
     ProductItem
   },
+  props: {
+    collections: {
+      type: Array,
+      required: true
+    },
+    displayCategory: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
-      collections: [],
       slickOptions_,
       slide,
       current: 0,
@@ -206,7 +233,8 @@ export default {
       },
       faChevronLeft,
       faChevronRight,
-      titleAnimate: "vth-fade-slide-right-to-left"
+      titleAnimate: "vth-fade-slide-right-to-left",
+      loaded: true
     };
   },
   ls: {
@@ -229,53 +257,6 @@ export default {
     }
   },
   methods: {
-    fetch() {
-      const categoryUrls = ["san-pham-moi", "onsale"].map(
-        c => "/collections/" + c + "/"
-      );
-      Promise.all(
-        categoryUrls.map(url =>
-          jQuery.get(url + "?view=json").then(rs => {
-            const obj = JSON.parse(rs);
-            console.log(obj);
-            obj.url = url;
-            obj.list = obj.list.map(ProductItem_);
-
-            if (/san-pham-moi/.test(obj.url)) {
-              //randomly San-Pham-Moi - swap last 4 elements
-              let lsValue = this.$ls.get("lastRandomNewProduct", {
-                  ts: Date.now(),
-                  step: 4
-                }),
-                times = lsValue.step,
-                compareDiff = Date.now() - lsValue.ts,
-                diff = window.vth.settings.autoUpdateNewProducts * 1000;
-              if (compareDiff > diff) {
-                console.log("do swap");
-                while (times--) {
-                  const tmp = obj.list.pop();
-                  obj.list.unshift(tmp);
-                }
-                this.$ls.set("lastRandomNewProduct", {
-                  ts: Date.now(),
-                  step: (lsValue.step += 4)
-                });
-              }
-            }
-
-            return obj;
-          })
-        )
-      ).then(rs => {
-        rs.push({
-          title: "SẢN PHẨM HÀNG ĐẦU",
-          categoryId: -1,
-          url: "#",
-          list: window.products_sale
-        });
-        this.collections = rs;
-      });
-    },
     next() {
       this.$nextTick(() => {
         this.titleAnimate = "vth-fade-slide-right-to-left";
@@ -300,8 +281,6 @@ export default {
       this.current = index;
     }
   },
-  mounted() {
-    this.fetch();
-  }
+  mounted() {}
 };
 </script>
