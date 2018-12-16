@@ -1,20 +1,14 @@
 import SliderSection from "../fragments/index__SliderSection.vue";
-import NewProducts from "../fragments/index__NewProductsSection.vue";
+import Banner from "../fragments/index__Banner.vue";
 import SaleProducts from "../fragments/index__PromotionsSection.vue";
 import TopProducts from "../fragments/index__TopProductsSection.vue";
 import Discover from "../fragments/index__DiscoverSection.vue";
 import Service from "../fragments/index__Service.vue";
 import News from "../fragments/index__News.vue";
 
-const mapTypeToComponent = {
-  CollectionSlider: TopProducts,
-  Promotions: SaleProducts
-};
-
 export default {
   components: {
     SliderSection,
-    NewProducts,
     SaleProducts,
     TopProducts,
     Discover,
@@ -37,9 +31,11 @@ export default {
             collections={layout.collections.filter(
               c => c.products && c.products.length > 0
             )}
+            displayCategory={false}
           />
         ),
-        Promotions: () => <SaleProducts />
+        Promotions: () => <SaleProducts />,
+        Banner: () => <Banner image={layout.banner} />
       }[layout.type];
 
       return component();

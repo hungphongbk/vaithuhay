@@ -32,3 +32,9 @@ export const createTransform = transforms =>
   Object.entries(transforms)
     .map(([k, v]) => `${k}(${v})`)
     .join(" ");
+
+export const normalizeMoney = money => {
+  return typeof money === "number"
+    ? money
+    : Number(money.replace(/[^0-9\.-]+/g, ""));
+};
