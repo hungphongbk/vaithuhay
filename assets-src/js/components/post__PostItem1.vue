@@ -53,10 +53,15 @@ export default {
     }
   },
   data() {
-    return Object.assign({}, this.item, {
-      CART_ITEM_ADDED: false,
-      slickLazy_: this.slickLazy || false
-    });
+    const newObj = Object.assign({}, this.item, {
+        CART_ITEM_ADDED: false,
+        slickLazy_: this.slickLazy || false
+      }),
+      patchedPrice = window.patchJSON[this.item.id]
+        ? Object.values(window.patchJSON[this.item.id].variants)[0].price
+        : this.item.price;
+    newObj.price.current = patchedPrice.current;
+    return newObj;
   },
   computed: {
     descriptionI18n() {

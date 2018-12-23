@@ -92,7 +92,9 @@
         .slick-center {
           transform: scale(1.65);
           z-index: 2;
-          @include _(box-shadow-2);
+          .vth-thumb {
+            @include _(box-shadow-2);
+          }
         }
       }
     }

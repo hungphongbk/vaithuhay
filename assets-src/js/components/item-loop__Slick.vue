@@ -33,7 +33,7 @@ $button-size: 70px;
 }
 
 .main {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .row-wrap {
@@ -207,7 +207,9 @@ export default {
           prevArrow: `.carousel-button-prev.${uniqId_}`,
           nextArrow: `.carousel-button-next.${uniqId_}`
         },
-        sliderOpts
+        sliderOpts,{
+          // autoplay:false
+        }
       );
       if (sliderOpts.nav) {
         opts.asNavFor = `.nav.${uniqId_}`;
