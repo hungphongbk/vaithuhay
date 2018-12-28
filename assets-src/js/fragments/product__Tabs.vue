@@ -126,7 +126,7 @@
 </style>
 <template lang="pug">
   div(:class="$style.productTabs")
-    div(:class="$style.tabs" v-sticky sticky-offset="offset")
+    div(:class="$style.tabs")
       div
         .container
           ul(:class="$style.ul", role="tablist", ref="tab")
