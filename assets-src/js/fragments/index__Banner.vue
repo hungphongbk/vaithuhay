@@ -1,4 +1,11 @@
-<style lang="scss" module></style>
+<style lang="scss" module>
+  .banner{
+    composes: d-inline-block from global;
+    img{
+      width:100%;
+    }
+  }
+</style>
 <template lang="pug">
   wrapper
     img.img-fluid(:src="img")
@@ -13,6 +20,7 @@ export default {
         const { banner } = parent;
         if (!banner.link.url) return <div>{children}</div>;
         const props = {
+          class: parent.$style.banner,
           href: banner.link.url
         };
         if (banner.link.newTab) props["target"] = "_blank";
