@@ -35,7 +35,7 @@ export default {
           />
         ),
         Promotions: () => <SaleProducts />,
-        Banner: () => <Banner image={layout.banner} />
+        Banner: () => <Banner banner={layout.banner} />
       }[layout.type];
 
       return component();
