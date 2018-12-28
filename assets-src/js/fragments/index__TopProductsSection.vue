@@ -178,14 +178,15 @@
 </style>
 <template lang="pug">
   index-section(:class="$style.container" :title="currentCol.title", titleForeground="#fff", background="#fc0" :title-animatable="titleAnimate")
-    div(:class="$style.indicator" v-if="!$mq.phone")
-      div(:class="{ [$style.indicatorItem]:true, [$style.current]:col===currentCol }" v-for="(col,index) in collections" @click="goTo(index)")
-        span
-    div(:class="$style.phoneNavigator" v-else)
-      div(:class="$style.prev" @click="prev")
-        fa-icon(:icon="faChevronLeft" size="2x")
-      div(:class="$style.next" @click="next")
-        fa-icon(:icon="faChevronRight" size="2x")
+    template(v-if="collections.length>1")
+      div(:class="$style.indicator" v-if="!$mq.phone")
+        div(:class="{ [$style.indicatorItem]:true, [$style.current]:col===currentCol }" v-for="(col,index) in collections" @click="goTo(index)")
+          span
+      div(:class="$style.phoneNavigator" v-else)
+        div(:class="$style.prev" @click="prev")
+          fa-icon(:icon="faChevronLeft" size="2x")
+        div(:class="$style.next" @click="next")
+          fa-icon(:icon="faChevronRight" size="2x")
     template
       product-loop.pt.mt-0.mt-sm-5(:class="$style.slide" :list="currentCol.products" slider="flickity" :rows="$mq.phone?2:4")
         template(slot="item", slot-scope="p")
