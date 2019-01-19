@@ -253,7 +253,8 @@ if (process.env.NODE_ENV === 'production') {
         banner: false,
         file: 'js.LICENSE'
       }
-    })
+    }),
+    require('./build/completed.js').default(['inline.js','vendor.js','frontend.js'])
   ]);
 } else {
   module.exports.devtool = 'eval-source-map';
