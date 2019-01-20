@@ -4,6 +4,7 @@ import path from "path";
 import fs from "fs";
 import flatten from "lodash/flatten";
 import zipObject from "lodash/zipObject";
+import https from "https";
 
 const localDir = path.join(__dirname, "../assets/"),
   remoteDir = "/home/phong/api.v1/vaithuhay/";
@@ -37,9 +38,11 @@ export default function(mainAssets) {
           );
 
         axios
-          .post("https://server.vaithuhay.com/b/meta?key=assetHash", {
-            hash,
-            ...postObj
+          // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
+          .post("https://server.vaithuhay.com/b/callback/updateTheme", postObj, {
+            httpsAgent: new https.Agent({
+              rejectUnauthorized: false
+            })
           })
           .then(function() {
             console.log("Resource hash has been updated :)");

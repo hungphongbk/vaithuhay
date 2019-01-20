@@ -8,10 +8,6 @@ var _regenerator = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_mo
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _extends2 = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/extends");
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _asyncToGenerator2 = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/asyncToGenerator");
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
@@ -61,9 +57,13 @@ exports.default = function (mainAssets) {
                   }));
 
 
-                  _axios2.default.post("https://server.vaithuhay.com/b/meta?key=assetHash", (0, _extends3.default)({
-                    hash: hash
-                  }, postObj)).then(function () {
+                  _axios2.default
+                  // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
+                  .post("https://server.vaithuhay.com/b/callback/updateTheme", postObj, {
+                    httpsAgent: new _https2.default.Agent({
+                      rejectUnauthorized: false
+                    })
+                  }).then(function () {
                     console.log("Resource hash has been updated :)");
                     console.log(postObj);
                   }).catch(function (err) {
@@ -106,10 +106,14 @@ var _zipObject = require("lodash/zipObject");
 
 var _zipObject2 = _interopRequireDefault(_zipObject);
 
+var _https = require("https");
+
+var _https2 = _interopRequireDefault(_https);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import PromiseSftp from 'promise-sftp'
 var localDir = _path2.default.join(__dirname, "../assets/"),
     remoteDir = "/home/phong/api.v1/vaithuhay/";
+// import PromiseSftp from 'promise-sftp'
 
 //# sourceMappingURL=completed.js.map

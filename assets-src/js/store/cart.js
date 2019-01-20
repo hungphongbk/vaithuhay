@@ -10,6 +10,7 @@ import {
 import { CartItem } from "../components/classes";
 import { SYSTEM_CART_OPEN } from "@/types";
 import { Event } from "@/components";
+import enqueueTask from "@/core/IdleTasks";
 
 const $ = jQuery,
   { list: listUrl, add: addUrl, change: changeUrl } = vth.links.cart;
@@ -44,9 +45,16 @@ export default {
     }
   },
   actions: {
-    async [CART_FETCH_]({ commit }) {
-      const data = await $.getJSON(listUrl);
-      commit(CART_FETCH_, data);
+    [CART_FETCH_]({ commit }) {
+      return new Promise(resolve => {
+        enqueueTask(function() {
+          console.log("idletask: cart fetch called");
+          $.getJSON(listUrl).then(data => {
+            commit(CART_FETCH_, data);
+            resolve(data);
+          });
+        });
+      });
     },
     async [CART_ADD_]({ dispatch }, { id, quantity = 1 }) {
       console.log("[store/cart] Add product with variant id=" + id);
