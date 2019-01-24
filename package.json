@@ -154,6 +154,7 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
+    "assign-deep": "^1.0.0",
     "firebase": "^5.7.0",
     "fizzy-ui-utils": "^2.0.7",
     "flickity": "latest",

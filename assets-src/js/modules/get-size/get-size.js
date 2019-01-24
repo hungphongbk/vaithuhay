@@ -123,7 +123,7 @@ function setup() {
 
 // -------------------------- getSize -------------------------- //
 
-function getSize(elem) {
+const getSize = weakCache(function(elem) {
   setup();
 
   // use querySeletor if elem is string
@@ -191,6 +191,6 @@ function getSize(elem) {
   size.outerHeight = size.height + marginHeight;
 
   return size;
-}
+});
 
 module.exports = getSize;

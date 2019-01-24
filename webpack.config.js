@@ -27,7 +27,6 @@ module.exports = {
       "vue",
       "vuex",
       "vue-i18n",
-      "vue-lazyload",
       "vue-slick",
       "vue-match-media",
       "slick",

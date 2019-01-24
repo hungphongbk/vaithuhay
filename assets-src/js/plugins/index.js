@@ -3,7 +3,7 @@ import "./animateCss";
 import Vue from "vue";
 import AsyncComputed from "vue-async-computed";
 import VueLocalStorage from "vue-localstorage";
-import VueLazyload from "vue-lazyload";
+import VueLazyload from "@/modules/vue-lazyload";
 import { delay } from "../components/helpers";
 import "./observe-visibility";
 import { detect } from "detect-browser";

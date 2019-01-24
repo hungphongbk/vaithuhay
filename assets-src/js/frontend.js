@@ -2,6 +2,7 @@
  * Created by hungphongbk on 5/6/17.
  */
 import Vue from "vue";
+import "@/core/performanceUtils";
 import "../sass/frontend.scss";
 import "@/plugins";
 import i18n from "@/plugins/i18n";
