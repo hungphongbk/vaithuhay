@@ -140,16 +140,14 @@ img {
         i.fa.fa-chevron-right
 </template>
 <script>
-import Slick from "vue-slick";
 import "slick-carousel/slick/slick.scss";
-
-const $ = jQuery;
+import Slick from "@/components/libs/VueSlickCarousel";
 
 export default {
   components: { Slick },
   data() {
-    const self = this,
-      responsive = (breakpoint, settings) => ({ breakpoint, settings });
+    // const self = this,
+    //   responsive = (breakpoint, settings) => ({ breakpoint, settings });
     return {
       options_: {
         lazyLoad: "ondemand",

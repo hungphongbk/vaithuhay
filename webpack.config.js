@@ -201,7 +201,7 @@ let plugins = [
 ];
 if (process.env.NODE_ENV === 'production') {
   // http://vue-loader.vuejs.org/en/workflow/production.html
-  // module.exports.devtool = 'source-map';
+  module.exports.devtool = 'source-map';
   plugins = plugins.concat([
     // new BundleAnalyzerPlugin({
     //   analyzerMode: 'static'

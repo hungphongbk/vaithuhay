@@ -222,7 +222,7 @@ import {
   Paginate
 } from "../components/index";
 import ProductItem from "@/components/products";
-import Slick from "vue-slick";
+import Slick from "@/components/libs/VueSlickCarousel";
 import { mapGetters } from "vuex";
 import {
   CATEGORIES_LIST_,

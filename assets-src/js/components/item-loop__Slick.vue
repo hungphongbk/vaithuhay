@@ -154,7 +154,7 @@ $button-size: 70px;
       slot(v-for="item in CHUNKED_LIST", name="item", :item="item")
 </template>
 <script>
-import Slick from "vue-slick";
+import Slick from "@/components/libs/VueSlickCarousel";
 import chunk from "lodash/chunk";
 
 const responsive = (breakpoint, settings) => ({ breakpoint, settings });

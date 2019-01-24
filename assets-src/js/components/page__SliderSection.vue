@@ -96,7 +96,7 @@ img {
         i.fa.fa-chevron-right
 </template>
 <script>
-import Slick from "vue-slick";
+import Slick from "@/components/libs/VueSlickCarousel";
 import "slick-carousel/slick/slick.scss";
 
 const $ = jQuery;
