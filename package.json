@@ -6,7 +6,7 @@
   "types": "./assets-src/js/global.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --https --cert=/Users/myowngrave/server.crt --key=/Users/myowngrave/server.key",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --optimize-min-chunk-size 10000 --display-error-details",
+    "build": "rm -rf assets-dist/*;cross-env NODE_ENV=production webpack --progress --hide-modules --optimize-min-chunk-size 10000 --display-error-details",
     "deploy": "npm run build; firebase deploy",
     "build-worker": "cross-env NODE_ENV=production webpack --config webpack.frame.config.js --progress --hide-modules --optimize-min-chunk-size 10000",
     "build-experiment": "cross-env NODE_ENV=production webpack --config webpack.experiment.config.js   --progress --hide-modules --optimize-min-chunk-size 10000",

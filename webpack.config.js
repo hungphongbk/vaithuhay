@@ -1,19 +1,21 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
-  regexCombiner = require('regex-combiner'),
-  _ = require('hungphongbk-webpack-build-utils');
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin"),
+  regexCombiner = require("regex-combiner"),
+  _ = require("hungphongbk-webpack-build-utils");
 
 //ok
 
 global.getLocalIdent = _.getLocalIdent;
 
-const src = './assets-src',
-  dist = './assets-dist',
-  isProduction = process.env.NODE_ENV === 'production',
-  publicPath = isProduction ? 'https://static.vaithuhay.com/' : 'https://localhost:8080/',
-  localIdentName = '[hash:base64:6]',
+const src = "./assets-src",
+  dist = "./assets-dist",
+  isProduction = process.env.NODE_ENV === "production",
+  publicPath = isProduction
+    ? "https://static.vaithuhay.com/"
+    : "https://localhost:8080/",
+  localIdentName = "[hash:base64:6]",
   nameCache = {};
 const extractCss = new ExtractTextPlugin({
   filename: "[name].css?[contenthash]"
@@ -21,36 +23,48 @@ const extractCss = new ExtractTextPlugin({
 
 module.exports = {
   entry: {
-    vendor: ['vue', 'vuex', 'vue-i18n', 'vue-lazyload', 'vue-slick', 'vue-match-media', 'slick', 'vue-responsive', 'mobile-detect'],
-    frontend: src + '/js/frontend.js'
+    vendor: [
+      "vue",
+      "vuex",
+      "vue-i18n",
+      "vue-lazyload",
+      "vue-slick",
+      "vue-match-media",
+      "slick",
+      "vue-responsive",
+      "mobile-detect"
+    ],
+    frontend: src + "/js/frontend.js"
   },
   output: {
     path: path.resolve(__dirname, dist),
     publicPath: publicPath,
-    filename: '[name].js' + (isProduction ? '?[chunkhash]' : ''),
-    chunkFilename: '[name].bundle.js?[chunkhash]',
+    filename: "[name].js" + (isProduction ? "?[chunkhash]" : ""),
+    chunkFilename: "[name].bundle.js?[chunkhash]"
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
         options: {
           cssModules: {
             localIdentName: localIdentName,
             importLoaders: 2,
-            camelCase: 'only'
+            camelCase: "only"
           },
           loaders: {
-            scss: isProduction ? ExtractTextPlugin.extract({
-              use: _.cssLoaders(['postcss-loader', 'sass-loader'], {
-                clean: true
-              }),
-              fallback: 'vue-style-loader'
-            }) : 'vue-style-loader!css-loader!sass-loader',
-            i18n: '@kazupon/vue-i18n-loader',
-            js: 'babel-loader?cacheDirectory',
-            ts: 'babel-loader?cacheDirectory!ts-loader'
+            scss: isProduction
+              ? ExtractTextPlugin.extract({
+                  use: _.cssLoaders(["postcss-loader", "sass-loader"], {
+                    clean: true
+                  }),
+                  fallback: "vue-style-loader"
+                })
+              : "vue-style-loader!css-loader!sass-loader",
+            i18n: "@kazupon/vue-i18n-loader",
+            js: "babel-loader?cacheDirectory",
+            ts: "babel-loader?cacheDirectory!ts-loader"
           }
         }
       },
@@ -58,16 +72,13 @@ module.exports = {
         test: /sw\.js$/,
         loader: "service-worker-loader",
         options: {
-          publicPath: 'https://vaithuhay.com/'
+          publicPath: "https://vaithuhay.com/"
         }
       },
       {
         test: /\.js($|\?)/,
-        exclude: [
-          /node_modules\/(?!(js-effect-ripple|vue-match-media))/
-        ],
-        use: "babel-loader?cacheDirectory",
-
+        exclude: [/node_modules\/(?!(js-effect-ripple|vue-match-media))/],
+        use: "babel-loader?cacheDirectory"
       },
       {
         test: /\.tsx?($|\?)/,
@@ -75,73 +86,78 @@ module.exports = {
           "babel-loader?cacheDirectory",
           {
             loader: "ts-loader",
-            options: {appendTsSuffixTo: [/\.vue$/]}
+            options: { appendTsSuffixTo: [/\.vue$/] }
           }
         ],
-        exclude: [
-          /node_modules\/(?!(js-effect-ripple|vue-match-media))/
-        ]
+        exclude: [/node_modules\/(?!(js-effect-ripple|vue-match-media))/]
       },
       {
         test: /\.css($|\?)/,
-        use: isProduction ? extractCss.extract({
-          use: _.cssLoaders(['postcss-loader'], {
-            clean: true
-          }),
-          // use style-loader in development
-          fallback: "style-loader"
-        }) : [
-          {loader: 'style-loader'},
-          {loader: 'css-loader'}
-        ]
+        use: isProduction
+          ? extractCss.extract({
+              use: _.cssLoaders(["postcss-loader"], {
+                clean: true
+              }),
+              // use style-loader in development
+              fallback: "style-loader"
+            })
+          : [{ loader: "style-loader" }, { loader: "css-loader" }]
       },
       {
         test: /\.s[ac]ss($|\?)/,
-        use: isProduction ? extractCss.extract({
-          use: _.cssLoaders(['postcss-loader', 'sass-loader'], {
-            clean: true
-          }),
-          fallback: "style-loader"
-        }) : ['style-loader', 'css-loader', 'sass-loader']
+        use: isProduction
+          ? extractCss.extract({
+              use: _.cssLoaders(["postcss-loader", "sass-loader"], {
+                clean: true
+              }),
+              fallback: "style-loader"
+            })
+          : ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.m-s[ac]ss($|\?)/,
-        use: isProduction ? extractCss.extract({
-          use: _.cssLoaders(['postcss-loader', 'sass-loader'], {
-            clean: true,
-            modules: true
-          }),
-          fallback: "style-loader"
-        }) : ['style-loader', {
-          loader: "css-loader",
-          options: {
-            modules: true,
-            localIdentName: localIdentName,
-            importLoaders: 2,
-            camelCase: 'only'
-          }
-        }, 'sass-loader']
+        use: isProduction
+          ? extractCss.extract({
+              use: _.cssLoaders(["postcss-loader", "sass-loader"], {
+                clean: true,
+                modules: true
+              }),
+              fallback: "style-loader"
+            })
+          : [
+              "style-loader",
+              {
+                loader: "css-loader",
+                options: {
+                  modules: true,
+                  localIdentName: localIdentName,
+                  importLoaders: 2,
+                  camelCase: "only"
+                }
+              },
+              "sass-loader"
+            ]
       },
       {
         test: /\.(png|jpg|gif|svg)($|\?)/,
         use: [
-          ...(isProduction ? ['cache-loader'] : []),
+          ...(isProduction ? ["cache-loader"] : []),
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
               limit: 1024,
-              name: '[sha512:hash:base64:8].[ext]'
+              name: "[sha512:hash:base64:8].[ext]"
             }
           },
           {
-            loader: 'img-loader',
+            loader: "img-loader",
             options: {
               enabled: isProduction,
               svgo: {
                 plugins: [
-                  {removeTitle: true},
-                  {convertPathData: false},
-                  {convertShapeToPath: false}
+                  { removeTitle: true },
+                  { convertPathData: false },
+                  { convertShapeToPath: false }
                 ]
               },
               pngquant: {
@@ -154,23 +170,24 @@ module.exports = {
       },
       {
         test: /\.(eot|ttf|woff|woff2)($|\?)/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[sha512:hash:base64:8].[ext]'
+          name: "[sha512:hash:base64:8].[ext]"
         }
-      },
+      }
     ]
   },
   externals: {
-    jquery: 'jQuery'
+    jquery: "jQuery"
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".vue"],
     alias: {
       // 'vue$': 'vue/dist/vue.runtime.esm.js'
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, 'assets-src/js'),
-      'js': path.resolve(__dirname, 'assets-src/js'),
+      vue$: "vue/dist/vue.esm.js",
+      "@": path.resolve(__dirname, "assets-src/js"),
+      js: path.resolve(__dirname, "assets-src/js"),
+      "get-size": path.resolve(__dirname, "assets-src/js/modules/get-size")
       // 'jquery$': 'jquery/dist/jquery.js'
     }
   },
@@ -181,13 +198,13 @@ module.exports = {
     contentBase: path.join(__dirname, "assets"),
     hot: true,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      "Access-Control-Allow-Origin": "*"
     },
-    publicPath: 'https://localhost:8080/'
+    publicPath: "https://localhost:8080/"
   }
 };
 
-const chunks = ['iframe', 'inline', 'vendor'];
+const chunks = ["iframe", "inline", "vendor"];
 let plugins = [
   extractCss,
   new webpack.IgnorePlugin(/(locale)/, /node_modules.+(moment)/)
@@ -199,9 +216,9 @@ let plugins = [
   //   swSrc: './assets-src/js/sw.js'
   // })
 ];
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.devtool = 'source-map';
+  module.exports.devtool = "source-map";
   plugins = plugins.concat([
     // new BundleAnalyzerPlugin({
     //   analyzerMode: 'static'
@@ -212,21 +229,21 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     }),
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"',
+      "process.env": {
+        NODE_ENV: '"production"'
       },
-      DEBUG: 'false',
+      DEBUG: "false",
       PUBLIC_PATH: JSON.stringify(publicPath),
       SERVER_URL: '"https://server.vaithuhay.com/b/"',
       FIREBASE_API_KEY: '"AIzaSyDu888R1nyP_W_xFX7aATSB0U5irf79lrM"'
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
-      minChunks: Infinity,
+      minChunks: Infinity
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "inline",
-      minChunks: Infinity,
+      minChunks: Infinity
     }),
     new UglifyJSPlugin({
       sourceMap: true,
@@ -251,21 +268,26 @@ if (process.env.NODE_ENV === 'production') {
       },
       extractComments: {
         banner: false,
-        file: 'js.LICENSE'
+        file: "js.LICENSE"
       }
     }),
-    require('./build/completed.js').default(['inline.js','vendor.js','frontend.js','mobile.bundle.js'])
+    require("./build/completed.js").default([
+      "inline.js",
+      "vendor.js",
+      "frontend.js",
+      "mobile.bundle.js"
+    ])
   ]);
 } else {
-  module.exports.devtool = 'eval-source-map';
+  module.exports.devtool = "eval-source-map";
   plugins = plugins.concat([
     new webpack.NamedModulesPlugin(),
     new webpack.SourceMapDevToolPlugin({
-      filename: '[name].js.map',
-      exclude: ['vendor.js']
+      filename: "[name].js.map",
+      exclude: ["vendor.js"]
     }),
     new webpack.DefinePlugin({
-      DEBUG: 'true',
+      DEBUG: "true",
       PUBLIC_PATH: JSON.stringify(publicPath),
       SERVER_URL: '"https://localhost:8089/"',
       FIREBASE_API_KEY: '"AIzaSyCUs1xIIz3keb9CAcdG8Aj0CRQuLNUHrtM"'
