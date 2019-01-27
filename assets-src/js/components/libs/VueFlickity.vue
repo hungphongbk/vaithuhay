@@ -1,9 +1,16 @@
+<style src="flickity/dist/flickity.css"></style>
+<style module>
+.wrapper :global(.flickity-slider) {
+  will-change: transform;
+}
+</style>
 <template>
-  <div><slot /></div>
+  <div :class="$style.wrapper"><slot /></div>
 </template>
 
 <script>
 import Flickity from "flickity";
+import enqueueTask from "@/core/IdleTasks";
 
 export default {
   props: {
@@ -24,8 +31,10 @@ export default {
      * Initialize a new flickity and emit init event.
      */
     init() {
-      this.$flickity = new Flickity(this.$el, this.options);
-      this.$emit("init", this.$flickity);
+      enqueueTask(() => {
+        this.$flickity = new Flickity(this.$el, this.options);
+        this.$emit("init", this.$flickity);
+      });
     },
 
     /**
@@ -319,5 +328,3 @@ export default {
   }
 };
 </script>
-
-<style src="flickity/dist/flickity.css"></style>

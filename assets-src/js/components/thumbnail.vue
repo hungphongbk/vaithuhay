@@ -97,6 +97,7 @@ import ImageZoomer from "@/components/image-zoomer";
 import loading from "../../img/icon-loading.svg";
 
 export default {
+  name: "Thumbnail",
   components: {
     Wrapper: {
       functional: true,

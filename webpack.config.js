@@ -274,7 +274,8 @@ if (process.env.NODE_ENV === "production") {
       "inline.js",
       "vendor.js",
       "frontend.js",
-      "mobile.bundle.js"
+      "mobile.bundle.js",
+      "desktop.bundle.js",
     ])
   ]);
 } else {

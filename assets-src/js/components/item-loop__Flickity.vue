@@ -59,7 +59,7 @@
       slot(name="item" :item="item")
 </template>
 <script>
-import Flickity from "vue-flickity";
+import Flickity from "@/components/libs/VueFlickity";
 
 export default {
   components: { Flickity },
