@@ -1,10 +1,10 @@
 <style lang="scss" module>
-  .banner{
-    composes: d-inline-block from global;
-    img{
-      width:100%;
-    }
+.banner {
+  composes: d-inline-block from global;
+  img {
+    width: 100%;
   }
+}
 </style>
 <template lang="pug">
   wrapper

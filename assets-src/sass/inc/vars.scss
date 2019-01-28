@@ -1,4 +1,4 @@
-$animation-time: .135s;
+$animation-time: 0.135s;
 
 $body-bg: #fff;
 
@@ -32,7 +32,8 @@ $theme-color-dark: #d6ab00;
 $theme-color-dark-2: darken($theme-color-dark, 10);
 $theme-color-dark-3: darken($theme-color-dark, 20);
 
-$font-size-h: $font-size-h1*0.87, $font-size-h2*0.95, $font-size-h3, $font-size-h4, $font-size-h5, $font-size-h6;
+$font-size-h: $font-size-h1 * 0.87, $font-size-h2 * 0.95, $font-size-h3,
+  $font-size-h4, $font-size-h5, $font-size-h6;
 
 $grid-breakpoints: (
   xs: 0,
@@ -43,11 +44,22 @@ $grid-breakpoints: (
 
 $spacer: 1rem !default;
 $spacers: () !default;
-$spacers: map-merge((
-  0: 0,
-  1: ($spacer * .25),
-  2: ($spacer * .5),
-  3: $spacer,
-  4: ($spacer * 1.5),
-  5: ($spacer * 3)
-), $spacers);
+$spacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $spacer * 0.25
+    ),
+    2: (
+      $spacer * 0.5
+    ),
+    3: $spacer,
+    4: (
+      $spacer * 1.5
+    ),
+    5: (
+      $spacer * 3
+    )
+  ),
+  $spacers
+);

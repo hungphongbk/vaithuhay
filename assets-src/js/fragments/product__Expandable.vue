@@ -48,7 +48,8 @@
         slot
 </template>
 <script>
-import Dropdown from "my-vue-utils/src/components/dropdown.vue";
+const Dropdown = () =>
+  import(/* webpackChunkName: "common" */ "my-vue-utils/src/components/dropdown");
 import FA_CIRCLE_UP from "@fortawesome/fontawesome-free-solid/faArrowCircleUp";
 
 const ProductExpandable = {

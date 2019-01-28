@@ -49,7 +49,8 @@ h3.container {
 </template>
 <script>
 import FA_CARET_DOWN from "@fortawesome/fontawesome-free-solid/faCaretDown";
-import Dropdown from "my-vue-utils/dist/components/dropdown";
+const Dropdown = () =>
+  import(/* webpackChunkName: "common" */ "my-vue-utils/src/components/dropdown");
 
 export default {
   components: { Dropdown },

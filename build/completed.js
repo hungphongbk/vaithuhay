@@ -8,10 +8,6 @@ var _regenerator = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_mo
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _promise = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/core-js/promise");
-
-var _promise2 = _interopRequireDefault(_promise);
-
 var _asyncToGenerator2 = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/asyncToGenerator");
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
@@ -33,10 +29,7 @@ exports.default = function (mainAssets) {
         user: "root",
         privateKey: getFilePath(".ssh/id_rsa")
       },
-          _ref = [ssh.connect(config), ssh2.connect(config)],
-          connectPromise = _ref[0],
-          connect2Promise = _ref[1];
-
+          connectPromise = ssh.connect(config);
 
       function readOld() {
         return JSON.parse(_fs2.default.readFileSync(__dirname + "/current.json"));
@@ -57,7 +50,7 @@ exports.default = function (mainAssets) {
       }
 
       compiler.plugin("done", function () {
-        var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(stat) {
+        var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(stat) {
           var _stat$toJson, assetsByChunkName, newAssets;
 
           return _regenerator2.default.wrap(function _callee$(_context) {
@@ -65,7 +58,7 @@ exports.default = function (mainAssets) {
               switch (_context.prev = _context.next) {
                 case 0:
                   _context.next = 2;
-                  return _promise2.default.all([connectPromise, connect2Promise]);
+                  return connectPromise;
 
                 case 2:
                   console.log("SSH connection successfully");
@@ -73,42 +66,27 @@ exports.default = function (mainAssets) {
                   return ssh.execCommand("rm -rf assets-dist", defaultSshOpts);
 
                 case 5:
+                  _context.next = 7;
+                  return ssh.putDirectory(_path2.default.resolve(__dirname, "../assets-dist/"), remoteDir + "assets-dist", {
+                    recursive: true,
+                    concurrency: 7,
+                    tick: function tick(localPath, _, err) {
+                      if (err) {
+                        console.error(err.message);
+                        console.error(localPath);
+                      } else console.info(localPath + " successfully uploaded!");
+                    }
+                  });
 
-                  // const uploads = await new Promise(resolve => {
-                  //   fs.readdir(
-                  //     path.resolve(__dirname, `../assets-dist`),
-                  //     (err, items) => {
-                  //       resolve(items);
-                  //     }
-                  //   );
-                  // });
-                  // function putFile(client, filename) {
-                  //   return client
-                  //     .putFile(
-                  //       path.resolve(__dirname, `../assets-dist/${filename}`),
-                  //       remoteDir + `assets-dist/${filename}`
-                  //     )
-                  //     .then(() => {
-                  //       console.log(`${filename} has been uploaded`);
-                  //     });
-                  // }
-                  // for (const filenames of chunk(uploads, 2))
-                  //   await Promise.all([
-                  //     putFile(ssh, filenames[0]),
-                  //     putFile(ssh2, filenames[1])
-                  //   ]);
-                  // console.log("Upload files completed");
+                case 7:
+                  console.log("Upload files completed");
 
                   // Finally, update hash
                   _stat$toJson = stat.toJson({
                     hash: true
                   }), assetsByChunkName = _stat$toJson.assetsByChunkName;
                   newAssets = readCurrent(assetsByChunkName);
-
-
-                  _axios2.default
-                  // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
-                  .post("https://server.vaithuhay.com/b/callback/updateTheme", newAssets, {
+                  return _context.abrupt("return", _axios2.default.post("https://server.vaithuhay.com/b/callback/updateTheme", newAssets, {
                     httpsAgent: new _https2.default.Agent({
                       rejectUnauthorized: false
                     })
@@ -117,9 +95,9 @@ exports.default = function (mainAssets) {
                     // console.log(postObj);
                   }).catch(function (err) {
                     console.error(err.message);
-                  });
+                  }));
 
-                case 8:
+                case 11:
                 case "end":
                   return _context.stop();
               }
@@ -128,7 +106,7 @@ exports.default = function (mainAssets) {
         }));
 
         return function (_x) {
-          return _ref2.apply(this, arguments);
+          return _ref.apply(this, arguments);
         };
       }());
     }
@@ -177,8 +155,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var localDir = _path2.default.join(__dirname, "../assets/"),
     remoteDir = "/home/phong/api.v1/vaithuhay/",
     ssh = new _nodeSsh2.default(),
-    ssh2 = new _nodeSsh2.default(),
-    defaultSshOpts = { cwd: remoteDir };
+
+// ssh2 = new NodeSSH(),
+defaultSshOpts = { cwd: remoteDir };
 
 function getFilePath(relativePath) {
   return _path2.default.resolve(_os2.default.homedir(), relativePath);

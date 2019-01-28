@@ -225,7 +225,7 @@ export default {
      */
     data() {
       if (this.$flickity) return Flickity.data(this.$el);
-      return {}
+      return {};
     },
 
     /**

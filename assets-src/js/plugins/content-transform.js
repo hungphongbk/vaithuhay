@@ -182,7 +182,7 @@ function makeExpandable($html) {
           return html;
         })
         .join("");
-    console.log(content)
+    console.log(content);
     $header.replaceWith(
       `<product-expandable title=\'${header.trim()}\'>${content}</product-expandable>`
     );

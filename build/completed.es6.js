@@ -12,7 +12,7 @@ import chunk from "lodash/chunk";
 const localDir = path.join(__dirname, "../assets/"),
   remoteDir = "/home/phong/api.v1/vaithuhay/",
   ssh = new NodeSSH(),
-  ssh2 = new NodeSSH(),
+  // ssh2 = new NodeSSH(),
   defaultSshOpts = { cwd: remoteDir };
 
 function getFilePath(relativePath) {
@@ -28,10 +28,7 @@ export default function(mainAssets) {
           user: "root",
           privateKey: getFilePath(".ssh/id_rsa")
         },
-        [connectPromise, connect2Promise] = [
-          ssh.connect(config),
-          ssh2.connect(config)
-        ];
+        connectPromise = ssh.connect(config);
 
       function readOld() {
         return JSON.parse(fs.readFileSync(__dirname + "/current.json"));
@@ -49,34 +46,25 @@ export default function(mainAssets) {
 
       compiler.plugin("done", async function(stat) {
         // First, empty & re-upload
-        await Promise.all([connectPromise, connect2Promise]);
+        await connectPromise;
         console.log("SSH connection successfully");
         await ssh.execCommand("rm -rf assets-dist", defaultSshOpts);
 
-        // const uploads = await new Promise(resolve => {
-        //   fs.readdir(
-        //     path.resolve(__dirname, `../assets-dist`),
-        //     (err, items) => {
-        //       resolve(items);
-        //     }
-        //   );
-        // });
-        // function putFile(client, filename) {
-        //   return client
-        //     .putFile(
-        //       path.resolve(__dirname, `../assets-dist/${filename}`),
-        //       remoteDir + `assets-dist/${filename}`
-        //     )
-        //     .then(() => {
-        //       console.log(`${filename} has been uploaded`);
-        //     });
-        // }
-        // for (const filenames of chunk(uploads, 2))
-        //   await Promise.all([
-        //     putFile(ssh, filenames[0]),
-        //     putFile(ssh2, filenames[1])
-        //   ]);
-        // console.log("Upload files completed");
+        await ssh.putDirectory(
+          path.resolve(__dirname, "../assets-dist/"),
+          remoteDir + "assets-dist",
+          {
+            recursive: true,
+            concurrency: 7,
+            tick(localPath, _, err) {
+              if (err) {
+                console.error(err.message);
+                console.error(localPath);
+              } else console.info(`${localPath} successfully uploaded!`);
+            }
+          }
+        );
+        console.log("Upload files completed");
 
         // Finally, update hash
         const { assetsByChunkName } = stat.toJson({
@@ -85,8 +73,7 @@ export default function(mainAssets) {
 
         const newAssets = readCurrent(assetsByChunkName);
 
-        axios
-          // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
+        return axios
           .post(
             "https://server.vaithuhay.com/b/callback/updateTheme",
             newAssets,

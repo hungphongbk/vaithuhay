@@ -1,14 +1,14 @@
 @import "../inc/inc";
 
 @font-face {
-  font-family: 'UTM Avo';
-  src: url(../fonts/utm-avobold.woff2) format('woff2');
+  font-family: "UTM Avo";
+  src: url(../fonts/utm-avobold.woff2) format("woff2");
   font-weight: bold;
 }
 
 @font-face {
-  font-family: 'UTM Avo';
-  src: url(../fonts/utm-avo.woff2) format('woff2');
+  font-family: "UTM Avo";
+  src: url(../fonts/utm-avo.woff2) format("woff2");
   font-weight: normal;
 }
 
@@ -21,17 +21,17 @@
 %btn-vth {
   border: none;
   border-radius: 4px;
-  @include font-size-with-line-height($font-size-base*1.2);
+  @include font-size-with-line-height($font-size-base * 1.2);
   padding: 8px 17px;
-  &.btn-sm{
-    @include font-size-with-line-height($font-size-base*0.88);
+  &.btn-sm {
+    @include font-size-with-line-height($font-size-base * 0.88);
     padding: 5px 13px;
   }
   transition: all $animation-time ease;
   overflow: hidden;
   position: relative;
   box-shadow: 0 1px 6px -3px rgba(0, 0, 0, 0.65);
-  @include responsive('md-min') {
+  @include responsive("md-min") {
     &:hover {
       box-shadow: 0 2px 8px -3px rgba(0, 0, 0, 0.65);
     }
@@ -54,13 +54,13 @@
 
   &:not(.no-text) {
     .fa {
-      margin-right: .7em;
+      margin-right: 0.7em;
       font-weight: 700;
     }
     .svg-inline--fa {
-      margin-right: .7em;
-      @include responsive('xs-max') {
-        margin-right: .5em;
+      margin-right: 0.7em;
+      @include responsive("xs-max") {
+        margin-right: 0.5em;
       }
     }
   }
@@ -82,11 +82,10 @@
 }
 
 .text-theme-red {
-  color: $theme-red-color
+  color: $theme-red-color;
 }
 
 .btn-vth-effect {
-
 }
 
 .btn-fb {
@@ -112,7 +111,9 @@
   &:hover {
     background-color: lighten($theme-red-color, 11%);
   }
-  &, &:hover, &:focus {
+  &,
+  &:hover,
+  &:focus {
     color: #fff;
   }
   @extend %btn-vth;
@@ -142,10 +143,10 @@
 .vth-section {
   &-title {
     text-align: center;
-    margin-bottom: 2*$line-height-computed;
-    margin-top: 3/2*$line-height-computed;
+    margin-bottom: 2 * $line-height-computed;
+    margin-top: 3/2 * $line-height-computed;
   }
-  @include responsive('xs-max') {
+  @include responsive("xs-max") {
     &-title {
       @include font-size-with-line-height($font-size-h3);
       margin-bottom: $line-height-computed;
@@ -154,7 +155,8 @@
   }
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
@@ -163,13 +165,14 @@ ul, ol {
 
 a {
   color: darken($theme-color-dark, 12%);
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: darken($theme-color-dark, 20%);
   }
 }
 
 .disabled {
-  opacity: .45;
+  opacity: 0.45;
 }
 
 .text-theme-red {
@@ -202,15 +205,15 @@ label {
 }
 
 $ratioList: (
-    (1, 2),
-    (1, 3),
-    (2, 3),
-    (2, 5),
-    (3, 4),
-    (4, 5),
-    (5, 6),
-    (6, 7),
-    (9, 16)
+  (1, 2),
+  (1, 3),
+  (2, 3),
+  (2, 5),
+  (3, 4),
+  (4, 5),
+  (5, 6),
+  (6, 7),
+  (9, 16)
 );
 .ratio-1-1 {
   @include aspect-ratio(1, 1);
@@ -220,21 +223,21 @@ $ratioList: (
   $w: nth($ratio, 1);
   $h: nth($ratio, 2);
   .ratio-#{$w}-#{$h} {
-    @include aspect-ratio($w, $h)
+    @include aspect-ratio($w, $h);
   }
   .ratio-#{$h}-#{$w} {
-    @include aspect-ratio($h, $w)
+    @include aspect-ratio($h, $w);
   }
 }
-@include responsive('sm-min'){
+@include responsive("sm-min") {
   @each $ratio in $ratioList {
     $w: nth($ratio, 1);
     $h: nth($ratio, 2);
     .ratio-sm-#{$w}-#{$h} {
-      @include aspect-ratio($w, $h)
+      @include aspect-ratio($w, $h);
     }
     .ratio-sm-#{$h}-#{$w} {
-      @include aspect-ratio($h, $w)
+      @include aspect-ratio($h, $w);
     }
   }
 }
@@ -243,19 +246,19 @@ $gutters: 5 10 20 30 40 50;
 @mixin pf($pf, $g) {
   $g2: $g/2;
   .#{$pf}-#{$g}.row {
-    margin-right: -$g2*1px;
-    margin-left: -$g2*1px;
+    margin-right: -$g2 * 1px;
+    margin-left: -$g2 * 1px;
   }
   .#{$pf}-#{$g} > [class*="col-"] {
-    padding-right: $g2*1px;
-    padding-left: $g2*1px;
+    padding-right: $g2 * 1px;
+    padding-left: $g2 * 1px;
   }
 }
 
 @each $g in $gutters {
-  @include pf('gutter', $g);
-  @include responsive('sm-min') {
-    @include pf('gutter-sm', $g);
+  @include pf("gutter", $g);
+  @include responsive("sm-min") {
+    @include pf("gutter-sm", $g);
   }
 }
 
@@ -268,5 +271,4 @@ img.lazy[lazy="loading"] {
 }
 
 .row.d-flex > [class*="col-"] {
-
 }

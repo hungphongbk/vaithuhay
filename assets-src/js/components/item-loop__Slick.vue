@@ -207,7 +207,8 @@ export default {
           prevArrow: `.carousel-button-prev.${uniqId_}`,
           nextArrow: `.carousel-button-next.${uniqId_}`
         },
-        sliderOpts,{
+        sliderOpts,
+        {
           // autoplay:false
         }
       );

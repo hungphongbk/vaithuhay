@@ -2,8 +2,8 @@
 
 .vth-product-summary {
   @extend %page-summary;
-  hr{
-    border-top-color: darken($theme-color, 15%)
+  hr {
+    border-top-color: darken($theme-color, 15%);
   }
 }
 
@@ -13,7 +13,7 @@
   }
   .vth-wc-archive {
     background-color: $theme-color;
-    padding-bottom: $line-height-computed*2.7;
+    padding-bottom: $line-height-computed * 2.7;
   }
 }
 
@@ -28,7 +28,7 @@
   .nav-tabs {
     > li > a {
       @extend %override-tab;
-      font-size: $font-size-h3*0.9;
+      font-size: $font-size-h3 * 0.9;
       font-weight: 700;
       color: #888;
       text-transform: uppercase;
@@ -44,6 +44,5 @@
     padding: 20px;
   }
   #tab-description {
-
   }
 }

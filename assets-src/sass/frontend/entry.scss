@@ -1,10 +1,11 @@
 @import "../inc/inc";
 
-html, body {
+html,
+body {
   width: 100%;
   overflow-x: hidden;
   font-size: 11px;
-  @include responsive('lg-min'){
+  @include responsive("lg-min") {
     font-size: 12.5px;
   }
   //@include responsive('xs-max'){
@@ -12,8 +13,10 @@ html, body {
   //}
 }
 
-@include responsive('xs-max') {
-  html, body, #app {
+@include responsive("xs-max") {
+  html,
+  body,
+  #app {
     height: 100%;
     max-height: 100%;
     overflow: hidden;

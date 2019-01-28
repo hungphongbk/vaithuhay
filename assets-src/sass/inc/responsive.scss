@@ -1,21 +1,21 @@
 @import "vars";
 
 $responsive-list: (
-        'xs-min':$screen-xs-min,
-        'xs-max':$screen-xs-max,
-        'sm-min':$screen-sm-min,
-        'sm-max':$screen-sm-max,
-        'md-min':$screen-md-min,
-        'md-max':$screen-md-max
+  "xs-min": $screen-xs-min,
+  "xs-max": $screen-xs-max,
+  "sm-min": $screen-sm-min,
+  "sm-max": $screen-sm-max,
+  "md-min": $screen-md-min,
+  "md-max": $screen-md-max
 );
 
-$default-brkpoint: 'root';
+$default-brkpoint: "root";
 $current-brkpoint: $default-brkpoint;
 @mixin responsive($size) {
   $type: str-slice($size, 4);
   $current-brkpoint: $size !global;
   @media screen and (unquote("#{$type}-width"): map_get($responsive-list, $size)) {
-    @content
+    @content;
   }
   $current-brkpoint: $default-brkpoint !global;
 }
