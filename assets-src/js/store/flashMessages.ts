@@ -12,7 +12,10 @@ import sortBy from "lodash/sortBy";
 import filter from "lodash/filter";
 import remove from "lodash/remove";
 import { Module, Store } from "vuex";
-import objectHash from "object-hash";
+// import objectHash from "object-hash";
+const objectHash = (obj: any): string => {
+  return "";
+};
 
 //region Typing
 export interface FlashMessage {

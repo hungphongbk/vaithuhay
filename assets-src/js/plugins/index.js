@@ -12,7 +12,8 @@ import "./cookie";
 import i18n from "./i18n";
 import Sticky from "vue-sticky-directive";
 import VueScroll from "vue-scroll";
-import VueTouch from "vue-touch";
+// TODO: replacement for v-touch
+// import VueTouch from "vue-touch";
 //
 // import 'vue-carousel'
 
@@ -74,10 +75,10 @@ export { default as ModalManager } from "./ModalManager";
 
 Vue.use(Sticky);
 Vue.use(VueScroll);
-VueTouch.config.swipe = {
-  threshold: 200
-};
-Vue.use(VueTouch, { name: "v-touch" });
+// VueTouch.config.swipe = {
+//   threshold: 200
+// };
+// Vue.use(VueTouch, { name: "v-touch" });
 
 import "./flickity-patch";
 

@@ -4,7 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin"),
   regexCombiner = require("regex-combiner"),
   _ = require("hungphongbk-webpack-build-utils");
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 //ok
 
 global.getLocalIdent = _.getLocalIdent;
@@ -219,9 +219,9 @@ if (process.env.NODE_ENV === "production") {
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.devtool = "source-map";
   plugins = plugins.concat([
-    // new BundleAnalyzerPlugin({
-    //   analyzerMode: 'static'
-    // }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static'
+    }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.LoaderOptionsPlugin({
