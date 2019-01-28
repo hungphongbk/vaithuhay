@@ -10,7 +10,6 @@ import { detect } from "detect-browser";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import "./cookie";
 import i18n from "./i18n";
-import Sticky from "vue-sticky-directive";
 import VueScroll from "vue-scroll";
 // TODO: replacement for v-touch
 // import VueTouch from "vue-touch";
@@ -73,7 +72,6 @@ window.fbAsyncInit = function() {
 Vue.component("fa-icon", FontAwesomeIcon);
 export { default as ModalManager } from "./ModalManager";
 
-Vue.use(Sticky);
 Vue.use(VueScroll);
 // VueTouch.config.swipe = {
 //   threshold: 200

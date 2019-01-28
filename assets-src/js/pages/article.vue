@@ -349,6 +349,7 @@
             .btn.btn-white KHÁM PHÁ THÊM
 </template>
 <script>
+import Sticky from "vue-sticky-directive";
 import transform from "../plugins/content-transform";
 import { delay } from "../components/helpers";
 import ProductWholeSaleItem from "../fragments/product__WholeSale-Item.vue";
@@ -378,7 +379,7 @@ const {
 } = window.article;
 export default {
   components: { ItemLoop, ProductSmallItem },
-  directives: { DarkPanel },
+  directives: { DarkPanel, sticky: VueStickyDirective },
   data() {
     return {
       title,
