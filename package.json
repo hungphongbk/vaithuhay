@@ -87,6 +87,7 @@
     "moment": "^2.22.1",
     "my-vue-utils": "https://github.com/hungphongbk/my-vue-utils",
     "node-sass": "^4.9.0",
+    "node-ssh": "^5.1.2",
     "normalize.css": "^7.0.0",
     "object-hash": "^1.3.0",
     "promise-sftp": "^0.11.3",

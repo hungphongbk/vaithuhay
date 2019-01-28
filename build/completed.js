@@ -8,6 +8,10 @@ var _regenerator = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_mo
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
+var _promise = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/core-js/promise");
+
+var _promise2 = _interopRequireDefault(_promise);
+
 var _asyncToGenerator2 = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/asyncToGenerator");
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
@@ -23,6 +27,17 @@ var _values2 = _interopRequireDefault(_values);
 exports.default = function (mainAssets) {
   return {
     apply: function apply(compiler) {
+      var config = {
+        host: "188.166.177.127",
+        port: "2234",
+        user: "root",
+        privateKey: getFilePath(".ssh/id_rsa")
+      },
+          _ref = [ssh.connect(config), ssh2.connect(config)],
+          connectPromise = _ref[0],
+          connect2Promise = _ref[1];
+
+
       function readOld() {
         return JSON.parse(_fs2.default.readFileSync(__dirname + "/current.json"));
       }
@@ -42,35 +57,76 @@ exports.default = function (mainAssets) {
       }
 
       compiler.plugin("done", function () {
-        var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(stat) {
-          var _stat$toJson, hash, assetsByChunkName, newAssets, postObj;
+        var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(stat) {
+          var _stat$toJson, assetsByChunkName, newAssets, postObj;
 
           return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
+                  _context.next = 2;
+                  return _promise2.default.all([connectPromise, connect2Promise]);
+
+                case 2:
+                  console.log("SSH connection successfully");
+                  _context.next = 5;
+                  return ssh.execCommand("rm -rf assets-dist", defaultSshOpts);
+
+                case 5:
+
+                  // const uploads = await new Promise(resolve => {
+                  //   fs.readdir(
+                  //     path.resolve(__dirname, `../assets-dist`),
+                  //     (err, items) => {
+                  //       resolve(items);
+                  //     }
+                  //   );
+                  // });
+                  // function putFile(client, filename) {
+                  //   return client
+                  //     .putFile(
+                  //       path.resolve(__dirname, `../assets-dist/${filename}`),
+                  //       remoteDir + `assets-dist/${filename}`
+                  //     )
+                  //     .then(() => {
+                  //       console.log(`${filename} has been uploaded`);
+                  //     });
+                  // }
+                  // for (const filenames of chunk(uploads, 2))
+                  //   await Promise.all([
+                  //     putFile(ssh, filenames[0]),
+                  //     putFile(ssh2, filenames[1])
+                  //   ]);
+                  // console.log("Upload files completed");
+
+                  // Finally, update hash
                   _stat$toJson = stat.toJson({
                     hash: true
-                  }), hash = _stat$toJson.hash, assetsByChunkName = _stat$toJson.assetsByChunkName;
+                  }), assetsByChunkName = _stat$toJson.assetsByChunkName;
                   newAssets = readCurrent(assetsByChunkName), postObj = (0, _zipObject2.default)(mainAssets, mainAssets.map(function (asset) {
                     return newAssets[asset];
                   }));
 
+                  console.log(newAssets);
 
-                  _axios2.default
-                  // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
-                  .post("https://server.vaithuhay.com/b/callback/updateTheme", postObj, {
-                    httpsAgent: new _https2.default.Agent({
-                      rejectUnauthorized: false
-                    })
-                  }).then(function () {
-                    console.log("Resource hash has been updated :)");
-                    console.log(postObj);
-                  }).catch(function (err) {
-                    console.log(err.message);
-                  });
+                  return _context.abrupt("return", new _promise2.default(function (resolve) {
+                    _axios2.default
+                    // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
+                    .post("https://server.vaithuhay.com/b/callback/updateTheme", postObj, {
+                      httpsAgent: new _https2.default.Agent({
+                        rejectUnauthorized: false
+                      })
+                    }).then(function () {
+                      console.log("Resource hash has been updated :)");
+                      // console.log(postObj);
+                      resolve();
+                    }).catch(function (err) {
+                      console.error(err.message);
+                      resolve();
+                    });
+                  }));
 
-                case 3:
+                case 9:
                 case "end":
                   return _context.stop();
               }
@@ -79,7 +135,7 @@ exports.default = function (mainAssets) {
         }));
 
         return function (_x) {
-          return _ref.apply(this, arguments);
+          return _ref2.apply(this, arguments);
         };
       }());
     }
@@ -98,6 +154,10 @@ var _fs = require("fs");
 
 var _fs2 = _interopRequireDefault(_fs);
 
+var _os = require("os");
+
+var _os2 = _interopRequireDefault(_os);
+
 var _flatten = require("lodash/flatten");
 
 var _flatten2 = _interopRequireDefault(_flatten);
@@ -110,10 +170,25 @@ var _https = require("https");
 
 var _https2 = _interopRequireDefault(_https);
 
+var _nodeSsh = require("node-ssh");
+
+var _nodeSsh2 = _interopRequireDefault(_nodeSsh);
+
+var _chunk = require("lodash/chunk");
+
+var _chunk2 = _interopRequireDefault(_chunk);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var localDir = _path2.default.join(__dirname, "../assets/"),
-    remoteDir = "/home/phong/api.v1/vaithuhay/";
 // import PromiseSftp from 'promise-sftp'
+var localDir = _path2.default.join(__dirname, "../assets/"),
+    remoteDir = "/home/phong/api.v1/vaithuhay/",
+    ssh = new _nodeSsh2.default(),
+    ssh2 = new _nodeSsh2.default(),
+    defaultSshOpts = { cwd: remoteDir };
+
+function getFilePath(relativePath) {
+  return _path2.default.resolve(_os2.default.homedir(), relativePath);
+}
 
 //# sourceMappingURL=completed.js.map

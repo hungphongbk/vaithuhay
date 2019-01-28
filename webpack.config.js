@@ -4,7 +4,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin"),
   regexCombiner = require("regex-combiner"),
   _ = require("hungphongbk-webpack-build-utils");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 //ok
 
 global.getLocalIdent = _.getLocalIdent;
@@ -38,8 +39,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, dist),
     publicPath: publicPath,
-    filename: "[name].js" + (isProduction ? "?[chunkhash]" : ""),
-    chunkFilename: "[name].bundle.js?[chunkhash]"
+    filename: `[name]${isProduction ? "-[chunkhash]" : ""}.js`,
+    chunkFilename: `[name]${isProduction ? "-[chunkhash]" : ""}.bundle.js`
   },
   module: {
     rules: [
@@ -140,7 +141,6 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg)($|\?)/,
         use: [
-          ...(isProduction ? ["cache-loader"] : []),
           {
             loader: "url-loader",
             options: {
@@ -203,10 +203,10 @@ module.exports = {
   }
 };
 
-const chunks = ["iframe", "inline", "vendor"];
 let plugins = [
   extractCss,
   new webpack.IgnorePlugin(/(locale)/, /node_modules.+(moment)/)
+  // new webpack.IgnorePlugin(/unidragger/)
   // new workboxPlugin({
   //   globDirectory: dist,
   //   globPatterns: ['**/*.{css,js}'],
@@ -220,7 +220,7 @@ if (process.env.NODE_ENV === "production") {
   module.exports.devtool = "source-map";
   plugins = plugins.concat([
     new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
+      analyzerMode: "static"
     }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
@@ -275,7 +275,7 @@ if (process.env.NODE_ENV === "production") {
       "vendor.js",
       "frontend.js",
       "mobile.bundle.js",
-      "desktop.bundle.js",
+      "desktop.bundle.js"
     ])
   ]);
 } else {
