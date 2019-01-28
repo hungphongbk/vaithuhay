@@ -3,11 +3,12 @@ const elemsWithBoundingRects = [];
 
 window.pbsGetBoundingClientRect = function(element) {
   // Check if we already got the client rect before.
-  if (!element._bcr) {
-    // If not, get it then store it for future use.
-    element._bcr = element.getBoundingClientRect();
-    elemsWithBoundingRects.push(element);
-  }
+  // if (!element._bcr) {
+  // If not, get it then store it for future use.
+  element._bcr = element.getBoundingClientRect();
+  // console.log(element._bcr);
+  // elemsWithBoundingRects.push(element);
+  // }
   return element._bcr;
 };
 //endregion

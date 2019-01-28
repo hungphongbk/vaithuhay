@@ -22,7 +22,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.$flickity.destroy();
+    if (this.$flickity) this.$flickity.destroy();
     this.$flickity = null;
   },
 
@@ -187,7 +187,7 @@ export default {
      * Trigger a rerender event
      */
     rerender() {
-      this.$flickity.destroy();
+      if (this.$flickity) this.$flickity.destroy();
       this.init();
     },
 
@@ -199,14 +199,14 @@ export default {
      * Destroy the flickity instance
      */
     destroy() {
-      this.$flickity.destroy();
+      if (this.$flickity) this.$flickity.destroy();
     },
 
     /**
      * Trigger a rerender event
      */
     reloadCells() {
-      this.$flickity.reloadCells();
+      if (this.$flickity) this.$flickity.reloadCells();
     },
 
     /**
@@ -215,7 +215,7 @@ export default {
      * @return {array}
      */
     getCellElements() {
-      return this.$flickity.getCellElements();
+      if (this.$flickity) return this.$flickity.getCellElements();
     },
 
     /**
@@ -224,7 +224,8 @@ export default {
      * @return {Flickity}
      */
     data() {
-      return Flickity.data(this.$el);
+      if (this.$flickity) return Flickity.data(this.$el);
+      return {}
     },
 
     /**
@@ -238,7 +239,7 @@ export default {
      * @param {function} listener
      */
     on(eventName, listener) {
-      this.$flickity.on(eventName, listener);
+      if (this.$flickity) this.$flickity.on(eventName, listener);
     },
 
     /**
@@ -248,7 +249,7 @@ export default {
      * @param {function} listener
      */
     off(eventName, listener) {
-      this.$flickity.off(eventName, listener);
+      if (this.$flickity) this.$flickity.off(eventName, listener);
     },
 
     /**
@@ -258,7 +259,7 @@ export default {
      * @param {function} listener
      */
     once(eventName, listener) {
-      this.$flickity.once(eventName, listener);
+      if (this.$flickity) this.$flickity.once(eventName, listener);
     },
 
     /**
@@ -271,7 +272,7 @@ export default {
      * @return {HTMLElement}
      */
     selectedElement() {
-      return this.$flickity.selectedElement;
+      if (this.$flickity) return this.$flickity.selectedElement;
     },
 
     /**
@@ -280,7 +281,7 @@ export default {
      * @return {array}
      */
     selectedElements() {
-      return this.$flickity.selectedElements;
+      if (this.$flickity) return this.$flickity.selectedElements;
     },
 
     /**
@@ -289,7 +290,7 @@ export default {
      * @return {number}
      */
     selectedIndex() {
-      return this.$flickity.selectedIndex;
+      if (this.$flickity) return this.$flickity.selectedIndex;
     },
 
     /**
@@ -298,7 +299,7 @@ export default {
      * @return {array}
      */
     cells() {
-      return this.$flickity.cells;
+      if (this.$flickity) return this.$flickity.cells;
     },
 
     /**
@@ -307,7 +308,7 @@ export default {
      * @return {array}
      */
     slides() {
-      return this.$flickity.slides;
+      if (this.$flickity) return this.$flickity.slides;
     },
 
     /**

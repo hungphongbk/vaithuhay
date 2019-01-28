@@ -369,9 +369,10 @@ export default function(Vue) {
         if (!listener.state.error && listener.state.loaded) {
           return freeList.push(listener);
         }
-        const catIn = listener.checkInView();
-        if (!catIn) return;
-        listener.load();
+        listener.checkInView().then(catIn => {
+          if (!catIn) return;
+          listener.load();
+        });
       });
       freeList.forEach(vm => remove(this.ListenerQueue, vm));
     }

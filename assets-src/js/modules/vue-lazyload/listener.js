@@ -98,20 +98,22 @@ export default class ReactiveListener {
    * @return
    */
   getRect() {
-    this.rect = window.pbsGetBoundingClientRect(this.el);
+    return new Promise(resolve => {
+      this.rect = window.pbsGetBoundingClientRect(this.el);
+      resolve(this.rect);
+    });
   }
 
   /*
    *  check el is in view
    * @return {Boolean} el is in view
    */
-  checkInView() {
-    this.getRect();
+  async checkInView() {
+    const rect = await this.getRect();
     return (
-      this.rect.top < window.innerHeight * this.options.preLoad &&
-      this.rect.bottom > this.options.preLoadTop &&
-      (this.rect.left < window.innerWidth * this.options.preLoad &&
-        this.rect.right > 0)
+      rect.top < window.innerHeight * this.options.preLoad &&
+      rect.bottom > this.options.preLoadTop &&
+      (rect.left < window.innerWidth * this.options.preLoad && rect.right > 0)
     );
   }
 
