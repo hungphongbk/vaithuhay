@@ -1,4 +1,5 @@
 import { loadImageAsync, ObjectKeys, noop } from "./util";
+import fastdom from "fastdom";
 
 let imageCache = {};
 
@@ -99,8 +100,10 @@ export default class ReactiveListener {
    */
   getRect() {
     return new Promise(resolve => {
-      this.rect = window.pbsGetBoundingClientRect(this.el);
-      resolve(this.rect);
+      fastdom.measure(() => {
+        this.rect = window.pbsGetBoundingClientRect(this.el);
+        resolve(this.rect);
+      });
     });
   }
 
@@ -108,12 +111,12 @@ export default class ReactiveListener {
    *  check el is in view
    * @return {Boolean} el is in view
    */
-  async checkInView() {
-    const rect = await this.getRect();
-    return (
-      rect.top < window.innerHeight * this.options.preLoad &&
-      rect.bottom > this.options.preLoadTop &&
-      (rect.left < window.innerWidth * this.options.preLoad && rect.right > 0)
+  checkInView() {
+    return this.getRect().then(
+      rect =>
+        rect.top < window.innerHeight * this.options.preLoad &&
+        rect.bottom > this.options.preLoadTop &&
+        (rect.left < window.innerWidth * this.options.preLoad && rect.right > 0)
     );
   }
 
