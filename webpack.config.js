@@ -271,11 +271,11 @@ if (process.env.NODE_ENV === "production") {
       }
     }),
     require("./build/completed.js").default([
-      "inline.js",
-      "vendor.js",
-      "frontend.js",
-      "mobile.bundle.js",
-      "desktop.bundle.js"
+      "inline",
+      "vendor",
+      "frontend",
+      "mobile",
+      "desktop"
     ])
   ]);
 } else {

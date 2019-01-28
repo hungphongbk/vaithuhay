@@ -58,7 +58,7 @@ exports.default = function (mainAssets) {
 
       compiler.plugin("done", function () {
         var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(stat) {
-          var _stat$toJson, assetsByChunkName, newAssets, postObj;
+          var _stat$toJson, assetsByChunkName, newAssets;
 
           return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
@@ -103,30 +103,23 @@ exports.default = function (mainAssets) {
                   _stat$toJson = stat.toJson({
                     hash: true
                   }), assetsByChunkName = _stat$toJson.assetsByChunkName;
-                  newAssets = readCurrent(assetsByChunkName), postObj = (0, _zipObject2.default)(mainAssets, mainAssets.map(function (asset) {
-                    return newAssets[asset];
-                  }));
+                  newAssets = readCurrent(assetsByChunkName);
 
-                  console.log(newAssets);
 
-                  return _context.abrupt("return", new _promise2.default(function (resolve) {
-                    _axios2.default
-                    // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
-                    .post("https://server.vaithuhay.com/b/callback/updateTheme", postObj, {
-                      httpsAgent: new _https2.default.Agent({
-                        rejectUnauthorized: false
-                      })
-                    }).then(function () {
-                      console.log("Resource hash has been updated :)");
-                      // console.log(postObj);
-                      resolve();
-                    }).catch(function (err) {
-                      console.error(err.message);
-                      resolve();
-                    });
-                  }));
+                  _axios2.default
+                  // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
+                  .post("https://server.vaithuhay.com/b/callback/updateTheme", newAssets, {
+                    httpsAgent: new _https2.default.Agent({
+                      rejectUnauthorized: false
+                    })
+                  }).then(function () {
+                    console.log("Resource hash has been updated :)");
+                    // console.log(postObj);
+                  }).catch(function (err) {
+                    console.error(err.message);
+                  });
 
-                case 9:
+                case 8:
                 case "end":
                   return _context.stop();
               }

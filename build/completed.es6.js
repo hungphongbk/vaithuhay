@@ -83,35 +83,26 @@ export default function(mainAssets) {
           hash: true
         });
 
-        const newAssets = readCurrent(assetsByChunkName),
-          postObj = zipObject(
-            mainAssets,
-            mainAssets.map(asset => newAssets[asset])
-          );
-        console.log(newAssets);
+        const newAssets = readCurrent(assetsByChunkName);
 
-        return new Promise(resolve => {
-          axios
-            // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
-            .post(
-              "https://server.vaithuhay.com/b/callback/updateTheme",
-              postObj,
-              {
-                httpsAgent: new https.Agent({
-                  rejectUnauthorized: false
-                })
-              }
-            )
-            .then(function() {
-              console.log("Resource hash has been updated :)");
-              // console.log(postObj);
-              resolve();
-            })
-            .catch(function(err) {
-              console.error(err.message);
-              resolve();
-            });
-        });
+        axios
+          // .post("https://server.vaithuhay.com/b/meta?key=assetHash", postObj)
+          .post(
+            "https://server.vaithuhay.com/b/callback/updateTheme",
+            newAssets,
+            {
+              httpsAgent: new https.Agent({
+                rejectUnauthorized: false
+              })
+            }
+          )
+          .then(function() {
+            console.log("Resource hash has been updated :)");
+            // console.log(postObj);
+          })
+          .catch(function(err) {
+            console.error(err.message);
+          });
       });
     }
   };
