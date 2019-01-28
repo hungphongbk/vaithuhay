@@ -299,8 +299,6 @@ import { mapGetters } from "vuex";
 import { CATEGORIES_LIST_ } from "../store/types";
 import ContactDetail from "./footer__ContactDetail.vue";
 import FooterWidgetPanel from "./footer__WidgetPanel";
-const Dropdown = () =>
-  import(/* webpackChunkName: "common" */ "my-vue-utils/src/components/dropdown");
 import { DarkPanel } from "../plugins/directives";
 
 export default {

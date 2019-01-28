@@ -1,6 +1,11 @@
 import Vue from "vue";
+import LoadingComponent from "@/fragments/app__Loading";
 
-const Index = () => import(/* webpackChunkName: "index" */ "./index-page.js"),
+const Index = () => ({
+    component: import(/* webpackChunkName: "index" */ "./index-page.js"),
+    loading: LoadingComponent,
+    delay: 200
+  }),
   Collection = () =>
     import(/* webpackChunkName: "collection" */ "./collection.vue"),
   Blog = () => import(/* webpackChunkName: "blog" */ "./blog.vue"),
@@ -15,7 +20,6 @@ const Pages = { Index, Collection, Blog, Article, PageVaithuhay, Product };
 // })
 
 const component = () => {
-  console.log(window.vth.template + " ahuhu");
   switch (window.vth.template) {
     case "index":
       return Pages.Index;
