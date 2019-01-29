@@ -73,16 +73,11 @@ $h-margin: (100% - $width)/2;
           .item
             .content
               item(:item="item")
-    div(v-observe-visibility="show")
-    template(v-if="$mq.phone")
-      modal.modal-wrapper(v-if="showInMobile", title="-", @dismiss="showInMobile=false;firstShow=false")
-        .modal-body
-          contact
-    contact(v-else, :popup-in-mobile_="true")
+    contact(v-if="!$mq.phone", :popup-in-mobile_="true")
 </template>
 <script>
 import { IndexSection, ItemLoop } from "../components";
-import { slickOptions_ } from "../components/helpers";
+// import { slickOptions_ } from "../components/helpers";
 import Contact from "../components/index__Contact.vue";
 
 export default {
@@ -121,9 +116,9 @@ export default {
         require("../../img/service-3.svg"),
         require("../../img/service-4.svg")
       ],
-      slickOptions_,
-      showInMobile: false,
-      firstShow: true
+      // slickOptions_,
+      // showInMobile: false,
+      // firstShow: true
     };
   },
   computed: {
@@ -134,13 +129,13 @@ export default {
         thumbnail: self.services[index]
       }));
     }
-  },
-  methods: {
-    show(isVisible) {
-      if (isVisible && !this.showInMobile)
-        this.showInMobile = isVisible && this.firstShow;
-    }
   }
+  // methods: {
+  //   show(isVisible) {
+  //     if (isVisible && !this.showInMobile)
+  //       this.showInMobile = isVisible && this.firstShow;
+  //   }
+  // }
 };
 </script>
 <i18n>
