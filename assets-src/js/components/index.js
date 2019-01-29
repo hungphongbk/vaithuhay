@@ -2,7 +2,7 @@ import Vue from "vue";
 import navMenu from "./nav-menu.vue";
 import PageFooter from "./footer.vue";
 import Thumbnail from "./thumbnail.vue";
-import SocialSharer from "./social-sharer.vue";
+// import SocialSharer from "./social-sharer.vue";
 import AsyncButton from "./async-button.vue";
 import Modal from "./modal.vue";
 import Btn from "./app__Button";
@@ -15,7 +15,7 @@ Object.entries({
   navMenu,
   PageFooter,
   Thumbnail,
-  SocialSharer,
+  // SocialSharer,
   AsyncButton,
   Modal,
   Btn
