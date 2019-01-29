@@ -19,7 +19,7 @@ const src = "./assets-src",
   localIdentName = "[hash:base64:6]",
   nameCache = {};
 const extractCss = new ExtractTextPlugin({
-  filename: "[name].css?[contenthash]"
+  filename: "[name]-[contenthash].css"
 });
 
 module.exports = {

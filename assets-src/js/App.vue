@@ -5,6 +5,9 @@
   position: relative;
   padding-top: $navbar-height;
 }
+#main {
+  min-height: 100vh;
+}
 </style>
 <style lang="scss" scoped>
 @import "../sass/inc/inc";

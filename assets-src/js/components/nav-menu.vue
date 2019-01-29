@@ -5,9 +5,9 @@
 </template>
 <script>
 const MobileMenu = () =>
-    import(/* webpackChunkName: "mobile" */ "./m/mobile-menu-wrapper.vue"),
+    import(/* webpackChunkName: "mobile" */ "@/components/m/mobile-menu-wrapper.vue"),
   DesktopMenu = () =>
-    import(/* webpackChunkName: "desktop" */ "./d/nav-menu-desktop.vue");
+    import(/* webpackChunkName: "desktop" */ "@/components/d/nav-menu-desktop.vue");
 
 export default {
   components: {

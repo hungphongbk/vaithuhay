@@ -1,18 +1,25 @@
 import Vue from "vue";
 import LoadingComponent from "@/fragments/app__Loading";
+import store from "@/store";
+import { ensureResponsiveAvailable } from "@/utils/ensureResponsiveAvailable";
 
-const Index = () => ({
-    component: import(/* webpackChunkName: "index" */ "./index-page.js"),
+const wrap = entry => () => ({
+    component: ensureResponsiveAvailable.then(() =>
+      store.state.mq.phone
+        ? import(/* webpackChunkName: "mobile" */ "@/components/m/mobile-menu-wrapper.vue").then(
+            () => import(/* webpackChunkName: "page-[request]" */ `./${entry}`)
+          )
+        : import(/* webpackChunkName: "page-[request]" */ `./${entry}`)
+    ),
     loading: LoadingComponent,
     delay: 200
   }),
-  Collection = () =>
-    import(/* webpackChunkName: "collection" */ "./collection.vue"),
-  Blog = () => import(/* webpackChunkName: "blog" */ "./blog.vue"),
-  Article = () => import(/* webpackChunkName: "article" */ "./article.vue"),
-  PageVaithuhay = () =>
-    import(/* webpackChunkName: "about-us" */ "./about-us.vue"),
-  Product = () => import(/* webpackChunkName: "product" */ "./product.vue");
+  Index = wrap("index-page"),
+  Collection = wrap("collection"),
+  Blog = wrap("blog"),
+  Article = wrap("article"),
+  PageVaithuhay = wrap("about-us"),
+  Product = wrap("product");
 
 const Pages = { Index, Collection, Blog, Article, PageVaithuhay, Product };
 // Object.values(Pages).forEach(pageComponent => {

@@ -9,5 +9,9 @@
     div(:class="$style.loading")
 </template>
 <script>
-export default {};
+export default {
+  mounted(){
+    const x=0;
+  }
+};
 </script>
