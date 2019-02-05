@@ -18,7 +18,7 @@
       './flickity',
       './drag',
       './prev-next-button',
-      './page-dots',
+      // './page-dots',
       './player',
       './add-remove-cell',
       './lazyload'
@@ -29,7 +29,7 @@
       require('./flickity'),
       require('./drag'),
       require('./prev-next-button'),
-      require('./page-dots'),
+      // require('./page-dots'),
       require('./player'),
       require('./add-remove-cell'),
       require('./lazyload')
