@@ -73,7 +73,7 @@ export default function(mainAssets) {
 
         const newAssets = readCurrent(assetsByChunkName);
 
-        return axios
+        await axios
           .post(
             "https://server.vaithuhay.com/b/callback/updateTheme",
             newAssets,

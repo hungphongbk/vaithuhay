@@ -4,19 +4,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/regenerator");
+var _regenerator = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/regenerator");
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/asyncToGenerator");
+var _asyncToGenerator2 = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/asyncToGenerator");
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _slicedToArray2 = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/slicedToArray");
+var _slicedToArray2 = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/slicedToArray");
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _values = require("/Users/myowngrave/WebstormProjects/vaithuhay/node_modules/babel-runtime/core-js/object/values");
+var _values = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/core-js/object/values");
 
 var _values2 = _interopRequireDefault(_values);
 
@@ -86,7 +86,8 @@ exports.default = function (mainAssets) {
                     hash: true
                   }), assetsByChunkName = _stat$toJson.assetsByChunkName;
                   newAssets = readCurrent(assetsByChunkName);
-                  return _context.abrupt("return", _axios2.default.post("https://server.vaithuhay.com/b/callback/updateTheme", newAssets, {
+                  _context.next = 12;
+                  return _axios2.default.post("https://server.vaithuhay.com/b/callback/updateTheme", newAssets, {
                     httpsAgent: new _https2.default.Agent({
                       rejectUnauthorized: false
                     })
@@ -95,9 +96,9 @@ exports.default = function (mainAssets) {
                     // console.log(postObj);
                   }).catch(function (err) {
                     console.error(err.message);
-                  }));
+                  });
 
-                case 11:
+                case 12:
                 case "end":
                   return _context.stop();
               }
