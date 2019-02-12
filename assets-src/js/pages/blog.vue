@@ -11,6 +11,9 @@
 .headlines {
   background: $theme-color;
   padding: 60px 30px 40px 30px;
+  @include responsive('xs-max'){
+    padding: 1rem 0 0 0;
+  }
   &-title {
     font-weight: 700;
     color: white;
@@ -22,6 +25,13 @@
   @extend %clearfix;
   margin: 0 -4px {
     top: 30px;
+  }
+  @include responsive('xs-max'){
+    &.product-loop{
+      margin: -.6rem;
+      margin-bottom: .3rem;
+      margin-top: 2.6rem;
+    }
   }
 
   $headline: (
@@ -50,6 +60,9 @@
 .headline-post {
   .content {
     padding: 8px;
+    @include responsive('xs-max'){
+      padding: .3rem;
+    }
     .inner {
       width: 100%;
       height: 100%;
