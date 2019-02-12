@@ -379,7 +379,7 @@ const {
 } = window.article;
 export default {
   components: { ItemLoop, ProductSmallItem },
-  directives: { DarkPanel, sticky: VueStickyDirective },
+  directives: { DarkPanel, Sticky },
   data() {
     return {
       title,
