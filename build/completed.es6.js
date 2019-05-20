@@ -8,6 +8,8 @@ import zipObject from "lodash/zipObject";
 import https from "https";
 import NodeSSH from "node-ssh";
 import chunk from "lodash/chunk";
+import "@babel/polyfill";
+
 
 const localDir = path.join(__dirname, "../assets/"),
   remoteDir = "/home/phong/api.v1/vaithuhay/",

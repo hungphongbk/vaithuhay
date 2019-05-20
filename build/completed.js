@@ -3,24 +3,55 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = _default;
 
-var _regenerator = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/regenerator");
+var _axios = _interopRequireDefault(require("axios"));
 
-var _regenerator2 = _interopRequireDefault(_regenerator);
+var _path = _interopRequireDefault(require("path"));
 
-var _asyncToGenerator2 = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/asyncToGenerator");
+var _fs = _interopRequireDefault(require("fs"));
 
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+var _os = _interopRequireDefault(require("os"));
 
-var _slicedToArray2 = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/helpers/slicedToArray");
+var _flatten = _interopRequireDefault(require("lodash/flatten"));
 
-var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+var _zipObject = _interopRequireDefault(require("lodash/zipObject"));
 
-var _values = require("/Users/phong.truong/WebstormProjects/vaithuhay/node_modules/babel-runtime/core-js/object/values");
+var _https = _interopRequireDefault(require("https"));
 
-var _values2 = _interopRequireDefault(_values);
+var _nodeSsh = _interopRequireDefault(require("node-ssh"));
 
-exports.default = function (mainAssets) {
+var _chunk = _interopRequireDefault(require("lodash/chunk"));
+
+require("@babel/polyfill");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var localDir = _path.default.join(__dirname, "../assets/"),
+    remoteDir = "/home/phong/api.v1/vaithuhay/",
+    ssh = new _nodeSsh.default(),
+    // ssh2 = new NodeSSH(),
+defaultSshOpts = {
+  cwd: remoteDir
+};
+
+function getFilePath(relativePath) {
+  return _path.default.resolve(_os.default.homedir(), relativePath);
+}
+
+function _default(mainAssets) {
   return {
     apply: function apply(compiler) {
       var config = {
@@ -32,15 +63,14 @@ exports.default = function (mainAssets) {
           connectPromise = ssh.connect(config);
 
       function readOld() {
-        return JSON.parse(_fs2.default.readFileSync(__dirname + "/current.json"));
+        return JSON.parse(_fs.default.readFileSync(__dirname + "/current.json"));
       }
 
       function readCurrent(assets) {
         var rs = {};
-
-        (0, _flatten2.default)((0, _values2.default)(assets)).forEach(function (item) {
+        (0, _flatten.default)(Object.values(assets)).forEach(function (item) {
           var _item$split = item.split("?"),
-              _item$split2 = (0, _slicedToArray3.default)(_item$split, 2),
+              _item$split2 = _slicedToArray(_item$split, 2),
               file = _item$split2[0],
               hash = _item$split2[1];
 
@@ -49,11 +79,15 @@ exports.default = function (mainAssets) {
         return rs;
       }
 
-      compiler.plugin("done", function () {
-        var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(stat) {
+      compiler.plugin("done",
+      /*#__PURE__*/
+      function () {
+        var _ref = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee(stat) {
           var _stat$toJson, assetsByChunkName, newAssets;
 
-          return _regenerator2.default.wrap(function _callee$(_context) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -67,33 +101,31 @@ exports.default = function (mainAssets) {
 
                 case 5:
                   _context.next = 7;
-                  return ssh.putDirectory(_path2.default.resolve(__dirname, "../assets-dist/"), remoteDir + "assets-dist", {
+                  return ssh.putDirectory(_path.default.resolve(__dirname, "../assets-dist/"), remoteDir + "assets-dist", {
                     recursive: true,
                     concurrency: 7,
                     tick: function tick(localPath, _, err) {
                       if (err) {
                         console.error(err.message);
                         console.error(localPath);
-                      } else console.info(localPath + " successfully uploaded!");
+                      } else console.info("".concat(localPath, " successfully uploaded!"));
                     }
                   });
 
                 case 7:
-                  console.log("Upload files completed");
+                  console.log("Upload files completed"); // Finally, update hash
 
-                  // Finally, update hash
                   _stat$toJson = stat.toJson({
                     hash: true
                   }), assetsByChunkName = _stat$toJson.assetsByChunkName;
                   newAssets = readCurrent(assetsByChunkName);
                   _context.next = 12;
-                  return _axios2.default.post("https://server.vaithuhay.com/b/callback/updateTheme", newAssets, {
-                    httpsAgent: new _https2.default.Agent({
+                  return _axios.default.post("https://server.vaithuhay.com/b/callback/updateTheme", newAssets, {
+                    httpsAgent: new _https.default.Agent({
                       rejectUnauthorized: false
                     })
                   }).then(function () {
-                    console.log("Resource hash has been updated :)");
-                    // console.log(postObj);
+                    console.log("Resource hash has been updated :)"); // console.log(postObj);
                   }).catch(function (err) {
                     console.error(err.message);
                   });
@@ -103,7 +135,7 @@ exports.default = function (mainAssets) {
                   return _context.stop();
               }
             }
-          }, _callee, this);
+          }, _callee);
         }));
 
         return function (_x) {
@@ -112,56 +144,6 @@ exports.default = function (mainAssets) {
       }());
     }
   };
-};
-
-var _axios = require("axios");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _path = require("path");
-
-var _path2 = _interopRequireDefault(_path);
-
-var _fs = require("fs");
-
-var _fs2 = _interopRequireDefault(_fs);
-
-var _os = require("os");
-
-var _os2 = _interopRequireDefault(_os);
-
-var _flatten = require("lodash/flatten");
-
-var _flatten2 = _interopRequireDefault(_flatten);
-
-var _zipObject = require("lodash/zipObject");
-
-var _zipObject2 = _interopRequireDefault(_zipObject);
-
-var _https = require("https");
-
-var _https2 = _interopRequireDefault(_https);
-
-var _nodeSsh = require("node-ssh");
-
-var _nodeSsh2 = _interopRequireDefault(_nodeSsh);
-
-var _chunk = require("lodash/chunk");
-
-var _chunk2 = _interopRequireDefault(_chunk);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import PromiseSftp from 'promise-sftp'
-var localDir = _path2.default.join(__dirname, "../assets/"),
-    remoteDir = "/home/phong/api.v1/vaithuhay/",
-    ssh = new _nodeSsh2.default(),
-
-// ssh2 = new NodeSSH(),
-defaultSshOpts = { cwd: remoteDir };
-
-function getFilePath(relativePath) {
-  return _path2.default.resolve(_os2.default.homedir(), relativePath);
 }
 
 //# sourceMappingURL=completed.js.map

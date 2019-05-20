@@ -49,7 +49,7 @@
 </template>
 <script>
 const Dropdown = () =>
-  import(/* webpackChunkName: "common" */ "my-vue-utils/src/components/dropdown");
+  import(/* webpackChunkName: "common" */ "my-vue-utils/src/components/dropdown.vue");
 import FA_CIRCLE_UP from "@fortawesome/fontawesome-free-solid/faArrowCircleUp";
 
 const ProductExpandable = {

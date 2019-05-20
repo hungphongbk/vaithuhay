@@ -42,7 +42,7 @@
       <envs />
     </TaskOptions>
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="$FilePathRelativeToProjectRoot$ --out-file $FileDirRelativeToProjectRoot$/$FileNameWithoutAllExtensions$.js --source-maps --presets env" />
+      <option name="arguments" value="$FilePathRelativeToProjectRoot$ --out-file $FileDirRelativeToProjectRoot$/$FileNameWithoutAllExtensions$.js --source-maps --no-babelrc --presets @babel/preset-env" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
@@ -54,7 +54,7 @@
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="program" value="/usr/local/bin/babel" />
+      <option name="program" value="$USER_HOME$/.nvm/versions/node/v11.11.0/bin/babel" />
       <option name="runOnExternalChanges" value="false" />
       <option name="scopeName" value="es6" />
       <option name="trackOnlyRoot" value="false" />
