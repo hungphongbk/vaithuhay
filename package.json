@@ -5,7 +5,8 @@
   "private": true,
   "types": "./assets-src/js/global.d.ts",
   "scripts": {
-    "dev": "export $(cat .env | xargs) && cross-env NODE_ENV=development webpack-dev-server --inline --hot --https --cert=$DEV_CERT_CRT --key=$DEV_CERT_KEY",
+    "generate-cert": ".bin/generate-cert.sh vaithuhay.com",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --https --cert=.private/vaithuhay.com.crt --key=.private/vaithuhay.com.key",
     "build": "rm -rf assets-dist/*;cross-env NODE_ENV=production webpack --progress --hide-modules --optimize-min-chunk-size 10000 --display-error-details",
     "deploy": "npm run build; firebase deploy",
     "build-worker": "cross-env NODE_ENV=production webpack --config webpack.frame.config.js --progress --hide-modules --optimize-min-chunk-size 10000",

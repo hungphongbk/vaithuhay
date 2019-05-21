@@ -117,3 +117,5 @@ fabric.properties
 /assets/
 /assets-dist/
 assets-src/html/
+/.private/*
+!.gitkeep
