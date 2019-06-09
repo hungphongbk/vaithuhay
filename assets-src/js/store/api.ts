@@ -12,7 +12,7 @@ export const ProductFavoriteAPI = {
 
 export const CustomerAPI = {
   login: email => http.post(SERVER_URL + "u/login", { email }),
-  update: body => http.post(SERVER_URL + "u/update", body),
+  update: body => http.post(SERVER_URL + "u/update", body,true),
   address: {
     delete: id => http.del(SERVER_URL + "u/address/" + id),
     update: (address: CustomerAddress) =>
