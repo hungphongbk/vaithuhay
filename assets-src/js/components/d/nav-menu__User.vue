@@ -153,6 +153,7 @@ import ProductItem from "@/components/products";
 import UserPanel from "./UserPanel";
 
 export default {
+  name:'DesktopUser',
   mixins: [loginMixins],
   components: {
     UserButton,
@@ -162,14 +163,12 @@ export default {
     StaticOverlay,
     UserPanel
   },
-  data() {
-    return {
-      orderTrackingForm: false,
-      favoriteModal: false,
-      isExperiment: window.o.isExperiment,
-      show: false
-    };
-  },
+  data:()=>({
+    orderTrackingForm: false,
+    favoriteModal: false,
+    isExperiment: false,
+    show: false
+  }),
   computed: {
     ...mapGetters({
       loggedIn: USER_LOGGED_IN,
@@ -208,6 +207,9 @@ export default {
       if (value && !this.loggedIn)
         this.$vthStore.commit(USER_LOGIN_FORM_SHOW, true);
     }
+  },
+  mounted(): void {
+    console.log(this.show)
   }
 };
 </script>

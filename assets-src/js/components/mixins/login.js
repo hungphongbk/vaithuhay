@@ -10,16 +10,14 @@ export default {
   components: {
     AppLoginWrapper
   },
-  data() {
-    return {
-      customer: {
-        email: "",
-        password: ""
-      },
-      faFacebook,
-      faGoogle
-    };
-  },
+  data:()=>({
+    customer: {
+      email: "",
+      password: ""
+    },
+    faFacebook,
+    faGoogle
+  }),
   methods: {
     facebookLogin() {
       this.$vthStore.commit(USER_IS_LOGGING_IN);

@@ -85,14 +85,14 @@ li {
                 li
                   cart
                 li
-                  user
+                  user-icon
                 li
                   lang
             .col-sm-12
               discover#menu-discover(:isShow_="discover_")
 </template>
 <script>
-import User from "./nav-menu__User.vue";
+import UserIcon from "./nav-menu__User.vue";
 import Cart from "../cart.vue";
 import Search from "./nav-menu__Search.vue";
 import Lang from "./nav-menu__Lang.vue";
@@ -105,7 +105,7 @@ const $ = jQuery;
 export default {
   mixins: [overlayMixin],
   components: {
-    User,
+    UserIcon,
     Cart,
     Discover,
     Search,
