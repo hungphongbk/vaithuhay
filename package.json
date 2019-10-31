@@ -164,7 +164,7 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
-    "assign-deep": "^1.0.0",
+    "assign-deep": "^1.0.1",
     "fastdom": "^1.0.8",
     "firebase": "^5.11.1",
     "fizzy-ui-utils": "^2.0.7",
