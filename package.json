@@ -110,7 +110,7 @@
     "slick": "^1.12.2",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^2.2.0",
-    "ssh2": "^0.5.5",
+    "ssh2": "^1.4.0",
     "sticky-js": "^1.2.0",
     "style-loader": "^0.19.1",
     "sw-loader": "^0.1.2",
