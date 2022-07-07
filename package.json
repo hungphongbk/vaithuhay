@@ -91,7 +91,7 @@
     "lodash": "^4.17.10",
     "mobile-detect": "^1.4.1",
     "mocha": "^5.2.0",
-    "moment": "^2.22.1",
+    "moment": "^2.29.4",
     "my-vue-utils": "git+https://github.com/hungphongbk/my-vue-utils.git",
     "node-sass": "^4.12.0",
     "node-ssh": "^5.1.2",
